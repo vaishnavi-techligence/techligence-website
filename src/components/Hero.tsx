@@ -36,38 +36,17 @@ export default function Hero() {
   TECHLIGENCE ROBOTICS
 </p>
 
-<h1 className="
-text-[90px]
-lg:text-[150px]
-font-black
-leading-none
-tracking-[-4px]
-text-transparent
-bg-clip-text
-bg-gradient-to-r
-from-white
-via-cyan-300
-to-cyan-500
-">
+<h1
+  className="text-[90px] lg:text-[150px] font-black leading-none tracking-[-4px] text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-300 to-cyan-500"
+>
 T2 MINI
 </h1>
 
-<h2 className="
-  mt-4
-  text-3xl
-  lg:text-5xl
-  font-bold
-  text-white
-">
+<h2 className="mt-4 text-3xl lg:text-5xl font-bold text-white">
   The Future Of Customer Experience
 </h2>
 <div className="w-24 h-[2px] bg-cyan-400 mt-5 mb-6"></div>
-<p className="
-  mt-6
-  text-lg
-  text-gray-400
-  max-w-md
-">
+<p className="mt-6 text-lg text-gray-400 max-w-md">
   AI-powered humanoid robot for reception,
   customer engagement and intelligent assistance.
 </p>
@@ -75,15 +54,7 @@ T2 MINI
 <div className="mt-10">
   <button className="robot-button p-[2px]">
 
-    <div className="
-      relative z-10
-      px-10 py-4
-      rounded-full
-      bg-[#050816]
-      text-white
-      font-bold
-      tracking-wide
-    ">
+    <div className="relative z-10 px-10 py-4 rounded-full bg-[#050816] text-white font-bold tracking-wide">
       EXPLORE T2 MINI
     </div>
 
@@ -135,35 +106,11 @@ T2 MINI
         {/* ROBOT */}
 <div className="relative flex justify-center items-center lg:-ml-10">
 <div
-  className="
-    absolute
-    right-[-80px]
-    top-1/2
-    -translate-y-1/2
-    text-[450px]
-    lg:text-[650px]
-    font-black
-    text-white/[0.05]
-    leading-none
-    select-none
-    pointer-events-none
-    z-0
-  "
->
+  className="absolute right-[-80px] top-1/2 -translate-y-1/2 text-[450px] lg:text-[650px] font-black text-white/[0.05] leading-none select-none pointer-events-none z-0">
   T2
 </div>
 
-  <div
-    className="
-      absolute
-      text-[250px]
-      font-black
-      text-white/[0.03]
-      select-none
-      pointer-events-none
-      leading-none
-    "
-  >
+<div className="absolute text-[250px] font-black text-white/[0.03] select-none pointer-events-none leading-none">
     AI
   </div>
 
@@ -196,25 +143,17 @@ T2 MINI
 <div className="absolute bottom-[45%] right-[25%] w-2 h-2 bg-cyan-400 rounded-full blur-[1px]"></div>
 {/* Robot */}
 <Image
-            src={robots[currentImage]}
-            alt="T2 Mini Robot"
-            width={1400}
-            height={1400}
-            priority
-            className="
-  relative
-  z-10
-  object-contain
-  robot-float
-  transition-all
-  duration-1000
-  hover:scale-105
-"
-          />
+  src={robots[currentImage]}
+  alt="T2 Mini Robot"
+  width={1400}
+  height={1400}
+  priority
+  className="relative z-10 object-contain robot-float transition-all duration-1000 hover:scale-105"
+/>
 
-        </div>
+</div>
 
-      </div>
-    </section>
-  );
+</div>
+</section>
+);
 }
