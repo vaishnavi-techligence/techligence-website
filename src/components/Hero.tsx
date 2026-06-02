@@ -1,24 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
+import RobotVideo from "./RobotVideo";
 
 export default function Hero() {
-  const robots = [
-    "/robots/front.png",
-    "/robots/wave.png",
-    "/robots/side.png",
-  ];
-
-  const [currentImage, setCurrentImage] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % robots.length);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, []);
 
   return (
    <section className="relative min-h-screen bg-[#050816] text-white flex items-center overflow-hidden">
@@ -36,38 +20,15 @@ export default function Hero() {
   TECHLIGENCE ROBOTICS
 </p>
 
-<h1 className="
-text-[90px]
-lg:text-[150px]
-font-black
-leading-none
-tracking-[-4px]
-text-transparent
-bg-clip-text
-bg-gradient-to-r
-from-white
-via-cyan-300
-to-cyan-500
-">
-T2 MINI
+<h1 className="text-[90px] lg:text-[150px] font-black leading-none tracking-[-4px] text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-300 to-cyan-500">
+  T2 MINI
 </h1>
 
-<h2 className="
-  mt-4
-  text-3xl
-  lg:text-5xl
-  font-bold
-  text-white
-">
+<h2 className="mt-4 text-3xl lg:text-5xl font-bold text-white">
   The Future Of Customer Experience
 </h2>
 <div className="w-24 h-[2px] bg-cyan-400 mt-5 mb-6"></div>
-<p className="
-  mt-6
-  text-lg
-  text-gray-400
-  max-w-md
-">
+<p className="mt-6 text-lg text-gray-400 max-w-md">
   AI-powered humanoid robot for reception,
   customer engagement and intelligent assistance.
 </p>
@@ -75,15 +36,7 @@ T2 MINI
 <div className="mt-10">
   <button className="robot-button p-[2px]">
 
-    <div className="
-      relative z-10
-      px-10 py-4
-      rounded-full
-      bg-[#050816]
-      text-white
-      font-bold
-      tracking-wide
-    ">
+    <div className="relative z-10 px-10 py-4 rounded-full bg-[#050816] text-white font-bold tracking-wide">
       EXPLORE T2 MINI
     </div>
 
@@ -134,36 +87,11 @@ T2 MINI
 
         {/* ROBOT */}
 <div className="relative flex justify-center items-center lg:-ml-10">
-<div
-  className="
-    absolute
-    right-[-80px]
-    top-1/2
-    -translate-y-1/2
-    text-[450px]
-    lg:text-[650px]
-    font-black
-    text-white/[0.05]
-    leading-none
-    select-none
-    pointer-events-none
-    z-0
-  "
->
+<div className="absolute right-[-80px] top-1/2 -translate-y-1/2 text-[450px] lg:text-[650px] font-black text-white/[0.05] leading-none select-none pointer-events-none z-0">
   T2
 </div>
 
-  <div
-    className="
-      absolute
-      text-[250px]
-      font-black
-      text-white/[0.03]
-      select-none
-      pointer-events-none
-      leading-none
-    "
-  >
+  <div className="absolute text-[250px] font-black text-white/[0.03] select-none pointer-events-none leading-none">
     AI
   </div>
 
@@ -194,23 +122,42 @@ T2 MINI
 <div className="absolute bottom-[30%] left-[5%] w-1 h-1 bg-cyan-400 rounded-full"></div>
 
 <div className="absolute bottom-[45%] right-[25%] w-2 h-2 bg-cyan-400 rounded-full blur-[1px]"></div>
+{/* Technical HUD/Radar System in the background */}
+<div className="absolute right-[5%] top-1/2 -translate-y-1/2 w-[700px] h-[700px] flex items-center justify-center pointer-events-none select-none z-0 opacity-40">
+  {/* Outer rotating dashed ring */}
+  <div className="absolute w-[600px] h-[600px] rounded-full border border-dashed border-cyan-500/30 animate-spin-slow"></div>
+  {/* Middle solid ring */}
+  <div className="absolute w-[480px] h-[480px] rounded-full border border-cyan-400/20"></div>
+  {/* Inner reverse rotating technical ring */}
+  <div className="absolute w-[360px] h-[360px] rounded-full border border-double border-cyan-300/40 animate-spin-reverse-slow"></div>
+  {/* Technical grid lines */}
+  <div className="absolute w-[650px] h-[1px] bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"></div>
+  <div className="absolute h-[650px] w-[1px] bg-gradient-to-b from-transparent via-cyan-500/30 to-transparent"></div>
+  {/* Tiny glowing coordinate indicators */}
+  <div className="absolute top-[22%] right-[22%] text-[10px] font-mono text-cyan-400/50 tracking-widest">SYS.ACTIVE // 99.8%</div>
+  <div className="absolute bottom-[22%] left-[22%] text-[10px] font-mono text-cyan-400/50 tracking-widest">GRID.COORD // T2-MINI</div>
+</div>
+
+{/* Inline custom keyframe animations */}
+<style>{`
+  @keyframes spinSlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  @keyframes spinReverseSlow {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+  }
+  .animate-spin-slow {
+    animation: spinSlow 35s linear infinite;
+  }
+  .animate-spin-reverse-slow {
+    animation: spinReverseSlow 25s linear infinite;
+  }
+`}</style>
+
 {/* Robot */}
-<Image
-            src={robots[currentImage]}
-            alt="T2 Mini Robot"
-            width={1400}
-            height={1400}
-            priority
-            className="
-  relative
-  z-10
-  object-contain
-  robot-float
-  transition-all
-  duration-1000
-  hover:scale-105
-"
-          />
+<RobotVideo />
 
         </div>
 
