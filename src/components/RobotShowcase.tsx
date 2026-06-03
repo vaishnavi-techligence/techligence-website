@@ -13,6 +13,7 @@ interface Robot {
   rgbColor: string; // rgb
   hueRotate: string; // css filter
   image: string; // path to main PNG image
+  video?: string; // path to optional video loop
   specs: {
     height: string;
     battery: string;
@@ -39,6 +40,7 @@ const ROBOTS_DATA: Robot[] = [
     rgbColor: "0, 240, 255",
     hueRotate: "hue-rotate(0deg)",
     image: "/robots/joy-a01.png",
+    video: "/robots/joy-a01.mp4",
     specs: {
       height: "1.35m (4.4ft)",
       battery: "24h Continuous",
@@ -69,6 +71,7 @@ const ROBOTS_DATA: Robot[] = [
     rgbColor: "0, 240, 255",
     hueRotate: "hue-rotate(0deg)",
     image: "/robots/t2-mini.png",
+    video: "/robots/t2-mini.mp4",
     specs: {
       height: "1.22m (4.0ft)",
       battery: "20h Continuous",
@@ -99,6 +102,7 @@ const ROBOTS_DATA: Robot[] = [
     rgbColor: "0, 240, 255",
     hueRotate: "hue-rotate(0deg)",
     image: "/robots/tella-s.png",
+    video: "/robots/tella-s.mp4",
     specs: {
       height: "1.30m (4.0ft)",
       battery: "24h Continuous",
@@ -128,6 +132,7 @@ const ROBOTS_DATA: Robot[] = [
     rgbColor: "0, 240, 255",
     hueRotate: "hue-rotate(0deg)",
     image: "/robots/andy-r1.png",
+    video: "/robots/andy-r1.mp4",
     specs: {
       height: "1.30m (4.2ft)",
       battery: "18h Continuous",
@@ -158,6 +163,7 @@ const ROBOTS_DATA: Robot[] = [
     rgbColor: "0, 240, 255",
     hueRotate: "hue-rotate(0deg)",
     image: "/robots/t2-max.png",
+    video: "/robots/t2-max.mp4",
     specs: {
       height: "1.38m (4.5ft)",
       battery: "30h Continuous",
@@ -188,6 +194,7 @@ const ROBOTS_DATA: Robot[] = [
     rgbColor: "0, 240, 255",
     hueRotate: "hue-rotate(0deg)",
     image: "/robots/nova-m1.png",
+    video: "/robots/nova-m1.mp4",
     specs: {
       height: "0.90m (3.0ft)",
       battery: "36h Continuous",
@@ -210,40 +217,48 @@ const ROBOTS_DATA: Robot[] = [
   }
 ];
 
+// Per-robot positioning adjustments to handle varying blank space at the top/bottom of the video frames
+const ROBOT_LAYOUT_ADJUSTMENTS: Record<string, { scale: number; translateY: string; bottomClip: string }> = {
+  "joy-a01": { scale: 1.0,  translateY: "-2%",  bottomClip: "94%" },
+  "t2-mini": { scale: 1.0,  translateY: "2%",   bottomClip: "94%" },
+  "tella-s": { scale: 1.0,  translateY: "2%",   bottomClip: "100%" },
+  "andy-r1": { scale: 1.0,  translateY: "2%",   bottomClip: "94%" },
+  "t2-max":  { scale: 1.0,  translateY: "1%",   bottomClip: "99.5%" },
+  "nova-m1": { scale: 1.0,  translateY: "2%",   bottomClip: "96%" },
+};
+
 export default function RobotShowcase() {
   const [activeRobotIndex, setActiveRobotIndex] = useState(0);
   const activeRobot = ROBOTS_DATA[activeRobotIndex];
-  
-  // Dynamic sync states for wheel full focus vs docked cockpit view
-  const [isSynced, setIsSynced] = useState(false);
+
   const [isTransitioning, setIsTransitioning] = useState(false);
-  
-  // Views: video (3D loop), front, side, back, wave (orthographic static)
   const [activeView, setActiveView] = useState<"video" | "front" | "side" | "back" | "wave">("video");
-  
-  // Interactive UI Transitions
-  const [isSurgeActive, setIsSurgeActive] = useState(false);
   const [flashActive, setFlashActive] = useState(false);
   const [videoError, setVideoError] = useState(false);
-  
-  // RPG stats numbers animations state
+
   const [animatedStats, setAnimatedStats] = useState({
-    cognitiveAI: 0,
-    dexterity: 0,
-    agility: 0,
-    power: 0
+    cognitiveAI: 0, dexterity: 0, agility: 0, power: 0
   });
 
-  // Terminal log reader simulation
   const [displayedLogs, setDisplayedLogs] = useState<string[]>([]);
   const logIndexRef = useRef(0);
-
-
-
-  // Refs for smooth portal transitions
-  const landingSectionRef = useRef<HTMLDivElement>(null);
-  const cockpitSectionRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  const [showHud, setShowHud] = useState(false);
+
+  // Scroll listener to animate HUD elements in when scrolling down the page
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 30) {
+        setShowHud(true);
+      } else {
+        setShowHud(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Particle Canvas Background Loop
   useEffect(() => {
@@ -254,17 +269,11 @@ export default function RobotShowcase() {
 
     let animationFrameId: number;
     let particles: Array<{
-      x: number;
-      y: number;
-      size: number;
-      speedY: number;
-      speedX: number;
-      opacity: number;
-      maxLife: number;
-      life: number;
+      x: number; y: number; size: number;
+      speedY: number; speedX: number;
+      opacity: number; maxLife: number; life: number;
     }> = [];
 
-    // Fit canvas
     const resizeCanvas = () => {
       canvas.width = canvas.parentElement?.clientWidth || window.innerWidth;
       canvas.height = canvas.parentElement?.clientHeight || window.innerHeight;
@@ -272,7 +281,6 @@ export default function RobotShowcase() {
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
-    // Initial setup
     const particleCount = 45;
     for (let i = 0; i < particleCount; i++) {
       particles.push({
@@ -289,8 +297,6 @@ export default function RobotShowcase() {
 
     const drawParticles = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      // Get current robot theme colors for standard blend
       const themeRgb = activeRobot.rgbColor;
 
       for (let i = 0; i < particles.length; i++) {
@@ -299,7 +305,6 @@ export default function RobotShowcase() {
         p.y += p.speedY;
         p.x += p.speedX;
 
-        // Reset if goes off top or reaches end of life
         if (p.y < 0 || p.life >= p.maxLife) {
           p.x = Math.random() * canvas.width;
           p.y = canvas.height + 10;
@@ -310,18 +315,16 @@ export default function RobotShowcase() {
           p.opacity = Math.random() * 0.5 + 0.1;
         }
 
-        // Calculate opacity based on life
         const lifeRatio = p.life / p.maxLife;
-        const currentOpacity = lifeRatio < 0.2 
-          ? (lifeRatio * 5) * p.opacity 
+        const currentOpacity = lifeRatio < 0.2
+          ? (lifeRatio * 5) * p.opacity
           : (1 - lifeRatio) * p.opacity;
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${themeRgb}, ${currentOpacity})`;
         ctx.fill();
-        
-        // Add subtle neon glow to larger particles
+
         if (p.size > 2) {
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
@@ -341,39 +344,29 @@ export default function RobotShowcase() {
     };
   }, [activeRobot]);
 
-  // Handle flash triggers and stats refilling upon robot selection changes
+  // Stats animation + rolling logs on robot change
   useEffect(() => {
-    // Flash effect
     setFlashActive(true);
     const flashTimer = setTimeout(() => setFlashActive(false), 500);
 
-    // RPG Stats Counters reset and fill-up animation
     setAnimatedStats({ cognitiveAI: 0, dexterity: 0, agility: 0, power: 0 });
-    
-    let currentStats = { cognitiveAI: 0, dexterity: 0, agility: 0, power: 0 };
+    let current = { cognitiveAI: 0, dexterity: 0, agility: 0, power: 0 };
     const step = 2;
     const interval = setInterval(() => {
       let done = true;
-      
       (["cognitiveAI", "dexterity", "agility", "power"] as const).forEach(key => {
         const target = activeRobot.stats[key];
-        if (currentStats[key] < target) {
-          currentStats[key] = Math.min(target, currentStats[key] + step);
+        if (current[key] < target) {
+          current[key] = Math.min(target, current[key] + step);
           done = false;
         }
       });
-
-      setAnimatedStats({ ...currentStats });
-
-      if (done) {
-        clearInterval(interval);
-      }
+      setAnimatedStats({ ...current });
+      if (done) clearInterval(interval);
     }, 15);
 
-    // Diagnostic console logs ticker typing effect
     setDisplayedLogs([]);
     logIndexRef.current = 0;
-    
     const logsInterval = setInterval(() => {
       if (logIndexRef.current < activeRobot.logs.length) {
         setDisplayedLogs(prev => [...prev, activeRobot.logs[logIndexRef.current]]);
@@ -390,639 +383,539 @@ export default function RobotShowcase() {
     };
   }, [activeRobotIndex]);
 
-  // Entrance Surge Trigger Flow (Scroll down to Selection cockpit)
-  const triggerEntranceSurge = () => {
-    setIsSurgeActive(true);
-    setFlashActive(true);
-    
-    setTimeout(() => {
-      setFlashActive(false);
-      cockpitSectionRef.current?.scrollIntoView({ behavior: "smooth" });
-      setTimeout(() => {
-        setIsSurgeActive(false);
-      }, 1000);
-    }, 600);
-  };
-
   const handleRobotClick = (index: number) => {
     if (isTransitioning) return;
-
-    if (!isSynced) {
-      // Centered state click: select and trigger smooth slide down transition
-      setIsTransitioning(true);
-      setActiveRobotIndex(index);
-      setActiveView("video");
-      
-      setTimeout(() => {
-        setIsSynced(true);
-        setIsTransitioning(false);
-      }, 700);
-    } else {
-      // Docked state click: rotate locally in place and swap active robot details instantly!
-      setActiveRobotIndex(index);
-      setActiveView("video");
-    }
+    setActiveRobotIndex(index);
+    setActiveView("video");
+    setVideoError(false);   // reset so next robot's video gets a fresh attempt
+    setIsTransitioning(true);
+    setTimeout(() => setIsTransitioning(false), 400);
   };
 
+  const layoutAdjustment = activeView === "video"
+    ? (ROBOT_LAYOUT_ADJUSTMENTS[activeRobot.id] || { scale: 1.0, translateY: "0%" })
+    : { scale: 1.0, translateY: "0%" };
+
   return (
-    <div className="relative w-full bg-[#050816] text-white">
+    /* Responsive scrollable container that allows full heights but scrolls if items exceed viewport */
+    <div
+      className="relative w-full bg-[#050816] text-white min-h-screen flex flex-col overflow-x-hidden"
+    >
       {/* Background Canvas Particles */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
         <canvas ref={canvasRef} className="w-full h-full opacity-65" />
       </div>
 
-      {/* GPU SVG Chroma Filter for pure black chroma-key rendering of loop video */}
-      <svg width="0" height="0" className="absolute pointer-events-none" style={{ position: "absolute" }}>
+      {/* CAD Flowing Circuit Traces on left and right edges of window */}
+      <svg 
+        viewBox="0 0 100 100" 
+        preserveAspectRatio="none" 
+        className="absolute inset-0 w-full h-full pointer-events-none z-0 hidden xl:block animate-[fadeIn_1s_ease-out]"
+      >
         <defs>
-          <filter id="remove-black-showcase" colorInterpolationFilters="sRGB">
-            <feColorMatrix
-              type="matrix"
-              values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 3.5 3.5 3.5 0 -0.5"
-            />
+          <filter id="glow-cyan-edge" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="0.4" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
           </filter>
         </defs>
+
+        {/* Left Circuit Trace */}
+        <path 
+          d="M 4 10 L 4 42 L 2.5 45.5 L 2.5 90" 
+          fill="none" 
+          stroke="rgba(0, 240, 255, 0.06)" 
+          strokeWidth="0.25" 
+        />
+        {/* Left Glowing Signal Pulse */}
+        <path 
+          d="M 4 10 L 4 42 L 2.5 45.5 L 2.5 90" 
+          fill="none" 
+          stroke="#00f0ff" 
+          strokeWidth="0.3" 
+          pathLength="100"
+          filter="url(#glow-cyan-edge)"
+          className="animate-[flowSignal_7s_linear_infinite]"
+          style={{ strokeDasharray: "15, 85" }}
+        />
+
+        {/* Right Circuit Trace */}
+        <path 
+          d="M 96 10 L 96 42 L 97.5 45.5 L 97.5 90" 
+          fill="none" 
+          stroke="rgba(0, 240, 255, 0.06)" 
+          strokeWidth="0.25" 
+        />
+        {/* Right Glowing Signal Pulse */}
+        <path 
+          d="M 96 10 L 96 42 L 97.5 45.5 L 97.5 90" 
+          fill="none" 
+          stroke="#00f0ff" 
+          strokeWidth="0.3" 
+          pathLength="100"
+          filter="url(#glow-cyan-edge)"
+          className="animate-[flowSignal_7s_linear_infinite]"
+          style={{ strokeDasharray: "15, 85", animationDelay: "3.5s" }}
+        />
       </svg>
 
+      {/* Global GPU SVG Chroma Filters used from layout.tsx */}
+
       {/* Screen flash transition overlay */}
-      <div 
-        className={`fixed inset-0 pointer-events-none z-50 transition-opacity duration-300 ${
-          flashActive ? "opacity-35" : "opacity-0"
-        }`} 
-        style={{
-          background: `radial-gradient(circle, rgba(${activeRobot.rgbColor}, 0.6) 0%, transparent 80%)`
-        }}
+      <div
+        className={`fixed inset-0 pointer-events-none z-50 transition-opacity duration-300 ${flashActive ? "opacity-35" : "opacity-0"}`}
+        style={{ background: `radial-gradient(circle, rgba(${activeRobot.rgbColor}, 0.6) 0%, transparent 80%)` }}
       />
 
-      {/* Spacing alignment matches the rest of the pages */}
-      
+      {/* ── MAIN LAYOUT: flex-grow with proper responsive padding ── */}
+      <div className="relative z-10 flex-grow flex flex-col pt-[120px] px-4 pb-4 gap-4 max-w-7xl mx-auto w-full min-h-0">
 
+        {/* ── HEADER ── compact, never grows */}
+        <div className="text-center flex-shrink-0">
+          <p className="text-[8px] font-mono uppercase tracking-[5px] text-cyan-400/70">
+            CONSOLE HOST: CORE.COMMAND // 0x48FA
+          </p>
+          <h2 className="text-xl md:text-2xl font-black tracking-tight text-white uppercase leading-none">
+            COMMAND SELECTION COCKPIT
+          </h2>
+        </div>
 
-      {/* ========================================================
-          THE COMMAND COCKPIT (Interactive Single-Screen Selector Wheel)
-          ======================================================== */}
-      <section 
-        ref={cockpitSectionRef}
-        className="cockpit-section relative min-h-screen lg:h-screen lg:min-h-0 w-full pt-28 pb-4 px-6 bg-[#050816] z-10 flex flex-col justify-between overflow-hidden"
-      >
-        <div className="max-w-[1400px] w-full mx-auto flex flex-col justify-between h-full lg:h-[calc(100vh-130px)] gap-4">
-          
-          {/* Compact Dashboard Header */}
-          <div className="text-center mb-2 relative lg:mb-0">
-            <p className="text-[9px] font-mono uppercase tracking-[5px] mb-1 text-cyan-400/80">
-              CONSOLE HOST: CORE.COMMAND // 0x48FA
-            </p>
-            <h2 className="text-2xl md:text-3xl font-black tracking-tight text-white mb-1 uppercase transition-all duration-300">
-              {isSynced ? "COMMAND SELECTION COCKPIT" : "CHASSIS FRAME INITIALIZATION"}
-            </h2>
-            <p className="text-gray-400 text-xs max-w-xl mx-auto hidden lg:block leading-tight transition-all duration-300">
-              {isSynced 
-                ? "Autonomous humanoid chassis linked. Specs synced, telemetry loaded, orthographic diagnostic metrics online."
-                : "Select an autonomous chassis framework below to initialize the quantum link and sync cockpit systems."
-              }
-            </p>
-            {!isSynced && (
-              <p className="text-[9px] font-mono text-cyan-400 uppercase tracking-[4px] animate-pulse mt-2.5">
-                [ AWAITING QUANTUM SYNC - SELECT ACTIVE ROBOT FRAME ]
-              </p>
-            )}
-            <div className="w-12 h-[1px] bg-cyan-500/20 mx-auto mt-2 lg:hidden" />
-          </div>
+        {/* ── COCKPIT GRID: responsive stack on mobile, 3-column layout on desktop ── */}
+        <div className="flex-grow min-h-0 grid grid-cols-1 lg:grid-cols-[2.2fr_5fr_2.2fr] gap-4">
 
-          {/* Selector Cockpit Dashboard Grid - Realigned horizontally for perfect top alignment */}
-          <div className="grid lg:grid-cols-12 gap-4 lg:gap-6 items-stretch relative z-10">
-            
-            {/* LEFT HUD: Technical Readouts / Specifications (3 Columns) */}
-            <div className={`lg:col-span-3 flex flex-col gap-3.5 order-2 lg:order-1 relative z-25 transition-all duration-700 ease-out ${
-              isSynced ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-16 pointer-events-none"
-            }`}>
-              
-              {/* Selected Model Details card */}
-              <div className="p-4 rounded-xl border border-white/5 bg-slate-900/30 backdrop-blur-md relative overflow-hidden transition-all duration-500 flex flex-col justify-between">
-                <div 
-                  className="absolute top-0 left-0 w-[4px] h-full transition-all duration-500" 
-                  style={{ backgroundColor: activeRobot.color }}
-                />
-                
-                <div>
-                  <span className="text-[9px] font-mono tracking-widest text-gray-400 uppercase">
-                    ACTIVE FRAME: 0{activeRobotIndex + 1} // MODEL
-                  </span>
-                  <h3 className="text-2xl font-extrabold text-white mt-0.5 mb-1 tracking-tight">
-                    {activeRobot.name}
-                  </h3>
-                  <p className="text-xs font-semibold mb-2" style={{ color: activeRobot.color }}>
-                    {activeRobot.role}
-                  </p>
-                </div>
-                <p className="text-[11px] text-gray-400 leading-relaxed">
-                  {activeRobot.description}
-                </p>
-              </div>
+          {/* ── LEFT PANEL: identity + specs + telemetry ── */}
+          <div className="flex flex-col gap-2 min-h-0 order-2 lg:order-1">
 
-              {/* Physical specifications */}
-              <div className="p-4 rounded-xl border border-white/5 bg-slate-900/30 backdrop-blur-md grid grid-cols-2 gap-3">
-                <div>
-                  <p className="text-[8px] font-mono text-gray-500 uppercase tracking-wider">UNIT HEIGHT</p>
-                  <p className="text-xs font-extrabold text-white mt-0.5">{activeRobot.specs.height}</p>
-                </div>
-                <div>
-                  <p className="text-[8px] font-mono text-gray-500 uppercase tracking-wider">BATTERY PROFILE</p>
-                  <p className="text-xs font-extrabold text-white mt-0.5 truncate">{activeRobot.specs.battery.split(" ")[0]}</p>
-                </div>
-                <div>
-                  <p className="text-[8px] font-mono text-gray-500 uppercase tracking-wider">{activeRobot.specs.specialLabel.toUpperCase()}</p>
-                  <p className="text-xs font-extrabold text-white mt-0.5 truncate">{activeRobot.specs.special}</p>
-                </div>
-                <div>
-                  <p className="text-[8px] font-mono text-gray-500 uppercase tracking-wider">CORE THERMALS</p>
-                  <p className="text-xs font-extrabold text-green-400 mt-0.5">36.5°C</p>
-                </div>
-              </div>
-
-              {/* Telemetry quick values */}
-              <div className="p-4 rounded-xl border border-white/5 bg-slate-900/20 backdrop-blur-md grid grid-cols-2 gap-3">
-                <div>
-                  <p className="text-[8px] font-mono text-gray-500 uppercase tracking-wider">AI FRAMEWORK</p>
-                  <p className="text-[11px] font-bold text-white mt-0.5">Techligence-L2</p>
-                </div>
-                <div>
-                  <p className="text-[8px] font-mono text-gray-500 uppercase tracking-wider">DIAGNOSTICS</p>
-                  <p className="text-[11px] font-bold text-green-400 mt-0.5">ONLINE // 100%</p>
-                </div>
-                <div>
-                  <p className="text-[8px] font-mono text-gray-500 uppercase tracking-wider">COMMUNICATION</p>
-                  <p className="text-[11px] font-bold text-white mt-0.5">5G QUANTUM LINK</p>
-                </div>
-                <div>
-                  <p className="text-[8px] font-mono text-gray-500 uppercase tracking-wider">SYSTEM STATE</p>
-                  <p className="text-[11px] font-bold text-cyan-400 mt-0.5">READY</p>
-                </div>
-              </div>
-
-            </div>
-
-            {/* CENTER FOCUS: The active Spotlight 3D Viewer (6 Columns) */}
-            <div className={`lg:col-span-6 flex flex-col items-center justify-center min-h-[360px] lg:min-h-0 relative order-1 lg:order-2 transition-all duration-700 ease-out ${
-              isSynced ? "opacity-100 scale-100" : "opacity-0 scale-90 pointer-events-none"
-            }`}>
-              
-              {/* Spotlight base stand area */}
-              <div className="relative w-full h-[280px] sm:h-[300px] lg:h-[320px] flex items-center justify-center mx-auto z-10 mb-2">
-                {/* Circular glowing telemetry ring inside central preview */}
-                <div className="absolute w-[120%] h-[80%] rounded-full border border-dashed pointer-events-none z-0 opacity-15 animate-[spin_40s_linear_infinite]" style={{ borderColor: "#00f0ff", transform: "scaleY(0.35) rotate(15deg)" }} />
-                <div className="absolute w-[110%] h-[70%] rounded-full border pointer-events-none z-0 opacity-25 animate-[spin_20s_linear_infinite_reverse]" style={{ borderColor: "#00f0ff", transform: "scaleY(0.35) rotate(-15deg)" }} />
-
-                {/* Ambient dynamic reflection floor glows */}
-                <div 
-                  className="absolute bottom-[6%] left-[45%] w-[58%] h-[20px] bg-black/85 rounded-full z-0 pointer-events-none scale-y-[0.35] shadow-[0_0_25px_12px_rgba(0,0,0,0.95)] animate-shadow-pulse" 
-                  style={{ transform: "translate(-50%, 0)" }}
-                />
-                <div 
-                  className="absolute bottom-[6%] left-[45%] w-[40%] h-[14px] rounded-full z-0 pointer-events-none scale-y-[0.35] animate-shadow-pulse"
-                  style={{ 
-                    transform: "translate(-50%, 0)",
-                    backgroundColor: "rgba(0, 240, 255, 0.2)"
-                  }}
-                />
-
-                {/* Universal dynamic renderer */}
-                {activeView === "video" && activeRobot.id === "t2-mini" ? (
-                  !videoError ? (
-                    <video
-                      src="/Robo.mp4"
-                      loop
-                      muted
-                      playsInline
-                      autoPlay
-                      className="w-full h-full object-contain robot-float pointer-events-none relative z-10 transition-all duration-500"
-                      style={{
-                        filter: "url(#remove-black-showcase)",
-                        clipPath: "polygon(0 0, 100% 0, 100% 85%, 75% 85%, 75% 100%, 0 100%)"
-                      }}
-                    />
-                  ) : (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-md">
-                      <p className="text-red-400 font-semibold mb-2">Video Offline</p>
-                    </div>
-                  )
-                ) : (
-                  <div className="w-full h-full relative z-10 flex items-center justify-center py-2">
-                    <img 
-                      src={activeView === "video" ? activeRobot.image : `/robots/${activeView}.png`} 
-                      alt={`${activeRobot.name} visual`}
-                      className="w-full h-full object-contain robot-float transition-all duration-500 relative z-10"
-                      style={{
-                        filter: "url(#remove-black-showcase)"
-                      }}
-                    />
-                  </div>
-                )}
-
-                {/* Viewer Mode Selector Toggle Deck (Positioned Absolutely inside Spotlight container to lock it vertically) */}
-                <div className="absolute top-2 left-1/2 -translate-x-1/2 flex gap-1.5 p-1 rounded-xl border border-white/5 bg-black/60 backdrop-blur-md z-30 select-none scale-90 sm:scale-95">
-                  {[
-                    { view: "video", label: "3D MODEL", index: "01" },
-                    { view: "front", label: "FRONT VIEW", index: "02" },
-                    { view: "side", label: "SIDE VIEW", index: "03" },
-                    { view: "back", label: "BACK VIEW", index: "04" }
-                  ].map((item) => {
-                    const isActive = activeView === item.view;
-                    return (
-                      <button
-                        key={item.view}
-                        onClick={() => setActiveView(item.view as any)}
-                        className={`px-3 py-2 rounded-lg text-[9px] font-mono font-bold tracking-widest transition-all duration-300 cursor-pointer flex flex-col items-center select-none ${
-                          isActive 
-                            ? "text-black shadow-md scale-105" 
-                            : "text-gray-400 hover:text-white hover:bg-white/5"
-                        }`}
-                        style={isActive ? {
-                          boxShadow: "0 0 10px 1px rgba(0, 240, 255, 0.45)",
-                          backgroundColor: "#00f0ff",
-                          color: "#050816"
-                        } : {}}
-                      >
-                        <span className="text-[7px] opacity-60 mb-0.5">{item.index}</span>
-                        <span>{item.label}</span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-            </div>
-
-            {/* RIGHT HUD: RPG Diagnostic Metrics & Terminal Logs Ticker (3 Columns) */}
-            <div className={`lg:col-span-3 flex flex-col gap-3.5 order-3 relative z-25 transition-all duration-700 ease-out ${
-              isSynced ? "opacity-100 translate-x-0" : "opacity-0 translate-x-16 pointer-events-none"
-            }`}>
-              
-              {/* Telemetry specs dashboard (RPG Progress Cards) */}
-              <div className="p-4 rounded-xl border border-white/5 bg-slate-900/30 backdrop-blur-md relative overflow-hidden">
-                <span className="text-[9px] font-mono tracking-widest text-gray-500 uppercase block mb-4">
-                  HARDWARE SYSTEM RATINGS
+            {/* Robot identity */}
+            <div className="flex-shrink-0 p-3 rounded-xl border border-white/5 bg-slate-900/30 backdrop-blur-md relative overflow-hidden">
+              <div
+                className="absolute top-0 left-0 w-[3px] h-full rounded-l-xl transition-all duration-500"
+                style={{ backgroundColor: activeRobot.color }}
+              />
+              <div className="pl-3">
+                <span className="text-[7px] font-mono tracking-widest text-gray-400 uppercase">
+                  ACTIVE FRAME: 0{activeRobotIndex + 1} // MODEL
                 </span>
-                
-                <div className="flex flex-col gap-3.5">
-                  {/* Rating 1: Cognitive AI */}
-                  <div>
-                    <div className="flex justify-between text-[11px] font-semibold mb-1">
-                      <span className="text-gray-300">Cognitive Decision AI</span>
-                      <span className="font-mono text-cyan-400">{animatedStats.cognitiveAI}%</span>
-                    </div>
-                    <div className="w-full h-1 rounded-full bg-white/10 overflow-hidden">
-                      <div 
-                        className="h-full rounded-full transition-all duration-300"
-                        style={{
-                          width: `${animatedStats.cognitiveAI}%`,
-                          backgroundColor: "#00f0ff",
-                          boxShadow: "0 0 8px #00f0ff"
-                        }}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Rating 2: Physical Dexterity */}
-                  <div>
-                    <div className="flex justify-between text-[11px] font-semibold mb-1">
-                      <span className="text-gray-300">Kinetic Physical Dexterity</span>
-                      <span className="font-mono text-cyan-400">{animatedStats.dexterity}%</span>
-                    </div>
-                    <div className="w-full h-1 rounded-full bg-white/10 overflow-hidden">
-                      <div 
-                        className="h-full rounded-full transition-all duration-300"
-                        style={{
-                          width: `${animatedStats.dexterity}%`,
-                          backgroundColor: "#00f0ff",
-                          boxShadow: "0 0 8px #00f0ff"
-                        }}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Rating 3: Spatial Agility */}
-                  <div>
-                    <div className="flex justify-between text-[11px] font-semibold mb-1">
-                      <span className="text-gray-300">Spatial LiDAR Agility</span>
-                      <span className="font-mono text-cyan-400">{animatedStats.agility}%</span>
-                    </div>
-                    <div className="w-full h-1 rounded-full bg-white/10 overflow-hidden">
-                      <div 
-                        className="h-full rounded-full transition-all duration-300"
-                        style={{
-                          width: `${animatedStats.agility}%`,
-                          backgroundColor: "#00f0ff",
-                          boxShadow: "0 0 8px #00f0ff"
-                        }}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Rating 4: Battery & Power Core */}
-                  <div>
-                    <div className="flex justify-between text-[11px] font-semibold mb-1">
-                      <span className="text-gray-300">Power Core Endurance</span>
-                      <span className="font-mono text-cyan-400">{animatedStats.power}%</span>
-                    </div>
-                    <div className="w-full h-1 rounded-full bg-white/10 overflow-hidden">
-                      <div 
-                        className="h-full rounded-full transition-all duration-300"
-                        style={{
-                          width: `${animatedStats.power}%`,
-                          backgroundColor: "#00f0ff",
-                          boxShadow: "0 0 8px #00f0ff"
-                        }}
-                      />
-                    </div>
-                  </div>
-                </div>
+                <h3 className="text-lg font-extrabold text-white mt-0.5 tracking-tight leading-none">{activeRobot.name}</h3>
+                <p className="text-[10px] font-semibold mt-1 mb-1.5" style={{ color: activeRobot.color }}>{activeRobot.role}</p>
+                <p className="text-[10px] text-gray-400 leading-relaxed">{activeRobot.description}</p>
               </div>
-
-              {/* Diagnostic Terminal Logs console screen */}
-              <div className="p-4 rounded-xl border border-white/5 bg-black/60 font-mono text-[9px] leading-relaxed text-gray-400 relative overflow-hidden h-[120px] flex flex-col justify-end">
-                <div 
-                  className="absolute top-0 left-0 w-full h-[2px]"
-                  style={{ backgroundColor: "#00f0ff" }}
-                />
-                
-                <div className="flex flex-col gap-0.5 w-full overflow-hidden">
-                  <p className="text-cyan-400 font-bold mb-0.5">{">> SYSTEM INTERCONNECT DIAGNOSTICS"}</p>
-                  
-                  {displayedLogs.map((log, i) => (
-                    <p key={i} className="truncate transition-opacity duration-300">
-                      {">> "}{log}
-                    </p>
-                  ))}
-                  
-                  {displayedLogs.length < activeRobot.logs.length && (
-                    <p className="animate-pulse text-cyan-400/50">{">> DEPLOYING CHASSIS MODULES..."}</p>
-                  )}
-                </div>
-              </div>
-
             </div>
 
+            {/* Physical specs 2×2 grid */}
+            <div className="flex-shrink-0 p-3 rounded-xl border border-white/5 bg-slate-900/30 backdrop-blur-md grid grid-cols-2 gap-2">
+              {[
+                ["UNIT HEIGHT",   activeRobot.specs.height, "text-white"],
+                ["BATTERY",       activeRobot.specs.battery.split(" ")[0], "text-white"],
+                [activeRobot.specs.specialLabel.toUpperCase(), activeRobot.specs.special, "text-white"],
+                ["THERMALS",      "36.5°C", "text-green-400"],
+              ].map(([label, value, col]) => (
+                <div key={label}>
+                  <p className="text-[7px] font-mono text-gray-500 uppercase tracking-wider">{label}</p>
+                  <p className={`text-[10px] font-extrabold mt-0.5 truncate ${col}`}>{value}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Telemetry 2×2 grid */}
+            <div className="flex-shrink-0 p-3 rounded-xl border border-white/5 bg-slate-900/20 backdrop-blur-md grid grid-cols-2 gap-2">
+              {[
+                ["AI FRAMEWORK",  "Techligence-L2",  "text-white"],
+                ["DIAGNOSTICS",   "ONLINE",           "text-green-400"],
+                ["COMMS",         "5G QUANTUM",       "text-white"],
+                ["STATE",         "READY",            "text-cyan-400"],
+              ].map(([label, value, col]) => (
+                <div key={label}>
+                  <p className="text-[7px] font-mono text-gray-500 uppercase tracking-wider">{label}</p>
+                  <p className={`text-[10px] font-bold mt-0.5 truncate ${col}`}>{value}</p>
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* 2D SCREEN-FACING ROTARY SELECTION DISC */}
-          <div className="relative w-full h-[145px] lg:h-[130px] mt-2 lg:mt-0 flex items-center justify-center select-none overflow-visible z-20 transition-all duration-700">
-            
+          {/* ── CENTER PANEL: robot viewer, positioned on top layer, no overflow clipping ── */}
+          <div className="flex flex-col min-h-0 items-center justify-center relative order-1 lg:order-2 min-h-[300px] h-[40vh] lg:h-auto lg:min-h-0 z-30 pointer-events-none">
 
+            {/* Consolidated Robotic Name & Navigation Header */}
+            <div className="absolute top-3 left-1/2 -translate-x-1/2 z-40 text-center pointer-events-auto select-none flex items-center justify-center gap-4 md:gap-6 w-full max-w-[450px]">
+              {/* Left Chevron Button */}
+              <button
+                onClick={() => handleRobotClick((activeRobotIndex - 1 + ROBOTS_DATA.length) % ROBOTS_DATA.length)}
+                className="p-1.5 rounded-full border border-cyan-500/25 bg-slate-950/60 hover:bg-slate-900/80 hover:border-cyan-400 hover:shadow-[0_0_10px_rgba(0,240,255,0.4)] text-gray-400 hover:text-cyan-400 transition-all duration-300 cursor-pointer flex-shrink-0"
+                aria-label="Previous Robot"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
 
-            {/* The circular, spinning 2D glassmorphic selector disc */}
-            <div 
-              className="absolute left-1/2 rounded-full border-[3px] border-cyan-500/35 bg-gradient-to-b from-[#0b122f] to-[#040716] transition-all duration-[800ms] ease-out select-none shadow-[0_0_55px_rgba(6,182,212,0.25),_inset_0_0_35px_rgba(6,182,212,0.2)]"
-              style={{ 
-                width: "480px",
-                height: "480px",
-                bottom: isSynced ? "-410px" : "165px",
-                transform: `translateX(-50%) rotate(${activeRobotIndex * -60}deg) scale(${isSynced ? 1.0 : 1.15})`,
-              }}
-            >
-              {/* Concentric high-tech glowing inner rings */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92%] h-[92%] rounded-full border border-cyan-500/10 pointer-events-none" />
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] rounded-full border border-dashed border-cyan-500/15 pointer-events-none animate-[spin_80s_linear_infinite]" />
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] rounded-full border border-cyan-500/10 pointer-events-none animate-[spin_50s_linear_infinite_reverse]" />
-              
-              {/* Central glowing hub */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[35%] h-[35%] rounded-full border border-cyan-500/20 bg-[#060919] shadow-[inset_0_0_20px_rgba(6,182,212,0.15)] pointer-events-none flex items-center justify-center">
-                <div className="w-8 h-8 rounded-full bg-cyan-500/5 border border-cyan-500/30 animate-pulse" />
+              {/* Robot Name */}
+              <div className="flex-shrink-0">
+                <h2 className="text-cyan-400 font-mono text-xl md:text-2xl lg:text-3xl font-black tracking-[6px] uppercase drop-shadow-[0_0_12px_rgba(6,182,212,0.4)]">
+                  {activeRobot.name}
+                </h2>
+                <div className="w-12 h-[2px] bg-cyan-400/50 mx-auto mt-1.5 blur-[0.5px]"></div>
               </div>
 
-              {/* Spoke ticks */}
-              {[0, 60, 120, 180, 240, 300].map((deg) => (
-                <div 
-                  key={deg}
-                  className="absolute top-1/2 left-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent origin-center pointer-events-none"
-                  style={{ transform: `translate(-50%, -50%) rotate(${deg}deg)` }}
-                />
-              ))}
-
-              {/* Render the 6 robot selection cards inside the rotating disc */}
-              {ROBOTS_DATA.map((robot, index) => {
-                const isActive = index === activeRobotIndex;
-                const angle = index * 60; // evenly space 6 robots around the full circle
-                const rad = (angle * Math.PI) / 180;
-                const radius = 185; // radial distance from disc center
-                const x = Math.sin(rad) * radius;
-                const y = -Math.cos(rad) * radius; // standard top-center coordinate spacing
-
-                return (
-                  <button
-                    key={robot.id}
-                    onClick={() => handleRobotClick(index)}
-                    className={`absolute rounded-xl border transition-all duration-500 cursor-pointer w-24 h-[110px] sm:w-26 sm:h-[120px] flex flex-col items-center justify-between p-2.5 backdrop-blur-md select-none text-left group`}
-                    style={{
-                      left: `calc(50% + ${x}px)`,
-                      top: `calc(50% + ${y}px)`,
-                      transform: `translate(-50%, -50%) rotate(${angle}deg)`,
-                      borderColor: isActive ? "#00f0ff" : "rgba(255, 255, 255, 0.08)",
-                      boxShadow: isActive ? "0 0 20px rgba(0, 240, 255, 0.35)" : "none",
-                      backgroundColor: isActive ? "rgba(11, 16, 38, 0.95)" : "rgba(5, 8, 22, 0.65)"
-                    }}
-                  >
-                    {/* Monospace Indicator Tag at the top */}
-                    <div className="w-full flex justify-between items-center text-[7px] font-mono text-gray-500 font-bold mb-1">
-                      <span>[ 0{index + 1} ]</span>
-                      <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-cyan-400" style={{ color: "#00f0ff" }}>
-                        {isActive ? "ACTIVE" : "SELECT"}
-                      </span>
-                    </div>
-
-                    {/* Circular asset thumbnail render with dynamic glow border */}
-                    <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden relative bg-black/40 flex items-center justify-center border border-white/10 mb-1 transition-transform duration-500 group-hover:scale-105">
-                      <img 
-                        src={robot.image} 
-                        alt={robot.name}
-                        className="w-[85%] h-[85%] object-contain mt-0.5 relative z-10"
-                        style={{ 
-                          filter: "url(#remove-black-showcase)" 
-                        }}
-                      />
-                      {/* Active animated pulsing theme border highlights */}
-                      <div 
-                        className={`absolute inset-0 rounded-full border-2 transition-opacity duration-500 ${
-                          isActive ? "opacity-100 animate-pulse" : "opacity-0"
-                        }`}
-                        style={{ borderColor: "#00f0ff" }}
-                      />
-                    </div>
-
-                    {/* Monospace Label text */}
-                    <div className="text-center w-full mt-auto">
-                      <span 
-                        className="text-[9px] font-mono font-black tracking-wider uppercase transition-colors text-center truncate block w-full"
-                        style={{ color: isActive ? "#00f0ff" : "rgb(156, 163, 175)" }}
-                      >
-                        {robot.name}
-                      </span>
-                      <span className="text-[7px] font-mono text-gray-500 block truncate leading-none mt-0.5">
-                        {robot.role.split(" & ")[0].split(" // ")[0]}
-                      </span>
-                    </div>
-                  </button>
-                );
-              })}
+              {/* Right Chevron Button */}
+              <button
+                onClick={() => handleRobotClick((activeRobotIndex + 1) % ROBOTS_DATA.length)}
+                className="p-1.5 rounded-full border border-cyan-500/25 bg-slate-950/60 hover:bg-slate-900/80 hover:border-cyan-400 hover:shadow-[0_0_10px_rgba(0,240,255,0.4)] text-gray-400 hover:text-cyan-400 transition-all duration-300 cursor-pointer flex-shrink-0"
+                aria-label="Next Robot"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
             </div>
 
-            {/* Sweep light floor reflect overlay */}
-            <div 
-              className="absolute left-1/2 bottom-0 w-[55vw] h-10 rounded-full blur-3xl opacity-20 pointer-events-none z-0"
-              style={{ 
-                transform: "translateX(-50%)",
-                backgroundColor: "#00f0ff"
-              }}
+            {/* Futuristic Left Cyber Telemetry (Vertical HUD Axis) */}
+            <div className="hidden xl:flex absolute left-[12%] top-[18%] bottom-[18%] w-[60px] flex-col items-center justify-between pointer-events-none select-none z-10 font-mono text-[7px] text-cyan-500/40">
+              <span className="tracking-widest rotate-90 origin-left translate-x-3 mb-4">[ELEV_AXIS]</span>
+              <div className="relative w-[1px] flex-grow bg-cyan-500/20">
+                {/* Tick marks */}
+                {[0.2, 0.4, 0.6, 0.8].map((top, idx) => (
+                  <div 
+                    key={idx} 
+                    className="absolute w-2 h-[1px] bg-cyan-500/30 -left-1" 
+                    style={{ top: `${top * 100}%` }}
+                  >
+                    <span className="absolute left-3 -top-1 opacity-70">y_0{idx+1}</span>
+                  </div>
+                ))}
+                {/* Animated horizontal cursor */}
+                <div 
+                  className="absolute w-4 h-[1px] bg-cyan-400 left-[-7px] shadow-[0_0_8px_#00f0ff] animate-[elevCursor_6s_ease-in-out_infinite]"
+                />
+              </div>
+              <span className="mt-4">VAL_0x9A</span>
+            </div>
+
+            {/* Futuristic Right Cyber Telemetry (LiDAR Sweep / Sector Scope) */}
+            <div className="hidden xl:flex absolute right-[12%] top-[22%] w-[120px] flex-col gap-4 pointer-events-none select-none z-10 font-mono text-[7px] text-cyan-500/40 text-left">
+              <div>
+                <span className="block text-[8px] font-bold text-cyan-400/50 mb-1">[SECTOR_SWEEP]</span>
+                <div className="relative w-12 h-12 rounded-full border border-cyan-500/20 flex items-center justify-center">
+                  {/* Rotating sweep line */}
+                  <div className="absolute w-[95%] h-[95%] rounded-full border border-dashed border-cyan-500/10 animate-[spin_8s_linear_infinite]" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-cyan-500/30 animate-pulse" />
+                </div>
+              </div>
+              
+              <div className="border-t border-cyan-500/20 pt-2 flex flex-col gap-1">
+                <span>PING: 14MS // OK</span>
+                <span>SIGNAL: 99.8%</span>
+                <span>SECTOR: 0x4BFA</span>
+                <span>BANDWIDTH: 5.4 Gbps</span>
+              </div>
+
+              <div className="w-full h-8 border border-dashed border-cyan-500/15 rounded-sm relative overflow-hidden bg-cyan-500/[0.02]">
+                <div className="absolute top-1 left-2 w-2 h-2 bg-cyan-400/20 animate-pulse rounded-full" />
+                <div className="absolute top-1 left-6 w-8 h-[1px] bg-cyan-500/30" />
+                <div className="absolute top-3 left-6 w-12 h-[1px] bg-cyan-500/30" />
+              </div>
+            </div>
+
+            {/* Decorative orbital rings */}
+            <div
+              className="absolute w-[88%] h-[55%] rounded-full border border-dashed pointer-events-none z-0 opacity-10 animate-[spin_40s_linear_infinite]"
+              style={{ borderColor: "#00f0ff", transform: "translateY(16px) scaleY(0.3) rotate(15deg)" }}
+            />
+            <div
+              className="absolute w-[76%] h-[50%] rounded-full border pointer-events-none z-0 opacity-15 animate-[spin_20s_linear_infinite_reverse]"
+              style={{ borderColor: "#00f0ff", transform: "translateY(16px) scaleY(0.3) rotate(-15deg)" }}
             />
 
-          </div>
+            {/* Futuristic HUD Specs Badge Left */}
+            <div className={`hidden lg:block absolute left-[4%] top-[25%] z-20 border border-cyan-500/30 bg-slate-950/70 backdrop-blur-md p-2.5 rounded-sm font-mono select-none text-left w-[130px] shadow-[0_0_15px_rgba(6,182,212,0.15)] transition-all duration-700 ease-out ${
+              showHud ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8 pointer-events-none"
+            }`}>
+              <div className="text-lg font-black text-cyan-400 leading-none mb-1">{activeRobot.stats.cognitiveAI}%</div>
+              <div className="text-[7px] text-gray-400 uppercase tracking-widest leading-tight">Cognitive Core</div>
+            </div>
 
-        </div>
-      </section>
-      {/* ========================================================
-          PHASE 3: TRUST & LEAD CONVERSION BLOCK
-          ======================================================== */}
-      <section className="relative py-28 px-6 border-t border-white/5 bg-[#050816] z-10 overflow-hidden">
-        
-        {/* Decorative elements */}
-        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-cyan-500/5 rounded-full blur-[150px] pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-cyan-500/5 rounded-full blur-[150px] pointer-events-none" />
-        
-        <div className="max-w-[1400px] w-full mx-auto">
-          
-          {/* Header */}
-          <div className="text-center mb-20">
-            <p className="text-xs font-semibold uppercase tracking-[8px] mb-3 text-cyan-400">
-              TRUSTED WORLDWIDE
-            </p>
-            <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight uppercase">
-              DEPLOYED ACROSS LEADING INDUSTRIES
-            </h2>
-            <div className="w-16 h-[2px] bg-cyan-400 mx-auto mt-6" />
-          </div>
+            {/* Futuristic HUD Specs Badge Right */}
+            <div className={`hidden lg:block absolute right-[4%] top-[48%] z-20 border border-cyan-500/30 bg-slate-950/70 backdrop-blur-md p-2.5 rounded-sm font-mono select-none text-left w-[130px] shadow-[0_0_15px_rgba(6,182,212,0.15)] transition-all duration-700 ease-out ${
+              showHud ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8 pointer-events-none"
+            }`}>
+              <div className="text-lg font-black text-cyan-400 leading-none mb-1">{activeRobot.stats.dexterity}%</div>
+              <div className="text-[7px] text-gray-400 uppercase tracking-widest leading-tight">Kinetic Motion</div>
+            </div>
 
-          {/* Corporate partners grid (Glassmorphism minimalist branding) */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-24">
-            {[
-              { title: "Smart Retail", label: "T2 Mini", desc: "Automating checkout hubs and welcoming VIP premium clients." },
-              { title: "Healthcare Facilities", label: "T2 Max", desc: "Delivering autonomous patient care supplies cleanly." },
-              { title: "Enterprise Offices", label: "Andy R1", desc: "Interactive gestural support and company workspace map help." },
-              { title: "Logistics Hubs", label: "Nova M1", desc: "Mapping dynamic warehouses with 150m precise lidar ranges." }
-            ].map((industry, index) => (
+            {/* HUD Dashed Connector Lines */}
+            <svg className={`hidden lg:block absolute inset-0 w-full h-full pointer-events-none z-20 transition-opacity duration-700 ease-out ${
+              showHud ? "opacity-100" : "opacity-0"
+            }`}>
+              {/* Left Line Segment 1 */}
+              <line 
+                x1="20%" y1="31%" 
+                x2="28%" y2="31%" 
+                stroke="#00f0ff" 
+                strokeWidth="1" 
+                strokeDasharray="3,3" 
+                className="opacity-45"
+              />
+              {/* Left Line Segment 2 (Angled) */}
+              <line 
+                x1="28%" y1="31%" 
+                x2="48%" y2="39%" 
+                stroke="#00f0ff" 
+                strokeWidth="1" 
+                strokeDasharray="3,3" 
+                className="opacity-45"
+              />
+              {/* Right Line Segment 1 */}
+              <line 
+                x1="80%" y1="54%" 
+                x2="72%" y2="54%" 
+                stroke="#00f0ff" 
+                strokeWidth="1" 
+                strokeDasharray="3,3" 
+                className="opacity-45"
+              />
+              {/* Right Line Segment 2 (Angled) */}
+              <line 
+                x1="72%" y1="54%" 
+                x2="58%" y2="61%" 
+                stroke="#00f0ff" 
+                strokeWidth="1" 
+                strokeDasharray="3,3" 
+                className="opacity-45"
+              />
+            </svg>
+
+            {/* Target Pulsing Dot Left */}
+            <div 
+              className={`hidden lg:block absolute w-2.5 h-2.5 rounded-full bg-cyan-400/40 z-30 animate-ping pointer-events-none transition-opacity duration-700 ease-out ${
+                showHud ? "opacity-100" : "opacity-0"
+              }`}
+              style={{ left: "48%", top: "39%", transform: "translate(-50%, -50%)" }}
+            />
+            <div 
+              className={`hidden lg:block absolute w-1.5 h-1.5 rounded-full bg-cyan-300 z-30 shadow-[0_0_8px_#00f0ff] pointer-events-none transition-opacity duration-700 ease-out ${
+                showHud ? "opacity-100" : "opacity-0"
+              }`}
+              style={{ left: "48%", top: "39%", transform: "translate(-50%, -50%)" }}
+            />
+
+            {/* Target Pulsing Dot Right */}
+            <div 
+              className={`hidden lg:block absolute w-2.5 h-2.5 rounded-full bg-cyan-400/40 z-30 animate-ping pointer-events-none transition-opacity duration-700 ease-out ${
+                showHud ? "opacity-100" : "opacity-0"
+              }`}
+              style={{ left: "58%", top: "61%", transform: "translate(-50%, -50%)" }}
+            />
+            <div 
+              className={`hidden lg:block absolute w-1.5 h-1.5 rounded-full bg-cyan-300 z-30 shadow-[0_0_8px_#00f0ff] pointer-events-none transition-opacity duration-700 ease-out ${
+                showHud ? "opacity-100" : "opacity-0"
+              }`}
+              style={{ left: "58%", top: "61%", transform: "translate(-50%, -50%)" }}
+            />
+
+            {/* ── Robot media: per-robot background removal with centering translation ── */}
+            <div className="absolute inset-0 w-full h-full flex items-center justify-center z-10 pt-0">
               <div 
-                key={index} 
-                className="p-6 rounded-2xl border border-white/5 bg-white/[0.01] hover:bg-white/[0.03] backdrop-blur-md transition-all duration-300 text-left group"
+                className="relative w-full h-full flex items-center justify-center transition-all duration-500"
+                style={{ transform: `scale(${layoutAdjustment.scale}) translateY(${layoutAdjustment.translateY})` }}
               >
-                <span className="text-[10px] font-mono text-cyan-400 font-bold block mb-1">0{index + 1} // SECTOR</span>
-                <h4 className="text-lg font-bold text-white tracking-wide mb-2 group-hover:text-cyan-400 transition-colors">
-                  {industry.title}
-                </h4>
-                <div className="text-xs text-gray-500 font-semibold mb-3 uppercase tracking-widest">{industry.label} ACTIVE</div>
-                <p className="text-xs text-gray-400 leading-relaxed">
-                  {industry.desc}
-                </p>
+                {/* Floor shadow glows inside the translation container to lock to the robot base */}
+                <div
+                  className="absolute bottom-[16%] left-1/2 w-[44%] h-[14px] bg-black/85 rounded-full pointer-events-none z-0"
+                  style={{ transform: "translate(-50%,0) scaleY(0.25)", filter: "blur(14px)" }}
+                />
+                <div
+                  className="absolute bottom-[16%] left-1/2 w-[30%] h-[10px] rounded-full pointer-events-none z-0"
+                  style={{ transform: "translate(-50%,0) scaleY(0.25)", backgroundColor: "rgba(0,240,255,0.28)", filter: "blur(9px)" }}
+                />
+
+                {(() => {
+                  // Apply dynamic filter selection (remove-white-showcase for white bg, remove-green-showcase for green bg) and WebkitClipPath to hide watermark
+                  const isLandscape = ["tella-s", "nova-m1"].includes(activeRobot.id);
+                  const filterId = activeRobot.id === "t2-max" ? "remove-white-showcase" : "remove-green-showcase";
+                  
+                  const layoutAdjustment = ROBOT_LAYOUT_ADJUSTMENTS[activeRobot.id] || { scale: 1.0, translateY: "0%", bottomClip: "100%" };
+                  const bottomClipNum = parseFloat(layoutAdjustment.bottomClip || "100");
+                  const bottomCrop = 100 - bottomClipNum;
+
+                  const videoStyle: React.CSSProperties = isLandscape
+                    ? {
+                        filter: `url(#${filterId})`,
+                        height: "100%",
+                        width: "auto",
+                        maxWidth: "none",
+                        clipPath: `inset(0% 34.375% ${bottomCrop}% 34.375%)`,
+                        WebkitClipPath: `inset(0% 34.375% ${bottomCrop}% 34.375%)`,
+                      }
+                    : {
+                        filter: `url(#${filterId})`,
+                        clipPath: `inset(0% 0% ${bottomCrop}% 0%)`,
+                        WebkitClipPath: `inset(0% 0% ${bottomCrop}% 0%)`,
+                      };
+
+                  return activeView === "video" && activeRobot.video ? (
+                    !videoError ? (
+                      <video
+                        key={activeRobot.id}
+                        src={activeRobot.video}
+                        loop muted playsInline autoPlay
+                        className="h-full w-auto max-w-full object-contain robot-float pointer-events-none relative z-10 transition-all duration-500"
+                        style={videoStyle}
+                        onError={() => setVideoError(true)}
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-md z-10">
+                        <p className="text-red-400 font-semibold">Video Offline</p>
+                        <p className="text-xs text-gray-500 mt-1">Check /public/robots/{activeRobot.id}.mp4</p>
+                      </div>
+                    )
+                  ) : (
+                    <img
+                      src={activeView === "video" ? activeRobot.image : `/robots/${activeView}.png`}
+                      alt={`${activeRobot.name} visual`}
+                      className="h-full w-auto max-w-full object-contain robot-float transition-all duration-500 relative z-10"
+                    />
+                  );
+                })()}
               </div>
-            ))}
+            </div>
           </div>
 
-          {/* Testimonial slider / block (Cyber-glass treatments) */}
-          <div className="grid md:grid-cols-2 gap-8 mb-28">
-            {[
-              {
-                quote: "The integration of Techligence T2 Mini humanoid units transformed our flagship lobby. Guests are wowed by the real-time AI responses, and the dynamic visual presence anchors our futuristic enterprise branding perfectly.",
-                author: "Sarah Jenkins",
-                role: "VP of Operations, RetailCorp Global"
-              },
-              {
-                quote: "Nova M1 fleet navigation and LiDAR precision solved our warehouse logistics mapping deadlock in days. Safe, autonomous navigation that handles both human traffic and machinery mapping flawlessly.",
-                author: "Marcus Chen",
-                role: "Director of Automation, AlphaCare Labs"
-              }
-            ].map((item, i) => (
-              <div 
-                key={i} 
-                className="p-8 md:p-10 rounded-3xl border border-white/5 bg-white/[0.02] backdrop-blur-md relative overflow-hidden flex flex-col justify-between"
-              >
-                {/* Visual Quote accent */}
-                <div className="absolute top-4 right-6 text-7xl font-serif text-white/5 select-none font-bold">“</div>
-                
-                <p className="text-gray-300 italic text-base leading-relaxed mb-6 z-10 relative">
-                  "{item.quote}"
-                </p>
-                
-                <div className="flex items-center gap-4 border-t border-white/5 pt-6 z-10">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-cyan-400 to-blue-500 flex items-center justify-center text-black font-extrabold text-sm uppercase">
-                    {item.author[0]}
-                  </div>
-                  <div>
-                    <h5 className="text-sm font-bold text-white">{item.author}</h5>
-                    <p className="text-[10px] text-gray-500 font-mono uppercase">{item.role}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          {/* ── RIGHT PANEL: ratings + logs + view-selector ── */}
+          <div className="flex flex-col gap-2 min-h-0 order-3 lg:order-3">
 
-          {/* Book Demo Glowing Lead Conversion Card */}
-          <div className="relative p-8 md:p-14 rounded-3xl border border-cyan-500/20 bg-gradient-to-r from-[#080d26] to-[#04081b] overflow-hidden shadow-[0_0_50px_rgba(6,182,212,0.1)] flex flex-col lg:flex-row items-center justify-between gap-8">
-            <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none" />
-            
-            <div className="text-left max-w-xl">
-              <span className="text-[10px] font-mono text-cyan-400 font-bold tracking-widest uppercase block mb-2">
-                AUTHENTICATE BOOKING LINK //
+            {/* Hardware rating bars */}
+            <div className="flex-shrink-0 p-3 rounded-xl border border-white/5 bg-slate-900/30 backdrop-blur-md">
+              <span className="text-[7px] font-mono tracking-widest text-gray-500 uppercase block mb-2.5">
+                HARDWARE SYSTEM RATINGS
               </span>
-              <h3 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight mb-4">
-                READY TO ELEVATE YOUR SERVICE ECOSYSTEM?
-              </h3>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                Connect with our product specialist engineers. Book a private fleet demo and request a customized hardware and cognitive AI diagnostics appraisal.
-              </p>
+              <div className="flex flex-col gap-2.5">
+                {(["Cognitive Decision AI", "Kinetic Dexterity", "Spatial LiDAR Agility", "Power Core Endurance"] as const).map((label, i) => {
+                  const keys = ["cognitiveAI", "dexterity", "agility", "power"] as const;
+                  const val = animatedStats[keys[i]];
+                  return (
+                    <div key={label}>
+                      <div className="flex justify-between text-[10px] font-semibold mb-1">
+                        <span className="text-gray-300">{label}</span>
+                        <span className="font-mono text-cyan-400">{val}%</span>
+                      </div>
+                      <div className="w-full h-[3px] rounded-full bg-white/10 overflow-hidden">
+                        <div
+                          className="h-full rounded-full transition-all duration-300"
+                          style={{ width: `${val}%`, backgroundColor: "#00f0ff", boxShadow: "0 0 8px #00f0ff" }}
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto relative z-10">
-              <a 
-                href="/contact" 
-                className="robot-button p-[2px] w-full sm:w-auto transition-transform duration-300 hover:scale-105 active:scale-95 text-center flex items-center justify-center"
-                style={{
-                  boxShadow: "0 0 25px rgba(6, 182, 212, 0.2)"
-                }}
-              >
-                <div className="relative z-10 px-10 py-4.5 rounded-full bg-[#050816] text-white font-bold tracking-widest text-xs uppercase w-full">
-                  SCHEDULE PRIVATE DEMO
-                </div>
-              </a>
+            {/* Diagnostic terminal logs */}
+            <div
+              className="flex-shrink-0 p-3 rounded-xl border border-white/5 bg-black/60 font-mono text-[8px] leading-relaxed text-gray-400 relative overflow-hidden flex flex-col justify-end"
+              style={{ height: "92px" }}
+            >
+              <div className="absolute top-0 left-0 w-full h-[2px]" style={{ backgroundColor: "#00f0ff" }} />
+              <p className="text-cyan-400 font-bold mb-0.5">&gt;&gt; SYSTEM DIAGNOSTICS</p>
+              {displayedLogs.map((log, i) => (
+                <p key={i} className="truncate">&gt;&gt; {log}</p>
+              ))}
+              {displayedLogs.length < activeRobot.logs.length && (
+                <p className="animate-pulse text-cyan-400/50">&gt;&gt; LOADING...</p>
+              )}
+            </div>
+
+            {/* ── VIEW SELECTOR BUTTONS ── moved from center panel ── */}
+            <div className="flex-shrink-0">
+              <p className="text-[7px] font-mono text-gray-500 uppercase tracking-wider mb-1.5">VIEWPORT MODE</p>
+              <div className="grid grid-cols-2 gap-1.5">
+                {[
+                  { view: "video", label: "3D MODEL",   idx: "01" },
+                  { view: "front", label: "FRONT VIEW", idx: "02" },
+                  { view: "side",  label: "SIDE VIEW",  idx: "03" },
+                  { view: "back",  label: "BACK VIEW",  idx: "04" },
+                ].map(({ view, label, idx }) => {
+                  const isActive = activeView === view;
+                  return (
+                    <button
+                      key={view}
+                      onClick={() => setActiveView(view as "video" | "front" | "side" | "back" | "wave")}
+                      className="px-2 py-1.5 rounded-lg text-[8px] font-mono font-bold tracking-widest transition-all duration-300 cursor-pointer flex flex-col items-center"
+                      style={isActive
+                        ? { boxShadow: "0 0 10px rgba(0,240,255,0.45)", backgroundColor: "#00f0ff", color: "#050816" }
+                        : { backgroundColor: "rgba(255,255,255,0.02)", color: "rgb(156,163,175)", border: "1px solid rgba(255,255,255,0.08)" }
+                      }
+                    >
+                      <span className="text-[6px] opacity-60 mb-0.5">{idx}</span>
+                      <span>{label}</span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </div>
-
         </div>
-      </section>
 
-      {/* Inline animations styles for the local scan glows */}
+        {/* ── SELECTION DOCK: scrollable row on mobile, compact grid on desktop ── */}
+        <div className="flex-shrink-0 w-full overflow-hidden lg:-mt-20 relative z-40">
+          <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-cyan-500/30 scrollbar-track-transparent lg:grid lg:grid-cols-6 lg:overflow-visible lg:pb-0 max-w-3xl mx-auto w-full px-2 lg:px-0">
+            {ROBOTS_DATA.map((robot, index) => {
+              const isActive = index === activeRobotIndex;
+              return (
+                <button
+                  key={robot.id}
+                  onClick={() => handleRobotClick(index)}
+                  className="rounded-xl border transition-all duration-300 cursor-pointer w-24 h-[76px] flex-shrink-0 flex flex-col items-center justify-between p-2 backdrop-blur-md select-none group text-center relative overflow-hidden lg:w-full"
+                  style={{
+                    borderColor: isActive ? "#00f0ff" : "rgba(255,255,255,0.08)",
+                    boxShadow: isActive ? "0 0 12px rgba(0,240,255,0.2)" : "none",
+                    backgroundColor: isActive ? "rgba(11,16,38,0.85)" : "rgba(5,8,22,0.45)"
+                  }}
+                >
+                  {isActive && <div className="absolute top-0 left-0 w-full h-[2px] bg-cyan-400" />}
+                  <div className="w-full flex justify-between items-center text-[6px] font-mono text-gray-500 font-bold">
+                    <span>0{index + 1}</span>
+                    <span className="opacity-0 group-hover:opacity-100 transition-opacity text-cyan-400">
+                      {isActive ? "●" : "○"}
+                    </span>
+                  </div>
+                  <div className="w-8 h-8 rounded-full overflow-hidden bg-black/30 flex items-center justify-center border border-white/5 transition-transform duration-300 group-hover:scale-110">
+                    <img src={robot.image} alt={robot.name} className="w-[85%] h-[85%] object-contain" />
+                  </div>
+                  <span
+                    className="text-[7px] font-mono font-black tracking-wider uppercase truncate block w-full text-center"
+                    style={{ color: isActive ? "#00f0ff" : "rgb(156,163,175)" }}
+                  >
+                    {robot.name}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Inline keyframes */}
       <style>{`
-        @keyframes scanGlow {
-          0% {
-            top: 0%;
-            opacity: 0;
-          }
-          10% {
-            opacity: 0.85;
-          }
-          90% {
-            opacity: 0.85;
-          }
-          100% {
-            top: 100%;
-            opacity: 0;
-          }
+        .robot-float {
+          animation: robotFloat 4s ease-in-out infinite;
         }
-
-        /* Responsive zoom height media query to prevent vertical overlapping and ensure scrolling on compact screens */
-        @media (max-height: 740px) and (min-width: 1024px) {
-          .cockpit-section {
-            height: auto !important;
-            min-height: 100vh !important;
-            overflow: visible !important;
-            padding-top: 100px !important;
-            padding-bottom: 2.5rem !important;
+        @keyframes robotFloat {
+          0%, 100% { transform: translateY(0px); }
+          50%       { transform: translateY(-10px); }
+        }
+        @keyframes elevCursor {
+          0%, 100% { top: 10%; }
+          50%       { top: 90%; }
+        }
+        @keyframes flowSignal {
+          0% {
+            stroke-dashoffset: 115;
+          }
+          30%, 100% {
+            stroke-dashoffset: -15;
           }
         }
       `}</style>

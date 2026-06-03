@@ -5,7 +5,7 @@ import RobotVideo from "./RobotVideo";
 export default function Hero() {
 
   return (
-   <section className="relative min-h-screen bg-[#050816] text-white flex items-center overflow-hidden">
+   <section className="relative min-h-screen bg-[#050816] text-white flex items-center overflow-hidden py-24 lg:py-12">
 <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px]"></div>
     <div className="absolute inset-0 overflow-hidden">
 
@@ -20,11 +20,11 @@ export default function Hero() {
   TECHLIGENCE ROBOTICS
 </p>
 
-<h1 className="text-[90px] lg:text-[150px] font-black leading-none tracking-[-4px] text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-300 to-cyan-500">
+<h1 className="text-[60px] sm:text-[90px] lg:text-[150px] font-black leading-none tracking-[-4px] text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-300 to-cyan-500">
   T2 MINI
 </h1>
 
-<h2 className="mt-4 text-3xl lg:text-5xl font-bold text-white">
+<h2 className="mt-4 text-2xl sm:text-3xl lg:text-5xl font-bold text-white">
   The Future Of Customer Experience
 </h2>
 <div className="w-24 h-[2px] bg-cyan-400 mt-5 mb-6"></div>

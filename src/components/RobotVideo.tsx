@@ -20,16 +20,7 @@ export default function RobotVideo() {
         - Provides a smooth, feathered blend for intermediate shadows.
         - Leaves the brightly lit robot 100% opaque (no holes).
       */}
-      <svg width="0" height="0" style={{ position: "absolute", pointerEvents: "none" }}>
-        <defs>
-          <filter id="remove-black" colorInterpolationFilters="sRGB">
-            <feColorMatrix
-              type="matrix"
-              values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 3.5 3.5 3.5 0 -0.5"
-            />
-          </filter>
-        </defs>
-      </svg>
+      {/* Global GPU SVG Chroma Filter used from layout.tsx */}
 
       {/* Inline styles for local physics-synchronized floor shadow pulse */}
       <style>{`
@@ -78,8 +69,9 @@ export default function RobotVideo() {
           className="w-full h-full object-contain robot-float pointer-events-none relative z-10"
           style={{
             transform: "scale(1.05)",
-            filter: "url(#remove-black) contrast(1.05) brightness(1.02) drop-shadow(0 15px 35px rgba(6, 182, 212, 0.22))",
-            clipPath: "polygon(0 0, 100% 0, 100% 85%, 75% 85%, 75% 100%, 0 100%)",
+            filter: "url(#remove-green) contrast(1.05) brightness(1.02) drop-shadow(0 15px 35px rgba(6, 182, 212, 0.22))",
+            clipPath: "inset(0% 0% 7% 0%)",
+            WebkitClipPath: "inset(0% 0% 7% 0%)",
           }}
         />
       )}

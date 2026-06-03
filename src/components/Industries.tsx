@@ -16,7 +16,7 @@ export default function Industries() {
 
           {/* Card 1 */}
           <div className="robot-card p-[2px]">
-            <div className="bg-[#050816] rounded-3xl p-8 h-full">
+            <div className="bg-[#050816] rounded-3xl p-8 h-full relative overflow-hidden">
             <div
   className="
     absolute
@@ -51,7 +51,7 @@ export default function Industries() {
 
           {/* Card 2 */}
           <div className="robot-card p-[2px]">
-            <div className="bg-[#050816] rounded-3xl p-8 h-full">
+            <div className="bg-[#050816] rounded-3xl p-8 h-full relative overflow-hidden">
             <div
   className="
     absolute
@@ -86,7 +86,7 @@ export default function Industries() {
 
           {/* Card 3 */}
           <div className="robot-card p-[2px]">
-            <div className="bg-[#050816] rounded-3xl p-8 h-full">
+            <div className="bg-[#050816] rounded-3xl p-8 h-full relative overflow-hidden">
 <div
   className="
     absolute
