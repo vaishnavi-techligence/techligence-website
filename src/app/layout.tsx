@@ -27,7 +27,38 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        {/* Global GPU SVG Chroma Filters for background removal */}
+        <svg width="0" height="0" className="absolute pointer-events-none" style={{ position: "absolute", width: 0, height: 0 }}>
+          <defs>
+            <filter id="remove-green" colorInterpolationFilters="sRGB">
+              <feColorMatrix
+                type="matrix"
+                values="1 0 0 0 0  0.35 0.3 0.35 0 0  0 0 1 0 0  1 -11 10.5 0 1.35"
+              />
+            </filter>
+            <filter id="remove-green-showcase" colorInterpolationFilters="sRGB">
+              <feColorMatrix
+                type="matrix"
+                values="1 0 0 0 0  0.35 0.3 0.35 0 0  0 0 1 0 0  1 -11 10.5 0 1.35"
+              />
+            </filter>
+            <filter id="remove-black-showcase" colorInterpolationFilters="sRGB">
+              <feColorMatrix
+                type="matrix"
+                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  3.5 3.5 3.5 0 -0.5"
+              />
+            </filter>
+            <filter id="remove-white-showcase" colorInterpolationFilters="sRGB">
+              <feColorMatrix
+                type="matrix"
+                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  -3 -3 -3 0 3.5"
+              />
+            </filter>
+          </defs>
+        </svg>
+      </body>
     </html>
   );
 }
