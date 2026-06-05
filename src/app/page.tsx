@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="bg-[#050816]">
+    <main className="bg-[#050816] overflow-x-hidden">
       <Navbar />
       <Hero />
       <Industries />
