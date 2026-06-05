@@ -406,60 +406,7 @@ export default function RobotShowcase() {
         <canvas ref={canvasRef} className="w-full h-full opacity-65" />
       </div>
 
-      {/* CAD Flowing Circuit Traces on left and right edges of window */}
-      <svg 
-        viewBox="0 0 100 100" 
-        preserveAspectRatio="none" 
-        className="absolute inset-0 w-full h-full pointer-events-none z-0 hidden xl:block animate-[fadeIn_1s_ease-out]"
-      >
-        <defs>
-          <filter id="glow-cyan-edge" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="0.4" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
-
-        {/* Left Circuit Trace */}
-        <path 
-          d="M 4 10 L 4 42 L 2.5 45.5 L 2.5 90" 
-          fill="none" 
-          stroke="rgba(0, 240, 255, 0.06)" 
-          strokeWidth="0.25" 
-        />
-        {/* Left Glowing Signal Pulse */}
-        <path 
-          d="M 4 10 L 4 42 L 2.5 45.5 L 2.5 90" 
-          fill="none" 
-          stroke="#00f0ff" 
-          strokeWidth="0.3" 
-          pathLength="100"
-          filter="url(#glow-cyan-edge)"
-          className="animate-[flowSignal_7s_linear_infinite]"
-          style={{ strokeDasharray: "15, 85" }}
-        />
-
-        {/* Right Circuit Trace */}
-        <path 
-          d="M 96 10 L 96 42 L 97.5 45.5 L 97.5 90" 
-          fill="none" 
-          stroke="rgba(0, 240, 255, 0.06)" 
-          strokeWidth="0.25" 
-        />
-        {/* Right Glowing Signal Pulse */}
-        <path 
-          d="M 96 10 L 96 42 L 97.5 45.5 L 97.5 90" 
-          fill="none" 
-          stroke="#00f0ff" 
-          strokeWidth="0.3" 
-          pathLength="100"
-          filter="url(#glow-cyan-edge)"
-          className="animate-[flowSignal_7s_linear_infinite]"
-          style={{ strokeDasharray: "15, 85", animationDelay: "3.5s" }}
-        />
-      </svg>
+      {/* CAD Flowing Circuit Traces SVG removed to resolve black bars */}
 
       {/* Global GPU SVG Chroma Filters used from layout.tsx */}
 
@@ -745,13 +692,19 @@ export default function RobotShowcase() {
                         height: "100%",
                         width: "auto",
                         maxWidth: "none",
+                        aspectRatio: "16 / 9",
                         clipPath: `inset(0% 34.375% ${bottomCrop}% 34.375%)`,
                         WebkitClipPath: `inset(0% 34.375% ${bottomCrop}% 34.375%)`,
+                        backgroundColor: "transparent",
                       }
                     : {
                         filter: `url(#${filterId})`,
-                        clipPath: `inset(0% 0% ${bottomCrop}% 0%)`,
-                        WebkitClipPath: `inset(0% 0% ${bottomCrop}% 0%)`,
+                        height: "100%",
+                        width: "auto",
+                        aspectRatio: activeRobot.id === "t2-max" ? "1440 / 1956" : "9 / 16",
+                        clipPath: `inset(0% 3% ${bottomCrop}% 3%)`,
+                        WebkitClipPath: `inset(0% 3% ${bottomCrop}% 3%)`,
+                        backgroundColor: "transparent",
                       };
 
                   return activeView === "video" && activeRobot.video ? (
@@ -775,6 +728,15 @@ export default function RobotShowcase() {
                       src={activeView === "video" ? activeRobot.image : `/robots/${activeView}.png`}
                       alt={`${activeRobot.name} visual`}
                       className="h-full w-auto max-w-full object-contain robot-float transition-all duration-500 relative z-10"
+                      style={
+                        activeView !== "video"
+                          ? {
+                              filter: "url(#remove-black-showcase)",
+                              clipPath: `inset(0% 3% ${bottomCrop}% 3%)`,
+                              WebkitClipPath: `inset(0% 3% ${bottomCrop}% 3%)`,
+                            }
+                          : undefined
+                      }
                     />
                   );
                 })()}
