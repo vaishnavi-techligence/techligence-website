@@ -48,35 +48,35 @@ export default function Hero() {
     <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></div>
   </div>
   
-  <div className="flex gap-10 mt-12">
+  <div className="flex flex-wrap gap-6 sm:gap-10 mt-12 justify-start items-center">
 
-  <div>
-    <h3 className="text-cyan-400 text-4xl font-bold">
+  <div className="flex-shrink-0">
+    <h3 className="text-cyan-400 text-3xl sm:text-4xl font-bold">
       24/7
     </h3>
-    <p className="text-gray-400 text-sm">
+    <p className="text-gray-400 text-xs sm:text-sm">
       Operation
     </p>
   </div>
 
-  <div className="w-px bg-white/10"></div>
+  <div className="hidden sm:block w-px h-10 bg-white/10"></div>
 
-  <div>
-    <h3 className="text-cyan-400 text-4xl font-bold">
+  <div className="flex-shrink-0">
+    <h3 className="text-cyan-400 text-3xl sm:text-4xl font-bold">
       Voice AI
     </h3>
-    <p className="text-gray-400 text-sm">
+    <p className="text-gray-400 text-xs sm:text-sm">
       Powered
     </p>
   </div>
 
-  <div className="w-px bg-white/10"></div>
+  <div className="hidden sm:block w-px h-10 bg-white/10"></div>
 
-  <div>
-    <h3 className="text-cyan-400 text-4xl font-bold">
+  <div className="flex-shrink-0">
+    <h3 className="text-cyan-400 text-3xl sm:text-4xl font-bold">
       Face 
     </h3>
-    <p className="text-gray-400 text-sm">
+    <p className="text-gray-400 text-xs sm:text-sm">
       Recognition
     </p>
   </div>

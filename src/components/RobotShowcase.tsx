@@ -662,7 +662,7 @@ export default function RobotShowcase() {
             />
 
             {/* ── Robot media: per-robot background removal with centering translation ── */}
-            <div className="absolute inset-0 w-full h-full flex items-center justify-center z-10 pt-0">
+            <div className="absolute inset-0 w-full h-full flex items-center justify-center z-10 pt-0 overflow-hidden">
               <div 
                 className="relative w-full h-full flex items-center justify-center transition-all duration-500"
                 style={{ transform: `scale(${layoutAdjustment.scale}) translateY(${layoutAdjustment.translateY})` }}
@@ -742,6 +742,31 @@ export default function RobotShowcase() {
                 })()}
               </div>
             </div>
+
+            {/* Viewport Selection overlay for mobile (rendered inside the viewer panel for quick access) */}
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-40 flex lg:hidden items-center justify-center gap-1.5 pointer-events-auto w-[90%] max-w-[360px] p-1.5 rounded-xl bg-slate-950/70 border border-white/5 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+              {[
+                { view: "video", label: "3D MODEL" },
+                { view: "front", label: "FRONT" },
+                { view: "side",  label: "SIDE" },
+                { view: "back",  label: "BACK" },
+              ].map(({ view, label }) => {
+                const isActive = activeView === view;
+                return (
+                  <button
+                    key={view}
+                    onClick={() => setActiveView(view as "video" | "front" | "side" | "back" | "wave")}
+                    className="flex-1 py-1 rounded-lg text-[8px] font-mono font-black tracking-wider transition-all duration-300 cursor-pointer text-center"
+                    style={isActive
+                      ? { boxShadow: "0 0 8px rgba(0,240,255,0.4)", backgroundColor: "#00f0ff", color: "#050816" }
+                      : { backgroundColor: "transparent", color: "rgb(156,163,175)" }
+                    }
+                  >
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           {/* ── RIGHT PANEL: ratings + logs + view-selector ── */}
@@ -790,7 +815,7 @@ export default function RobotShowcase() {
             </div>
 
             {/* ── VIEW SELECTOR BUTTONS ── moved from center panel ── */}
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0 hidden lg:block">
               <p className="text-[7px] font-mono text-gray-500 uppercase tracking-wider mb-1.5">VIEWPORT MODE</p>
               <div className="grid grid-cols-2 gap-1.5">
                 {[
