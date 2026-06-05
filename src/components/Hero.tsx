@@ -34,13 +34,13 @@ export default function Hero() {
 </p>
 
 <div className="mt-10">
-  <button className="robot-button p-[2px]">
+  <a href="/robots?robot=t2-mini" className="robot-button p-[2px] inline-block">
 
     <div className="relative z-10 px-10 py-4 rounded-full bg-[#050816] text-white font-bold tracking-wide">
       EXPLORE T2 MINI
     </div>
 
-  </button>
+  </a>
 
   <div className="flex gap-2 mt-6">
     <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></div>
