@@ -1,5 +1,12 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ContactContent from "./ContactContent";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact Us | Techligence Robotics",
+  description: "Get in touch with Techligence Private Limited. Reach our Mumbai and Pune offices or contact us via phone and email.",
+};
 
 export default function ContactPage() {
   return (
@@ -16,7 +23,7 @@ export default function ContactPage() {
       <Navbar />
       
       {/* Page Content Container */}
-      <div className="max-w-[1400px] mx-auto px-6 pt-36 pb-24 min-h-[60vh] relative z-10 flex flex-col justify-center w-full">
+      <div className="max-w-[1400px] mx-auto px-6 pt-36 pb-24 min-h-[70vh] relative z-10 flex flex-col justify-center w-full">
         <p className="text-cyan-400 uppercase tracking-[8px] mb-4 text-sm font-semibold">
           GET IN TOUCH
         </p>
@@ -24,12 +31,16 @@ export default function ContactPage() {
           CONTACT
         </h1>
         <div className="w-24 h-[2px] bg-cyan-400 mb-8"></div>
-        <p className="text-gray-400 text-lg max-w-md">
-          Reach out to our global technical consulting teams to schedule virtual consultations or custom deployments.
+        <p className="text-gray-400 text-lg max-w-xl">
+          Reach out to our engineering and technical consulting teams for corporate inquiries, custom deployments, or service support.
         </p>
+
+        {/* Interactive Contact Content Grid */}
+        <ContactContent />
       </div>
 
       <Footer />
     </main>
   );
 }
+
