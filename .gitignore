@@ -39,3 +39,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# media and documents
+*.mp4
+*.pdf
+*.pptx
+*.ppt
+pdf_content.txt
+
+# ignore raw assets in root (keeps them locally but not in git)
+/*.png
