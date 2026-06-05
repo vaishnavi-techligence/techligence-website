@@ -89,12 +89,14 @@ export default function Footer() {
               Products
             </h3>
 
-            <div className="space-y-4 text-gray-400">
+            <div className="space-y-4 text-gray-400 flex flex-col items-start">
 
-              <p>T2 Mini</p>
-              <p>T2 Max</p>
-              <p>Andy R1</p>
-              <p>Nova M1</p>
+              <a href="/robots?robot=joy-a01" className="hover:text-cyan-400 transition-colors">Joy A-01</a>
+              <a href="/robots?robot=t2-mini" className="hover:text-cyan-400 transition-colors">T2 Mini</a>
+              <a href="/robots?robot=tella-s" className="hover:text-cyan-400 transition-colors">Tella S</a>
+              <a href="/robots?robot=andy-r1" className="hover:text-cyan-400 transition-colors">Andy R1</a>
+              <a href="/robots?robot=t2-max" className="hover:text-cyan-400 transition-colors">T2 Max</a>
+              <a href="/robots?robot=nova-m1" className="hover:text-cyan-400 transition-colors">Nova M1</a>
 
             </div>
           </div>

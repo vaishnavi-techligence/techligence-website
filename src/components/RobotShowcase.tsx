@@ -246,6 +246,20 @@ export default function RobotShowcase() {
 
   const [showHud, setShowHud] = useState(false);
 
+  // Parse query parameters for deep linking
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const robotId = params.get("robot");
+      if (robotId) {
+        const index = ROBOTS_DATA.findIndex((r) => r.id === robotId);
+        if (index !== -1) {
+          setActiveRobotIndex(index);
+        }
+      }
+    }
+  }, []);
+
   // Scroll listener to animate HUD elements in when scrolling down the page
   useEffect(() => {
     const handleScroll = () => {
