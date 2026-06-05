@@ -41,7 +41,7 @@ yarn-error.log*
 next-env.d.ts
 
 # media and documents
-*.mp4
+/*.mp4
 *.pdf
 *.pptx
 *.ppt
