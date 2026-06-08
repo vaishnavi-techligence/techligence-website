@@ -13,11 +13,35 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Techligence",
-  description: "Techligence Robotics - The Future of Customer Experience",
+  title: "Techligence | AI-Powered Service Robots",
+  description: "Techligence Robotics - Revolutionizing industries with AI-powered service robots and intelligent automation solutions.",
+  openGraph: {
+    title: "Techligence | AI-Powered Service Robots",
+    description: "Revolutionizing industries with AI-powered service robots and intelligent automation solutions.",
+    url: "https://www.techligence.in",
+    siteName: "Techligence",
+    type: "website",
+    images: [
+      {
+        url: "/favicon.png",
+        width: 256,
+        height: 256,
+        alt: "Techligence Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title: "Techligence | AI-Powered Service Robots",
+    description: "Revolutionizing industries with AI-powered service robots and intelligent automation solutions.",
+    images: ["/favicon.png"],
+  },
   icons: {
     icon: "/favicon.png",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.png",
   },
+  metadataBase: new URL("https://www.techligence.in"),
 };
 
 export default function RootLayout({
