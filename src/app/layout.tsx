@@ -78,13 +78,13 @@ export default function RootLayout({
             <filter id="remove-green" colorInterpolationFilters="sRGB">
               <feColorMatrix
                 type="matrix"
-                values="1 0 0 0 0  0.35 0.3 0.35 0 0  0 0 1 0 0  1 -11 10.5 0 1.35"
+                values="1 0 0 0 0  0.5 0 0.5 0 0  0 0 1 0 0  6.350 -17.798 13.239 0 1.333"
               />
             </filter>
             <filter id="remove-green-showcase" colorInterpolationFilters="sRGB">
               <feColorMatrix
                 type="matrix"
-                values="1 0 0 0 0  0.35 0.3 0.35 0 0  0 0 1 0 0  1 -11 10.5 0 1.35"
+                values="1 0 0 0 0  0.5 0 0.5 0 0  0 0 1 0 0  6.350 -17.798 13.239 0 1.333"
               />
             </filter>
             <filter id="remove-black-showcase" colorInterpolationFilters="sRGB">

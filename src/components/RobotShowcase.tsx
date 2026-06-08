@@ -221,10 +221,10 @@ const ROBOTS_DATA: Robot[] = [
 const ROBOT_LAYOUT_ADJUSTMENTS: Record<string, { scale: number; translateY: string; bottomClip: string; topClip?: string }> = {
   "joy-a01": { scale: 0.95,  translateY: "-2%",   bottomClip: "94%",   topClip: "12%" },
   "t2-mini": { scale: 1.10,  translateY: "1.5%",  bottomClip: "94%",   topClip: "16%" },
-  "tella-s": { scale: 0.8,   translateY: "2%",    bottomClip: "100%" },
-  "andy-r1": { scale: 0.85,  translateY: "0%",    bottomClip: "100%",  topClip: "0%" },
-  "t2-max":  { scale: 0.8,   translateY: "1%",    bottomClip: "99.5%" },
-  "nova-m1": { scale: 0.8,   translateY: "2%",    bottomClip: "96%" },
+  "tella-s": { scale: 0.8,   translateY: "2%",    bottomClip: "95%" },
+  "andy-r1": { scale: 0.85,  translateY: "0%",    bottomClip: "95%",   topClip: "0%" },
+  "t2-max":  { scale: 0.8,   translateY: "4%",    bottomClip: "95%" },
+  "nova-m1": { scale: 0.8,   translateY: "2%",    bottomClip: "95%" },
 };
 
 export default function RobotShowcase() {
@@ -692,9 +692,9 @@ export default function RobotShowcase() {
                 />
 
                 {(() => {
-                  // Apply dynamic filter selection (remove-t2max-bg for light blue bg, remove-green-showcase for green bg) and WebkitClipPath to hide watermark
+                  // Apply dynamic filter selection (remove-black-showcase for black bg, remove-green-showcase for green bg) and WebkitClipPath to hide watermark
                   const isLandscape = ["tella-s", "nova-m1"].includes(activeRobot.id);
-                  const filterId = activeRobot.id === "t2-max" ? "remove-t2max-bg" : "remove-green-showcase";
+                  const filterId = activeRobot.id === "t2-max" ? "remove-black-showcase" : "remove-green-showcase";
                   
                   const layoutAdjustment = ROBOT_LAYOUT_ADJUSTMENTS[activeRobot.id] || { scale: 1.0, translateY: "0%", bottomClip: "100%", topClip: "0" };
                   const bottomClipNum = parseFloat(layoutAdjustment.bottomClip || "100");
