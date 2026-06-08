@@ -219,10 +219,10 @@ const ROBOTS_DATA: Robot[] = [
 
 // Per-robot positioning adjustments to handle varying blank space at the top/bottom of the video frames
 const ROBOT_LAYOUT_ADJUSTMENTS: Record<string, { scale: number; translateY: string; bottomClip: string; topClip?: string }> = {
-  "joy-a01": { scale: 1.12,  translateY: "-2%",   bottomClip: "94%",   topClip: "12%" },
-  "t2-mini": { scale: 1.15,  translateY: "1.5%",  bottomClip: "94%",   topClip: "16%" },
+  "joy-a01": { scale: 0.95,  translateY: "-2%",   bottomClip: "94%",   topClip: "12%" },
+  "t2-mini": { scale: 1.10,  translateY: "1.5%",  bottomClip: "94%",   topClip: "16%" },
   "tella-s": { scale: 0.8,   translateY: "2%",    bottomClip: "100%" },
-  "andy-r1": { scale: 1.15,  translateY: "1.5%",  bottomClip: "94%",   topClip: "16%" },
+  "andy-r1": { scale: 0.85,  translateY: "0%",    bottomClip: "100%",  topClip: "0%" },
   "t2-max":  { scale: 0.8,   translateY: "1%",    bottomClip: "99.5%" },
   "nova-m1": { scale: 0.8,   translateY: "2%",    bottomClip: "96%" },
 };
