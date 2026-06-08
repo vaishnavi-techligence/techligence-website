@@ -218,13 +218,13 @@ const ROBOTS_DATA: Robot[] = [
 ];
 
 // Per-robot positioning adjustments to handle varying blank space at the top/bottom of the video frames
-const ROBOT_LAYOUT_ADJUSTMENTS: Record<string, { scale: number; translateY: string; bottomClip: string }> = {
-  "joy-a01": { scale: 1.0,  translateY: "-2%",  bottomClip: "94%" },
-  "t2-mini": { scale: 1.0,  translateY: "2%",   bottomClip: "94%" },
-  "tella-s": { scale: 1.0,  translateY: "2%",   bottomClip: "100%" },
-  "andy-r1": { scale: 1.0,  translateY: "2%",   bottomClip: "94%" },
-  "t2-max":  { scale: 1.0,  translateY: "1%",   bottomClip: "99.5%" },
-  "nova-m1": { scale: 1.0,  translateY: "2%",   bottomClip: "96%" },
+const ROBOT_LAYOUT_ADJUSTMENTS: Record<string, { scale: number; translateY: string; bottomClip: string; topClip?: string }> = {
+  "joy-a01": { scale: 1.12,  translateY: "-2%",   bottomClip: "94%",   topClip: "12%" },
+  "t2-mini": { scale: 1.15,  translateY: "1.5%",  bottomClip: "94%",   topClip: "16%" },
+  "tella-s": { scale: 0.8,   translateY: "2%",    bottomClip: "100%" },
+  "andy-r1": { scale: 1.15,  translateY: "1.5%",  bottomClip: "94%",   topClip: "16%" },
+  "t2-max":  { scale: 0.8,   translateY: "1%",    bottomClip: "99.5%" },
+  "nova-m1": { scale: 0.8,   translateY: "2%",    bottomClip: "96%" },
 };
 
 export default function RobotShowcase() {
@@ -235,6 +235,7 @@ export default function RobotShowcase() {
   const [activeView, setActiveView] = useState<"video" | "front" | "side" | "back" | "wave">("video");
   const [flashActive, setFlashActive] = useState(false);
   const [videoError, setVideoError] = useState(false);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
   const [animatedStats, setAnimatedStats] = useState({
     cognitiveAI: 0, dexterity: 0, agility: 0, power: 0
@@ -360,6 +361,7 @@ export default function RobotShowcase() {
 
   // Stats animation + rolling logs on robot change
   useEffect(() => {
+    setIsVideoPlaying(false);
     setFlashActive(true);
     const flashTimer = setTimeout(() => setFlashActive(false), 500);
 
@@ -406,9 +408,7 @@ export default function RobotShowcase() {
     setTimeout(() => setIsTransitioning(false), 400);
   };
 
-  const layoutAdjustment = activeView === "video"
-    ? (ROBOT_LAYOUT_ADJUSTMENTS[activeRobot.id] || { scale: 1.0, translateY: "0%" })
-    : { scale: 1.0, translateY: "0%" };
+  const layoutAdjustment = ROBOT_LAYOUT_ADJUSTMENTS[activeRobot.id] || { scale: 0.8, translateY: "0%" };
 
   return (
     /* Responsive scrollable container that allows full heights but scrolls if items exceed viewport */
@@ -692,13 +692,14 @@ export default function RobotShowcase() {
                 />
 
                 {(() => {
-                  // Apply dynamic filter selection (remove-white-showcase for white bg, remove-green-showcase for green bg) and WebkitClipPath to hide watermark
+                  // Apply dynamic filter selection (remove-t2max-bg for light blue bg, remove-green-showcase for green bg) and WebkitClipPath to hide watermark
                   const isLandscape = ["tella-s", "nova-m1"].includes(activeRobot.id);
-                  const filterId = activeRobot.id === "t2-max" ? "remove-white-showcase" : "remove-green-showcase";
+                  const filterId = activeRobot.id === "t2-max" ? "remove-t2max-bg" : "remove-green-showcase";
                   
-                  const layoutAdjustment = ROBOT_LAYOUT_ADJUSTMENTS[activeRobot.id] || { scale: 1.0, translateY: "0%", bottomClip: "100%" };
+                  const layoutAdjustment = ROBOT_LAYOUT_ADJUSTMENTS[activeRobot.id] || { scale: 1.0, translateY: "0%", bottomClip: "100%", topClip: "0" };
                   const bottomClipNum = parseFloat(layoutAdjustment.bottomClip || "100");
                   const bottomCrop = 100 - bottomClipNum;
+                  const topCrop = parseFloat(layoutAdjustment.topClip || "0");
 
                   const videoStyle: React.CSSProperties = isLandscape
                     ? {
@@ -707,30 +708,47 @@ export default function RobotShowcase() {
                         width: "auto",
                         maxWidth: "none",
                         aspectRatio: "16 / 9",
-                        clipPath: `inset(0% 34.375% ${bottomCrop}% 34.375%)`,
-                        WebkitClipPath: `inset(0% 34.375% ${bottomCrop}% 34.375%)`,
+                        clipPath: `inset(${topCrop}% 34.375% ${bottomCrop}% 34.375%)`,
+                        WebkitClipPath: `inset(${topCrop}% 34.375% ${bottomCrop}% 34.375%)`,
                         backgroundColor: "transparent",
                       }
                     : {
                         filter: `url(#${filterId})`,
                         height: "100%",
                         width: "auto",
-                        aspectRatio: activeRobot.id === "t2-max" ? "1440 / 1956" : "9 / 16",
-                        clipPath: `inset(0% 3% ${bottomCrop}% 3%)`,
-                        WebkitClipPath: `inset(0% 3% ${bottomCrop}% 3%)`,
+                        aspectRatio: "9 / 16",
+                        clipPath: `inset(${topCrop}% 3% ${bottomCrop}% 3%)`,
+                        WebkitClipPath: `inset(${topCrop}% 3% ${bottomCrop}% 3%)`,
                         backgroundColor: "transparent",
                       };
 
                   return activeView === "video" && activeRobot.video ? (
                     !videoError ? (
-                      <video
-                        key={activeRobot.id}
-                        src={activeRobot.video}
-                        loop muted playsInline autoPlay
-                        className="h-full w-auto max-w-full object-contain robot-float pointer-events-none relative z-10 transition-all duration-500"
-                        style={videoStyle}
-                        onError={() => setVideoError(true)}
-                      />
+                      <div className="relative w-full h-full flex items-center justify-center">
+                        {/* High-tech Loading State shown while video loads */}
+                        {!isVideoPlaying && (
+                          <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-10 transition-opacity duration-300">
+                            <div className="w-10 h-10 rounded-full border-2 border-cyan-500/10 border-t-cyan-400 animate-spin mb-3" />
+                            <span className="font-mono text-[8px] text-cyan-400/80 tracking-[3px] uppercase animate-pulse">
+                              LINKING_FRAME...
+                            </span>
+                          </div>
+                        )}
+                        {/* Video playing */}
+                        <video
+                          key={activeRobot.id}
+                          src={activeRobot.video}
+                          preload="auto"
+                          loop muted playsInline autoPlay
+                          onPlaying={() => setIsVideoPlaying(true)}
+                          className="h-full w-auto max-w-full object-contain robot-float pointer-events-none relative transition-opacity duration-300 z-20"
+                          style={{
+                            ...videoStyle,
+                            opacity: isVideoPlaying ? 1 : 0
+                          }}
+                          onError={() => setVideoError(true)}
+                        />
+                      </div>
                     ) : (
                       <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-md z-10">
                         <p className="text-red-400 font-semibold">Video Offline</p>
@@ -739,15 +757,15 @@ export default function RobotShowcase() {
                     )
                   ) : (
                     <img
-                      src={activeView === "video" ? activeRobot.image : `/robots/${activeView}.png`}
+                      src={activeView === "video" ? activeRobot.image : `/robots/${activeRobot.id}-${activeView}.png`}
                       alt={`${activeRobot.name} visual`}
                       className="h-full w-auto max-w-full object-contain robot-float transition-all duration-500 relative z-10"
                       style={
                         activeView !== "video"
                           ? {
-                              filter: "url(#remove-black-showcase)",
-                              clipPath: `inset(0% 3% ${bottomCrop}% 3%)`,
-                              WebkitClipPath: `inset(0% 3% ${bottomCrop}% 3%)`,
+                              filter: "none",
+                              clipPath: `inset(${topCrop}% 0% ${bottomCrop}% 0%)`,
+                              WebkitClipPath: `inset(${topCrop}% 0% ${bottomCrop}% 0%)`,
                             }
                           : undefined
                       }
@@ -770,7 +788,7 @@ export default function RobotShowcase() {
                   <button
                     key={view}
                     onClick={() => setActiveView(view as "video" | "front" | "side" | "back" | "wave")}
-                    className="flex-1 py-1 rounded-lg text-[8px] font-mono font-black tracking-wider transition-all duration-300 cursor-pointer text-center"
+                    className={`robot-viewport-btn flex-1 py-1 rounded-lg text-[8px] font-mono font-bold tracking-wider transition-all duration-300 cursor-pointer text-center ${isActive ? "active-viewport-btn" : "inactive-viewport-btn"}`}
                     style={isActive
                       ? { boxShadow: "0 0 8px rgba(0,240,255,0.4)", backgroundColor: "#00f0ff", color: "#050816" }
                       : { backgroundColor: "transparent", color: "rgb(156,163,175)" }
@@ -843,7 +861,7 @@ export default function RobotShowcase() {
                     <button
                       key={view}
                       onClick={() => setActiveView(view as "video" | "front" | "side" | "back" | "wave")}
-                      className="px-2 py-1.5 rounded-lg text-[8px] font-mono font-bold tracking-widest transition-all duration-300 cursor-pointer flex flex-col items-center"
+                      className={`robot-viewport-btn px-2 py-1.5 rounded-lg text-[8px] font-mono font-bold tracking-widest transition-all duration-300 cursor-pointer flex flex-col items-center ${isActive ? "active-viewport-btn" : "inactive-viewport-btn"}`}
                       style={isActive
                         ? { boxShadow: "0 0 10px rgba(0,240,255,0.45)", backgroundColor: "#00f0ff", color: "#050816" }
                         : { backgroundColor: "rgba(255,255,255,0.02)", color: "rgb(156,163,175)", border: "1px solid rgba(255,255,255,0.08)" }
@@ -860,7 +878,7 @@ export default function RobotShowcase() {
         </div>
 
         {/* ── SELECTION DOCK: scrollable row on mobile, compact grid on desktop ── */}
-        <div className="flex-shrink-0 w-full overflow-hidden lg:-mt-20 relative z-40">
+        <div className="flex-shrink-0 w-full overflow-hidden lg:-mt-10 relative z-40">
           <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-cyan-500/30 scrollbar-track-transparent lg:grid lg:grid-cols-6 lg:overflow-visible lg:pb-0 max-w-3xl mx-auto w-full px-2 lg:px-0">
             {ROBOTS_DATA.map((robot, index) => {
               const isActive = index === activeRobotIndex;
@@ -868,7 +886,7 @@ export default function RobotShowcase() {
                 <button
                   key={robot.id}
                   onClick={() => handleRobotClick(index)}
-                  className="rounded-xl border transition-all duration-300 cursor-pointer w-24 h-[76px] flex-shrink-0 flex flex-col items-center justify-between p-2 backdrop-blur-md select-none group text-center relative overflow-hidden lg:w-full"
+                  className={`robot-selection-btn rounded-xl border transition-all duration-300 cursor-pointer w-24 h-[76px] flex-shrink-0 flex flex-col items-center justify-between p-2 backdrop-blur-md select-none group text-center relative overflow-hidden lg:w-full ${isActive ? "active-selection-btn" : "inactive-selection-btn"}`}
                   style={{
                     borderColor: isActive ? "#00f0ff" : "rgba(255,255,255,0.08)",
                     boxShadow: isActive ? "0 0 12px rgba(0,240,255,0.2)" : "none",

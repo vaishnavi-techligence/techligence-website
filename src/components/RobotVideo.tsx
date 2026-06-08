@@ -4,6 +4,7 @@ import { useState } from "react";
 
 export default function RobotVideo() {
   const [hasError, setHasError] = useState(false);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
   const handleVideoError = () => {
     setHasError(true);
@@ -18,21 +19,33 @@ export default function RobotVideo() {
     <div className="relative w-full max-w-[480px] aspect-[3/4] overflow-hidden mx-auto z-10 robot-float">
       {/* Video: width fills the container, translateY(-18%) shifts up to trim dead top space */}
       {!hasError && (
-        <video
-          src="/Robo.mp4"
-          loop
-          muted
-          playsInline
-          autoPlay
-          onError={handleVideoError}
-          className="pointer-events-none w-full h-auto"
-          style={{
-            transform: "translateY(-14.8%) scale(0.92)",
-            filter: "url(#remove-green) contrast(1.05) brightness(1.02)",
-            clipPath: "inset(0% 3% 0% 3%)",
-            WebkitClipPath: "inset(0% 3% 0% 3%)",
-          }}
-        />
+        <>
+          {/* High-tech Loading State shown while video loads */}
+          {!isVideoPlaying && (
+            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-10 transition-opacity duration-300">
+              <div className="w-8 h-8 rounded-full border-2 border-cyan-500/10 border-t-cyan-400 animate-spin" />
+            </div>
+          )}
+          {/* Video playing */}
+          <video
+            src="/Robo.mp4"
+            preload="auto"
+            loop
+            muted
+            playsInline
+            autoPlay
+            onPlaying={() => setIsVideoPlaying(true)}
+            onError={handleVideoError}
+            className="pointer-events-none w-full h-auto relative transition-opacity duration-300 z-20"
+            style={{
+              transform: "translateY(-14.8%) scale(0.92)",
+              filter: "url(#remove-green) contrast(1.05) brightness(1.02)",
+              clipPath: "inset(0% 3% 0% 3%)",
+              WebkitClipPath: "inset(0% 3% 0% 3%)",
+              opacity: isVideoPlaying ? 1 : 0,
+            }}
+          />
+        </>
       )}
 
       {/* Fallback if video fails to load */}
