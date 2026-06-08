@@ -80,18 +80,27 @@ export default function RootLayout({
                 type="matrix"
                 values="1 0 0 0 0  0.5 0 0.5 0 0  0 0 1 0 0  6.350 -17.798 13.239 0 1.333"
               />
+              <feComponentTransfer>
+                <feFuncA type="linear" slope="3" intercept="-1" />
+              </feComponentTransfer>
             </filter>
             <filter id="remove-green-showcase" colorInterpolationFilters="sRGB">
               <feColorMatrix
                 type="matrix"
                 values="1 0 0 0 0  0.5 0 0.5 0 0  0 0 1 0 0  6.350 -17.798 13.239 0 1.333"
               />
+              <feComponentTransfer>
+                <feFuncA type="linear" slope="3" intercept="-1" />
+              </feComponentTransfer>
             </filter>
             <filter id="remove-black-showcase" colorInterpolationFilters="sRGB">
               <feColorMatrix
                 type="matrix"
-                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  3.5 3.5 3.5 0 -0.5"
+                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  20.0 20.0 20.0 0 -0.2"
               />
+              <feComponentTransfer>
+                <feFuncA type="linear" slope="3" intercept="-1" />
+              </feComponentTransfer>
             </filter>
             <filter id="remove-white-showcase" colorInterpolationFilters="sRGB">
               <feColorMatrix
