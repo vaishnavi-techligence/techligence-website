@@ -130,9 +130,16 @@ body {
   --theme-bg: #050816;
 }
 
-/* Navbar logo */
+/* Navbar / footer logo: black-bg image that blends away on any background */
 .navbar-logo {
-  border-radius: 4px;
+  /* On dark navbar: black blends with dark background → invisible */
+  mix-blend-mode: lighten;
+  border-radius: 3px;
+}
+
+[data-theme="light"] .navbar-logo {
+  /* On light navbar: black bg multiplied with white → disappears */
+  mix-blend-mode: multiply;
 }
 
 html[data-theme="light"] {
