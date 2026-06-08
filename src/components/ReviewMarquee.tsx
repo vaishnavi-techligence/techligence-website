@@ -184,9 +184,9 @@ export default function ReviewMarquee() {
       {/* Row 1: slides LEFT */}
       <div className="relative mb-4 overflow-hidden">
         {/* Left fade mask */}
-        <div className="absolute left-0 top-0 h-full w-20 bg-gradient-to-r from-[#050816] to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 h-full w-20 z-10 pointer-events-none" style={{ backgroundImage: "linear-gradient(to right, var(--theme-bg) 0%, transparent 100%)" }} />
         {/* Right fade mask */}
-        <div className="absolute right-0 top-0 h-full w-20 bg-gradient-to-l from-[#050816] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 h-full w-20 z-10 pointer-events-none" style={{ backgroundImage: "linear-gradient(to left, var(--theme-bg) 0%, transparent 100%)" }} />
 
         <div className="flex animate-marquee-left will-change-transform" style={{ width: "max-content" }}>
           {row1.map((review, i) => (
@@ -198,9 +198,9 @@ export default function ReviewMarquee() {
       {/* Row 2: slides RIGHT */}
       <div className="relative overflow-hidden">
         {/* Left fade mask */}
-        <div className="absolute left-0 top-0 h-full w-20 bg-gradient-to-r from-[#050816] to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 h-full w-20 z-10 pointer-events-none" style={{ backgroundImage: "linear-gradient(to right, var(--theme-bg) 0%, transparent 100%)" }} />
         {/* Right fade mask */}
-        <div className="absolute right-0 top-0 h-full w-20 bg-gradient-to-l from-[#050816] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 h-full w-20 z-10 pointer-events-none" style={{ backgroundImage: "linear-gradient(to left, var(--theme-bg) 0%, transparent 100%)" }} />
 
         <div className="flex animate-marquee-right will-change-transform" style={{ width: "max-content" }}>
           {row2.map((review, i) => (

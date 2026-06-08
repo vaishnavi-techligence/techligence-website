@@ -26,7 +26,23 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var storedTheme = localStorage.getItem('theme');
+                  var theme = storedTheme || 'dark';
+                  document.documentElement.setAttribute('data-theme', theme);
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col">
         {children}
         {/* Global GPU SVG Chroma Filters for background removal */}
@@ -54,6 +70,12 @@ export default function RootLayout({
               <feColorMatrix
                 type="matrix"
                 values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  -3 -3 -3 0 3.5"
+              />
+            </filter>
+            <filter id="remove-t2max-bg" colorInterpolationFilters="sRGB">
+              <feColorMatrix
+                type="matrix"
+                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  -8.324 14.549 -30.101 0 21.95"
               />
             </filter>
           </defs>
