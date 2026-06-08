@@ -6,7 +6,7 @@ import BookDemoModal from "./BookDemoModal";
 export default function Navbar() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [theme, setTheme] = useState<"dark" | "light">("light");
 
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme") as "dark" | "light" | null;
@@ -14,7 +14,7 @@ export default function Navbar() {
       setTheme(storedTheme);
       document.documentElement.setAttribute("data-theme", storedTheme);
     } else {
-      document.documentElement.setAttribute("data-theme", "dark");
+      document.documentElement.setAttribute("data-theme", "light");
     }
   }, []);
 

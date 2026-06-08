@@ -62,7 +62,7 @@ export default function RootLayout({
               (function() {
                 try {
                   var storedTheme = localStorage.getItem('theme');
-                  var theme = storedTheme || 'dark';
+                  var theme = storedTheme || 'light';
                   document.documentElement.setAttribute('data-theme', theme);
                 } catch (e) {}
               })();
