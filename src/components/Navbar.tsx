@@ -31,13 +31,7 @@ export default function Navbar() {
         <div className="px-6 py-2 flex items-center justify-between gap-4 whitespace-nowrap">
           {/* Logo + Brand */}
           <a href="/" className="flex items-center gap-2 flex-shrink-0 cursor-pointer">
-            <img
-              src="/logo.png"
-              alt="Techligence Logo"
-              width={28}
-              height={28}
-              className="object-contain"
-            />
+            <img src="/logo.png" alt="Techligence logo" className="navbar-logo h-9 w-9 object-contain" />
             <h1 className="text-sm sm:text-base font-black bg-gradient-to-r from-cyan-300 to-cyan-500 text-transparent bg-clip-text tracking-wide">
               TECHLIGENCE
             </h1>

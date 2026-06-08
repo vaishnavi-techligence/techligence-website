@@ -12,8 +12,8 @@ export default function Footer() {
             <div className="flex items-center gap-3">
               <img
                 src="/logo.png"
-                alt="Techligence Logo"
-                className="w-10 h-10 object-contain"
+                alt="Techligence logo"
+                className="navbar-logo w-10 h-10 object-contain"
               />
               <h2 className="
                 text-4xl
