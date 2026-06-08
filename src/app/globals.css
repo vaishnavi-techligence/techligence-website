@@ -130,6 +130,17 @@ body {
   --theme-bg: #050816;
 }
 
+/* Navbar logo: blend dark bg away in dark mode, invert in light mode */
+.navbar-logo {
+  mix-blend-mode: lighten;
+  border-radius: 6px;
+}
+
+[data-theme="light"] .navbar-logo {
+  mix-blend-mode: normal;
+  filter: invert(1) hue-rotate(180deg) brightness(0.85);
+}
+
 html[data-theme="light"] {
   --theme-bg: #f8fafc;
 }
