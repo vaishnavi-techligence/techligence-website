@@ -40,7 +40,7 @@ export default function Industries() {
                 Visitor management, reception and meeting assistance.
               </p>
 
-             <a href="/robots?robot=tella-s" className="robot-button p-[2px] mt-8 inline-block">
+             <a href="/solutions#corporate" className="robot-button p-[2px] mt-8 inline-block">
   <div className="relative z-10 px-8 py-3 rounded-full bg-[#050816] text-white font-bold tracking-wide">
     EXPLORE →
   </div>
@@ -75,7 +75,7 @@ export default function Industries() {
                 Guest assistance, concierge and customer engagement.
               </p>
 
-        <a href="/robots?robot=joy-a01" className="robot-button p-[2px] mt-8 inline-block">
+        <a href="/solutions#hospitality" className="robot-button p-[2px] mt-8 inline-block">
   <div className="relative z-10 px-8 py-3 rounded-full bg-[#050816] text-white font-bold tracking-wide">
     EXPLORE →
   </div>
@@ -110,7 +110,7 @@ export default function Industries() {
                 Patient guidance and smart information assistance.
               </p>
 
-<a href="/robots?robot=t2-max" className="robot-button p-[2px] mt-8 inline-block">
+<a href="/solutions#healthcare" className="robot-button p-[2px] mt-8 inline-block">
   <div className="relative z-10 px-8 py-3 rounded-full bg-[#050816] text-white font-bold tracking-wide">
     EXPLORE →
   </div>
