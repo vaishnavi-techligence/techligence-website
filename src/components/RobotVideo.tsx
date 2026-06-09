@@ -1,14 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function RobotVideo() {
   const [hasError, setHasError] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const handleVideoError = () => {
     setHasError(true);
   };
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Direct check: if video is already playing or ready (e.g., cached or loaded quickly)
+    if (video.readyState >= 3 || !video.paused) {
+      setIsVideoPlaying(true);
+    }
+
+    const handlePlaying = () => setIsVideoPlaying(true);
+    const handleCanPlay = () => setIsVideoPlaying(true);
+
+    video.addEventListener("playing", handlePlaying);
+    video.addEventListener("canplay", handleCanPlay);
+
+    return () => {
+      video.removeEventListener("playing", handlePlaying);
+      video.removeEventListener("canplay", handleCanPlay);
+    };
+  }, []);
 
   return (
     /*
@@ -28,6 +50,7 @@ export default function RobotVideo() {
           )}
           {/* Video playing */}
           <video
+            ref={videoRef}
             src="/Robo.mp4"
             preload="auto"
             loop
@@ -35,6 +58,7 @@ export default function RobotVideo() {
             playsInline
             autoPlay
             onPlaying={() => setIsVideoPlaying(true)}
+            onCanPlay={() => setIsVideoPlaying(true)}
             onError={handleVideoError}
             className="pointer-events-none w-full h-auto relative transition-opacity duration-300 z-20"
             style={{

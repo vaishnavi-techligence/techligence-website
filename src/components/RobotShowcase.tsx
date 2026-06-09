@@ -236,6 +236,7 @@ export default function RobotShowcase() {
   const [flashActive, setFlashActive] = useState(false);
   const [videoError, setVideoError] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const [animatedStats, setAnimatedStats] = useState({
     cognitiveAI: 0, dexterity: 0, agility: 0, power: 0
@@ -246,6 +247,26 @@ export default function RobotShowcase() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const [showHud, setShowHud] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (video.readyState >= 3 || !video.paused) {
+      setIsVideoPlaying(true);
+    }
+
+    const handlePlaying = () => setIsVideoPlaying(true);
+    const handleCanPlay = () => setIsVideoPlaying(true);
+
+    video.addEventListener("playing", handlePlaying);
+    video.addEventListener("canplay", handleCanPlay);
+
+    return () => {
+      video.removeEventListener("playing", handlePlaying);
+      video.removeEventListener("canplay", handleCanPlay);
+    };
+  }, [activeRobotIndex, activeView]);
 
   // Parse query parameters for deep linking
   useEffect(() => {
@@ -748,11 +769,13 @@ export default function RobotShowcase() {
                         )}
                         {/* Video playing */}
                         <video
+                          ref={videoRef}
                           key={activeRobot.id}
                           src={activeRobot.video}
                           preload="auto"
                           loop muted playsInline autoPlay
                           onPlaying={() => setIsVideoPlaying(true)}
+                          onCanPlay={() => setIsVideoPlaying(true)}
                           className="robot-media h-full w-auto max-w-full object-contain robot-float pointer-events-none relative transition-opacity duration-300 z-20"
                           style={{
                             ...videoStyle,

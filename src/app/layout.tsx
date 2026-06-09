@@ -76,28 +76,60 @@ export default function RootLayout({
         <svg width="0" height="0" className="absolute pointer-events-none" style={{ position: "absolute", width: 0, height: 0 }}>
           <defs>
             <filter id="remove-green" colorInterpolationFilters="sRGB">
-              <feColorMatrix
-                type="matrix"
-                values="1 0 0 0 0  0.5 0 0.5 0 0  0 0 1 0 0  6.350 -17.798 13.239 0 1.333"
-              />
+              <feColorMatrix type="matrix" values="
+                0 0 0 0 0  
+                0 0 0 0 0  
+                0 0 0 0 0  
+                6.350 -17.798 13.239 0 1.333" result="matte"/>
+              <feGaussianBlur in="matte" stdDeviation="0.8" result="blurred-matte"/>
+              <feComposite in="SourceGraphic" in2="blurred-matte" operator="in" result="keyed-src"/>
+              <feColorMatrix in="keyed-src" type="matrix" values="
+                1 0 0 0 0  
+                0.5 0 0.5 0 0  
+                0 0 1 0 0  
+                0 0 0 1 0"/>
             </filter>
             <filter id="remove-green-light" colorInterpolationFilters="sRGB">
-              <feColorMatrix
-                type="matrix"
-                values="1 0 0 0 0  0.5 0 0.5 0 0  0 0 1 0 0  9.0 -21.0 9.0 0 1.8"
-              />
+              <feColorMatrix type="matrix" values="
+                0 0 0 0 0  
+                0 0 0 0 0  
+                0 0 0 0 0  
+                6.350 -17.798 13.239 0 1.333" result="matte"/>
+              <feGaussianBlur in="matte" stdDeviation="0.8" result="blurred-matte"/>
+              <feComposite in="SourceGraphic" in2="blurred-matte" operator="in" result="keyed-src"/>
+              <feColorMatrix in="keyed-src" type="matrix" values="
+                1 0 0 0 0  
+                0.5 0 0.5 0 0  
+                0 0 1 0 0  
+                0 0 0 1 0"/>
             </filter>
             <filter id="remove-green-showcase" colorInterpolationFilters="sRGB">
-              <feColorMatrix
-                type="matrix"
-                values="1 0 0 0 0  0.5 0 0.5 0 0  0 0 1 0 0  6.350 -17.798 13.239 0 1.333"
-              />
+              <feColorMatrix type="matrix" values="
+                0 0 0 0 0  
+                0 0 0 0 0  
+                0 0 0 0 0  
+                6.350 -17.798 13.239 0 1.333" result="matte"/>
+              <feGaussianBlur in="matte" stdDeviation="0.8" result="blurred-matte"/>
+              <feComposite in="SourceGraphic" in2="blurred-matte" operator="in" result="keyed-src"/>
+              <feColorMatrix in="keyed-src" type="matrix" values="
+                1 0 0 0 0  
+                0.5 0 0.5 0 0  
+                0 0 1 0 0  
+                0 0 0 1 0"/>
             </filter>
             <filter id="remove-green-showcase-light" colorInterpolationFilters="sRGB">
-              <feColorMatrix
-                type="matrix"
-                values="1 0 0 0 0  0.5 0 0.5 0 0  0 0 1 0 0  6.350 -17.798 13.239 0 1.333"
-              />
+              <feColorMatrix type="matrix" values="
+                0 0 0 0 0  
+                0 0 0 0 0  
+                0 0 0 0 0  
+                6.350 -17.798 13.239 0 1.333" result="matte"/>
+              <feGaussianBlur in="matte" stdDeviation="0.8" result="blurred-matte"/>
+              <feComposite in="SourceGraphic" in2="blurred-matte" operator="in" result="keyed-src"/>
+              <feColorMatrix in="keyed-src" type="matrix" values="
+                1 0 0 0 0  
+                0.5 0 0.5 0 0  
+                0 0 1 0 0  
+                0 0 0 1 0"/>
             </filter>
             <filter id="remove-black-showcase" colorInterpolationFilters="sRGB">
               <feColorMatrix
