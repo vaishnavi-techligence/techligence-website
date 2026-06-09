@@ -702,7 +702,7 @@ export default function RobotShowcase() {
                 {(() => {
                   // Apply dynamic filter selection (remove-black-showcase for black bg, remove-green-showcase for green bg) and WebkitClipPath to hide watermark
                   const isLandscape = ["tella-s", "nova-m1"].includes(activeRobot.id);
-                  const filterId = activeRobot.id === "t2-max" ? "var(--filter-remove-black-showcase)" : "var(--filter-remove-green-showcase)";
+                  const filterId = "var(--filter-remove-green-showcase)";
                   
                   const layoutAdjustment = ROBOT_LAYOUT_ADJUSTMENTS[activeRobot.id] || { scale: 1.0, translateY: "0%", bottomClip: "100%", topClip: "0" };
                   const bottomClipNum = parseFloat(layoutAdjustment.bottomClip || "100");

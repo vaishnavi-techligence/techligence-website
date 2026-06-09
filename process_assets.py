@@ -7,7 +7,7 @@ ROBOTS = ["joy-a01", "t2-mini", "tella-s", "andy-r1", "t2-max", "nova-m1"]
 VIEWS = ["front", "side", "back", "wave"]
 
 def process_video():
-    src = r"d:\Projects\Website\T2 max video.mp4"
+    src = r"d:\Projects\Website\T2 max final video.mp4"
     dst = r"d:\Projects\Website\public\robots\t2-max.mp4"
     
     # Ensure destination directory exists
