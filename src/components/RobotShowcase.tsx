@@ -221,10 +221,10 @@ const ROBOTS_DATA: Robot[] = [
 const ROBOT_LAYOUT_ADJUSTMENTS: Record<string, { scale: number; translateY: string; bottomClip: string; topClip?: string; staticHeight?: string; staticTranslateY?: string }> = {
   "joy-a01": { scale: 0.95,  translateY: "-2%",   bottomClip: "89%",   topClip: "12%", staticHeight: "115%", staticTranslateY: "-2%" },
   "t2-mini": { scale: 1.10,  translateY: "1.5%",  bottomClip: "89%",   topClip: "16%", staticHeight: "115%", staticTranslateY: "-2%" },
-  "tella-s": { scale: 0.8,   translateY: "2%",    bottomClip: "91%",   staticHeight: "58%", staticTranslateY: "0%" },
+  "tella-s": { scale: 0.8,   translateY: "2%",    bottomClip: "91%",   staticHeight: "112%", staticTranslateY: "-2%" },
   "andy-r1": { scale: 0.85,  translateY: "0%",    bottomClip: "91%",   topClip: "0%",  staticHeight: "112%", staticTranslateY: "-2%" },
   "t2-max":  { scale: 0.8,   translateY: "4%",    bottomClip: "91%",   staticHeight: "112%", staticTranslateY: "-2%" },
-  "nova-m1": { scale: 0.8,   translateY: "2%",    bottomClip: "91%",   staticHeight: "58%", staticTranslateY: "0%" },
+  "nova-m1": { scale: 0.8,   translateY: "2%",    bottomClip: "91%",   staticHeight: "112%", staticTranslateY: "-2%" },
 };
 
 export default function RobotShowcase() {
@@ -413,7 +413,7 @@ export default function RobotShowcase() {
   return (
     /* Responsive scrollable container that allows full heights but scrolls if items exceed viewport */
     <div
-      className="relative w-full bg-[#050816] text-white min-h-screen flex flex-col overflow-x-hidden"
+      className="robot-cockpit-dark relative w-full bg-[#050816] text-white min-h-screen flex flex-col overflow-x-hidden"
     >
       {/* Background Canvas Particles */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">

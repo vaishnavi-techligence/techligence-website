@@ -419,3 +419,69 @@ html[data-theme="light"],
   background-color: rgba(255, 255, 255, 0.85) !important;
   border-color: rgba(15, 23, 42, 0.1) !important;
 }
+
+/* --- Robot Cockpit Dark Theme Overrides for Light Mode --- */
+[data-theme="light"] .robot-cockpit-dark {
+  background-color: #050816 !important;
+  color: #ffffff !important;
+}
+
+[data-theme="light"] .robot-cockpit-dark .text-white,
+[data-theme="light"] .robot-cockpit-dark h2,
+[data-theme="light"] .robot-cockpit-dark h3,
+[data-theme="light"] .robot-cockpit-dark h4 {
+  color: #ffffff !important;
+}
+
+[data-theme="light"] .robot-cockpit-dark p,
+[data-theme="light"] .robot-cockpit-dark .text-gray-300 {
+  color: #cbd5e1 !important;
+}
+
+[data-theme="light"] .robot-cockpit-dark .text-gray-400 {
+  color: #94a3b8 !important;
+}
+
+[data-theme="light"] .robot-cockpit-dark .text-gray-500 {
+  color: #64748b !important;
+}
+
+[data-theme="light"] .robot-cockpit-dark .text-cyan-400,
+[data-theme="light"] .robot-cockpit-dark .text-cyan-300 {
+  color: #00f0ff !important;
+}
+
+[data-theme="light"] .robot-cockpit-dark .bg-slate-900\/30,
+[data-theme="light"] .robot-cockpit-dark .bg-slate-900\/20,
+[data-theme="light"] .robot-cockpit-dark .bg-black\/60,
+[data-theme="light"] .robot-cockpit-dark .bg-black\/40 {
+  background-color: rgba(15, 23, 42, 0.65) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-theme="light"] .robot-cockpit-dark .robot-viewport-btn,
+[data-theme="light"] .robot-cockpit-dark button[class*="robot-viewport-btn"] {
+  background-color: rgba(255, 255, 255, 0.02) !important;
+  color: #9ca3af !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-theme="light"] .robot-cockpit-dark .robot-viewport-btn[style*="background-color: rgb(0, 240, 255)"],
+[data-theme="light"] .robot-cockpit-dark button[style*="background-color: rgb(0, 240, 255)"],
+[data-theme="light"] .robot-cockpit-dark button.active-viewport-btn {
+  background-color: #00f0ff !important;
+  color: #050816 !important;
+  border-color: transparent !important;
+}
+
+[data-theme="light"] .robot-cockpit-dark .robot-selection-btn,
+[data-theme="light"] .robot-cockpit-dark button[class*="robot-selection-btn"] {
+  background-color: rgba(5, 8, 22, 0.45) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-theme="light"] .robot-cockpit-dark button[style*="border-color: #00f0ff"],
+[data-theme="light"] .robot-cockpit-dark button.active-selection-btn {
+  background-color: rgba(11, 16, 38, 0.85) !important;
+  border-color: #00f0ff !important;
+}
