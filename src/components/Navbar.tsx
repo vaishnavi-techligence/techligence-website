@@ -27,7 +27,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] max-w-fit z-50 bg-black/40 backdrop-blur-xl border border-white/10 rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.6)] transition-all duration-300">
+      <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] md:w-[90%] md:max-w-fit z-50 bg-black/40 backdrop-blur-xl border border-white/10 rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.6)] transition-all duration-300">
         <div className="px-6 py-2 flex items-center justify-between gap-4 whitespace-nowrap">
           {/* Logo + Brand */}
           <a href="/" className="flex items-center gap-2 flex-shrink-0 cursor-pointer">

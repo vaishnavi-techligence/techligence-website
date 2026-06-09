@@ -1,7 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import RobotShowcase from "@/components/RobotShowcase";
-import Technologies from "@/components/Technologies";
+import RobotsOverview from "@/components/RobotsOverview";
 
 export default function RobotsPage() {
   return (
@@ -9,8 +9,8 @@ export default function RobotsPage() {
       <Navbar />
       {/* Cockpit: full viewport, no internal scroll */}
       <RobotShowcase />
-      {/* Technologies stack section below – accessible by scrolling */}
-      <Technologies />
+      {/* Brochure Content Section */}
+      <RobotsOverview />
       <Footer />
     </main>
   );

@@ -7,20 +7,7 @@ const ASSOCIATIONS = [
     category: "Incubation & Ecosystem Partner",
     desc: "Technology Business Incubator of Veermata Jijabai Technological Institute, fostering deep-tech hardware startups.",
     logo: (
-      <svg viewBox="0 0 100 100" className="w-16 h-16 text-[#D4AF37]" fill="currentColor">
-        <path d="M50 15 L80 25 V55 C80 75 50 85 50 85 C50 85 20 75 20 55 V25 Z" fill="none" stroke="#D4AF37" strokeWidth="2" />
-        <path d="M35 55 A 15 15 0 0 1 65 55 Z" fill="#D4AF37" opacity="0.8" />
-        <line x1="50" y1="55" x2="50" y2="40" stroke="#D4AF37" strokeWidth="2" />
-        <line x1="50" y1="55" x2="40" y2="44" stroke="#D4AF37" strokeWidth="2" />
-        <line x1="50" y1="55" x2="60" y2="44" stroke="#D4AF37" strokeWidth="2" />
-        <line x1="50" y1="55" x2="33" y2="50" stroke="#D4AF37" strokeWidth="2" />
-        <line x1="50" y1="55" x2="67" y2="50" stroke="#D4AF37" strokeWidth="2" />
-        <path d="M25 58 Q 37 55 50 58 T 75 58" fill="none" stroke="#D4AF37" strokeWidth="1.5" />
-        <path d="M25 64 Q 37 61 50 64 T 75 64" fill="none" stroke="#D4AF37" strokeWidth="1.5" />
-        <circle cx="50" cy="55" r="7" fill="#050816" stroke="#D4AF37" strokeWidth="1.5" />
-        <text x="50" y="32" fontFamily="sans-serif" fontSize="7" fontWeight="black" fill="white" textAnchor="middle">VJTI</text>
-        <text x="50" y="78" fontFamily="sans-serif" fontSize="6" fontWeight="black" fill="#D4AF37" textAnchor="middle">TBI</text>
-      </svg>
+      <img src="/logos/vjti-tbi.png" alt="VJTI-TBI" className="h-full w-auto object-contain bg-white p-2 rounded-lg" />
     ),
   },
   {
@@ -28,21 +15,7 @@ const ASSOCIATIONS = [
     category: "Academic & Research Collaboration",
     desc: "Collaborative research and development in robotics kinematics, embedded systems, and autonomous navigation.",
     logo: (
-      <svg viewBox="0 0 100 100" className="w-16 h-16 text-[#D4AF37]" fill="currentColor">
-        <path d="M50 15 L80 25 V55 C80 75 50 85 50 85 C50 85 20 75 20 55 V25 Z" fill="none" stroke="#D4AF37" strokeWidth="2" />
-        <path d="M35 55 A 15 15 0 0 1 65 55 Z" fill="#D4AF37" opacity="0.8" />
-        <line x1="50" y1="55" x2="50" y2="38" stroke="#D4AF37" strokeWidth="2" />
-        <line x1="50" y1="55" x2="38" y2="42" stroke="#D4AF37" strokeWidth="2" />
-        <line x1="50" y1="55" x2="62" y2="42" stroke="#D4AF37" strokeWidth="2" />
-        <line x1="50" y1="55" x2="31" y2="49" stroke="#D4AF37" strokeWidth="2" />
-        <line x1="50" y1="55" x2="69" y2="49" stroke="#D4AF37" strokeWidth="2" />
-        <path d="M25 58 Q 37 55 50 58 T 75 58" fill="none" stroke="#D4AF37" strokeWidth="1.5" />
-        <path d="M25 64 Q 37 61 50 64 T 75 64" fill="none" stroke="#D4AF37" strokeWidth="1.5" />
-        <path d="M45 72 L50 68 L55 72 Z" fill="#D4AF37" />
-        <circle cx="50" cy="65" r="1.5" fill="#FF8C00" />
-        <text x="50" y="32" fontFamily="sans-serif" fontSize="7" fontWeight="black" fill="white" textAnchor="middle">VJTI</text>
-        <text x="50" y="80" fontFamily="sans-serif" fontSize="5.5" fontWeight="bold" fill="white" textAnchor="middle">MUMBAI</text>
-      </svg>
+      <img src="/logos/vjti.jpg" alt="VJTI Institute" className="h-full w-auto object-contain bg-white p-2 rounded-lg" />
     ),
   },
   {
@@ -50,12 +23,7 @@ const ASSOCIATIONS = [
     category: "Innovation & Incubation Partner",
     desc: "Chitkara University Center for Innovation & Incubation Fellowship supporting next-generation tech enterprises.",
     logo: (
-      <svg viewBox="0 0 120 40" className="h-8 text-[#E31E24]" fill="currentColor">
-        <path d="M15 5 C30 5 33 22 33 22 C33 22 28 32 15 32 C3 32 5 15 15 5 Z" fill="#E31E24" />
-        <path d="M21 10 C30 10 32 20 32 20 C32 20 28 26 21 26 C13 26 15 15 21 10 Z" fill="#050816" />
-        <text x="42" y="18" fontFamily="sans-serif" fontSize="10" fontWeight="950" fill="white">CHITKARA</text>
-        <text x="42" y="29" fontFamily="sans-serif" fontSize="8" fontWeight="bold" fill="#E31E24" letterSpacing="1.5">CIIF</text>
-      </svg>
+      <img src="/logos/ciif.png" alt="Chitkara CIIF" className="h-full w-auto object-contain bg-white p-2 rounded-lg" />
     ),
   },
   {
@@ -63,12 +31,7 @@ const ASSOCIATIONS = [
     category: "Academic & Development Partner",
     desc: "Academic synergy for internship programs, robotic talent development, and technical labs.",
     logo: (
-      <svg viewBox="0 0 120 40" className="h-8 text-[#E31E24]" fill="currentColor">
-        <path d="M15 5 C30 5 33 22 33 22 C33 22 28 32 15 32 C3 32 5 15 15 5 Z" fill="#E31E24" />
-        <path d="M21 10 C30 10 32 20 32 20 C32 20 28 26 21 26 C13 26 15 15 21 10 Z" fill="#050816" />
-        <text x="42" y="17" fontFamily="sans-serif" fontSize="10" fontWeight="950" fill="white">CHITKARA</text>
-        <text x="42" y="28" fontFamily="sans-serif" fontSize="6.5" fontWeight="bold" fill="#888" letterSpacing="0.5">UNIVERSITY</text>
-      </svg>
+      <img src="/logos/chitkara.png" alt="Chitkara University" className="h-full w-auto object-contain bg-white p-2 rounded-lg" />
     ),
   },
   {
@@ -76,12 +39,7 @@ const ASSOCIATIONS = [
     category: "Incubation & Startup Support",
     desc: "Atal Incubation Centre supported by Pinnacle, enabling scaling and commercialization of AI systems.",
     logo: (
-      <svg viewBox="0 0 120 40" className="h-8">
-        <polygon points="12,30 24,10 36,30" fill="none" stroke="#00D2FF" strokeWidth="2" />
-        <polygon points="20,30 28,17 36,30" fill="#FF6B00" />
-        <text x="44" y="18" fontFamily="sans-serif" fontSize="10" fontWeight="950" fill="white">AIC PINNACLE</text>
-        <text x="44" y="29" fontFamily="sans-serif" fontSize="6.5" fontWeight="bold" fill="#FF6B00" letterSpacing="1">ALLIANCE</text>
-      </svg>
+      <img src="/logos/aic-pinnacle.png" alt="AIC Pinnacle" className="h-full w-auto object-contain bg-white p-2 rounded-lg" />
     ),
   },
   {
@@ -89,12 +47,7 @@ const ASSOCIATIONS = [
     category: "Industrial & Manufacturing Partner",
     desc: "Strategic industrial alignment for production scaling, design optimization, and manufacturing guidance.",
     logo: (
-      <svg viewBox="0 0 130 40" className="h-8">
-        <polygon points="12,30 24,10 36,30" fill="none" stroke="#00D2FF" strokeWidth="2" />
-        <polygon points="20,30 28,17 36,30" fill="#FF6B00" />
-        <text x="44" y="17" fontFamily="sans-serif" fontSize="10" fontWeight="950" fill="white">PINNACLE</text>
-        <text x="44" y="28" fontFamily="sans-serif" fontSize="6.5" fontWeight="bold" fill="#888" letterSpacing="0.5">INDUSTRIES</text>
-      </svg>
+      <img src="/logos/pinnacle.svg" alt="Pinnacle Industries" className="h-full w-auto object-contain bg-white p-2 rounded-lg" />
     ),
   },
   {
@@ -102,14 +55,7 @@ const ASSOCIATIONS = [
     category: "Technology Associate",
     desc: "Synergistic tech exploration combining satellite data insights with localized mobile robotic systems.",
     logo: (
-      <svg viewBox="0 0 120 40" className="h-8">
-        <circle cx="18" cy="20" r="10" fill="none" stroke="#2196F3" strokeWidth="2" />
-        <path d="M18 10 A 10 10 0 0 1 28 20" fill="none" stroke="#4CAF50" strokeWidth="2.5" />
-        <circle cx="18" cy="20" r="3.5" fill="#4CAF50" />
-        <line x1="18" y1="20" x2="26" y2="12" stroke="white" strokeWidth="1.5" />
-        <text x="36" y="18" fontFamily="sans-serif" fontSize="10" fontWeight="950" fill="white">AUMSAT</text>
-        <text x="36" y="29" fontFamily="sans-serif" fontSize="6.5" fontWeight="bold" fill="#4CAF50" letterSpacing="0.8">TECHNOLOGIES</text>
-      </svg>
+      <img src="/logos/aumsat-new.png" alt="Aumsat Technologies" className="h-full w-auto object-contain bg-white p-2 rounded-lg" />
     ),
   },
   {
@@ -117,12 +63,7 @@ const ASSOCIATIONS = [
     category: "Cleantech Associate",
     desc: "Joint engineering explorations to design and deploy specialized robots for environmental utilities.",
     logo: (
-      <svg viewBox="0 0 130 40" className="h-8">
-        <path d="M12 10 L22 5 L32 10 V20 C32 27 22 32 22 32 C22 32 12 27 12 20 Z" fill="none" stroke="#00A3E0" strokeWidth="2" />
-        <path d="M22 11 C19 15 19 21 22 25 C25 21 25 15 22 11 Z" fill="#00A3E0" />
-        <text x="38" y="17" fontFamily="sans-serif" fontSize="9.5" fontWeight="950" fill="white">HYDROCAWACH</text>
-        <text x="38" y="28" fontFamily="sans-serif" fontSize="6.5" fontWeight="bold" fill="#00A3E0" letterSpacing="0.8">TECHNOLOGIES</text>
-      </svg>
+      <img src="/logos/hydrocawach-new.png" alt="Hydrocawach Technologies" className="h-full w-auto object-contain bg-white p-2 rounded-lg" />
     ),
   },
   {
@@ -130,15 +71,7 @@ const ASSOCIATIONS = [
     category: "Academic & Research Partner",
     desc: "Undergraduate research initiatives, technical workshops, and direct campus recruitment channels.",
     logo: (
-      <svg viewBox="0 0 130 40" className="h-8">
-        <circle cx="16" cy="20" r="11" fill="none" stroke="#FFD700" strokeWidth="1.5" />
-        <circle cx="16" cy="20" r="8.5" fill="rgba(128,0,0,0.2)" stroke="#FFD700" strokeWidth="0.5" />
-        <path d="M15 25 L17 25 L18 17 L14 17 Z" fill="#FFD700" />
-        <path d="M13 15 Q16 10 19 15 Z" fill="#FF5722" />
-        <text x="32" y="15" fontFamily="sans-serif" fontSize="9" fontWeight="950" fill="white">LOKMANYA TILAK</text>
-        <text x="32" y="23" fontFamily="sans-serif" fontSize="6.2" fontWeight="bold" fill="#FFD700">COLLEGE OF ENG.</text>
-        <text x="32" y="30" fontFamily="sans-serif" fontSize="5.5" fontWeight="bold" fill="#888" letterSpacing="0.5">MUMBAI</text>
-      </svg>
+      <img src="/logos/ltce.png" alt="Lokmanya Tilak College" className="h-full w-auto object-contain bg-white p-2 rounded-lg" />
     ),
   },
   {
@@ -146,11 +79,7 @@ const ASSOCIATIONS = [
     category: "Media & Features Recognition",
     desc: "National media highlight and editorial coverage of our rapid growth and unique service robot lineup.",
     logo: (
-      <svg viewBox="0 0 120 40" className="h-8">
-        <text x="2" y="24" fontFamily="sans-serif" fontSize="15" fontWeight="950" fill="white" letterSpacing="-0.5">
-          silicon<tspan fill="#E31E24">india</tspan>
-        </text>
-      </svg>
+      <img src="/logos/silicon-new.png" alt="Silicon India" className="h-full w-auto object-contain bg-white p-2 rounded-lg" />
     ),
   },
   {
@@ -158,12 +87,7 @@ const ASSOCIATIONS = [
     category: "Startup & Media Coverage",
     desc: "International startup coverage, showcasing Techligence's vision for future humanoid interfaces.",
     logo: (
-      <svg viewBox="0 0 120 40" className="h-8">
-        <text x="2" y="24" fontFamily="Impact, Arial Black, sans-serif" fontSize="16" fontWeight="bold" fill="white" letterSpacing="0.5">
-          JUMPSTART
-        </text>
-        <rect x="92" y="10" width="6" height="18" fill="#FFD700" />
-      </svg>
+      <img src="/logos/jumpstart-new.png" alt="Jumpstart Magazine" className="h-full w-auto object-contain bg-white p-2 rounded-lg" />
     ),
   },
 ];
@@ -220,8 +144,8 @@ export default function CompanyPage() {
                 <div className="absolute top-4 right-4 w-1.5 h-1.5 rounded-full bg-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse pointer-events-none" />
 
                 <div className="flex flex-col items-center w-full">
-                  {/* Organization Logo Area with Grayscale transition */}
-                  <div className="h-16 flex items-center justify-center mb-6 grayscale opacity-45 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 ease-out transform group-hover:scale-105">
+                  {/* Organization Logo Area */}
+                  <div className="h-16 flex items-center justify-center mb-6 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-out transform group-hover:scale-105">
                     {org.logo}
                   </div>
 
@@ -249,13 +173,8 @@ export default function CompanyPage() {
 
               <div className="flex flex-col items-center w-full">
                 {/* Organization Logo Placeholder Area */}
-                <div className="h-16 flex items-center justify-center mb-6 text-cyan-500/40 group-hover:text-cyan-400 transition-colors duration-500">
-                  <svg viewBox="0 0 100 30" className="h-6" fill="currentColor">
-                    <rect x="5" y="5" width="20" height="20" rx="4" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="3 3" />
-                    <line x1="15" y1="5" x2="15" y2="25" stroke="currentColor" strokeWidth="1" strokeDasharray="2 2" />
-                    <line x1="5" y1="15" x2="25" y2="15" stroke="currentColor" strokeWidth="1" strokeDasharray="2 2" />
-                    <text x="32" y="19" fontFamily="sans-serif" fontSize="11" fontWeight="bold" fill="white">TECHLIGENCE</text>
-                  </svg>
+                <div className="h-16 flex items-center justify-center mb-6 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-out transform group-hover:scale-105">
+                  <img src="/logo.png" alt="Techligence" className="h-full w-auto object-contain bg-white p-2 rounded-lg" />
                 </div>
 
                 {/* Organization Title */}

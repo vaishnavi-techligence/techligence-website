@@ -39,7 +39,7 @@ export default function RobotVideo() {
             className="pointer-events-none w-full h-auto relative transition-opacity duration-300 z-20"
             style={{
               transform: "translateY(-14.8%) scale(0.92)",
-              filter: "url(#remove-green) contrast(1.05) brightness(1.02)",
+              filter: "var(--filter-remove-green) contrast(1.05) brightness(1.02)",
               clipPath: "inset(0% 3% 0% 3%)",
               WebkitClipPath: "inset(0% 3% 0% 3%)",
               opacity: isVideoPlaying ? 1 : 0,

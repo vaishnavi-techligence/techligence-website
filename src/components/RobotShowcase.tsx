@@ -218,13 +218,13 @@ const ROBOTS_DATA: Robot[] = [
 ];
 
 // Per-robot positioning adjustments to handle varying blank space at the top/bottom of the video frames
-const ROBOT_LAYOUT_ADJUSTMENTS: Record<string, { scale: number; translateY: string; bottomClip: string; topClip?: string }> = {
-  "joy-a01": { scale: 0.95,  translateY: "-2%",   bottomClip: "94%",   topClip: "12%" },
-  "t2-mini": { scale: 1.10,  translateY: "1.5%",  bottomClip: "94%",   topClip: "16%" },
-  "tella-s": { scale: 0.8,   translateY: "2%",    bottomClip: "95%" },
-  "andy-r1": { scale: 0.85,  translateY: "0%",    bottomClip: "95%",   topClip: "0%" },
-  "t2-max":  { scale: 0.8,   translateY: "4%",    bottomClip: "95%" },
-  "nova-m1": { scale: 0.8,   translateY: "2%",    bottomClip: "95%" },
+const ROBOT_LAYOUT_ADJUSTMENTS: Record<string, { scale: number; translateY: string; bottomClip: string; topClip?: string; staticHeight?: string; staticTranslateY?: string }> = {
+  "joy-a01": { scale: 0.95,  translateY: "-2%",   bottomClip: "89%",   topClip: "12%", staticHeight: "115%", staticTranslateY: "-2%" },
+  "t2-mini": { scale: 1.10,  translateY: "1.5%",  bottomClip: "89%",   topClip: "16%", staticHeight: "115%", staticTranslateY: "-2%" },
+  "tella-s": { scale: 0.8,   translateY: "2%",    bottomClip: "91%",   staticHeight: "58%", staticTranslateY: "0%" },
+  "andy-r1": { scale: 0.85,  translateY: "0%",    bottomClip: "91%",   topClip: "0%",  staticHeight: "112%", staticTranslateY: "-2%" },
+  "t2-max":  { scale: 0.8,   translateY: "4%",    bottomClip: "91%",   staticHeight: "112%", staticTranslateY: "-2%" },
+  "nova-m1": { scale: 0.8,   translateY: "2%",    bottomClip: "91%",   staticHeight: "58%", staticTranslateY: "0%" },
 };
 
 export default function RobotShowcase() {
@@ -691,10 +691,18 @@ export default function RobotShowcase() {
                   style={{ transform: "translate(-50%,0) scaleY(0.25)", backgroundColor: "rgba(0,240,255,0.28)", filter: "blur(9px)" }}
                 />
 
+                {/* Smoky background effect to camouflage edge glitches in Light Mode (Video Only) */}
+                {activeView === "video" && (
+                  <div
+                    className="hidden light-mode-smoky-bg absolute top-1/2 left-1/2 w-[55%] h-[85%] bg-black/30 rounded-full pointer-events-none z-0"
+                    style={{ transform: "translate(-50%, -50%)", filter: "blur(50px)" }}
+                  />
+                )}
+
                 {(() => {
                   // Apply dynamic filter selection (remove-black-showcase for black bg, remove-green-showcase for green bg) and WebkitClipPath to hide watermark
                   const isLandscape = ["tella-s", "nova-m1"].includes(activeRobot.id);
-                  const filterId = activeRobot.id === "t2-max" ? "remove-black-showcase" : "remove-green-showcase";
+                  const filterId = activeRobot.id === "t2-max" ? "var(--filter-remove-black-showcase)" : "var(--filter-remove-green-showcase)";
                   
                   const layoutAdjustment = ROBOT_LAYOUT_ADJUSTMENTS[activeRobot.id] || { scale: 1.0, translateY: "0%", bottomClip: "100%", topClip: "0" };
                   const bottomClipNum = parseFloat(layoutAdjustment.bottomClip || "100");
@@ -703,24 +711,28 @@ export default function RobotShowcase() {
 
                   const videoStyle: React.CSSProperties = isLandscape
                     ? {
-                        filter: `url(#${filterId})`,
+                        "--current-robot-filter": filterId,
                         height: "100%",
                         width: "auto",
                         maxWidth: "none",
                         aspectRatio: "16 / 9",
-                        clipPath: `inset(${topCrop}% 34.375% ${bottomCrop}% 34.375%)`,
-                        WebkitClipPath: `inset(${topCrop}% 34.375% ${bottomCrop}% 34.375%)`,
+                        clipPath: `inset(0 34.375% 0 34.375%)`,
+                        WebkitClipPath: `inset(0 34.375% 0 34.375%)`,
+                        WebkitMaskImage: `linear-gradient(to bottom, transparent ${topCrop}%, black ${topCrop + 3}%, black ${bottomClipNum - 4}%, transparent ${bottomClipNum}%)`,
+                        maskImage: `linear-gradient(to bottom, transparent ${topCrop}%, black ${topCrop + 3}%, black ${bottomClipNum - 4}%, transparent ${bottomClipNum}%)`,
                         backgroundColor: "transparent",
-                      }
+                      } as React.CSSProperties
                     : {
-                        filter: `url(#${filterId})`,
+                        "--current-robot-filter": filterId,
                         height: "100%",
                         width: "auto",
                         aspectRatio: "9 / 16",
-                        clipPath: `inset(${topCrop}% 3% ${bottomCrop}% 3%)`,
-                        WebkitClipPath: `inset(${topCrop}% 3% ${bottomCrop}% 3%)`,
+                        clipPath: `inset(0 3% 0 3%)`,
+                        WebkitClipPath: `inset(0 3% 0 3%)`,
+                        WebkitMaskImage: `linear-gradient(to bottom, transparent ${topCrop}%, black ${topCrop + 3}%, black ${bottomClipNum - 4}%, transparent ${bottomClipNum}%)`,
+                        maskImage: `linear-gradient(to bottom, transparent ${topCrop}%, black ${topCrop + 3}%, black ${bottomClipNum - 4}%, transparent ${bottomClipNum}%)`,
                         backgroundColor: "transparent",
-                      };
+                      } as React.CSSProperties;
 
                   return activeView === "video" && activeRobot.video ? (
                     !videoError ? (
@@ -741,7 +753,7 @@ export default function RobotShowcase() {
                           preload="auto"
                           loop muted playsInline autoPlay
                           onPlaying={() => setIsVideoPlaying(true)}
-                          className="h-full w-auto max-w-full object-contain robot-float pointer-events-none relative transition-opacity duration-300 z-20"
+                          className="robot-media h-full w-auto max-w-full object-contain robot-float pointer-events-none relative transition-opacity duration-300 z-20"
                           style={{
                             ...videoStyle,
                             opacity: isVideoPlaying ? 1 : 0
@@ -759,13 +771,14 @@ export default function RobotShowcase() {
                     <img
                       src={activeView === "video" ? activeRobot.image : `/robots/${activeRobot.id}-${activeView}.png`}
                       alt={`${activeRobot.name} visual`}
-                      className="h-full w-auto max-w-full object-contain robot-float transition-all duration-500 relative z-10"
+                      className="robot-media w-auto object-contain robot-float transition-all duration-500 relative z-10"
                       style={
                         activeView !== "video"
                           ? {
                               filter: "none",
-                              clipPath: `inset(${topCrop}% 0% ${bottomCrop}% 0%)`,
-                              WebkitClipPath: `inset(${topCrop}% 0% ${bottomCrop}% 0%)`,
+                              height: layoutAdjustment.staticHeight || "100%",
+                              maxWidth: "none",
+                              transform: `translateY(${layoutAdjustment.staticTranslateY || "0%"})`,
                             }
                           : undefined
                       }
@@ -804,47 +817,7 @@ export default function RobotShowcase() {
           {/* ── RIGHT PANEL: ratings + logs + view-selector ── */}
           <div className="flex flex-col gap-2 min-h-0 order-3 lg:order-3">
 
-            {/* Hardware rating bars */}
-            <div className="flex-shrink-0 p-3 rounded-xl border border-white/5 bg-slate-900/30 backdrop-blur-md">
-              <span className="text-[7px] font-mono tracking-widest text-gray-500 uppercase block mb-2.5">
-                HARDWARE SYSTEM RATINGS
-              </span>
-              <div className="flex flex-col gap-2.5">
-                {(["Cognitive Decision AI", "Kinetic Dexterity", "Spatial LiDAR Agility", "Power Core Endurance"] as const).map((label, i) => {
-                  const keys = ["cognitiveAI", "dexterity", "agility", "power"] as const;
-                  const val = animatedStats[keys[i]];
-                  return (
-                    <div key={label}>
-                      <div className="flex justify-between text-[10px] font-semibold mb-1">
-                        <span className="text-gray-300">{label}</span>
-                        <span className="font-mono text-cyan-400">{val}%</span>
-                      </div>
-                      <div className="w-full h-[3px] rounded-full bg-white/10 overflow-hidden">
-                        <div
-                          className="h-full rounded-full transition-all duration-300"
-                          style={{ width: `${val}%`, backgroundColor: "#00f0ff", boxShadow: "0 0 8px #00f0ff" }}
-                        />
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
 
-            {/* Diagnostic terminal logs */}
-            <div
-              className="flex-shrink-0 p-3 rounded-xl border border-white/5 bg-black/60 font-mono text-[8px] leading-relaxed text-gray-400 relative overflow-hidden flex flex-col justify-end"
-              style={{ height: "92px" }}
-            >
-              <div className="absolute top-0 left-0 w-full h-[2px]" style={{ backgroundColor: "#00f0ff" }} />
-              <p className="text-cyan-400 font-bold mb-0.5">&gt;&gt; SYSTEM DIAGNOSTICS</p>
-              {displayedLogs.map((log, i) => (
-                <p key={i} className="truncate">&gt;&gt; {log}</p>
-              ))}
-              {displayedLogs.length < activeRobot.logs.length && (
-                <p className="animate-pulse text-cyan-400/50">&gt;&gt; LOADING...</p>
-              )}
-            </div>
 
             {/* ── VIEW SELECTOR BUTTONS ── moved from center panel ── */}
             <div className="flex-shrink-0 hidden lg:block">
