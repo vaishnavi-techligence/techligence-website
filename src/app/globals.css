@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+:root {
+  --filter-remove-green: url(#remove-green);
+  --filter-remove-green-showcase: url(#remove-green-showcase);
+  --filter-remove-black-showcase: url(#remove-black-showcase);
+}
+
+html[data-theme="light"] {
+  --filter-remove-green: url(#remove-green-light);
+  --filter-remove-green-showcase: url(#remove-green-showcase-light);
+  --filter-remove-black-showcase: url(#remove-black-showcase-light);
+}
+
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
@@ -28,6 +40,21 @@ body {
 
 .robot-float {
   animation: floatRobot 4s ease-in-out infinite;
+}
+
+/* =========================
+   ROBOT MEDIA EFFECTS
+========================= */
+.robot-media {
+  filter: var(--current-robot-filter);
+}
+
+[data-theme="light"] .robot-media {
+  filter: var(--current-robot-filter) !important;
+}
+
+[data-theme="light"] .light-mode-smoky-bg {
+  display: block !important;
 }
 
 /* =========================
