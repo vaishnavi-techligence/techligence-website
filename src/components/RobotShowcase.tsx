@@ -33,9 +33,9 @@ const ROBOTS_DATA: Robot[] = [
   {
     id: "joy-a01",
     name: "JOY A-01",
-    role: "Intelligent Robotic Assistant",
+    role: "Hospitality & Reception Robot",
     tagline: "Meet Your New Digital Receptionist",
-    description: "An elegant bipedal hospitality specialist designed to elevate lobby reception, patient concierge, and VIP business greetings with an expressive face.",
+    description: "AI-powered hospitality and reception robot designed to assist visitors, provide information, and enhance customer experience.",
     color: "#00f0ff",
     rgbColor: "0, 240, 255",
     hueRotate: "hue-rotate(0deg)",
@@ -43,15 +43,15 @@ const ROBOTS_DATA: Robot[] = [
     video: "/robots/joy-a01.mp4",
     specs: {
       height: "1.35m (4.4ft)",
-      battery: "24h Continuous",
-      special: "2-6 DoF Articulated Arms",
-      specialLabel: "Mechanics"
+      battery: "Available",
+      special: "Articulated Arms",
+      specialLabel: "Features"
     },
     stats: {
-      cognitiveAI: 94,
-      dexterity: 88,
-      agility: 78,
-      power: 85
+      cognitiveAI: 100,
+      dexterity: 100,
+      agility: 100,
+      power: 100
     },
     logs: [
       "INITIALIZING CONCIERGE INTERFACE Core-v4.0",
@@ -64,9 +64,9 @@ const ROBOTS_DATA: Robot[] = [
   {
     id: "t2-mini",
     name: "T2 MINI",
-    role: "AI Reception & Engagement",
+    role: "Interactive Service Robot",
     tagline: "The Future Of Customer Experience",
-    description: "Compact humanoid customer engagement specialist optimized for seamless lobby interaction, voice-guided guidance, and corporate office assistance.",
+    description: "Interactive service robot designed for customer engagement, guidance, and assistance in commercial environments.",
     color: "#00f0ff",
     rgbColor: "0, 240, 255",
     hueRotate: "hue-rotate(0deg)",
@@ -74,15 +74,15 @@ const ROBOTS_DATA: Robot[] = [
     video: "/robots/t2-mini.mp4",
     specs: {
       height: "1.22m (4.0ft)",
-      battery: "20h Continuous",
-      special: "Compact SLAM",
-      specialLabel: "Navigation"
+      battery: "Available",
+      special: "360° Mobility",
+      specialLabel: "Features"
     },
     stats: {
-      cognitiveAI: 92,
-      dexterity: 70,
-      agility: 85,
-      power: 95
+      cognitiveAI: 100,
+      dexterity: 100,
+      agility: 100,
+      power: 100
     },
     logs: [
       "INITIALIZING NEURAL LINK // COGNITIVE CORE v2.8",
@@ -95,9 +95,9 @@ const ROBOTS_DATA: Robot[] = [
   {
     id: "tella-s",
     name: "TELLA S",
-    role: "Customer Relations & Concierge",
+    role: "Service & Assistance Robot",
     tagline: "Enterprise Fleet Service Dynamics",
-    description: "Sleek and robust corporate service frame featuring interactive double-display HUD panels to coordinate client data and guest onboarding.",
+    description: "Service and assistance robot designed to support customer interaction and information delivery.",
     color: "#00f0ff",
     rgbColor: "0, 240, 255",
     hueRotate: "hue-rotate(0deg)",
@@ -105,15 +105,15 @@ const ROBOTS_DATA: Robot[] = [
     video: "/robots/tella-s.mp4",
     specs: {
       height: "1.30m (4.0ft)",
-      battery: "24h Continuous",
-      special: "Interactive HUD",
-      specialLabel: "Display Core"
+      battery: "Available",
+      special: "Interactive Display",
+      specialLabel: "Features"
     },
-    stats: {
-      cognitiveAI: 90,
-      dexterity: 82,
-      agility: 80,
-      power: 92
+     stats: {
+      cognitiveAI: 100,
+      dexterity: 100,
+      agility: 100,
+      power: 100
     },
     logs: [
       "TELLA S ONLINE // QUANTUM INTERCONNECT LINK",
@@ -125,7 +125,7 @@ const ROBOTS_DATA: Robot[] = [
   {
     id: "andy-r1",
     name: "ANDY R1",
-    role: "Gesture Mimicry & Support",
+    role: "Interactive Humanoid Robot",
     tagline: "Fluid Kinematic Mimicry Interaction",
     description: "Advanced bipedal research platform equipped with high-degree-of-freedom actuators for natural body language, biped balance, and gestural support.",
     color: "#00f0ff",
@@ -135,15 +135,15 @@ const ROBOTS_DATA: Robot[] = [
     video: "/robots/andy-r1.mp4",
     specs: {
       height: "1.30m (4.2ft)",
-      battery: "18h Continuous",
-      special: "42 Deg. of Freedom",
-      specialLabel: "Actuators"
+      battery: "Available",
+      special: "Interactive Touch Screen",
+      specialLabel: "Features"
     },
     stats: {
-      cognitiveAI: 85,
-      dexterity: 96,
-      agility: 90,
-      power: 80
+      cognitiveAI: 100,
+      dexterity: 100,
+      agility: 100,
+      power: 100
     },
     logs: [
       "ESTABLISHING SYNPATIC INTERFACE...",
@@ -156,7 +156,7 @@ const ROBOTS_DATA: Robot[] = [
   {
     id: "t2-max",
     name: "T2 MAX",
-    role: "Autonomous Logistics & Delivery",
+    role: "Autonomous Service Robot",
     tagline: "Industrial Strength Payload Freight",
     description: "Heavy-duty bipedal freight carrier designed to carry heavy payloads safely across corporate offices, medical wings, and logistics depots.",
     color: "#00f0ff",
@@ -166,15 +166,15 @@ const ROBOTS_DATA: Robot[] = [
     video: "/robots/t2-max.mp4",
     specs: {
       height: "1.38m (4.5ft)",
-      battery: "30h Continuous",
-      special: "80 Kilograms Cap",
-      specialLabel: "Cargo Space"
+      battery: "Available",
+      special: "Dual Camera System",
+      specialLabel: "Features"
     },
     stats: {
-      cognitiveAI: 88,
-      dexterity: 80,
-      agility: 75,
-      power: 99
+      cognitiveAI: 100,
+      dexterity: 100,
+      agility: 100,
+      power: 100
     },
     logs: [
       "LOAD CAPACITY VERIFIED // BALANCE ON SPEC",
@@ -187,7 +187,7 @@ const ROBOTS_DATA: Robot[] = [
   {
     id: "nova-m1",
     name: "NOVA M1",
-    role: "High-Definition Facility Mapping",
+    role: "Autonomous Navigation Robot",
     tagline: "High-Definition LiDAR Spatial Intelligence",
     description: "Advanced mapping specialist engineered with high-precision SLAM navigation and a 905nm LiDAR pulse scanner to map facilities dynamically.",
     color: "#00f0ff",
@@ -197,15 +197,15 @@ const ROBOTS_DATA: Robot[] = [
     video: "/robots/nova-m1.mp4",
     specs: {
       height: "0.90m (3.0ft)",
-      battery: "36h Continuous",
-      special: "150m Lidar range",
-      specialLabel: "LiDAR Array"
+      battery: "Available",
+      special: "Advanced Navigation",
+      specialLabel: "Features"
     },
     stats: {
-      cognitiveAI: 96,
-      dexterity: 40,
-      agility: 98,
-      power: 98
+      cognitiveAI: 100,
+      dexterity: 100,
+      agility: 100,
+      power: 100
     },
     logs: [
       "EMITTING LASER TELEMETRY ARRAY // 905NM PULSE",
@@ -492,7 +492,7 @@ export default function RobotShowcase() {
                 ["UNIT HEIGHT",   activeRobot.specs.height, "text-white"],
                 ["BATTERY",       activeRobot.specs.battery.split(" ")[0], "text-white"],
                 [activeRobot.specs.specialLabel.toUpperCase(), activeRobot.specs.special, "text-white"],
-                ["THERMALS",      "36.5°C", "text-green-400"],
+                ["SYSTEM", "ONLINE", "text-green-400"],
               ].map(([label, value, col]) => (
                 <div key={label}>
                   <p className="text-[7px] font-mono text-gray-500 uppercase tracking-wider">{label}</p>
@@ -504,9 +504,9 @@ export default function RobotShowcase() {
             {/* Telemetry 2×2 grid */}
             <div className="flex-shrink-0 p-3 rounded-xl border border-white/5 bg-slate-900/20 backdrop-blur-md grid grid-cols-2 gap-2">
               {[
-                ["AI FRAMEWORK",  "Techligence-L2",  "text-white"],
+                ["AI SYSTEM",     "ACTIVE",           "text-white"],
                 ["DIAGNOSTICS",   "ONLINE",           "text-green-400"],
-                ["COMMS",         "5G QUANTUM",       "text-white"],
+                ["STATUS",        "READY",            "text-white"],
                 ["STATE",         "READY",            "text-cyan-400"],
               ].map(([label, value, col]) => (
                 <div key={label}>
