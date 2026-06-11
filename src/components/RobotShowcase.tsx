@@ -32,38 +32,6 @@ interface Robot {
 
 const ROBOTS_DATA: Robot[] = [
   {
-    id: "joy-a01",
-    name: "JOY A-01",
-    role: "Hospitality & Reception Robot",
-    tagline: "Meet Your New Digital Receptionist",
-    description: "AI-powered hospitality and reception robot designed to assist visitors, provide information, and enhance customer experience.",
-    color: "#00f0ff",
-    rgbColor: "0, 240, 255",
-    hueRotate: "hue-rotate(0deg)",
-    image: "/robots/joy-a01.png",
-    video: "/robots/joy-a01.mp4",
-    specs: {
-      height: "1.35m (4.4ft)",
-      battery: "24V Li-ion 60Ah",
-      backup: "6-8 Hours",
-      special: "Articulated Arms",
-      specialLabel: "Features"
-    },
-    stats: {
-      cognitiveAI: 100,
-      dexterity: 100,
-      agility: 100,
-      power: 100
-    },
-    logs: [
-      "INITIALIZING CONCIERGE INTERFACE Core-v4.0",
-      "EXPRESSIVE DIGITAL FACE ACTIVATION: NOMINAL",
-      "ARTICULATED MOTION CONTROLLERS ONLINE // 6 DoF",
-      "RIGID FIBER SHIELD DYNAMICS VERIFIED",
-      "MOBILITY BASE DEPLOYED // RECEPTION READY"
-    ]
-  },
-  {
     id: "t2-mini",
     name: "T2 MINI",
     role: "Interactive Service Robot",
@@ -93,6 +61,38 @@ const ROBOTS_DATA: Robot[] = [
       "LIDAR PRECISION CALIBRATED // ACCURACY TO 0.1MM",
       "SPEECH RECOGNITION ONLINE // LATENCY 12MS",
       "GUEST DETECTION VECTOR ENABLED // RECEPTION READY"
+    ]
+  },
+  {
+    id: "joy-a01",
+    name: "JOY A-01",
+    role: "Hospitality & Reception Robot",
+    tagline: "Meet Your New Digital Receptionist",
+    description: "AI-powered hospitality and reception robot designed to assist visitors, provide information, and enhance customer experience.",
+    color: "#00f0ff",
+    rgbColor: "0, 240, 255",
+    hueRotate: "hue-rotate(0deg)",
+    image: "/robots/joy-a01.png",
+    video: "/robots/joy-a01.mp4",
+    specs: {
+      height: "1.35m (4.4ft)",
+      battery: "24V Li-ion 60Ah",
+      backup: "6-8 Hours",
+      special: "Articulated Arms",
+      specialLabel: "Features"
+    },
+    stats: {
+      cognitiveAI: 100,
+      dexterity: 100,
+      agility: 100,
+      power: 100
+    },
+    logs: [
+      "INITIALIZING CONCIERGE INTERFACE Core-v4.0",
+      "EXPRESSIVE DIGITAL FACE ACTIVATION: NOMINAL",
+      "ARTICULATED MOTION CONTROLLERS ONLINE // 6 DoF",
+      "RIGID FIBER SHIELD DYNAMICS VERIFIED",
+      "MOBILITY BASE DEPLOYED // RECEPTION READY"
     ]
   },
   {
