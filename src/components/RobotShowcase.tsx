@@ -253,7 +253,7 @@ export default function RobotShowcase() {
   const logIndexRef = useRef(0);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const [showHud, setShowHud] = useState(false);
+  const [showHud, setShowHud] = useState(true);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -289,13 +289,13 @@ export default function RobotShowcase() {
     }
   }, []);
 
-  // Scroll listener to animate HUD elements in when scrolling down the page
+  // Scroll listener to show HUD elements before scrolling and hide them when scrolling down
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 30) {
-        setShowHud(true);
-      } else {
         setShowHud(false);
+      } else {
+        setShowHud(true);
       }
     };
     window.addEventListener("scroll", handleScroll);
