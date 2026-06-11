@@ -31,13 +31,13 @@ export default function SolutionsPage() {
         className="max-w-7xl mx-auto px-6 py-12 scroll-mt-52"
       >
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <Image
-            src="/solutions/healthcare.jpg"
-            alt="Healthcare"
-            width={700}
-            height={500}
-            className="rounded-3xl object-cover w-full"
-          />
+      <Image
+        src="/solutions/hospitality.jpg"
+        alt="Healthcare"
+        width={700}
+        height={500}
+        className="rounded-3xl object-cover w-full"
+      />
 
           <div>
             <p className="text-cyan-400 uppercase tracking-[4px]">
@@ -118,13 +118,13 @@ export default function SolutionsPage() {
         className="max-w-7xl mx-auto px-6 py-12 scroll-mt-52"
       >
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <Image
-            src="/solutions/hospitality.jpg"
-            alt="Hospitality"
-            width={700}
-            height={500}
-            className="rounded-3xl object-cover w-full"
-          />
+      <Image
+        src="/solutions/healthcare.jpg"
+        alt="Hospitality"
+        width={700}
+        height={500}
+        className="rounded-3xl object-cover w-full"
+      />
 
           <div>
             <p className="text-cyan-400 uppercase tracking-[4px]">
