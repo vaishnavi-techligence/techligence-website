@@ -121,7 +121,7 @@ export default function CompanyPage() {
       </div>
 
       {/* Associated Companies & Organisations Section */}
-      <div className="max-w-[1400px] mx-auto px-6 pb-28 w-full relative z-10">
+      <div className="max-w-[1400px] mx-auto px-6 w-full relative z-10">
         <div className="border-t border-white/10 pt-16">
           <p className="text-cyan-400 uppercase tracking-[6px] text-xs font-semibold mb-2 font-mono">
             COLLABORATIVE NETWORK
@@ -132,6 +132,10 @@ export default function CompanyPage() {
           <p className="text-gray-400 text-sm max-w-2xl mb-12">
             We collaborate with premier academic institutions, startup accelerators, incubation centers, and media agencies to co-create the robotics solutions of tomorrow.
           </p>
+        </div>
+      </div>
+
+      <div className="w-full pb-28 relative z-10 overflow-hidden">
 
           {/* Companies Marquee (Infinite horizontal slider) */}
           {(() => {
@@ -224,7 +228,6 @@ export default function CompanyPage() {
               </div>
             );
           })()}
-        </div>
       </div>
 
       <Footer />
