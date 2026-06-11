@@ -17,6 +17,7 @@ interface Robot {
   specs: {
     height: string;
     battery: string;
+    backup: string;
     special: string;
     specialLabel: string;
   };
@@ -43,7 +44,8 @@ const ROBOTS_DATA: Robot[] = [
     video: "/robots/joy-a01.mp4",
     specs: {
       height: "1.35m (4.4ft)",
-      battery: "Available",
+      battery: "24V Li-ion 60Ah",
+      backup: "6-8 Hours",
       special: "Articulated Arms",
       specialLabel: "Features"
     },
@@ -74,7 +76,8 @@ const ROBOTS_DATA: Robot[] = [
     video: "/robots/t2-mini.mp4",
     specs: {
       height: "1.22m (4.0ft)",
-      battery: "Available",
+      battery: "24V Li-ion 60Ah",
+      backup: "6-8 Hours",
       special: "360° Mobility",
       specialLabel: "Features"
     },
@@ -105,7 +108,8 @@ const ROBOTS_DATA: Robot[] = [
     video: "/robots/tella-s.mp4",
     specs: {
       height: "1.30m (4.0ft)",
-      battery: "Available",
+      battery: "24V Li-ion 60Ah",
+      backup: "6-8 Hours",
       special: "Interactive Display",
       specialLabel: "Features"
     },
@@ -135,7 +139,8 @@ const ROBOTS_DATA: Robot[] = [
     video: "/robots/andy-r1.mp4",
     specs: {
       height: "1.30m (4.2ft)",
-      battery: "Available",
+      battery: "24V Li-ion 60Ah",
+      backup: "6-8 Hours",
       special: "Interactive Touch Screen",
       specialLabel: "Features"
     },
@@ -166,7 +171,8 @@ const ROBOTS_DATA: Robot[] = [
     video: "/robots/t2-max.mp4",
     specs: {
       height: "1.38m (4.5ft)",
-      battery: "Available",
+      battery: "24V Li-ion 60Ah",
+      backup: "6-8 Hours",
       special: "Dual Camera System",
       specialLabel: "Features"
     },
@@ -197,7 +203,8 @@ const ROBOTS_DATA: Robot[] = [
     video: "/robots/nova-m1.mp4",
     specs: {
       height: "0.90m (3.0ft)",
-      battery: "Available",
+      battery: "24V Li-ion 60Ah",
+      backup: "6-8 Hours",
       special: "Advanced Navigation",
       specialLabel: "Features"
     },
@@ -489,11 +496,11 @@ export default function RobotShowcase() {
             {/* Physical specs 2×2 grid */}
             <div className="flex-shrink-0 p-3 rounded-xl border border-white/5 bg-slate-900/30 backdrop-blur-md grid grid-cols-2 gap-2">
               {[
-                ["UNIT HEIGHT",   activeRobot.specs.height, "text-white"],
-                ["BATTERY",       activeRobot.specs.battery.split(" ")[0], "text-white"],
-                [activeRobot.specs.specialLabel.toUpperCase(), activeRobot.specs.special, "text-white"],
-                ["SYSTEM", "ONLINE", "text-green-400"],
-              ].map(([label, value, col]) => (
+  ["UNIT HEIGHT", activeRobot.specs.height, "text-white"],
+  ["BATTERY", activeRobot.specs.battery, "text-white"],
+  ["BACKUP", activeRobot.specs.backup, "text-white"],
+  [activeRobot.specs.specialLabel.toUpperCase(), activeRobot.specs.special, "text-white"],
+].map(([label, value, col]) => (
                 <div key={label}>
                   <p className="text-[7px] font-mono text-gray-500 uppercase tracking-wider">{label}</p>
                   <p className={`text-[10px] font-extrabold mt-0.5 truncate ${col}`}>{value}</p>
