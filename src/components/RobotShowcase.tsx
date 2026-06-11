@@ -31,37 +31,6 @@ interface Robot {
 
 const ROBOTS_DATA: Robot[] = [
   {
-    id: "joy-a01",
-    name: "JOY A-01",
-    role: "Intelligent Robotic Assistant",
-    tagline: "Meet Your New Digital Receptionist",
-    description: "An elegant bipedal hospitality specialist designed to elevate lobby reception, patient concierge, and VIP business greetings with an expressive face.",
-    color: "#00f0ff",
-    rgbColor: "0, 240, 255",
-    hueRotate: "hue-rotate(0deg)",
-    image: "/robots/joy-a01.png",
-    video: "/robots/joy-a01.mp4",
-    specs: {
-      height: "1.35m (4.4ft)",
-      battery: "24h Continuous",
-      special: "2-6 DoF Articulated Arms",
-      specialLabel: "Mechanics"
-    },
-    stats: {
-      cognitiveAI: 94,
-      dexterity: 88,
-      agility: 78,
-      power: 85
-    },
-    logs: [
-      "INITIALIZING CONCIERGE INTERFACE Core-v4.0",
-      "EXPRESSIVE DIGITAL FACE ACTIVATION: NOMINAL",
-      "ARTICULATED MOTION CONTROLLERS ONLINE // 6 DoF",
-      "RIGID FIBER SHIELD DYNAMICS VERIFIED",
-      "MOBILITY BASE DEPLOYED // RECEPTION READY"
-    ]
-  },
-  {
     id: "t2-mini",
     name: "T2 MINI",
     role: "AI Reception & Engagement",
@@ -90,6 +59,37 @@ const ROBOTS_DATA: Robot[] = [
       "LIDAR PRECISION CALIBRATED // ACCURACY TO 0.1MM",
       "SPEECH RECOGNITION ONLINE // LATENCY 12MS",
       "GUEST DETECTION VECTOR ENABLED // RECEPTION READY"
+    ]
+  },
+  {
+    id: "joy-a01",
+    name: "JOY A-01",
+    role: "Intelligent Robotic Assistant",
+    tagline: "Meet Your New Digital Receptionist",
+    description: "An elegant bipedal hospitality specialist designed to elevate lobby reception, patient concierge, and VIP business greetings with an expressive face.",
+    color: "#00f0ff",
+    rgbColor: "0, 240, 255",
+    hueRotate: "hue-rotate(0deg)",
+    image: "/robots/joy-a01.png",
+    video: "/robots/joy-a01.mp4",
+    specs: {
+      height: "1.35m (4.4ft)",
+      battery: "24h Continuous",
+      special: "2-6 DoF Articulated Arms",
+      specialLabel: "Mechanics"
+    },
+    stats: {
+      cognitiveAI: 94,
+      dexterity: 88,
+      agility: 78,
+      power: 85
+    },
+    logs: [
+      "INITIALIZING CONCIERGE INTERFACE Core-v4.0",
+      "EXPRESSIVE DIGITAL FACE ACTIVATION: NOMINAL",
+      "ARTICULATED MOTION CONTROLLERS ONLINE // 6 DoF",
+      "RIGID FIBER SHIELD DYNAMICS VERIFIED",
+      "MOBILITY BASE DEPLOYED // RECEPTION READY"
     ]
   },
   {
@@ -149,7 +149,7 @@ const ROBOTS_DATA: Robot[] = [
       "ESTABLISHING SYNPATIC INTERFACE...",
       "KINEMATIC EQUATIONS RESOLVED // GAIT BALANCED",
       "TORQUE SENSORS CALIBRATED // 42 DOF ONLINE",
-      "GESTURAL IMITATION MODEL ACTIVE",
+      "GESTURAL IMITATION MODULE ACTIVE",
       "SYSTEM RUNNING AT MAXIMUM PHYSICAL DEXTERITY"
     ]
   },
@@ -456,9 +456,6 @@ export default function RobotShowcase() {
 
         {/* ── HEADER ── compact, never grows */}
         <div className="text-center flex-shrink-0">
-          <p className="text-[8px] font-mono uppercase tracking-[5px] text-cyan-400/70">
-            CONSOLE HOST: CORE.COMMAND // 0x48FA
-          </p>
           <h2 className="text-xl md:text-2xl font-black tracking-tight text-white uppercase leading-none">
             COMMAND SELECTION COCKPIT
           </h2>
@@ -480,7 +477,14 @@ export default function RobotShowcase() {
                 <span className="text-[7px] font-mono tracking-widest text-gray-400 uppercase">
                   ACTIVE FRAME: 0{activeRobotIndex + 1} // MODEL
                 </span>
-                <h3 className="text-lg font-extrabold text-white mt-0.5 tracking-tight leading-none">{activeRobot.name}</h3>
+                <div className="flex items-center gap-2 mt-0.5">
+                  <h3 className="text-lg font-extrabold text-white tracking-tight leading-none">{activeRobot.name}</h3>
+                  {activeRobot.id !== "t2-mini" && (
+                    <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[7px] font-mono font-bold tracking-wider text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 shadow-[0_0_8px_rgba(0,240,255,0.25)] animate-pulse">
+                      COMING SOON
+                    </span>
+                  )}
+                </div>
                 <p className="text-[10px] font-semibold mt-1 mb-1.5" style={{ color: activeRobot.color }}>{activeRobot.role}</p>
                 <p className="text-[10px] text-gray-400 leading-relaxed">{activeRobot.description}</p>
               </div>
@@ -518,7 +522,7 @@ export default function RobotShowcase() {
           </div>
 
           {/* ── CENTER PANEL: robot viewer, positioned on top layer, no overflow clipping ── */}
-          <div className="flex flex-col min-h-0 items-center justify-center relative order-1 lg:order-2 min-h-[300px] h-[40vh] lg:h-auto lg:min-h-0 z-30 pointer-events-none">
+          <div className="robot-viewer-panel flex flex-col min-h-0 items-center justify-center relative order-1 lg:order-2 min-h-[300px] h-[40vh] lg:h-auto lg:min-h-0 z-30 pointer-events-none">
 
             {/* Consolidated Robotic Name & Navigation Header */}
             <div className="absolute top-3 left-1/2 -translate-x-1/2 z-40 text-center pointer-events-auto select-none flex items-center justify-center gap-4 md:gap-6 w-full max-w-[450px]">
@@ -609,6 +613,24 @@ export default function RobotShowcase() {
               className="absolute w-[76%] h-[50%] rounded-full border pointer-events-none z-0 opacity-15 animate-[spin_20s_linear_infinite_reverse]"
               style={{ borderColor: "#00f0ff", transform: "translateY(16px) scaleY(0.3) rotate(-15deg)" }}
             />
+
+            {/* Large soft blue radial glow behind the robot */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] rounded-full pointer-events-none z-0 robot-radial-glow" />
+
+            {/* Concentric Scanner Rings & Radar Grid behind the robot */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden">
+              {/* Outer Scanner Circle */}
+              <div className="absolute w-[320px] h-[320px] rounded-full border border-dashed border-cyan-500/10 animate-[spin_60s_linear_infinite] robot-scanner-ring-outer" />
+              {/* Mid Scanner Circle with crosshairs */}
+              <div className="absolute w-[240px] h-[240px] rounded-full border border-cyan-500/15 animate-[spin_40s_linear_infinite_reverse] flex items-center justify-center robot-scanner-ring-mid">
+                <div className="absolute top-0 bottom-0 left-1/2 w-[1px] bg-cyan-500/5" />
+                <div className="absolute left-0 right-0 top-1/2 h-[1px] bg-cyan-500/5" />
+              </div>
+              {/* Inner pulsing radar target */}
+              <div className="absolute w-[160px] h-[160px] rounded-full border border-cyan-500/20 animate-pulse robot-scanner-ring-inner" />
+              {/* Tech alignment markers */}
+              <div className="absolute w-[280px] h-[280px] rounded-full border-2 border-transparent border-t-cyan-500/15 border-b-cyan-500/15 animate-[spin_15s_ease-in-out_infinite] robot-scanner-marker" />
+            </div>
 
             {/* Futuristic HUD Specs Badge Left */}
             <div className={`hidden lg:block absolute left-[4%] top-[25%] z-20 border border-cyan-500/30 bg-slate-950/70 backdrop-blur-md p-2.5 rounded-sm font-mono select-none text-left w-[130px] shadow-[0_0_15px_rgba(6,182,212,0.15)] transition-all duration-700 ease-out ${
@@ -704,21 +726,15 @@ export default function RobotShowcase() {
               >
                 {/* Floor shadow glows inside the translation container to lock to the robot base */}
                 <div
-                  className="absolute bottom-[16%] left-1/2 w-[44%] h-[14px] bg-black/85 rounded-full pointer-events-none z-0"
+                  className="robot-floor-shadow absolute bottom-[16%] left-1/2 w-[44%] h-[14px] bg-black/85 rounded-full pointer-events-none z-0"
                   style={{ transform: "translate(-50%,0) scaleY(0.25)", filter: "blur(14px)" }}
                 />
                 <div
-                  className="absolute bottom-[16%] left-1/2 w-[30%] h-[10px] rounded-full pointer-events-none z-0"
+                  className="robot-floor-shadow-glow absolute bottom-[16%] left-1/2 w-[30%] h-[10px] rounded-full pointer-events-none z-0"
                   style={{ transform: "translate(-50%,0) scaleY(0.25)", backgroundColor: "rgba(0,240,255,0.28)", filter: "blur(9px)" }}
                 />
 
-                {/* Smoky background effect to camouflage edge glitches in Light Mode (Video Only) */}
-                {activeView === "video" && (
-                  <div
-                    className="hidden light-mode-smoky-bg absolute top-1/2 left-1/2 w-[55%] h-[85%] bg-black/30 rounded-full pointer-events-none z-0"
-                    style={{ transform: "translate(-50%, -50%)", filter: "blur(50px)" }}
-                  />
-                )}
+
 
                 {(() => {
                   // Apply dynamic filter selection (remove-black-showcase for black bg, remove-green-showcase for green bg) and WebkitClipPath to hide watermark
@@ -892,9 +908,15 @@ export default function RobotShowcase() {
                   {isActive && <div className="absolute top-0 left-0 w-full h-[2px] bg-cyan-400" />}
                   <div className="w-full flex justify-between items-center text-[6px] font-mono text-gray-500 font-bold">
                     <span>0{index + 1}</span>
-                    <span className="opacity-0 group-hover:opacity-100 transition-opacity text-cyan-400">
-                      {isActive ? "●" : "○"}
-                    </span>
+                    {robot.id !== "t2-mini" ? (
+                      <span className="text-[5.5px] font-bold tracking-tighter text-cyan-400 bg-cyan-950/40 px-1 py-0.2 rounded border border-cyan-500/20 shadow-[0_0_4px_rgba(0,240,255,0.15)]">
+                        SOON
+                      </span>
+                    ) : (
+                      <span className="opacity-0 group-hover:opacity-100 transition-opacity text-cyan-400">
+                        {isActive ? "●" : "○"}
+                      </span>
+                    )}
                   </div>
                   <div className="w-8 h-8 rounded-full overflow-hidden bg-black/30 flex items-center justify-center border border-white/5 transition-transform duration-300 group-hover:scale-110">
                     <img src={robot.image} alt={robot.name} className="w-[85%] h-[85%] object-contain" />

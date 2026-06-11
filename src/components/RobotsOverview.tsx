@@ -38,24 +38,77 @@ export default function RobotsOverview() {
             <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-sm hover:bg-cyan-500/5 transition-colors">
               <h4 className="text-cyan-400 font-mono text-sm tracking-wider mb-4 uppercase">Hospitality & Service</h4>
               <ul className="space-y-4 text-gray-300">
-                <li><strong className="text-white block text-lg">JOY A-01</strong> <span className="text-xs text-gray-400 font-mono">Height: 135 cm (4.4 ft)</span></li>
-                <li><strong className="text-white block text-lg">T-2 Mini</strong> <span className="text-xs text-gray-400 font-mono">Height: 122 cm (4.0 ft)</span></li>
-                <li><strong className="text-white block text-lg">TELLA S</strong> <span className="text-xs text-gray-400 font-mono">Height: 130 cm (4.0 ft)</span></li>
+                <li>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <strong className="text-white text-lg">T-2 Mini</strong>
+                  </div>
+                  <span className="text-xs text-gray-400 font-mono">Height: 122 cm (4.0 ft)</span>
+                </li>
+                <li>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <strong className="text-white text-lg">JOY A-01</strong>
+                    <span className="px-1.5 py-0.5 text-[7px] font-mono font-bold tracking-widest text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 rounded shadow-[0_0_6px_rgba(0,240,255,0.15)] animate-pulse uppercase">
+                      Coming Soon
+                    </span>
+                  </div>
+                  <span className="text-xs text-gray-400 font-mono">Height: 135 cm (4.4 ft)</span>
+                </li>
+                <li>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <strong className="text-white text-lg">TELLA S</strong>
+                    <span className="px-1.5 py-0.5 text-[7px] font-mono font-bold tracking-widest text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 rounded shadow-[0_0_6px_rgba(0,240,255,0.15)] animate-pulse uppercase">
+                      Coming Soon
+                    </span>
+                  </div>
+                  <span className="text-xs text-gray-400 font-mono">Height: 130 cm (4.0 ft)</span>
+                </li>
               </ul>
             </div>
             <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-sm hover:bg-cyan-500/5 transition-colors">
               <h4 className="text-cyan-400 font-mono text-sm tracking-wider mb-4 uppercase">Advanced Service</h4>
               <ul className="space-y-4 text-gray-300">
-                <li><strong className="text-white block text-lg">ANDY R-1</strong> <span className="text-xs text-gray-400 font-mono">Height: 130 cm (4.2 ft)</span></li>
-                <li><strong className="text-white block text-lg">T-2 Max</strong> <span className="text-xs text-gray-400 font-mono">Height: 138 cm (4.5 ft)</span></li>
-                <li><strong className="text-white block text-lg">NOVA M1</strong> <span className="text-xs text-gray-400 font-mono">Mentioned in lineup</span></li>
+                <li>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <strong className="text-white text-lg">ANDY R-1</strong>
+                    <span className="px-1.5 py-0.5 text-[7px] font-mono font-bold tracking-widest text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 rounded shadow-[0_0_6px_rgba(0,240,255,0.15)] animate-pulse uppercase">
+                      Coming Soon
+                    </span>
+                  </div>
+                  <span className="text-xs text-gray-400 font-mono">Height: 130 cm (4.2 ft)</span>
+                </li>
+                <li>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <strong className="text-white text-lg">T-2 Max</strong>
+                    <span className="px-1.5 py-0.5 text-[7px] font-mono font-bold tracking-widest text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 rounded shadow-[0_0_6px_rgba(0,240,255,0.15)] animate-pulse uppercase">
+                      Coming Soon
+                    </span>
+                  </div>
+                  <span className="text-xs text-gray-400 font-mono">Height: 138 cm (4.5 ft)</span>
+                </li>
+                <li>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <strong className="text-white text-lg">NOVA M1</strong>
+                    <span className="px-1.5 py-0.5 text-[7px] font-mono font-bold tracking-widest text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 rounded shadow-[0_0_6px_rgba(0,240,255,0.15)] animate-pulse uppercase">
+                      Coming Soon
+                    </span>
+                  </div>
+                  <span className="text-xs text-gray-400 font-mono">Mentioned in lineup</span>
+                </li>
               </ul>
             </div>
             <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-sm hover:bg-cyan-500/5 transition-colors">
               <h4 className="text-cyan-400 font-mono text-sm tracking-wider mb-4 uppercase">Woodgen Series</h4>
               <p className="text-sm text-gray-400 mb-4">Hand-crafted wooden robot variants.</p>
               <ul className="space-y-4 text-gray-300">
-                <li><strong className="text-white block text-lg">Joy A-01 (Wood)</strong> <span className="text-xs text-gray-400 font-mono">Height: 135 cm (4.4 ft)</span></li>
+                <li>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <strong className="text-white text-lg">Joy A-01 (Wood)</strong>
+                    <span className="px-1.5 py-0.5 text-[7px] font-mono font-bold tracking-widest text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 rounded shadow-[0_0_6px_rgba(0,240,255,0.15)] animate-pulse uppercase">
+                      Coming Soon
+                    </span>
+                  </div>
+                  <span className="text-xs text-gray-400 font-mono">Height: 135 cm (4.4 ft)</span>
+                </li>
               </ul>
             </div>
           </div>
