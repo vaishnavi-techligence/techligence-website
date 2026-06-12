@@ -138,15 +138,6 @@ export default function CompanyPage() {
           {(() => {
             const allItems = [
               ...ASSOCIATIONS,
-              {
-                name: "Partner with Us",
-                category: "Joint R&D & Deployments",
-                desc: "Interested in piloting, collaborative research, incubation opportunities, or custom integrations? Connect with our engineering teams.",
-                logo: (
-                  <img src="/logo.png" alt="Techligence" className="h-full w-auto object-contain bg-white p-2 rounded-lg" />
-                ),
-                isCta: true,
-              },
             ];
             const doubleList = [...allItems, ...allItems];
             return (
