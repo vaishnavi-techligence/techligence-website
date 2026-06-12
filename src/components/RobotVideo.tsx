@@ -15,6 +15,10 @@ export default function RobotVideo() {
     const video = videoRef.current;
     if (!video) return;
 
+    // Programmatically enforce muted state to prevent React hydration issues
+    video.muted = true;
+    video.defaultMuted = true;
+
     // Direct check: if video is already playing or ready (e.g., cached or loaded quickly)
     if (video.readyState >= 3 || !video.paused) {
       setIsVideoPlaying(true);
@@ -54,7 +58,7 @@ export default function RobotVideo() {
             src="/Robo.mp4"
             preload="auto"
             loop
-            muted
+            muted={true}
             playsInline
             autoPlay
             onPlaying={() => setIsVideoPlaying(true)}
