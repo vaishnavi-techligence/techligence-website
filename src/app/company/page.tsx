@@ -119,7 +119,19 @@ export default function CompanyPage() {
           Discover the mission, technology, and engineering pioneers behind Techligence Robotics and our drive for seamless human-robot cooperation.
         </p>
       </div>
+      <div className="max-w-[1400px] mx-auto px-6 pb-10 w-full relative z-10">
+        <p className="text-cyan-400 uppercase tracking-[6px] text-xs font-semibold mb-2 font-mono">
+          CLIENTS & PARTNERS
+        </p>
 
+        <h2 className="text-3xl md:text-4xl font-black text-white uppercase mb-4 tracking-tight">
+          OUR CLIENTS & PARTNERS
+        </h2>
+
+        <p className="text-gray-400 text-sm max-w-2xl">
+          Trusted by academic institutions, incubation centers, industry leaders, and innovation partners.
+        </p>
+      </div>
       <div className="w-full pb-28 relative z-10 overflow-hidden">
 
           {/* Companies Marquee (Infinite horizontal slider) */}
