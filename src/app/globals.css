@@ -53,9 +53,6 @@ body {
   filter: var(--current-robot-filter) !important;
 }
 
-[data-theme="light"] .light-mode-smoky-bg {
-  display: block !important;
-}
 
 /* =========================
    HERO GLOW
@@ -421,67 +418,270 @@ html[data-theme="light"],
 }
 
 /* --- Robot Cockpit Dark Theme Overrides for Light Mode --- */
-[data-theme="light"] .robot-cockpit-dark {
-  background-color: #050816 !important;
-  color: #ffffff !important;
+[data-theme="light"] div.robot-cockpit-dark,
+[data-theme="light"] div.robot-cockpit-dark[class*="bg-[#050816]"] {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
 }
 
-[data-theme="light"] .robot-cockpit-dark .text-white,
-[data-theme="light"] .robot-cockpit-dark h2,
-[data-theme="light"] .robot-cockpit-dark h3,
-[data-theme="light"] .robot-cockpit-dark h4 {
-  color: #ffffff !important;
+[data-theme="light"] div.robot-cockpit-dark h2,
+[data-theme="light"] div.robot-cockpit-dark h3,
+[data-theme="light"] div.robot-cockpit-dark h4 {
+  color: #0f172a !important;
 }
 
-[data-theme="light"] .robot-cockpit-dark p,
-[data-theme="light"] .robot-cockpit-dark .text-gray-300 {
-  color: #cbd5e1 !important;
+[data-theme="light"] div.robot-cockpit-dark p,
+[data-theme="light"] div.robot-cockpit-dark .text-gray-300 {
+  color: #334155 !important;
 }
 
-[data-theme="light"] .robot-cockpit-dark .text-gray-400 {
-  color: #94a3b8 !important;
+[data-theme="light"] div.robot-cockpit-dark .text-gray-400 {
+  color: #475569 !important;
 }
 
-[data-theme="light"] .robot-cockpit-dark .text-gray-500 {
+[data-theme="light"] div.robot-cockpit-dark .text-gray-500 {
   color: #64748b !important;
 }
 
-[data-theme="light"] .robot-cockpit-dark .text-cyan-400,
-[data-theme="light"] .robot-cockpit-dark .text-cyan-300 {
-  color: #00f0ff !important;
+[data-theme="light"] div.robot-cockpit-dark .text-white {
+  color: #0f172a !important;
 }
 
-[data-theme="light"] .robot-cockpit-dark .bg-slate-900\/30,
-[data-theme="light"] .robot-cockpit-dark .bg-slate-900\/20,
-[data-theme="light"] .robot-cockpit-dark .bg-black\/60,
-[data-theme="light"] .robot-cockpit-dark .bg-black\/40 {
-  background-color: rgba(15, 23, 42, 0.65) !important;
-  border-color: rgba(255, 255, 255, 0.08) !important;
+[data-theme="light"] div.robot-cockpit-dark .text-cyan-400,
+[data-theme="light"] div.robot-cockpit-dark .text-cyan-300 {
+  color: #0891b2 !important;
 }
 
-[data-theme="light"] .robot-cockpit-dark .robot-viewport-btn,
-[data-theme="light"] .robot-cockpit-dark button[class*="robot-viewport-btn"] {
-  background-color: rgba(255, 255, 255, 0.02) !important;
-  color: #9ca3af !important;
-  border-color: rgba(255, 255, 255, 0.08) !important;
+/* Panel Containers in light mode */
+[data-theme="light"] div.robot-cockpit-dark .bg-slate-900\/30,
+[data-theme="light"] div.robot-cockpit-dark .bg-slate-900\/20,
+[data-theme="light"] div.robot-cockpit-dark .bg-black\/60,
+[data-theme="light"] div.robot-cockpit-dark .bg-black\/40 {
+  background-color: #ffffff !important;
+  border-color: rgba(15, 23, 42, 0.1) !important;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05) !important;
 }
 
-[data-theme="light"] .robot-cockpit-dark .robot-viewport-btn[style*="background-color: rgb(0, 240, 255)"],
-[data-theme="light"] .robot-cockpit-dark button[style*="background-color: rgb(0, 240, 255)"],
-[data-theme="light"] .robot-cockpit-dark button.active-viewport-btn {
-  background-color: #00f0ff !important;
-  color: #050816 !important;
+/* Viewport Buttons in light mode */
+[data-theme="light"] div.robot-cockpit-dark .robot-viewport-btn,
+[data-theme="light"] div.robot-cockpit-dark button[class*="robot-viewport-btn"] {
+  background-color: #f1f5f9 !important;
+  color: #475569 !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+[data-theme="light"] div.robot-cockpit-dark .robot-viewport-btn[style*="background-color: rgb(0, 240, 255)"],
+[data-theme="light"] div.robot-cockpit-dark button[style*="background-color: rgb(0, 240, 255)"],
+[data-theme="light"] div.robot-cockpit-dark button.active-viewport-btn {
+  background-color: #0284c7 !important;
+  color: #ffffff !important;
   border-color: transparent !important;
+  box-shadow: 0 0 10px rgba(2, 132, 199, 0.3) !important;
 }
 
-[data-theme="light"] .robot-cockpit-dark .robot-selection-btn,
-[data-theme="light"] .robot-cockpit-dark button[class*="robot-selection-btn"] {
-  background-color: rgba(5, 8, 22, 0.45) !important;
-  border-color: rgba(255, 255, 255, 0.08) !important;
+/* Selection buttons (bottom dock) in light mode */
+[data-theme="light"] div.robot-cockpit-dark .robot-selection-btn,
+[data-theme="light"] div.robot-cockpit-dark button[class*="robot-selection-btn"] {
+  background-color: #ffffff !important;
+  border-color: rgba(15, 23, 42, 0.1) !important;
+  color: #475569 !important;
+}
+[data-theme="light"] div.robot-cockpit-dark button[style*="border-color: #00f0ff"],
+[data-theme="light"] div.robot-cockpit-dark button.active-selection-btn {
+  background-color: #ffffff !important;
+  border-color: #0284c7 !important;
+  color: #0284c7 !important;
+  box-shadow: 0 0 12px rgba(2, 132, 199, 0.2) !important;
 }
 
-[data-theme="light"] .robot-cockpit-dark button[style*="border-color: #00f0ff"],
-[data-theme="light"] .robot-cockpit-dark button.active-selection-btn {
-  background-color: rgba(11, 16, 38, 0.85) !important;
-  border-color: #00f0ff !important;
+[data-theme="light"] div.robot-cockpit-dark .robot-selection-btn div[class*="bg-black/30"] {
+  background-color: rgba(15, 23, 42, 0.05) !important;
+  border-color: rgba(15, 23, 42, 0.08) !important;
+}
+/* Telemetry detail text override for sweep panel */
+[data-theme="light"] div.robot-cockpit-dark div[class*="text-cyan-500/40"] {
+  color: rgba(8, 145, 178, 0.7) !important;
+}
+[data-theme="light"] div.robot-cockpit-dark div[class*="border-cyan-500/20"] {
+  border-color: rgba(8, 145, 178, 0.2) !important;
+}
+[data-theme="light"] div.robot-cockpit-dark div[class*="bg-cyan-500/"] {
+  background-color: rgba(2, 132, 199, 0.05) !important;
+}
+[data-theme="light"] div.robot-cockpit-dark svg line {
+  stroke: rgba(2, 132, 199, 0.2) !important;
+}
+[data-theme="light"] div.robot-cockpit-dark div[class*="shadow-[#00f0ff]"] {
+  box-shadow: 0 0 8px rgba(2, 132, 199, 0.4) !important;
+}
+[data-theme="light"] div.robot-cockpit-dark div[class*="bg-cyan-400"] {
+  background-color: #0284c7 !important;
+}
+[data-theme="light"] div.robot-cockpit-dark div[style*="border-color: #00f0ff"],
+[data-theme="light"] div.robot-cockpit-dark div[style*="borderColor: #00f0ff"] {
+  border-color: rgba(2, 132, 199, 0.25) !important;
+}
+
+/* Soon tags in light mode */
+[data-theme="light"] div.robot-cockpit-dark span[class*="text-cyan-400"] {
+  color: #0891b2 !important;
+  background-color: rgba(8, 145, 178, 0.05) !important;
+  border-color: rgba(8, 145, 178, 0.2) !important;
+}
+
+/* ── FUTURISTIC ROBOT SHOWCASE PANEL REDESIGN (LIGHT MODE ONLY) ── */
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel {
+  background: linear-gradient(180deg, #f0f7ff 0%, #e1efff 100%) !important;
+  border: 1px solid rgba(2, 132, 199, 0.15) !important;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05), inset 0 0 20px rgba(2, 132, 199, 0.05) !important;
+  backdrop-filter: blur(20px) !important;
+  border-radius: 24px !important;
+}
+
+/* Force light theme elements inside the showcase viewport under Light Mode */
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel h2 {
+  color: #0369a1 !important;
+  text-shadow: none !important;
+}
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="bg-cyan-400/50"] {
+  background-color: rgba(2, 132, 199, 0.4) !important;
+}
+
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel p,
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel .text-gray-300 {
+  color: #334155 !important;
+}
+
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel .text-gray-400 {
+  color: #475569 !important;
+}
+
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel .text-gray-500 {
+  color: #64748b !important;
+}
+
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel .text-cyan-400,
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel .text-cyan-300 {
+  color: #0284c7 !important;
+}
+
+/* Glassmorphic spec widget/badge styling inside showcase panel in Light Mode (make light and readable) */
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="bg-slate-950/70"] {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  border: 1px solid rgba(2, 132, 199, 0.15) !important;
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06) !important;
+}
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="bg-slate-950/70"] .text-cyan-400 {
+  color: #0284c7 !important;
+}
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="bg-slate-950/70"] .text-gray-400 {
+  color: #475569 !important;
+}
+
+/* Navigation chevrons inside showcase panel in Light Mode */
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel button[class*="bg-slate-950/"] {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  border: 1px solid rgba(2, 132, 199, 0.15) !important;
+  color: #475569 !important;
+}
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel button[class*="bg-slate-950/"]:hover {
+  background-color: #f0f7ff !important;
+  border-color: #0284c7 !important;
+  color: #0284c7 !important;
+  box-shadow: 0 0 10px rgba(2, 132, 199, 0.2) !important;
+}
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel button svg {
+  stroke: #475569 !important;
+}
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel button:hover svg {
+  stroke: #0284c7 !important;
+}
+
+/* Mobile viewport layout controls overlay inside showcase panel in Light Mode */
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="bg-slate-950/70"] .robot-viewport-btn {
+  background-color: transparent !important;
+  color: #475569 !important;
+}
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="bg-slate-950/70"] .robot-viewport-btn.active-viewport-btn {
+  background-color: #0284c7 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 8px rgba(2, 132, 199, 0.25) !important;
+}
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="bg-slate-950/70"] button.inactive-viewport-btn,
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="bg-slate-950/70"] button[style*="color: rgb(156, 163, 175)"] {
+  color: #475569 !important;
+}
+
+/* Radial Glow styles */
+.robot-radial-glow {
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.15) 0%, transparent 70%);
+}
+[data-theme="light"] .robot-radial-glow {
+  background: radial-gradient(circle, rgba(2, 132, 199, 0.25) 0%, transparent 70%) !important;
+}
+
+/* Concentric Scanner Rings and HUD Elements styling */
+[data-theme="light"] .robot-scanner-ring-outer {
+  border-color: rgba(2, 132, 199, 0.12) !important;
+}
+[data-theme="light"] .robot-scanner-ring-mid {
+  border-color: rgba(2, 132, 199, 0.15) !important;
+}
+[data-theme="light"] .robot-scanner-ring-mid div {
+  background-color: rgba(2, 132, 199, 0.08) !important;
+}
+[data-theme="light"] .robot-scanner-ring-inner {
+  border-color: rgba(2, 132, 199, 0.18) !important;
+}
+[data-theme="light"] .robot-scanner-marker {
+  border-top-color: rgba(2, 132, 199, 0.2) !important;
+  border-bottom-color: rgba(2, 132, 199, 0.2) !important;
+}
+
+/* Holographic sweep lines & radar telemetry inside showcase panel in Light Mode (soft blue/cyan) */
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel .text-cyan-500\/40,
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel span[class*="text-cyan-500/40"],
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="text-cyan-400/50"] {
+  color: rgba(2, 132, 199, 0.6) !important;
+}
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="border-cyan-500/20"] {
+  border-color: rgba(2, 132, 199, 0.25) !important;
+}
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="border-cyan-500/15"] {
+  border-color: rgba(2, 132, 199, 0.18) !important;
+}
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="bg-cyan-500/[0.02]"] {
+  background-color: rgba(2, 132, 199, 0.02) !important;
+}
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="bg-cyan-400/20"] {
+  background-color: rgba(2, 132, 199, 0.2) !important;
+}
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="bg-cyan-500/30"] {
+  background-color: rgba(2, 132, 199, 0.3) !important;
+}
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel svg line {
+  stroke: rgba(2, 132, 199, 0.35) !important;
+}
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[style*="border-color: #00f0ff"],
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[style*="borderColor: #00f0ff"] {
+  border-color: rgba(2, 132, 199, 0.2) !important;
+}
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[style*="border-color: rgba(2, 132, 199"],
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[style*="borderColor: rgba(2, 132, 199"] {
+  border-color: rgba(2, 132, 199, 0.2) !important;
+}
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="shadow-[#00f0ff]"] {
+  box-shadow: 0 0 8px rgba(2, 132, 199, 0.4) !important;
+}
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="bg-cyan-400"] {
+  background-color: #0284c7 !important;
+}
+[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="bg-cyan-300"] {
+  background-color: #0284c7 !important;
+}
+
+/* HIDE GROUND SHADOW COMPLETELY IN ALL THEMES */
+.robot-floor-shadow,
+.robot-floor-shadow-glow {
+  display: none !important;
 }

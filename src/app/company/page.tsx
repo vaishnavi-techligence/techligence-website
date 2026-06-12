@@ -121,7 +121,7 @@ export default function CompanyPage() {
       </div>
 
       {/* Associated Companies & Organisations Section */}
-      <div className="max-w-[1400px] mx-auto px-6 pb-28 w-full relative z-10">
+      <div className="max-w-[1400px] mx-auto px-6 w-full relative z-10">
         <div className="border-t border-white/10 pt-16">
           <p className="text-cyan-400 uppercase tracking-[6px] text-xs font-semibold mb-2 font-mono">
             COLLABORATIVE NETWORK
@@ -132,6 +132,7 @@ export default function CompanyPage() {
           <p className="text-gray-400 text-sm max-w-2xl mb-12">
             We collaborate with premier academic institutions, startup accelerators, incubation centers, and media agencies to co-create the robotics solutions of tomorrow.
           </p>
+<<<<<<< HEAD
 
           {/* Connected Grid Datasheet Layout */}
           <div className="company-associations-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-white/10 rounded-2xl overflow-hidden bg-black/10 backdrop-blur-md">
@@ -183,7 +184,104 @@ export default function CompanyPage() {
               </a>
             </div>
           </div>
+=======
+>>>>>>> b499eca35a30faf134ed2f0824fc3078fb90b9c7
         </div>
+      </div>
+
+      <div className="w-full pb-28 relative z-10 overflow-hidden">
+
+          {/* Companies Marquee (Infinite horizontal slider) */}
+          {(() => {
+            const allItems = [
+              ...ASSOCIATIONS,
+              {
+                name: "Partner with Us",
+                category: "Joint R&D & Deployments",
+                desc: "Interested in piloting, collaborative research, incubation opportunities, or custom integrations? Connect with our engineering teams.",
+                logo: (
+                  <img src="/logo.png" alt="Techligence" className="h-full w-auto object-contain bg-white p-2 rounded-lg" />
+                ),
+                isCta: true,
+              },
+            ];
+            const doubleList = [...allItems, ...allItems];
+            return (
+              <div className="relative overflow-hidden py-4 w-full">
+                {/* Left and Right Fade Masks */}
+                <div className="absolute left-0 top-0 h-full w-24 bg-gradient-to-r to-transparent z-10 pointer-events-none" style={{ backgroundImage: "linear-gradient(to right, var(--theme-bg) 0%, transparent 100%)" }} />
+                <div className="absolute right-0 top-0 h-full w-24 bg-gradient-to-l to-transparent z-10 pointer-events-none" style={{ backgroundImage: "linear-gradient(to left, var(--theme-bg) 0%, transparent 100%)" }} />
+
+                <div
+                  className="flex animate-marquee-left will-change-transform"
+                  style={{ width: "max-content" }}
+                >
+                  {doubleList.map((org, idx) => {
+                    const isCta = (org as any).isCta;
+                    return (
+                      <div
+                        key={`${org.name}-${idx}`}
+                        className={`flex-shrink-0 w-[300px] md:w-[350px] p-8 rounded-2xl border border-white/10 backdrop-blur-md relative overflow-hidden mx-3 group transition-all duration-300 hover:border-cyan-500/30 flex flex-col items-center text-center justify-between ${
+                          isCta ? "bg-cyan-950/5 border-cyan-500/20" : "bg-black/10 hover:bg-cyan-500/[0.02]"
+                        }`}
+                      >
+                        {/* Subtle light cursor dot on hover / permanent for CTA */}
+                        <div className={`absolute top-4 right-4 w-1.5 h-1.5 rounded-full bg-cyan-400 transition-opacity duration-300 ${
+                          isCta ? "opacity-100" : "opacity-0 group-hover:opacity-100 animate-pulse"
+                        } pointer-events-none`} />
+
+                        <div className="flex flex-col items-center w-full">
+                          {/* Organization Logo Area */}
+                          <div className="h-16 flex items-center justify-center mb-6 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-out transform group-hover:scale-105">
+                            {org.logo}
+                          </div>
+
+                          {/* Organization Title */}
+                          <h3 className="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors mb-1 leading-snug">
+                            {org.name}
+                          </h3>
+
+                          {/* Category */}
+                          <p className={`text-[10px] font-mono uppercase tracking-wider mb-4 ${
+                            isCta ? "text-gray-500" : "text-cyan-400/80"
+                          }`}>
+                            {org.category}
+                          </p>
+
+                          {/* Description */}
+                          <p className="text-xs text-gray-400 leading-relaxed font-light max-w-xs">
+                            {org.desc}
+                          </p>
+                        </div>
+
+                        {isCta && (
+                          <a
+                            href="/contact"
+                            className="inline-flex items-center text-[10px] font-mono text-cyan-400 hover:text-cyan-300 tracking-wider font-bold transition-colors mt-6"
+                          >
+                            [ GET IN TOUCH → ]
+                          </a>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <style>{`
+                  @keyframes marqueeLeft {
+                    0%   { transform: translateX(0); }
+                    100% { transform: translateX(-50%); }
+                  }
+                  .animate-marquee-left {
+                    animation: marqueeLeft 50s linear infinite;
+                  }
+                  .animate-marquee-left:hover {
+                    animation-play-state: paused;
+                  }
+                `}</style>
+              </div>
+            );
+          })()}
       </div>
 
       <Footer />
