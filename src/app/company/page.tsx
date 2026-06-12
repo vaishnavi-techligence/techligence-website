@@ -154,15 +154,6 @@ export default function CompanyPage() {
                     {org.name}
                   </h3>
 
-                  {/* Category */}
-                  <p className="text-[10px] text-cyan-400/80 font-mono uppercase tracking-wider mb-4">
-                    {org.category}
-                  </p>
-
-                  {/* Description */}
-                  <p className="text-xs text-gray-400 leading-relaxed font-light max-w-xs">
-                    {org.desc}
-                  </p>
                 </div>
               </div>
             ))}
@@ -182,15 +173,6 @@ export default function CompanyPage() {
                   Partner with Us
                 </h3>
 
-                {/* Category */}
-                <p className="text-[10px] text-gray-500 font-mono uppercase tracking-wider mb-4">
-                  Joint R&D & Deployments
-                </p>
-
-                {/* Description */}
-                <p className="text-xs text-gray-400 leading-relaxed font-light mb-6 max-w-xs">
-                  Interested in piloting, collaborative research, incubation opportunities, or custom integrations? Connect with our engineering teams.
-                </p>
               </div>
 
               <a 
