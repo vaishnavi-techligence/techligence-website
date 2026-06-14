@@ -200,7 +200,7 @@ html[data-theme="light"],
 }
 
 [data-theme="light"] nav a:hover {
-  color: #0284c7 !important;
+  color: #007099 !important;
 }
 
 [data-theme="light"] nav button,
@@ -212,8 +212,8 @@ html[data-theme="light"],
 
 [data-theme="light"] nav button:hover {
   background-color: rgba(15, 23, 42, 0.1) !important;
-  border-color: #0284c7 !important;
-  color: #0284c7 !important;
+  border-color: #00ace9 !important;
+  color: #007099 !important;
 }
 
 /* --- General Text & Colors --- */
@@ -238,19 +238,28 @@ html[data-theme="light"],
   color: #64748b !important;
 }
 
-/* High contrast for cyan accents in light mode */
+/* High contrast for cyan accents in light mode matching Techligence logo blue (#00ace9) */
 [data-theme="light"] .text-cyan-300,
 [data-theme="light"] .text-cyan-400 {
-  color: #0891b2 !important;
+  color: #00ace9 !important;
 }
 
 [data-theme="light"] .text-cyan-400\/90 {
-  color: rgba(8, 145, 178, 0.9) !important;
+  color: rgba(0, 172, 233, 0.9) !important;
 }
 
 [data-theme="light"] code.text-cyan-300 {
-  color: #0e7490 !important;
-  background-color: rgba(15, 23, 42, 0.05) !important;
+  color: #007099 !important;
+  background-color: rgba(0, 172, 233, 0.05) !important;
+}
+
+/* Coming Soon status badges styling in Light Mode */
+[data-theme="light"] span[class*="text-cyan-400"][class*="bg-cyan-500/10"],
+[data-theme="light"] span[class*="text-cyan-400"][class*="bg-cyan-950/40"],
+[data-theme="light"] .coming-soon-badge {
+  color: #075985 !important;
+  background-color: #e0f2fe !important;
+  border-color: #bae6fd !important;
 }
 
 /* --- Form Fields & Inputs (Contact Page & Modals) --- */
@@ -270,8 +279,8 @@ html[data-theme="light"],
 [data-theme="light"] input:focus,
 [data-theme="light"] textarea:focus {
   background-color: #ffffff !important;
-  border-color: #0284c7 !important;
-  box-shadow: 0 0 0 1px #0284c7 !important;
+  border-color: #00ace9 !important;
+  box-shadow: 0 0 0 1px #00ace9 !important;
 }
 
 [data-theme="light"] label {
@@ -295,7 +304,7 @@ html[data-theme="light"],
 
 [data-theme="light"] a[href^="tel:"]:hover,
 [data-theme="light"] a[href^="mailto:"]:hover {
-  color: #0284c7 !important;
+  color: #007099 !important;
 }
 
 /* --- Container Cards & Elements --- */
@@ -323,7 +332,7 @@ html[data-theme="light"],
 }
 
 [data-theme="light"] .bg-cyan-950\/5 {
-  background-color: rgba(2, 132, 199, 0.04) !important;
+  background-color: rgba(0, 172, 233, 0.04) !important;
 }
 
 [data-theme="light"] .bg-black\/10 {
@@ -341,7 +350,7 @@ html[data-theme="light"],
 }
 
 [data-theme="light"] .robot-card:hover {
-  box-shadow: 0 10px 30px rgba(2, 132, 199, 0.12) !important;
+  box-shadow: 0 10px 30px rgba(0, 172, 233, 0.12) !important;
 }
 
 [data-theme="light"] .robot-button div {
@@ -386,13 +395,13 @@ html[data-theme="light"],
 /* Active buttons (like active slot/use case selection) */
 [data-theme="light"] button[class*="bg-cyan-500/"],
 [data-theme="light"] button[class*="border-cyan-400"] {
-  background-color: rgba(2, 132, 199, 0.1) !important;
-  border-color: #0284c7 !important;
-  color: #0369a1 !important;
+  background-color: rgba(0, 172, 233, 0.08) !important;
+  border-color: #00ace9 !important;
+  color: #007099 !important;
 }
 
 [data-theme="light"] button[class*="bg-cyan-500/"]:hover {
-  background-color: rgba(2, 132, 199, 0.15) !important;
+  background-color: rgba(0, 172, 233, 0.12) !important;
 }
 
 /* Close Modal Button */
@@ -449,7 +458,7 @@ html[data-theme="light"],
 
 [data-theme="light"] div.robot-cockpit-dark .text-cyan-400,
 [data-theme="light"] div.robot-cockpit-dark .text-cyan-300 {
-  color: #0891b2 !important;
+  color: #007099 !important;
 }
 
 /* Panel Containers in light mode */
@@ -473,10 +482,10 @@ html[data-theme="light"],
 [data-theme="light"] div.robot-cockpit-dark .robot-viewport-btn[style*="background-color: rgb(0, 240, 255)"],
 [data-theme="light"] div.robot-cockpit-dark button[style*="background-color: rgb(0, 240, 255)"],
 [data-theme="light"] div.robot-cockpit-dark button.active-viewport-btn {
-  background-color: #0284c7 !important;
+  background-color: #00ace9 !important;
   color: #ffffff !important;
   border-color: transparent !important;
-  box-shadow: 0 0 10px rgba(2, 132, 199, 0.3) !important;
+  box-shadow: 0 0 10px rgba(0, 172, 233, 0.3) !important;
 }
 
 /* Selection buttons (bottom dock) in light mode */
@@ -489,9 +498,9 @@ html[data-theme="light"],
 [data-theme="light"] div.robot-cockpit-dark button[style*="border-color: #00f0ff"],
 [data-theme="light"] div.robot-cockpit-dark button.active-selection-btn {
   background-color: #ffffff !important;
-  border-color: #0284c7 !important;
-  color: #0284c7 !important;
-  box-shadow: 0 0 12px rgba(2, 132, 199, 0.2) !important;
+  border-color: #00ace9 !important;
+  color: #007099 !important;
+  box-shadow: 0 0 12px rgba(0, 172, 233, 0.2) !important;
 }
 
 [data-theme="light"] div.robot-cockpit-dark .robot-selection-btn div[class*="bg-black/30"] {
@@ -500,51 +509,52 @@ html[data-theme="light"],
 }
 /* Telemetry detail text override for sweep panel */
 [data-theme="light"] div.robot-cockpit-dark div[class*="text-cyan-500/40"] {
-  color: rgba(8, 145, 178, 0.7) !important;
+  color: rgba(0, 172, 233, 0.7) !important;
 }
 [data-theme="light"] div.robot-cockpit-dark div[class*="border-cyan-500/20"] {
-  border-color: rgba(8, 145, 178, 0.2) !important;
+  border-color: rgba(0, 172, 233, 0.2) !important;
 }
 [data-theme="light"] div.robot-cockpit-dark div[class*="bg-cyan-500/"] {
-  background-color: rgba(2, 132, 199, 0.05) !important;
+  background-color: rgba(0, 172, 233, 0.05) !important;
 }
 [data-theme="light"] div.robot-cockpit-dark svg line {
-  stroke: rgba(2, 132, 199, 0.2) !important;
+  stroke: rgba(0, 172, 233, 0.2) !important;
 }
 [data-theme="light"] div.robot-cockpit-dark div[class*="shadow-[#00f0ff]"] {
-  box-shadow: 0 0 8px rgba(2, 132, 199, 0.4) !important;
+  box-shadow: 0 0 8px rgba(0, 172, 233, 0.4) !important;
 }
 [data-theme="light"] div.robot-cockpit-dark div[class*="bg-cyan-400"] {
-  background-color: #0284c7 !important;
+  background-color: #00ace9 !important;
 }
 [data-theme="light"] div.robot-cockpit-dark div[style*="border-color: #00f0ff"],
 [data-theme="light"] div.robot-cockpit-dark div[style*="borderColor: #00f0ff"] {
-  border-color: rgba(2, 132, 199, 0.25) !important;
+  border-color: rgba(0, 172, 233, 0.25) !important;
 }
 
 /* Soon tags in light mode */
-[data-theme="light"] div.robot-cockpit-dark span[class*="text-cyan-400"] {
-  color: #0891b2 !important;
-  background-color: rgba(8, 145, 178, 0.05) !important;
-  border-color: rgba(8, 145, 178, 0.2) !important;
+[data-theme="light"] div.robot-cockpit-dark span[class*="text-cyan-400"],
+[data-theme="light"] div.robot-cockpit-dark .coming-soon-badge {
+  color: #075985 !important;
+  background-color: #e0f2fe !important;
+  border-color: #bae6fd !important;
 }
 
 /* ── FUTURISTIC ROBOT SHOWCASE PANEL REDESIGN (LIGHT MODE ONLY) ── */
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel {
   background: linear-gradient(180deg, #f0f7ff 0%, #e1efff 100%) !important;
-  border: 1px solid rgba(2, 132, 199, 0.15) !important;
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05), inset 0 0 20px rgba(2, 132, 199, 0.05) !important;
+  border: 1px solid rgba(0, 172, 233, 0.15) !important;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05), inset 0 0 20px rgba(0, 172, 233, 0.05) !important;
   backdrop-filter: blur(20px) !important;
   border-radius: 24px !important;
 }
 
 /* Force light theme elements inside the showcase viewport under Light Mode */
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel h2 {
-  color: #0369a1 !important;
+  color: #007099 !important;
   text-shadow: none !important;
 }
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="bg-cyan-400/50"] {
-  background-color: rgba(2, 132, 199, 0.4) !important;
+  background-color: rgba(0, 172, 233, 0.4) !important;
 }
 
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel p,
@@ -562,17 +572,17 @@ html[data-theme="light"],
 
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel .text-cyan-400,
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel .text-cyan-300 {
-  color: #0284c7 !important;
+  color: #007099 !important;
 }
 
 /* Glassmorphic spec widget/badge styling inside showcase panel in Light Mode (make light and readable) */
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="bg-slate-950/70"] {
   background-color: rgba(255, 255, 255, 0.85) !important;
-  border: 1px solid rgba(2, 132, 199, 0.15) !important;
+  border: 1px solid rgba(0, 172, 233, 0.15) !important;
   box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06) !important;
 }
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="bg-slate-950/70"] .text-cyan-400 {
-  color: #0284c7 !important;
+  color: #007099 !important;
 }
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="bg-slate-950/70"] .text-gray-400 {
   color: #475569 !important;
@@ -581,20 +591,20 @@ html[data-theme="light"],
 /* Navigation chevrons inside showcase panel in Light Mode */
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel button[class*="bg-slate-950/"] {
   background-color: rgba(255, 255, 255, 0.85) !important;
-  border: 1px solid rgba(2, 132, 199, 0.15) !important;
+  border: 1px solid rgba(0, 172, 233, 0.15) !important;
   color: #475569 !important;
 }
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel button[class*="bg-slate-950/"]:hover {
   background-color: #f0f7ff !important;
-  border-color: #0284c7 !important;
-  color: #0284c7 !important;
-  box-shadow: 0 0 10px rgba(2, 132, 199, 0.2) !important;
+  border-color: #00ace9 !important;
+  color: #007099 !important;
+  box-shadow: 0 0 10px rgba(0, 172, 233, 0.2) !important;
 }
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel button svg {
   stroke: #475569 !important;
 }
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel button:hover svg {
-  stroke: #0284c7 !important;
+  stroke: #007099 !important;
 }
 
 /* Mobile viewport layout controls overlay inside showcase panel in Light Mode */
@@ -603,9 +613,9 @@ html[data-theme="light"],
   color: #475569 !important;
 }
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="bg-slate-950/70"] .robot-viewport-btn.active-viewport-btn {
-  background-color: #0284c7 !important;
+  background-color: #00ace9 !important;
   color: #ffffff !important;
-  box-shadow: 0 0 8px rgba(2, 132, 199, 0.25) !important;
+  box-shadow: 0 0 8px rgba(0, 172, 233, 0.25) !important;
 }
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="bg-slate-950/70"] button.inactive-viewport-btn,
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="bg-slate-950/70"] button[style*="color: rgb(156, 163, 175)"] {
@@ -617,73 +627,111 @@ html[data-theme="light"],
   background: radial-gradient(circle, rgba(0, 240, 255, 0.15) 0%, transparent 70%);
 }
 [data-theme="light"] .robot-radial-glow {
-  background: radial-gradient(circle, rgba(2, 132, 199, 0.25) 0%, transparent 70%) !important;
+  background: radial-gradient(circle, rgba(0, 172, 233, 0.25) 0%, transparent 70%) !important;
 }
 
 /* Concentric Scanner Rings and HUD Elements styling */
 [data-theme="light"] .robot-scanner-ring-outer {
-  border-color: rgba(2, 132, 199, 0.12) !important;
+  border-color: rgba(0, 172, 233, 0.12) !important;
 }
 [data-theme="light"] .robot-scanner-ring-mid {
-  border-color: rgba(2, 132, 199, 0.15) !important;
+  border-color: rgba(0, 172, 233, 0.15) !important;
 }
 [data-theme="light"] .robot-scanner-ring-mid div {
-  background-color: rgba(2, 132, 199, 0.08) !important;
+  background-color: rgba(0, 172, 233, 0.08) !important;
 }
 [data-theme="light"] .robot-scanner-ring-inner {
-  border-color: rgba(2, 132, 199, 0.18) !important;
+  border-color: rgba(0, 172, 233, 0.18) !important;
 }
 [data-theme="light"] .robot-scanner-marker {
-  border-top-color: rgba(2, 132, 199, 0.2) !important;
-  border-bottom-color: rgba(2, 132, 199, 0.2) !important;
+  border-top-color: rgba(0, 172, 233, 0.2) !important;
+  border-bottom-color: rgba(0, 172, 233, 0.2) !important;
 }
 
 /* Holographic sweep lines & radar telemetry inside showcase panel in Light Mode (soft blue/cyan) */
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel .text-cyan-500\/40,
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel span[class*="text-cyan-500/40"],
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="text-cyan-400/50"] {
-  color: rgba(2, 132, 199, 0.6) !important;
+  color: rgba(0, 172, 233, 0.6) !important;
 }
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="border-cyan-500/20"] {
-  border-color: rgba(2, 132, 199, 0.25) !important;
+  border-color: rgba(0, 172, 233, 0.25) !important;
 }
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="border-cyan-500/15"] {
-  border-color: rgba(2, 132, 199, 0.18) !important;
+  border-color: rgba(0, 172, 233, 0.18) !important;
 }
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="bg-cyan-500/[0.02]"] {
-  background-color: rgba(2, 132, 199, 0.02) !important;
+  background-color: rgba(0, 172, 233, 0.02) !important;
 }
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="bg-cyan-400/20"] {
-  background-color: rgba(2, 132, 199, 0.2) !important;
+  background-color: rgba(0, 172, 233, 0.2) !important;
 }
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="bg-cyan-500/30"] {
-  background-color: rgba(2, 132, 199, 0.3) !important;
+  background-color: rgba(0, 172, 233, 0.3) !important;
 }
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel svg line {
-  stroke: rgba(2, 132, 199, 0.35) !important;
+  stroke: rgba(0, 172, 233, 0.35) !important;
 }
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[style*="border-color: #00f0ff"],
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[style*="borderColor: #00f0ff"] {
-  border-color: rgba(2, 132, 199, 0.2) !important;
+  border-color: rgba(0, 172, 233, 0.2) !important;
 }
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[style*="border-color: rgba(2, 132, 199"],
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[style*="borderColor: rgba(2, 132, 199"] {
-  border-color: rgba(2, 132, 199, 0.2) !important;
+  border-color: rgba(0, 172, 233, 0.2) !important;
 }
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="shadow-[#00f0ff]"] {
-  box-shadow: 0 0 8px rgba(2, 132, 199, 0.4) !important;
+  box-shadow: 0 0 8px rgba(0, 172, 233, 0.4) !important;
 }
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="bg-cyan-400"] {
-  background-color: #0284c7 !important;
+  background-color: #00ace9 !important;
 }
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="bg-cyan-300"] {
-  background-color: #0284c7 !important;
+  background-color: #00ace9 !important;
 }
 
 /* HIDE GROUND SHADOW COMPLETELY IN ALL THEMES */
 .robot-floor-shadow,
 .robot-floor-shadow-glow {
   display: none !important;
+}
+
+/* Secondary Explore Button Styles */
+.secondary-explore-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  background-color: rgba(6, 182, 212, 0.05);
+  color: #22d3ee;
+  cursor: pointer;
+}
+
+.secondary-explore-btn:hover {
+  border-color: rgba(6, 182, 212, 0.6);
+  background-color: rgba(6, 182, 212, 0.15);
+  color: #22d3ee;
+  box-shadow: 0 0 15px rgba(6, 182, 212, 0.15);
+}
+
+[data-theme="light"] .secondary-explore-btn {
+  border-color: rgba(0, 172, 233, 0.3) !important;
+  background-color: rgba(0, 172, 233, 0.05) !important;
+  color: #007099 !important;
+}
+
+[data-theme="light"] .secondary-explore-btn:hover {
+  border-color: rgba(0, 172, 233, 0.6) !important;
+  background-color: rgba(0, 172, 233, 0.12) !important;
+  color: #007099 !important;
+  box-shadow: 0 4px 12px rgba(0, 172, 233, 0.1) !important;
 }
 
 @theme {

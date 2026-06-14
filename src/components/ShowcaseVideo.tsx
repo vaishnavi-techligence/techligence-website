@@ -5,6 +5,7 @@ import { useState, useRef, useEffect } from "react";
 export default function ShowcaseVideo() {
   const [isMuted, setIsMuted] = useState(true);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [hideText, setHideText] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const handleScrollDown = () => {
@@ -19,6 +20,21 @@ export default function ShowcaseVideo() {
       const newMuted = !videoRef.current.muted;
       videoRef.current.muted = newMuted;
       setIsMuted(newMuted);
+    }
+  };
+
+  const handleTimeUpdate = (e: React.SyntheticEvent<HTMLVideoElement>) => {
+    const video = e.currentTarget;
+    const time = video.currentTime;
+    
+    window.dispatchEvent(
+      new CustomEvent("showcase-video-time", { detail: time })
+    );
+
+    if (time >= 3 && time < 29) {
+      setHideText(false);
+    } else {
+      setHideText(true);
     }
   };
 
@@ -65,6 +81,7 @@ export default function ShowcaseVideo() {
           autoPlay
           onPlaying={() => setIsVideoPlaying(true)}
           onCanPlay={() => setIsVideoPlaying(true)}
+          onTimeUpdate={handleTimeUpdate}
           className={`w-full h-full object-cover transition-opacity duration-700 ${
             isVideoPlaying ? "opacity-75" : "opacity-0"
           }`}
@@ -84,8 +101,26 @@ export default function ShowcaseVideo() {
       {/* Tech Grid overlay for cyber aesthetic */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:60px_60px] z-1 pointer-events-none" />
 
+      {/* Homepage Headline Text Overlay */}
+      <div className={`absolute inset-0 flex flex-col items-center justify-center text-center z-10 px-6 transition-all duration-700 pointer-events-none select-none ${
+        hideText ? "opacity-0 invisible translate-y-4" : "opacity-100 visible translate-y-0"
+      }`}>
+        <span className="text-cyan-400 font-mono text-[10px] md:text-xs tracking-[0.3em] uppercase mb-3 animate-pulse">
+          // @TECHLIGENCE FLEET SHOWCASE
+        </span>
+        <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white tracking-wider uppercase leading-none max-w-4xl bg-clip-text bg-gradient-to-b from-white via-white to-gray-400 text-transparent drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)]">
+          AUTONOMOUS AI ROBOTICS FLEET
+        </h1>
+        <div className="w-16 h-[2px] bg-cyan-400 my-5" />
+        <p className="text-gray-300 text-xs md:text-sm lg:text-base max-w-xl font-light leading-relaxed drop-shadow-[0_2px_5px_rgba(0,0,0,0.5)]">
+          Step into the future of enterprise automation with the world's most advanced autonomous service robots.
+        </p>
+      </div>
+
       {/* Explore T2 Mini button at the bottom center */}
-      <div className="absolute bottom-16 md:bottom-24 left-1/2 -translate-x-1/2 z-10 text-center">
+      <div className={`absolute bottom-16 md:bottom-24 left-1/2 -translate-x-1/2 z-10 text-center transition-all duration-700 ${
+        hideText ? "opacity-0 invisible pointer-events-none translate-y-4" : "opacity-100 visible translate-y-0"
+      }`}>
         <button
           onClick={handleScrollDown}
           className="robot-button p-[2px] inline-block cursor-pointer active:scale-95 transition-transform"

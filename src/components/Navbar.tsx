@@ -9,6 +9,7 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [theme, setTheme] = useState<"dark" | "light">("light");
   const [isLogoLoaded, setIsLogoLoaded] = useState(false);
+  const [hideTextByVideo, setHideTextByVideo] = useState(true);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -21,6 +22,28 @@ export default function Navbar() {
     }
   }, []);
 
+  useEffect(() => {
+    if (pathname !== "/") {
+      setHideTextByVideo(false);
+      return;
+    }
+
+    const handleTimeChange = (e: Event) => {
+      const time = (e as CustomEvent).detail;
+      if (time >= 3 && time < 29) {
+        setHideTextByVideo(false);
+      } else {
+        setHideTextByVideo(true);
+      }
+    };
+
+    setHideTextByVideo(true);
+    window.addEventListener("showcase-video-time", handleTimeChange);
+    return () => {
+      window.removeEventListener("showcase-video-time", handleTimeChange);
+    };
+  }, [pathname]);
+
   const toggleTheme = () => {
     const nextTheme = theme === "dark" ? "light" : "dark";
     setTheme(nextTheme);
@@ -31,7 +54,7 @@ export default function Navbar() {
   return (
     <>
       <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] md:w-[90%] md:max-w-fit z-50 bg-black/40 backdrop-blur-xl border border-white/10 rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.6)] transition-all duration-300">
-        <div className="px-6 py-2 flex items-center justify-between gap-4 whitespace-nowrap">
+        <div className="pl-6 pr-8 lg:pl-8 lg:pr-10 py-2 flex items-center justify-between gap-3 lg:gap-4 whitespace-nowrap">
           {/* Logo + Brand */}
           <a href="/" className="flex items-center gap-2 flex-shrink-0 cursor-pointer">
             <img
@@ -41,18 +64,18 @@ export default function Navbar() {
               onLoad={() => setIsLogoLoaded(true)}
               onError={() => setIsLogoLoaded(false)}
             />
-            <h1 className={`text-sm sm:text-base font-black bg-gradient-to-r from-cyan-300 to-cyan-500 text-transparent bg-clip-text tracking-wide transition-all duration-300 ${
-              isLogoLoaded ? "invisible w-0 opacity-0 overflow-hidden" : "w-auto opacity-100"
+            <h1 className={`text-xs xl:text-sm font-black bg-gradient-to-r from-cyan-300 to-cyan-500 text-transparent bg-clip-text tracking-wide transition-all duration-300 ${
+              (isLogoLoaded && hideTextByVideo) ? "invisible w-0 opacity-0 overflow-hidden" : "w-auto opacity-100"
             }`}>
               TECHLIGENCE
             </h1>
           </a>
 
           {/* Nav links (Desktop) */}
-          <div className="hidden lg:flex gap-6 items-center flex-shrink-0">
+          <div className="hidden lg:flex gap-3 xl:gap-6 items-center flex-shrink-0">
             <a
               href="/"
-              className={`relative text-[10px] uppercase tracking-[1.5px] transition-all duration-300 ${
+              className={`relative text-[9px] xl:text-[10px] uppercase tracking-[1px] xl:tracking-[1.5px] transition-all duration-300 ${
                 pathname === "/" ? "text-cyan-400" : "text-gray-300 hover:text-cyan-400"
               }`}
             >
@@ -64,7 +87,7 @@ export default function Navbar() {
 
             <a
               href="/robots"
-              className={`relative text-[10px] uppercase tracking-[1.5px] transition-all duration-300 ${
+              className={`relative text-[9px] xl:text-[10px] uppercase tracking-[1px] xl:tracking-[1.5px] transition-all duration-300 ${
                 pathname === "/robots" ? "text-cyan-400" : "text-gray-300 hover:text-cyan-400"
               }`}
             >
@@ -76,7 +99,7 @@ export default function Navbar() {
 
             <a
               href="/solutions"
-              className={`relative text-[10px] uppercase tracking-[1.5px] transition-all duration-300 ${
+              className={`relative text-[9px] xl:text-[10px] uppercase tracking-[1px] xl:tracking-[1.5px] transition-all duration-300 ${
                 pathname === "/solutions" ? "text-cyan-400" : "text-gray-300 hover:text-cyan-400"
               }`}
             >
@@ -88,7 +111,7 @@ export default function Navbar() {
 
             <a
               href="/configurator"
-              className={`relative text-[10px] uppercase tracking-[1.5px] transition-all duration-300 ${
+              className={`relative text-[9px] xl:text-[10px] uppercase tracking-[1px] xl:tracking-[1.5px] transition-all duration-300 ${
                 pathname === "/configurator" ? "text-cyan-400" : "text-gray-300 hover:text-cyan-400"
               }`}
             >
@@ -100,7 +123,7 @@ export default function Navbar() {
 
             <a
               href="/company"
-              className={`relative text-[10px] uppercase tracking-[1.5px] transition-all duration-300 ${
+              className={`relative text-[9px] xl:text-[10px] uppercase tracking-[1px] xl:tracking-[1.5px] transition-all duration-300 ${
                 pathname === "/company" ? "text-cyan-400" : "text-gray-300 hover:text-cyan-400"
               }`}
             >
@@ -112,7 +135,7 @@ export default function Navbar() {
 
             <a
               href="/contact"
-              className={`relative text-[10px] uppercase tracking-[1.5px] transition-all duration-300 ${
+              className={`relative text-[9px] xl:text-[10px] uppercase tracking-[1px] xl:tracking-[1.5px] transition-all duration-300 ${
                 pathname === "/contact" ? "text-cyan-400" : "text-gray-300 hover:text-cyan-400"
               }`}
             >

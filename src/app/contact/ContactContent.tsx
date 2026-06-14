@@ -53,7 +53,113 @@ export default function ContactContent() {
       {/* LEFT COLUMN: Contact Cards */}
       <div className="lg:col-span-5 flex flex-col gap-6 w-full">
         
-        {/* Card 1: Corporate Details */}
+        {/* Card 1: Mumbai Office */}
+        <div className="relative overflow-hidden bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-6 sm:p-8 hover:border-cyan-500/40 transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] group">
+          <div className="absolute top-0 right-0 w-[150px] h-[150px] bg-cyan-500/5 rounded-full blur-[40px] pointer-events-none group-hover:bg-cyan-500/10 transition-colors duration-300"></div>
+          
+          <div className="flex items-start gap-4">
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=D9-802,+Lokdhara,+Phase-3,+Kalyan+-+421306"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 bg-cyan-500/10 rounded-xl border border-cyan-500/20 text-cyan-400 hover:text-cyan-300 hover:border-cyan-400/50 hover:bg-cyan-500/20 transition-all duration-300 flex-shrink-0"
+              title="View Mumbai Office on Google Maps"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+              </svg>
+            </a>
+            
+            <div className="flex-1 min-w-0">
+              <div className="flex justify-between items-start gap-2">
+                <h3 className="text-xl font-bold text-white tracking-wide uppercase">Mumbai Office</h3>
+                <button
+                  id="copy-mumbai"
+                  type="button"
+                  onClick={() => handleCopy("D9-802, Lokdhara, Phase-3, Kalyan - 421306", "mumbai")}
+                  className="text-gray-400 hover:text-cyan-400 transition-colors p-1"
+                  title="Copy Mumbai Address"
+                >
+                  {copiedId === "mumbai" ? (
+                    <span className="text-[10px] text-cyan-400 font-medium">Copied!</span>
+                  ) : (
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H5.25m11.9-3.664A2.251 2.251 0 0 0 15 2.25h-1.5a2.251 2.251 0 0 0-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.362V4.5a1.5 1.5 0 0 1 1.5-1.5h1.5m3.75 3.375V4.5a1.5 1.5 0 0 0-1.5-1.5h-1.5m9 3.375v10.125c0 .621-.504 1.125-1.125 1.125H9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H18a1.125 1.125 0 0 1 1.125 1.125Z" />
+                    </svg>
+                  )}
+                </button>
+              </div>
+              <p className="mt-4 text-gray-300 leading-relaxed text-base">
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=D9-802,+Lokdhara,+Phase-3,+Kalyan+-+421306"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-cyan-400 transition-colors duration-200"
+                >
+                  D9-802, Lokdhara, Phase-3,<br />
+                  Kalyan - 421306
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Card 2: Pune Office */}
+        <div className="relative overflow-hidden bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-6 sm:p-8 hover:border-cyan-500/40 transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] group">
+          <div className="absolute top-0 right-0 w-[150px] h-[150px] bg-cyan-500/5 rounded-full blur-[40px] pointer-events-none group-hover:bg-cyan-500/10 transition-colors duration-300"></div>
+          
+          <div className="flex items-start gap-4">
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Shop+1/2/3,+Selenia+Housing+Society,+Jadhavwadi,+Chikhali,+Pimpri-Chinchwad,+Pune+-+411062"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 bg-cyan-500/10 rounded-xl border border-cyan-500/20 text-cyan-400 hover:text-cyan-300 hover:border-cyan-400/50 hover:bg-cyan-500/20 transition-all duration-300 flex-shrink-0"
+              title="View Pune Office on Google Maps"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+              </svg>
+            </a>
+            
+            <div className="flex-1 min-w-0">
+              <div className="flex justify-between items-start gap-2">
+                <h3 className="text-xl font-bold text-white tracking-wide uppercase">Pune Office</h3>
+                <button
+                  id="copy-pune"
+                  type="button"
+                  onClick={() => handleCopy("Techligence Private Limited, Shop 1/2/3, Selenia Housing society, Jadhavwadi, Chikhali, Pimpri-Chinchwad, Pune - 411062", "pune")}
+                  className="text-gray-400 hover:text-cyan-400 transition-colors p-1"
+                  title="Copy Pune Address"
+                >
+                  {copiedId === "pune" ? (
+                    <span className="text-[10px] text-cyan-400 font-medium">Copied!</span>
+                  ) : (
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H5.25m11.9-3.664A2.251 2.251 0 0 0 15 2.25h-1.5a2.251 2.251 0 0 0-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.362V4.5a1.5 1.5 0 0 1 1.5-1.5h1.5m3.75 3.375V4.5a1.5 1.5 0 0 0-1.5-1.5h-1.5m9 3.375v10.125c0 .621-.504 1.125-1.125 1.125H9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H18a1.125 1.125 0 0 1 1.125 1.125Z" />
+                    </svg>
+                  )}
+                </button>
+              </div>
+              <p className="mt-4 text-gray-300 leading-relaxed text-base">
+                <span className="font-semibold text-white">Techligence Private Limited</span><br />
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=Shop+1/2/3,+Selenia+Housing+Society,+Jadhavwadi,+Chikhali,+Pimpri-Chinchwad,+Pune+-+411062"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-cyan-400 transition-colors duration-200"
+                >
+                  Shop 1/2/3, Selenia Housing Society,<br />
+                  Jadhavwadi, Chikhali,<br />
+                  Pimpri-Chinchwad, Pune - 411062
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Card 3: Corporate Details */}
         <div className="relative overflow-hidden bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-6 sm:p-8 hover:border-cyan-500/40 transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] group">
           <div className="absolute top-0 right-0 w-[150px] h-[150px] bg-cyan-500/5 rounded-full blur-[40px] pointer-events-none group-hover:bg-cyan-500/10 transition-colors duration-300"></div>
           
@@ -94,7 +200,7 @@ export default function ContactContent() {
 
                 {/* Contact No */}
                 <div>
-                  <span className="text-[10px] text-gray-400 uppercase tracking-widest block mb-1">Call Us</span>
+                  <span className="text-[10px] text-gray-400 uppercase tracking-widest block mb-1">Customer Care</span>
                   <a 
                     href="tel:+917020812247" 
                     className="text-white hover:text-cyan-400 transition-colors text-base font-medium flex items-center gap-2 group/phone"
@@ -148,86 +254,6 @@ export default function ContactContent() {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Card 2: Mumbai Office */}
-        <div className="relative overflow-hidden bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-6 sm:p-8 hover:border-cyan-500/40 transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] group">
-          <div className="absolute top-0 right-0 w-[150px] h-[150px] bg-cyan-500/5 rounded-full blur-[40px] pointer-events-none group-hover:bg-cyan-500/10 transition-colors duration-300"></div>
-          
-          <div className="flex items-start gap-4">
-            <div className="p-3 bg-cyan-500/10 rounded-xl border border-cyan-500/20 text-cyan-400 group-hover:scale-110 transition-transform duration-300">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-              </svg>
-            </div>
-            
-            <div className="flex-1 min-w-0">
-              <div className="flex justify-between items-start gap-2">
-                <h3 className="text-xl font-bold text-white tracking-wide uppercase">Mumbai Office</h3>
-                <button
-                  id="copy-mumbai"
-                  type="button"
-                  onClick={() => handleCopy("D9-802, Lokdhara, Phase-3, Kalyan - 421306", "mumbai")}
-                  className="text-gray-400 hover:text-cyan-400 transition-colors p-1"
-                  title="Copy Mumbai Address"
-                >
-                  {copiedId === "mumbai" ? (
-                    <span className="text-[10px] text-cyan-400 font-medium">Copied!</span>
-                  ) : (
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H5.25m11.9-3.664A2.251 2.251 0 0 0 15 2.25h-1.5a2.251 2.251 0 0 0-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.362V4.5a1.5 1.5 0 0 1 1.5-1.5h1.5m3.75 3.375V4.5a1.5 1.5 0 0 0-1.5-1.5h-1.5m9 3.375v10.125c0 .621-.504 1.125-1.125 1.125H9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H18a1.125 1.125 0 0 1 1.125 1.125Z" />
-                    </svg>
-                  )}
-                </button>
-              </div>
-              <p className="mt-4 text-gray-300 leading-relaxed text-base">
-                D9-802, Lokdhara, Phase-3,<br />
-                Kalyan - 421306
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Card 3: Pune Office */}
-        <div className="relative overflow-hidden bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-6 sm:p-8 hover:border-cyan-500/40 transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] group">
-          <div className="absolute top-0 right-0 w-[150px] h-[150px] bg-cyan-500/5 rounded-full blur-[40px] pointer-events-none group-hover:bg-cyan-500/10 transition-colors duration-300"></div>
-          
-          <div className="flex items-start gap-4">
-            <div className="p-3 bg-cyan-500/10 rounded-xl border border-cyan-500/20 text-cyan-400 group-hover:scale-110 transition-transform duration-300">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-              </svg>
-            </div>
-            
-            <div className="flex-1 min-w-0">
-              <div className="flex justify-between items-start gap-2">
-                <h3 className="text-xl font-bold text-white tracking-wide uppercase">Pune Office</h3>
-                <button
-                  id="copy-pune"
-                  type="button"
-                  onClick={() => handleCopy("Techligence Private Limited, Shop 1/2/3, Selenia Housing society, Jadhavwadi, Chikhali, Pimpri-Chinchwad, Pune - 411062", "pune")}
-                  className="text-gray-400 hover:text-cyan-400 transition-colors p-1"
-                  title="Copy Pune Address"
-                >
-                  {copiedId === "pune" ? (
-                    <span className="text-[10px] text-cyan-400 font-medium">Copied!</span>
-                  ) : (
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H5.25m11.9-3.664A2.251 2.251 0 0 0 15 2.25h-1.5a2.251 2.251 0 0 0-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.362V4.5a1.5 1.5 0 0 1 1.5-1.5h1.5m3.75 3.375V4.5a1.5 1.5 0 0 0-1.5-1.5h-1.5m9 3.375v10.125c0 .621-.504 1.125-1.125 1.125H9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H18a1.125 1.125 0 0 1 1.125 1.125Z" />
-                    </svg>
-                  )}
-                </button>
-              </div>
-              <p className="mt-4 text-gray-300 leading-relaxed text-base">
-                <span className="font-semibold text-white">Techligence Private Limited</span><br />
-                Shop 1/2/3, Selenia Housing Society,<br />
-                Jadhavwadi, Chikhali,<br />
-                Pimpri-Chinchwad, Pune - 411062
-              </p>
             </div>
           </div>
         </div>

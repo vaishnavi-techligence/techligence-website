@@ -55,7 +55,7 @@ export default function RobotsOverview() {
                 <li>
                   <div className="flex flex-wrap items-center gap-2">
                     <strong className="text-white text-lg">JOY A-01</strong>
-                    <span className="px-1.5 py-0.5 text-[7px] font-mono font-bold tracking-widest text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 rounded shadow-[0_0_6px_rgba(0,240,255,0.15)] animate-pulse uppercase">
+                    <span className="coming-soon-badge px-1.5 py-0.5 text-[7px] font-mono font-bold tracking-widest text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 rounded shadow-[0_0_6px_rgba(0,240,255,0.15)] animate-pulse uppercase">
                       Coming Soon
                     </span>
                   </div>
@@ -64,7 +64,7 @@ export default function RobotsOverview() {
                 <li>
                   <div className="flex flex-wrap items-center gap-2">
                     <strong className="text-white text-lg">TELLA S</strong>
-                    <span className="px-1.5 py-0.5 text-[7px] font-mono font-bold tracking-widest text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 rounded shadow-[0_0_6px_rgba(0,240,255,0.15)] animate-pulse uppercase">
+                    <span className="coming-soon-badge px-1.5 py-0.5 text-[7px] font-mono font-bold tracking-widest text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 rounded shadow-[0_0_6px_rgba(0,240,255,0.15)] animate-pulse uppercase">
                       Coming Soon
                     </span>
                   </div>
@@ -78,7 +78,7 @@ export default function RobotsOverview() {
                 <li>
                   <div className="flex flex-wrap items-center gap-2">
                     <strong className="text-white text-lg">ANDY R-1</strong>
-                    <span className="px-1.5 py-0.5 text-[7px] font-mono font-bold tracking-widest text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 rounded shadow-[0_0_6px_rgba(0,240,255,0.15)] animate-pulse uppercase">
+                    <span className="coming-soon-badge px-1.5 py-0.5 text-[7px] font-mono font-bold tracking-widest text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 rounded shadow-[0_0_6px_rgba(0,240,255,0.15)] animate-pulse uppercase">
                       Coming Soon
                     </span>
                   </div>
@@ -87,7 +87,7 @@ export default function RobotsOverview() {
                 <li>
                   <div className="flex flex-wrap items-center gap-2">
                     <strong className="text-white text-lg">T-2 Max</strong>
-                    <span className="px-1.5 py-0.5 text-[7px] font-mono font-bold tracking-widest text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 rounded shadow-[0_0_6px_rgba(0,240,255,0.15)] animate-pulse uppercase">
+                    <span className="coming-soon-badge px-1.5 py-0.5 text-[7px] font-mono font-bold tracking-widest text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 rounded shadow-[0_0_6px_rgba(0,240,255,0.15)] animate-pulse uppercase">
                       Coming Soon
                     </span>
                   </div>
@@ -96,7 +96,7 @@ export default function RobotsOverview() {
                 <li>
                   <div className="flex flex-wrap items-center gap-2">
                     <strong className="text-white text-lg">NOVA M1</strong>
-                    <span className="px-1.5 py-0.5 text-[7px] font-mono font-bold tracking-widest text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 rounded shadow-[0_0_6px_rgba(0,240,255,0.15)] animate-pulse uppercase">
+                    <span className="coming-soon-badge px-1.5 py-0.5 text-[7px] font-mono font-bold tracking-widest text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 rounded shadow-[0_0_6px_rgba(0,240,255,0.15)] animate-pulse uppercase">
                       Coming Soon
                     </span>
                   </div>
@@ -111,7 +111,7 @@ export default function RobotsOverview() {
                 <li>
                   <div className="flex flex-wrap items-center gap-2">
                     <strong className="text-white text-lg">Joy A-01 (Wood)</strong>
-                    <span className="px-1.5 py-0.5 text-[7px] font-mono font-bold tracking-widest text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 rounded shadow-[0_0_6px_rgba(0,240,255,0.15)] animate-pulse uppercase">
+                    <span className="coming-soon-badge px-1.5 py-0.5 text-[7px] font-mono font-bold tracking-widest text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 rounded shadow-[0_0_6px_rgba(0,240,255,0.15)] animate-pulse uppercase">
                       Coming Soon
                     </span>
                   </div>

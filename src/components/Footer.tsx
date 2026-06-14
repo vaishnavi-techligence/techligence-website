@@ -33,9 +33,65 @@ export default function Footer() {
               robots and intelligent automation solutions.
             </p>
 
-            <div className="mt-8 space-y-4 text-gray-400">
+            <div className="mt-8 space-y-5 text-gray-400">
 
-              <div className="space-y-2.5">
+              {/* Addresses at the top */}
+              <div className="space-y-4 pb-4 border-b border-white/5">
+                <div className="flex gap-3 items-start">
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=D9-802,+Lokdhara,+Phase-3,+Kalyan+-+421306"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-cyan-400 hover:text-cyan-300 transition-colors flex-shrink-0 mt-0.5"
+                    aria-label="View Mumbai Office on Google Maps"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0z" />
+                    </svg>
+                  </a>
+                  <div className="text-xs leading-relaxed">
+                    <strong className="text-white block text-[10px] uppercase tracking-wider mb-0.5 text-cyan-400/90">Mumbai Office:</strong>
+                    <a
+                      href="https://www.google.com/maps/search/?api=1&query=D9-802,+Lokdhara,+Phase-3,+Kalyan+-+421306"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-cyan-400 transition-colors"
+                    >
+                      D9-802, Lokdhara, Phase-3, Kalyan - 421306
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex gap-3 items-start">
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=Shop+1/2/3,+Selenia+Housing+Society,+Jadhavwadi,+Chikhali,+Pimpri-Chinchwad,+Pune+-+411062"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-cyan-400 hover:text-cyan-300 transition-colors flex-shrink-0 mt-0.5"
+                    aria-label="View Pune Office on Google Maps"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0z" />
+                    </svg>
+                  </a>
+                  <div className="text-xs leading-relaxed">
+                    <strong className="text-white block text-[10px] uppercase tracking-wider mb-0.5 text-cyan-400/90">Pune Office:</strong>
+                    <a
+                      href="https://www.google.com/maps/search/?api=1&query=Shop+1/2/3,+Selenia+Housing+Society,+Jadhavwadi,+Chikhali,+Pimpri-Chinchwad,+Pune+-+411062"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-cyan-400 transition-colors"
+                    >
+                      Shop 1/2/3, Selenia Housing Society, Jadhavwadi, Chikhali, Pimpri-Chinchwad, Pune - 411062
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              {/* Contact Info (Emails & Phone) below addresses */}
+              <div className="space-y-3">
                 <div className="flex items-start gap-3">
                   <svg className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
@@ -52,25 +108,15 @@ export default function Footer() {
                     </a>
                   </div>
                 </div>
-              </div>
 
-              <p className="flex items-center gap-3 hover:text-cyan-400 transition-colors">
-                <svg className="w-4 h-4 text-cyan-400 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.58c0-1.017.762-1.785 1.785-1.785h1.86c.646 0 1.228.384 1.488.978l.848 1.932c.266.608.066 1.304-.469 1.68l-1.104.793a12.083 12.083 0 005.282 5.282l.793-1.104c.376-.535 1.071-.735 1.68-.469l1.932.848c.594.26 1.017.842 1.017 1.488v1.86c0 1.022-.768 1.785-1.785 1.785H18c-8.837 0-16-7.163-16-16v-.22z" />
-                </svg>
-                <a href="tel:+917020812247">+91 70208 12247</a>
-              </p>
-
-              <div className="pt-2 border-t border-white/5 space-y-3">
-                <p className="text-xs leading-relaxed">
-                  <strong className="text-white block text-[10px] uppercase tracking-wider mb-0.5 text-cyan-400/90">Mumbai Office:</strong>
-                  D9-802, Lokdhara, Phase-3, Kalyan - 421306
-                </p>
-
-                <p className="text-xs leading-relaxed">
-                  <strong className="text-white block text-[10px] uppercase tracking-wider mb-0.5 text-cyan-400/90">Pune Office:</strong>
-                  Shop 1/2/3, Selenia Housing Society, Jadhavwadi, Chikhali, Pimpri-Chinchwad, Pune - 411062
-                </p>
+                <div className="flex items-center gap-3">
+                  <svg className="w-4 h-4 text-cyan-400 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.58c0-1.017.762-1.785 1.785-1.785h1.86c.646 0 1.228.384 1.488.978l.848 1.932c.266.608.066 1.304-.469 1.68l-1.104.793a12.083 12.083 0 005.282 5.282l.793-1.104c.376-.535 1.071-.735 1.68-.469l1.932.848c.594.26 1.017.842 1.017 1.488v1.86c0 1.022-.768 1.785-1.785 1.785H18c-8.837 0-16-7.163-16-16v-.22z" />
+                  </svg>
+                  <a href="tel:+917020812247" className="hover:text-cyan-400 transition-colors text-xs">
+                    <span className="font-semibold text-white">Customer Care:</span> +91 70208 12247
+                  </a>
+                </div>
               </div>
 
             </div>
@@ -104,23 +150,23 @@ export default function Footer() {
               <a href="/robots?robot=t2-mini" className="hover:text-cyan-400 transition-colors">T2 Mini</a>
               <a href="/robots?robot=joy-a01" className="hover:text-cyan-400 transition-colors flex items-center gap-2">
                 <span>Joy A-01</span>
-                <span className="px-1.5 py-0.5 text-[7px] font-mono font-bold tracking-widest text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 rounded uppercase scale-90 origin-left">Soon</span>
+                <span className="coming-soon-badge px-2 py-0.5 text-[8px] font-black tracking-widest text-cyan-400 bg-cyan-500/10 border border-cyan-500/30 rounded-full uppercase scale-90 origin-left">Coming Soon</span>
               </a>
               <a href="/robots?robot=tella-s" className="hover:text-cyan-400 transition-colors flex items-center gap-2">
                 <span>Tella S</span>
-                <span className="px-1.5 py-0.5 text-[7px] font-mono font-bold tracking-widest text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 rounded uppercase scale-90 origin-left">Soon</span>
+                <span className="coming-soon-badge px-2 py-0.5 text-[8px] font-black tracking-widest text-cyan-400 bg-cyan-500/10 border border-cyan-500/30 rounded-full uppercase scale-90 origin-left">Coming Soon</span>
               </a>
               <a href="/robots?robot=andy-r1" className="hover:text-cyan-400 transition-colors flex items-center gap-2">
                 <span>Andy R1</span>
-                <span className="px-1.5 py-0.5 text-[7px] font-mono font-bold tracking-widest text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 rounded uppercase scale-90 origin-left">Soon</span>
+                <span className="coming-soon-badge px-2 py-0.5 text-[8px] font-black tracking-widest text-cyan-400 bg-cyan-500/10 border border-cyan-500/30 rounded-full uppercase scale-90 origin-left">Coming Soon</span>
               </a>
               <a href="/robots?robot=t2-max" className="hover:text-cyan-400 transition-colors flex items-center gap-2">
                 <span>T2 Max</span>
-                <span className="px-1.5 py-0.5 text-[7px] font-mono font-bold tracking-widest text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 rounded uppercase scale-90 origin-left">Soon</span>
+                <span className="coming-soon-badge px-2 py-0.5 text-[8px] font-black tracking-widest text-cyan-400 bg-cyan-500/10 border border-cyan-500/30 rounded-full uppercase scale-90 origin-left">Coming Soon</span>
               </a>
               <a href="/robots?robot=nova-m1" className="hover:text-cyan-400 transition-colors flex items-center gap-2">
                 <span>Nova M1</span>
-                <span className="px-1.5 py-0.5 text-[7px] font-mono font-bold tracking-widest text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 rounded uppercase scale-90 origin-left">Soon</span>
+                <span className="coming-soon-badge px-2 py-0.5 text-[8px] font-black tracking-widest text-cyan-400 bg-cyan-500/10 border border-cyan-500/30 rounded-full uppercase scale-90 origin-left">Coming Soon</span>
               </a>
 
             </div>

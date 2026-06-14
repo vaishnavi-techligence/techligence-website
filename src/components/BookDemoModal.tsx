@@ -140,24 +140,26 @@ export default function BookDemoModal({ isOpen, onClose }: BookDemoModalProps) {
                     <button
                       type="button"
                       onClick={() => setAcquisitionType("buy")}
-                      className={`py-3 rounded-xl border text-center font-bold text-xs tracking-wider transition-all duration-300 cursor-pointer uppercase ${
+                      className={`flex flex-col text-left p-4 rounded-xl border transition-all duration-300 cursor-pointer ${
                         acquisitionType === "buy"
-                          ? "bg-cyan-500/10 border-cyan-400 text-white shadow-[0_0_15px_rgba(6,182,212,0.2)]"
-                          : "bg-white/[0.02] border-white/10 text-gray-400 hover:border-white/20 hover:text-white"
+                          ? "bg-cyan-500/10 border-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.25)]"
+                          : "bg-white/[0.02] border-white/10 hover:border-white/20 hover:bg-white/[0.04]"
                       }`}
                     >
-                      Buy
+                      <span className="text-white font-bold text-sm tracking-wide">Buy</span>
+                      <span className="text-gray-400 text-[10px] sm:text-xs mt-1.5 leading-snug font-normal">Outright purchase of the platform with software upgrades and hardware warranty.</span>
                     </button>
                     <button
                       type="button"
                       onClick={() => setAcquisitionType("rent")}
-                      className={`py-3 rounded-xl border text-center font-bold text-xs tracking-wider transition-all duration-300 cursor-pointer uppercase ${
+                      className={`flex flex-col text-left p-4 rounded-xl border transition-all duration-300 cursor-pointer ${
                         acquisitionType === "rent"
-                          ? "bg-cyan-500/10 border-cyan-400 text-white shadow-[0_0_15px_rgba(6,182,212,0.2)]"
-                          : "bg-white/[0.02] border-white/10 text-gray-400 hover:border-white/20 hover:text-white"
+                          ? "bg-cyan-500/10 border-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.25)]"
+                          : "bg-white/[0.02] border-white/10 hover:border-white/20 hover:bg-white/[0.04]"
                       }`}
                     >
-                      Rent
+                      <span className="text-white font-bold text-sm tracking-wide">Rent</span>
+                      <span className="text-gray-400 text-[10px] sm:text-xs mt-1.5 leading-snug font-normal">Flexible leasing option with maintenance and cloud ecosystem subscription.</span>
                     </button>
                   </div>
                 </div>

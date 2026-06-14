@@ -487,7 +487,7 @@ export default function RobotShowcase() {
                 <div className="flex items-center gap-2 mt-0.5">
                   <h3 className="text-lg font-extrabold text-white tracking-tight leading-none">{activeRobot.name}</h3>
                   {activeRobot.id !== "t2-mini" && (
-                    <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[7px] font-mono font-bold tracking-wider text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 shadow-[0_0_8px_rgba(0,240,255,0.25)] animate-pulse">
+                    <span className="coming-soon-badge inline-flex items-center px-1.5 py-0.5 rounded text-[7px] font-mono font-bold tracking-wider text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 shadow-[0_0_8px_rgba(0,240,255,0.25)] animate-pulse">
                       COMING SOON
                     </span>
                   )}
@@ -639,91 +639,7 @@ export default function RobotShowcase() {
               <div className="absolute w-[280px] h-[280px] rounded-full border-2 border-transparent border-t-cyan-500/15 border-b-cyan-500/15 animate-[spin_15s_ease-in-out_infinite] robot-scanner-marker" />
             </div>
 
-            {/* Futuristic HUD Specs Badge Left */}
-            <div className={`hidden lg:block absolute left-[4%] top-[25%] z-20 border border-cyan-500/30 bg-slate-950/70 backdrop-blur-md p-2.5 rounded-sm font-mono select-none text-left w-[130px] shadow-[0_0_15px_rgba(6,182,212,0.15)] transition-all duration-700 ease-out ${
-              showHud ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8 pointer-events-none"
-            }`}>
-              <div className="text-lg font-black text-cyan-400 leading-none mb-1">{activeRobot.stats.cognitiveAI}%</div>
-              <div className="text-[7px] text-gray-400 uppercase tracking-widest leading-tight">Cognitive Core</div>
-            </div>
 
-            {/* Futuristic HUD Specs Badge Right */}
-            <div className={`hidden lg:block absolute right-[4%] top-[48%] z-20 border border-cyan-500/30 bg-slate-950/70 backdrop-blur-md p-2.5 rounded-sm font-mono select-none text-left w-[130px] shadow-[0_0_15px_rgba(6,182,212,0.15)] transition-all duration-700 ease-out ${
-              showHud ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8 pointer-events-none"
-            }`}>
-              <div className="text-lg font-black text-cyan-400 leading-none mb-1">{activeRobot.stats.dexterity}%</div>
-              <div className="text-[7px] text-gray-400 uppercase tracking-widest leading-tight">Kinetic Motion</div>
-            </div>
-
-            {/* HUD Dashed Connector Lines */}
-            <svg className={`hidden lg:block absolute inset-0 w-full h-full pointer-events-none z-20 transition-opacity duration-700 ease-out ${
-              showHud ? "opacity-100" : "opacity-0"
-            }`}>
-              {/* Left Line Segment 1 */}
-              <line 
-                x1="20%" y1="31%" 
-                x2="28%" y2="31%" 
-                stroke="#00f0ff" 
-                strokeWidth="1" 
-                strokeDasharray="3,3" 
-                className="opacity-45"
-              />
-              {/* Left Line Segment 2 (Angled) */}
-              <line 
-                x1="28%" y1="31%" 
-                x2="48%" y2="39%" 
-                stroke="#00f0ff" 
-                strokeWidth="1" 
-                strokeDasharray="3,3" 
-                className="opacity-45"
-              />
-              {/* Right Line Segment 1 */}
-              <line 
-                x1="80%" y1="54%" 
-                x2="72%" y2="54%" 
-                stroke="#00f0ff" 
-                strokeWidth="1" 
-                strokeDasharray="3,3" 
-                className="opacity-45"
-              />
-              {/* Right Line Segment 2 (Angled) */}
-              <line 
-                x1="72%" y1="54%" 
-                x2="58%" y2="61%" 
-                stroke="#00f0ff" 
-                strokeWidth="1" 
-                strokeDasharray="3,3" 
-                className="opacity-45"
-              />
-            </svg>
-
-            {/* Target Pulsing Dot Left */}
-            <div 
-              className={`hidden lg:block absolute w-2.5 h-2.5 rounded-full bg-cyan-400/40 z-30 animate-ping pointer-events-none transition-opacity duration-700 ease-out ${
-                showHud ? "opacity-100" : "opacity-0"
-              }`}
-              style={{ left: "48%", top: "39%", transform: "translate(-50%, -50%)" }}
-            />
-            <div 
-              className={`hidden lg:block absolute w-1.5 h-1.5 rounded-full bg-cyan-300 z-30 shadow-[0_0_8px_#00f0ff] pointer-events-none transition-opacity duration-700 ease-out ${
-                showHud ? "opacity-100" : "opacity-0"
-              }`}
-              style={{ left: "48%", top: "39%", transform: "translate(-50%, -50%)" }}
-            />
-
-            {/* Target Pulsing Dot Right */}
-            <div 
-              className={`hidden lg:block absolute w-2.5 h-2.5 rounded-full bg-cyan-400/40 z-30 animate-ping pointer-events-none transition-opacity duration-700 ease-out ${
-                showHud ? "opacity-100" : "opacity-0"
-              }`}
-              style={{ left: "58%", top: "61%", transform: "translate(-50%, -50%)" }}
-            />
-            <div 
-              className={`hidden lg:block absolute w-1.5 h-1.5 rounded-full bg-cyan-300 z-30 shadow-[0_0_8px_#00f0ff] pointer-events-none transition-opacity duration-700 ease-out ${
-                showHud ? "opacity-100" : "opacity-0"
-              }`}
-              style={{ left: "58%", top: "61%", transform: "translate(-50%, -50%)" }}
-            />
 
             {/* ── Robot media: per-robot background removal with centering translation ── */}
             <div className="absolute inset-0 w-full h-full flex items-center justify-center z-10 pt-0 overflow-hidden">
@@ -916,8 +832,8 @@ export default function RobotShowcase() {
                   <div className="w-full flex justify-between items-center text-[6px] font-mono text-gray-500 font-bold">
                     <span>0{index + 1}</span>
                     {robot.id !== "t2-mini" ? (
-                      <span className="text-[5.5px] font-bold tracking-tighter text-cyan-400 bg-cyan-950/40 px-1 py-0.2 rounded border border-cyan-500/20 shadow-[0_0_4px_rgba(0,240,255,0.15)]">
-                        SOON
+                      <span className="coming-soon-badge text-[5.5px] font-bold tracking-tighter text-cyan-400 bg-cyan-950/40 px-1 py-0.2 rounded border border-cyan-500/20 shadow-[0_0_4px_rgba(0,240,255,0.15)] uppercase">
+                        COMING SOON
                       </span>
                     ) : (
                       <span className="opacity-0 group-hover:opacity-100 transition-opacity text-cyan-400">

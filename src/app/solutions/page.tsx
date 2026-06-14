@@ -102,13 +102,20 @@ export default function SolutionsPage() {
             </p>
           </div>
 
-          <Image
-            src="/solutions/mall.jpg"
-            alt="Mall"
-            width={700}
-            height={500}
-            className="rounded-3xl object-cover w-full"
-          />
+          <div className="relative w-full aspect-video rounded-3xl p-2 bg-slate-950/60 border border-white/10 shadow-[0_0_30px_rgba(0,240,255,0.1)]">
+            <video
+              src="/solutions/mall.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-contain rounded-xl"
+            />
+            {/* Watermark Mask / Brand Overlay */}
+            <div className="absolute bottom-11 right-6 px-3 py-2 bg-[#050816]/95 backdrop-blur-md border border-cyan-500/30 rounded-xl text-[8px] font-mono font-black tracking-widest text-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.25)] select-none uppercase pointer-events-none">
+              TECHLIGENCE // SECURE
+            </div>
+          </div>
         </div>
       </section>
 
@@ -118,13 +125,20 @@ export default function SolutionsPage() {
         className="max-w-7xl mx-auto px-6 py-12 scroll-mt-52"
       >
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-      <Image
-        src="/solutions/healthcare.jpg"
-        alt="Hospitality"
-        width={700}
-        height={500}
-        className="rounded-3xl object-cover w-full"
-      />
+          <div className="relative w-full aspect-video rounded-3xl p-2 bg-slate-950/60 border border-white/10 shadow-[0_0_30px_rgba(0,240,255,0.1)]">
+            <video
+              src="/solutions/hospitality.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-contain rounded-xl"
+            />
+            {/* Watermark Mask / Brand Overlay */}
+            <div className="absolute bottom-11 right-6 px-3 py-2 bg-[#050816]/95 backdrop-blur-md border border-cyan-500/30 rounded-xl text-[8px] font-mono font-black tracking-widest text-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.25)] select-none uppercase pointer-events-none">
+              TECHLIGENCE // SECURE
+            </div>
+          </div>
 
           <div>
             <p className="text-cyan-400 uppercase tracking-[4px]">

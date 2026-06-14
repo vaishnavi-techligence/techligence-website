@@ -40,11 +40,10 @@ export default function Industries() {
                 Visitor management, reception and meeting assistance.
               </p>
 
-             <a href="/solutions#corporate" className="robot-button p-[2px] mt-8 inline-block">
-  <div className="relative z-10 px-8 py-3 rounded-full bg-[#050816] text-white font-bold tracking-wide">
-    EXPLORE →
-  </div>
-</a>
+              <a href="/solutions#corporate" className="secondary-explore-btn mt-8 group">
+                <span>EXPLORE</span>
+                <span className="transform group-hover:translate-x-1.5 transition-transform duration-300">→</span>
+              </a>
 
             </div>
           </div>
@@ -75,11 +74,10 @@ export default function Industries() {
                 Guest assistance, concierge and customer engagement.
               </p>
 
-        <a href="/solutions#hospitality" className="robot-button p-[2px] mt-8 inline-block">
-  <div className="relative z-10 px-8 py-3 rounded-full bg-[#050816] text-white font-bold tracking-wide">
-    EXPLORE →
-  </div>
-</a>
+              <a href="/solutions#hospitality" className="secondary-explore-btn mt-8 group">
+                <span>EXPLORE</span>
+                <span className="transform group-hover:translate-x-1.5 transition-transform duration-300">→</span>
+              </a>
 
             </div>
           </div>
@@ -110,11 +108,10 @@ export default function Industries() {
                 Patient guidance and smart information assistance.
               </p>
 
-<a href="/solutions#healthcare" className="robot-button p-[2px] mt-8 inline-block">
-  <div className="relative z-10 px-8 py-3 rounded-full bg-[#050816] text-white font-bold tracking-wide">
-    EXPLORE →
-  </div>
-</a>
+              <a href="/solutions#healthcare" className="secondary-explore-btn mt-8 group">
+                <span>EXPLORE</span>
+                <span className="transform group-hover:translate-x-1.5 transition-transform duration-300">→</span>
+              </a>
 
             </div>
           </div>
