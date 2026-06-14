@@ -41,7 +41,7 @@ yarn-error.log*
 next-env.d.ts
 
 # media and documents
-*.mp4
+/*.mp4
 *.pdf
 *.pptx
 *.ppt
@@ -49,5 +49,4 @@ pdf_content.txt
 
 # ignore raw assets in root (keeps them locally but not in git)
 /*.png
-public/solutions/*.mp4
 public/Timeline Photos/
