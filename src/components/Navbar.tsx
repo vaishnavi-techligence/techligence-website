@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import BookDemoModal from "./BookDemoModal";
 
 export default function Navbar() {
@@ -8,6 +9,7 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [theme, setTheme] = useState<"dark" | "light">("light");
   const [isLogoLoaded, setIsLogoLoaded] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme") as "dark" | "light" | null;
@@ -48,12 +50,77 @@ export default function Navbar() {
 
           {/* Nav links (Desktop) */}
           <div className="hidden lg:flex gap-6 items-center flex-shrink-0">
-            <a href="/" className="relative text-[10px] uppercase tracking-[1.5px] text-gray-300 hover:text-cyan-400 transition-all duration-300 after:absolute after:left-0 after:-bottom-1.5 after:h-[2px] after:w-0 after:bg-cyan-400 after:transition-all after:duration-300 hover:after:w-full">Home</a>
-            <a href="/robots" className="relative text-[10px] uppercase tracking-[1.5px] text-gray-300 hover:text-cyan-400 transition-all duration-300 after:absolute after:left-0 after:-bottom-1.5 after:h-[2px] after:w-0 after:bg-cyan-400 after:transition-all after:duration-300 hover:after:w-full">Robots</a>
-            <a href="/solutions" className="relative text-[10px] uppercase tracking-[1.5px] text-gray-300 hover:text-cyan-400 transition-all duration-300 after:absolute after:left-0 after:-bottom-1.5 after:h-[2px] after:w-0 after:bg-cyan-400 after:transition-all after:duration-300 hover:after:w-full">Solutions</a>
-            <a href="/configurator" className="relative text-[10px] uppercase tracking-[1.5px] text-gray-300 hover:text-cyan-400 transition-all duration-300 after:absolute after:left-0 after:-bottom-1.5 after:h-[2px] after:w-0 after:bg-cyan-400 after:transition-all after:duration-300 hover:after:w-full">Configurator</a>
-            <a href="/company" className="relative text-[10px] uppercase tracking-[1.5px] text-gray-300 hover:text-cyan-400 transition-all duration-300 after:absolute after:left-0 after:-bottom-1.5 after:h-[2px] after:w-0 after:bg-cyan-400 after:transition-all after:duration-300 hover:after:w-full">Company</a>
-            <a href="/contact" className="relative text-[10px] uppercase tracking-[1.5px] text-gray-300 hover:text-cyan-400 transition-all duration-300 after:absolute after:left-0 after:-bottom-1.5 after:h-[2px] after:w-0 after:bg-cyan-400 after:transition-all after:duration-300 hover:after:w-full">Contact</a>
+            <a
+              href="/"
+              className={`relative text-[10px] uppercase tracking-[1.5px] transition-all duration-300 ${
+                pathname === "/" ? "text-cyan-400" : "text-gray-300 hover:text-cyan-400"
+              }`}
+            >
+              Home
+              {pathname === "/" && (
+                <span className="absolute left-0 -bottom-1.5 h-[2px] w-full bg-cyan-400 rounded-full"></span>
+              )}
+            </a>
+
+            <a
+              href="/robots"
+              className={`relative text-[10px] uppercase tracking-[1.5px] transition-all duration-300 ${
+                pathname === "/robots" ? "text-cyan-400" : "text-gray-300 hover:text-cyan-400"
+              }`}
+            >
+              Robots
+              {pathname === "/robots" && (
+                <span className="absolute left-0 -bottom-1.5 h-[2px] w-full bg-cyan-400 rounded-full"></span>
+              )}
+            </a>
+
+            <a
+              href="/solutions"
+              className={`relative text-[10px] uppercase tracking-[1.5px] transition-all duration-300 ${
+                pathname === "/solutions" ? "text-cyan-400" : "text-gray-300 hover:text-cyan-400"
+              }`}
+            >
+              Solutions
+              {pathname === "/solutions" && (
+                <span className="absolute left-0 -bottom-1.5 h-[2px] w-full bg-cyan-400 rounded-full"></span>
+              )}
+            </a>
+
+            <a
+              href="/configurator"
+              className={`relative text-[10px] uppercase tracking-[1.5px] transition-all duration-300 ${
+                pathname === "/configurator" ? "text-cyan-400" : "text-gray-300 hover:text-cyan-400"
+              }`}
+            >
+              Configurator
+              {pathname === "/configurator" && (
+                <span className="absolute left-0 -bottom-1.5 h-[2px] w-full bg-cyan-400 rounded-full"></span>
+              )}
+            </a>
+
+            <a
+              href="/company"
+              className={`relative text-[10px] uppercase tracking-[1.5px] transition-all duration-300 ${
+                pathname === "/company" ? "text-cyan-400" : "text-gray-300 hover:text-cyan-400"
+              }`}
+            >
+              Company
+              {pathname === "/company" && (
+                <span className="absolute left-0 -bottom-1.5 h-[2px] w-full bg-cyan-400 rounded-full"></span>
+              )}
+            </a>
+
+            <a
+              href="/contact"
+              className={`relative text-[10px] uppercase tracking-[1.5px] transition-all duration-300 ${
+                pathname === "/contact" ? "text-cyan-400" : "text-gray-300 hover:text-cyan-400"
+              }`}
+            >
+              Contact
+              {pathname === "/contact" && (
+                <span className="absolute left-0 -bottom-1.5 h-[2px] w-full bg-cyan-400 rounded-full"></span>
+              )}
+            </a>
           </div>
 
           {/* Right Action container */}
