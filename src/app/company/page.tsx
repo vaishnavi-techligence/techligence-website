@@ -7,15 +7,14 @@ const ASSOCIATIONS = [
     category: "Incubation & Ecosystem Partner",
     desc: "Technology Business Incubator of Veermata Jijabai Technological Institute, fostering deep-tech hardware startups.",
     logo: (
-      <img src="/logos/vjti-tbi.png" alt="VJTI-TBI" className="h-full w-auto object-contain bg-white p-2 rounded-lg" />
+      <img src="/logos/vjti-tbi.png" alt="VJTI-TBI" className="max-h-[90px] max-w-[200px] w-auto h-auto object-contain bg-white p-2 rounded-lg" />
     ),
   },
   {
     name: "VJTI Institute",
     category: "Academic & Research Collaboration",
     desc: "Collaborative research and development in robotics kinematics, embedded systems, and autonomous navigation.",
-    logo: (
-      <img src="/logos/vjti.jpg" alt="VJTI Institute" className="h-full w-auto object-contain bg-white p-2 rounded-lg" />
+    logo: (<img src="/logos/vjti.jpg" alt="VJTI Institute"  className="h-[110px] w-auto object-contain bg-white p-2 rounded-lg" style={{ marginTop: "12px" }} />
     ),
   },
   {
@@ -23,7 +22,7 @@ const ASSOCIATIONS = [
     category: "Innovation & Incubation Partner",
     desc: "Chitkara University Center for Innovation & Incubation Fellowship supporting next-generation tech enterprises.",
     logo: (
-      <img src="/logos/ciif.png" alt="Chitkara CIIF" className="h-full w-auto object-contain bg-white p-2 rounded-lg" />
+      <img src="/logos/ciif.png" alt="Chitkara CIIF" className="max-h-[90px] max-w-[200px] w-auto h-auto object-contain bg-white p-2 rounded-lg" />
     ),
   },
   {
@@ -31,7 +30,7 @@ const ASSOCIATIONS = [
     category: "Academic & Development Partner",
     desc: "Academic synergy for internship programs, robotic talent development, and technical labs.",
     logo: (
-      <img src="/logos/chitkara.png" alt="Chitkara University" className="h-full w-auto object-contain bg-white p-2 rounded-lg" />
+      <img src="/logos/chitkara.png" alt="Chitkara University" className="max-h-[90px] max-w-[200px] w-auto h-auto object-contain bg-white p-2 rounded-lg" />
     ),
   },
   {
@@ -39,7 +38,7 @@ const ASSOCIATIONS = [
     category: "Incubation & Startup Support",
     desc: "Atal Incubation Centre supported by Pinnacle, enabling scaling and commercialization of AI systems.",
     logo: (
-      <img src="/logos/aic-pinnacle.png" alt="AIC Pinnacle" className="h-full w-auto object-contain bg-white p-2 rounded-lg" />
+      <img src="/logos/aic-pinnacle.png" alt="AIC Pinnacle" className="max-h-[90px] max-w-[200px] w-auto h-auto object-contain bg-white p-2 rounded-lg" />
     ),
   },
   {
@@ -47,7 +46,7 @@ const ASSOCIATIONS = [
     category: "Industrial & Manufacturing Partner",
     desc: "Strategic industrial alignment for production scaling, design optimization, and manufacturing guidance.",
     logo: (
-      <img src="/logos/pinnacle.svg" alt="Pinnacle Industries" className="h-full w-auto object-contain bg-white p-2 rounded-lg" />
+      <img src="/logos/pinnacle.svg" alt="Pinnacle Industries" className="max-h-[90px] max-w-[200px] w-auto h-auto object-contain bg-white p-2 rounded-lg" />
     ),
   },
   {
@@ -55,7 +54,7 @@ const ASSOCIATIONS = [
     category: "Technology Associate",
     desc: "Synergistic tech exploration combining satellite data insights with localized mobile robotic systems.",
     logo: (
-      <img src="/logos/aumsat-new.png" alt="Aumsat Technologies" className="h-full w-auto object-contain bg-white p-2 rounded-lg" />
+      <img src="/logos/aumsat-new.png" alt="Aumsat Technologies" className="max-h-[90px] max-w-[200px] w-auto h-auto object-contain bg-white p-2 rounded-lg" />
     ),
   },
   {
@@ -63,7 +62,7 @@ const ASSOCIATIONS = [
     category: "Cleantech Associate",
     desc: "Joint engineering explorations to design and deploy specialized robots for environmental utilities.",
     logo: (
-      <img src="/logos/hydrocawach-new.png" alt="Hydrocawach Technologies" className="h-full w-auto object-contain bg-white p-2 rounded-lg" />
+      <img src="/logos/hydrocawach-new.png" alt="Hydrocawach Technologies" className="max-h-[90px] max-w-[200px] w-auto h-auto object-contain bg-white p-2 rounded-lg" />
     ),
   },
   {
@@ -71,7 +70,7 @@ const ASSOCIATIONS = [
     category: "Academic & Research Partner",
     desc: "Undergraduate research initiatives, technical workshops, and direct campus recruitment channels.",
     logo: (
-      <img src="/logos/ltce.png" alt="Lokmanya Tilak College" className="h-full w-auto object-contain bg-white p-2 rounded-lg" />
+      <img src="/logos/ltce.png" alt="Lokmanya Tilak College" className="max-h-[90px] max-w-[260px] w-auto h-auto object-contain bg-white p-2 rounded-lg" />
     ),
   },
   {
@@ -79,7 +78,7 @@ const ASSOCIATIONS = [
     category: "Media & Features Recognition",
     desc: "National media highlight and editorial coverage of our rapid growth and unique service robot lineup.",
     logo: (
-      <img src="/logos/silicon-new.png" alt="Silicon India" className="h-full w-auto object-contain bg-white p-2 rounded-lg" />
+      <img src="/logos/silicon-new.png" alt="Silicon India" className="max-h-[90px] max-w-[200px] w-auto h-auto object-contain bg-white p-2 rounded-lg" />
     ),
   },
   {
@@ -87,7 +86,7 @@ const ASSOCIATIONS = [
     category: "Startup & Media Coverage",
     desc: "International startup coverage, showcasing Techligence's vision for future humanoid interfaces.",
     logo: (
-      <img src="/logos/jumpstart-new.png" alt="Jumpstart Magazine" className="h-full w-auto object-contain bg-white p-2 rounded-lg" />
+      <img src="/logos/jumpstart-new.png" alt="Jumpstart Magazine" className="max-h-[90px] max-w-[200px] w-auto h-auto object-contain bg-white p-2 rounded-lg" />
     ),
   },
 ];
@@ -108,16 +107,259 @@ export default function CompanyPage() {
       
       {/* Page Content Container */}
       <div className="max-w-[1400px] mx-auto px-6 pt-36 pb-12 w-full relative z-10 flex flex-col justify-center">
-        <p className="text-cyan-400 uppercase tracking-[8px] mb-4 text-sm font-semibold">
-          WHO WE ARE
+        {/* About Techligence */}
+<section className="max-w-[1400px] mx-auto px-6 pb-20 w-full relative z-10">
+  <div className="rounded-3xl border border-[var(--theme-border)] bg-[var(--theme-card)] p-8 md:p-12">
+
+    <p className="text-cyan-500 uppercase tracking-[6px] text-xs font-semibold mb-3">
+      ABOUT TECHLIGENCE
+    </p>
+
+    <h2 className="text-3xl md:text-5xl font-black mb-6 text-[var(--theme-text)]">
+      India's AI-Powered Service Robot Company
+    </h2>
+
+    <p className="text-[var(--theme-text-secondary)] text-lg leading-relaxed max-w-4xl">
+      Techligence Robotics is focused on building intelligent service robots
+      for healthcare, hospitality, retail, corporate and educational
+      environments. We combine robotics, artificial intelligence and autonomous
+      technologies to create smart solutions that improve customer engagement,
+      visitor assistance and operational efficiency.
+    </p>
+
+    <div className="grid md:grid-cols-3 gap-6 mt-10">
+
+      <div className="rounded-2xl border border-[var(--theme-border)] bg-[var(--theme-background)] p-6">
+        <h3 className="text-cyan-500 font-bold mb-3">
+          Mission
+        </h3>
+        <p className="text-[var(--theme-text-secondary)] text-sm">
+          To innovate and deliver advanced robotic solutions that empower industries and enrich lives.
         </p>
-        <h1 className="text-5xl lg:text-7xl font-black tracking-[-2px] text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-300 to-cyan-500 uppercase mb-4">
-          COMPANY
-        </h1>
-        <div className="w-24 h-[2px] bg-cyan-400 mb-8"></div>
-        <p className="text-gray-400 text-lg max-w-xl leading-relaxed">
-          Discover the mission, technology, and engineering pioneers behind Techligence Robotics and our drive for seamless human-robot cooperation.
+      </div>
+
+      <div className="rounded-2xl border border-[var(--theme-border)] bg-[var(--theme-background)] p-6">
+        <h3 className="text-cyan-500 font-bold mb-3">
+          Industry
+        </h3>
+        <p className="text-[var(--theme-text-secondary)] text-sm">
+          Robotics, Artificial Intelligence & Automation
         </p>
+      </div>
+
+      <div className="rounded-2xl border border-[var(--theme-border)] bg-[var(--theme-background)] p-6">
+        <h3 className="text-cyan-500 font-bold mb-3">
+          Founded
+        </h3>
+        <p className="text-[var(--theme-text-secondary)] text-sm">
+          AI-powered service robotics and autonomous systems development.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+{/* Leadership Team */}
+<section className="max-w-[1400px] mx-auto px-6 pb-24 relative z-10">
+
+  <div className="text-center mb-16">
+    <p className="text-cyan-400 uppercase tracking-[6px] text-xs font-semibold mb-3">
+      LEADERSHIP TEAM
+    </p>
+
+    <h2 className="text-4xl md:text-5xl font-black mb-6">
+      The Team Behind Techligence
+    </h2>
+
+    <p className="text-gray-400 max-w-4xl mx-auto">
+      Techligence Robotics is driven by a multidisciplinary team of innovators,
+      engineers, researchers and business leaders dedicated to advancing
+      AI-powered service robotics and intelligent automation solutions.
+    </p>
+  </div>
+
+  {/* Founders */}
+  <div className="grid md:grid-cols-3 gap-8 mb-20">
+
+    <div className="bg-black/20 border border-cyan-500/20 rounded-3xl p-8 text-center">
+      <img
+        src="/team/kunal-gawhale.jpg"
+        alt="Kunal Gawhale"
+        className="w-40 h-40 rounded-full mx-auto mb-6 border-4 border-cyan-400 object-cover object-top shadow-[0_0_25px_rgba(0,255,255,0.3)]"
+      />
+      <h3 className="text-2xl font-bold">Kunal Gawhale</h3>
+      <p className="text-cyan-400 font-semibold">Founder & CEO</p>
+      <p className="text-sm text-gray-400 mt-2">M.Tech (EXTC), VJTI Mumbai</p>
+
+      <p className="text-gray-300 text-sm mt-4 leading-relaxed">
+        Leads product strategy, robotics innovation and business growth
+        initiatives focused on intelligent service robots.
+      </p>
+
+      <div className="mt-5 inline-flex items-center gap-2 px-5 py-2 rounded-full border border-cyan-400 bg-cyan-500/20 text-cyan-300 text-sm font-bold">
+        ⭐ 6+ Years Experience
+      </div>
+    </div>
+
+    <div className="bg-black/20 border border-cyan-500/20 rounded-3xl p-8 text-center">
+      <img
+        src="/team/priyanka-udmale.jpg"
+        alt="Priyanka Udmale"
+        className="w-40 h-40 rounded-full mx-auto mb-6 border-4 border-cyan-400 object-cover object-top shadow-[0_0_25px_rgba(0,255,255,0.3)]"
+      />
+      <h3 className="text-2xl font-bold">Priyanka Udmale</h3>
+      <p className="text-cyan-400 font-semibold">Co-Founder & CFO</p>
+      <p className="text-sm text-gray-400 mt-2">
+        Ph.D. Research Scholar (Pursuing), E&C, VJTI Mumbai
+      </p>
+
+      <p className="text-gray-300 text-sm mt-4 leading-relaxed">
+        Oversees financial planning, strategic partnerships and operational
+        growth while supporting innovation and commercialization.
+      </p>
+
+      <div className="mt-5 inline-flex items-center gap-2 px-5 py-2 rounded-full border border-cyan-400 bg-cyan-500/20 text-cyan-300 text-sm font-bold">
+        ⭐ 8+ Years Experience
+      </div>
+    </div>
+
+    <div className="bg-black/20 border border-cyan-500/20 rounded-3xl p-8 text-center">
+      <img
+        src="/team/dr-sandeep-udmale.jpg"
+        alt="Dr. Sandeep Udmale"
+        className="w-40 h-40 rounded-full mx-auto mb-6 border-4 border-cyan-400 object-cover object-top shadow-[0_0_25px_rgba(0,255,255,0.3)]"
+      />
+      <h3 className="text-2xl font-bold">Dr. Sandeep Udmale</h3>
+      <p className="text-cyan-400 font-semibold">Co-Founder & Director</p>
+      <p className="text-sm text-gray-400 mt-2">
+        Ph.D., IIT-BHU, Varanasi
+      </p>
+
+      <p className="text-gray-300 text-sm mt-4 leading-relaxed">
+        Provides technical leadership in artificial intelligence, robotics
+        research and autonomous systems development.
+      </p>
+
+      <div className="mt-5 inline-flex items-center gap-2 px-5 py-2 rounded-full border border-cyan-400 bg-cyan-500/20 text-cyan-300 text-sm font-bold">
+        ⭐ 16+ Years Experience
+      </div>
+    </div>
+
+  </div>
+
+{/* Advisory Board */}
+<div className="mt-10">
+  <h3 className="text-4xl font-bold text-center mb-12">
+    Advisory Board & Mentors
+  </h3>
+
+  <div className="grid md:grid-cols-4 gap-6">
+
+    {/* Mentor 1 */}
+    <div className="bg-black/20 border border-cyan-500/20 rounded-3xl p-6 text-center hover:border-cyan-400/40 transition-all duration-300">
+      <img
+        src="/team/surendra-agarwal.jpg"
+        alt="Surendra Agarwal"
+        className="w-28 h-28 rounded-full mx-auto mb-5 border-4 border-cyan-400 object-cover shadow-[0_0_20px_rgba(0,255,255,0.25)]"
+      />
+
+      <h4 className="text-xl font-bold">
+        Surendra Agarwal
+      </h4>
+
+      <p className="text-cyan-400 text-sm font-semibold mt-2">
+        Senior Industry Mentor
+      </p>
+
+      <p className="text-gray-400 text-sm mt-3">
+        Ex. Bajaj Auto, L&T
+      </p>
+
+      <div className="mt-5 inline-flex items-center gap-2 px-5 py-2 rounded-full border border-cyan-400 bg-cyan-500/20 text-cyan-300 text-sm font-bold">
+        ⭐ 52+ Years Experience
+      </div>
+    </div>
+
+    {/* Mentor 2 */}
+    <div className="bg-black/20 border border-cyan-500/20 rounded-3xl p-6 text-center hover:border-cyan-400/40 transition-all duration-300">
+      <img
+        src="/team/ashok-yavele.jpg"
+        alt="Ashok Yavele"
+        className="w-28 h-28 rounded-full mx-auto mb-5 border-4 border-cyan-400 object-cover shadow-[0_0_20px_rgba(0,255,255,0.25)]"
+      />
+
+      <h4 className="text-xl font-bold">
+        Ashok Yavele
+      </h4>
+
+      <p className="text-cyan-400 text-sm font-semibold mt-2">
+        Automotive Industry Advisor
+      </p>
+
+      <p className="text-gray-400 text-sm mt-3">
+        Ex. Force Motors
+      </p>
+
+      <div className="mt-5 inline-flex items-center gap-2 px-5 py-2 rounded-full border border-cyan-400 bg-cyan-500/20 text-cyan-300 text-sm font-bold">
+        ⭐ 45+ Years Experience
+      </div>
+    </div>
+
+    {/* Mentor 3 */}
+    <div className="bg-black/20 border border-cyan-500/20 rounded-3xl p-6 text-center hover:border-cyan-400/40 transition-all duration-300">
+      <img
+        src="/team/sunil-dhadiwal.jpg"
+        alt="Sunil Dhadiwal"
+        className="w-28 h-28 rounded-full mx-auto mb-5 border-4 border-cyan-400 object-cover shadow-[0_0_20px_rgba(0,255,255,0.25)]"
+      />
+
+      <h4 className="text-xl font-bold">
+        Sunil Dhadiwal
+      </h4>
+
+      <p className="text-cyan-400 text-sm font-semibold mt-2">
+        Business & Manufacturing Mentor
+      </p>
+
+      <p className="text-gray-400 text-sm mt-3">
+        CEO, AIC Pinnacle
+      </p>
+
+      <div className="mt-5 inline-flex items-center gap-2 px-5 py-2 rounded-full border border-cyan-400 bg-cyan-500/20 text-cyan-300 text-sm font-bold">
+        ⭐ 30+ Years Experience
+      </div>
+    </div>
+
+    {/* Mentor 4 */}
+    <div className="bg-black/20 border border-cyan-500/20 rounded-3xl p-6 text-center hover:border-cyan-400/40 transition-all duration-300">
+      <img
+        src="/team/chaitanya-rajguru.jpg"
+        alt="Chaitanya Rajguru"
+        className="w-28 h-28 rounded-full mx-auto mb-5 border-4 border-cyan-400 object-cover shadow-[0_0_20px_rgba(0,255,255,0.25)]"
+      />
+
+      <h4 className="text-xl font-bold">
+        Chaitanya Rajguru
+      </h4>
+
+      <p className="text-cyan-400 text-sm font-semibold mt-2">
+        Technology & Innovation Mentor
+      </p>
+
+      <p className="text-gray-400 text-sm mt-3">
+        Ex. Intel, KPIT, Whirlpool
+      </p>
+
+      <div className="mt-5 inline-flex items-center gap-2 px-5 py-2 rounded-full border border-cyan-400 bg-cyan-500/20 text-cyan-300 text-sm font-bold">
+        ⭐ 35+ Years Experience
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</section>
       </div>
       <div className="max-w-[1400px] mx-auto px-6 pb-10 w-full relative z-10">
         <p className="text-cyan-400 uppercase tracking-[6px] text-xs font-semibold mb-2 font-mono">
@@ -165,10 +407,12 @@ export default function CompanyPage() {
                         } pointer-events-none`} />
 
                         <div className="flex flex-col items-center w-full">
-                          {/* Organization Logo Area */}
-                          <div className="h-16 flex items-center justify-center mb-6 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-out transform group-hover:scale-105">
+                        {/* Organization Logo Area */}
+                        <div className="w-full h-20 flex items-center justify-center mb-4">
+                          <div className="w-[180px] h-[70px] flex items-center justify-center">
                             {org.logo}
                           </div>
+                        </div>
                         </div>
 
                         {isCta && (
