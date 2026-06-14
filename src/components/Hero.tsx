@@ -5,7 +5,7 @@ import RobotVideo from "./RobotVideo";
 export default function Hero() {
 
   return (
-    <section className="relative min-h-screen bg-[#050816] text-white flex items-center overflow-hidden pt-16 pb-8">
+    <section id="t2-mini-hero" className="relative min-h-screen bg-[#050816] text-white flex items-center overflow-hidden pt-16 pb-8">
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px] pointer-events-none"></div>
     <div className="absolute inset-0 overflow-hidden">
 
