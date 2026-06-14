@@ -1,5 +1,31 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Timeline from "@/components/Timeline";
+
+interface ExperienceBadgeProps {
+  years: string;
+}
+
+function ExperienceBadge({ years }: ExperienceBadgeProps) {
+  return (
+    <div className="mt-5 inline-flex items-center gap-2 px-5 py-2 rounded-full border border-cyan-400 bg-cyan-500/20 text-cyan-300 text-sm font-bold transition-all duration-300 hover:bg-cyan-500/30 hover:border-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.2)] group/badge">
+      <svg
+        className="w-4 h-4 text-cyan-400 fill-cyan-400/20 group-hover/badge:scale-110 transition-transform duration-300"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+      </svg>
+      <span>{years} Years Experience</span>
+    </div>
+  );
+}
+
+
 
 const ASSOCIATIONS = [
   {
@@ -197,9 +223,7 @@ export default function CompanyPage() {
         initiatives focused on intelligent service robots.
       </p>
 
-      <div className="mt-5 inline-flex items-center gap-2 px-5 py-2 rounded-full border border-cyan-400 bg-cyan-500/20 text-cyan-300 text-sm font-bold">
-        ⭐ 6+ Years Experience
-      </div>
+      <ExperienceBadge years="6+" />
     </div>
 
     <div className="bg-black/20 border border-cyan-500/20 rounded-3xl p-8 text-center">
@@ -219,9 +243,7 @@ export default function CompanyPage() {
         growth while supporting innovation and commercialization.
       </p>
 
-      <div className="mt-5 inline-flex items-center gap-2 px-5 py-2 rounded-full border border-cyan-400 bg-cyan-500/20 text-cyan-300 text-sm font-bold">
-        ⭐ 8+ Years Experience
-      </div>
+      <ExperienceBadge years="8+" />
     </div>
 
     <div className="bg-black/20 border border-cyan-500/20 rounded-3xl p-8 text-center">
@@ -241,9 +263,7 @@ export default function CompanyPage() {
         research and autonomous systems development.
       </p>
 
-      <div className="mt-5 inline-flex items-center gap-2 px-5 py-2 rounded-full border border-cyan-400 bg-cyan-500/20 text-cyan-300 text-sm font-bold">
-        ⭐ 16+ Years Experience
-      </div>
+      <ExperienceBadge years="16+" />
     </div>
 
   </div>
@@ -276,9 +296,7 @@ export default function CompanyPage() {
         Ex. Bajaj Auto, L&T
       </p>
 
-      <div className="mt-5 inline-flex items-center gap-2 px-5 py-2 rounded-full border border-cyan-400 bg-cyan-500/20 text-cyan-300 text-sm font-bold">
-        ⭐ 52+ Years Experience
-      </div>
+      <ExperienceBadge years="52+" />
     </div>
 
     {/* Mentor 2 */}
@@ -301,9 +319,7 @@ export default function CompanyPage() {
         Ex. Force Motors
       </p>
 
-      <div className="mt-5 inline-flex items-center gap-2 px-5 py-2 rounded-full border border-cyan-400 bg-cyan-500/20 text-cyan-300 text-sm font-bold">
-        ⭐ 45+ Years Experience
-      </div>
+      <ExperienceBadge years="45+" />
     </div>
 
     {/* Mentor 3 */}
@@ -326,9 +342,7 @@ export default function CompanyPage() {
         CEO, AIC Pinnacle
       </p>
 
-      <div className="mt-5 inline-flex items-center gap-2 px-5 py-2 rounded-full border border-cyan-400 bg-cyan-500/20 text-cyan-300 text-sm font-bold">
-        ⭐ 30+ Years Experience
-      </div>
+      <ExperienceBadge years="30+" />
     </div>
 
     {/* Mentor 4 */}
@@ -351,9 +365,7 @@ export default function CompanyPage() {
         Ex. Intel, KPIT, Whirlpool
       </p>
 
-      <div className="mt-5 inline-flex items-center gap-2 px-5 py-2 rounded-full border border-cyan-400 bg-cyan-500/20 text-cyan-300 text-sm font-bold">
-        ⭐ 35+ Years Experience
-      </div>
+      <ExperienceBadge years="35+" />
     </div>
 
   </div>
@@ -444,6 +456,8 @@ export default function CompanyPage() {
             );
           })()}
       </div>
+
+      <Timeline />
 
       <Footer />
     </main>
