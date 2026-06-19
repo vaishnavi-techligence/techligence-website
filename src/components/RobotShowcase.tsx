@@ -669,46 +669,53 @@ export default function RobotShowcase() {
 
                 {(() => {
                   // Apply dynamic filter selection (remove-black-showcase for black bg, remove-green-showcase for green bg) and WebkitClipPath to hide watermark
+                  // Bypass Safari's buggy CSS variable parser for filters by using the URL directly
+                  const filterId = "url(#remove-green-showcase)";
                   const isLandscape = ["tella-s", "nova-m1"].includes(activeRobot.id);
-                  const filterId = "var(--filter-remove-green-showcase)";
                   
                   const layoutAdjustment = ROBOT_LAYOUT_ADJUSTMENTS[activeRobot.id] || { scale: 1.0, translateY: "0%", bottomClip: "100%", topClip: "0" };
                   const bottomClipNum = parseFloat(layoutAdjustment.bottomClip || "100");
                   const bottomCrop = 100 - bottomClipNum;
                   const topCrop = parseFloat(layoutAdjustment.topClip || "0");
 
-                    const videoStyle: React.CSSProperties = isLandscape
-                    ? {
-                        "--current-robot-filter": filterId,
-                        WebkitFilter: filterId,
-                        filter: filterId,
-                        "--top-crop": `${topCrop}%`,
-                        "--top-crop-fade": `${topCrop + 3}%`,
-                        "--bottom-clip-fade": `${bottomClipNum - 4}%`,
-                        "--bottom-clip": `${bottomClipNum}%`,
-                        height: "100%",
-                        width: "auto",
-                        maxWidth: "none",
-                        aspectRatio: "16 / 9",
-                        clipPath: `inset(0 34.375% 0 34.375%)`,
-                        WebkitClipPath: `inset(0 34.375% 0 34.375%)`,
-                        backgroundColor: "transparent",
-                      } as React.CSSProperties
-                    : {
-                        "--current-robot-filter": filterId,
-                        WebkitFilter: filterId,
-                        filter: filterId,
-                        "--top-crop": `${topCrop}%`,
-                        "--top-crop-fade": `${topCrop + 3}%`,
-                        "--bottom-clip-fade": `${bottomClipNum - 4}%`,
-                        "--bottom-clip": `${bottomClipNum}%`,
-                        height: "100%",
-                        width: "auto",
-                        aspectRatio: "9 / 16",
-                        clipPath: `inset(0 3% 0 3%)`,
-                        WebkitClipPath: `inset(0 3% 0 3%)`,
-                        backgroundColor: "transparent",
-                      } as React.CSSProperties;
+                  // The wrapper handles clipping, masking, and floating animation
+                  const wrapperStyle: React.CSSProperties = isLandscape
+                  ? {
+                      "--top-crop": `${topCrop}%`,
+                      "--top-crop-fade": `${topCrop + 3}%`,
+                      "--bottom-clip-fade": `${bottomClipNum - 4}%`,
+                      "--bottom-clip": `${bottomClipNum}%`,
+                      clipPath: `inset(0 34.375% 0 34.375%)`,
+                      WebkitClipPath: `inset(0 34.375% 0 34.375%)`,
+                    } as React.CSSProperties
+                  : {
+                      "--top-crop": `${topCrop}%`,
+                      "--top-crop-fade": `${topCrop + 3}%`,
+                      "--bottom-clip-fade": `${bottomClipNum - 4}%`,
+                      "--bottom-clip": `${bottomClipNum}%`,
+                      clipPath: `inset(0 3% 0 3%)`,
+                      WebkitClipPath: `inset(0 3% 0 3%)`,
+                    } as React.CSSProperties;
+
+                  // The inner video handles ONLY the SVG chroma key filter
+                  const videoStyle: React.CSSProperties = isLandscape
+                  ? {
+                      WebkitFilter: filterId,
+                      filter: filterId,
+                      height: "100%",
+                      width: "auto",
+                      maxWidth: "none",
+                      aspectRatio: "16 / 9",
+                      backgroundColor: "transparent",
+                    } as React.CSSProperties
+                  : {
+                      WebkitFilter: filterId,
+                      filter: filterId,
+                      height: "100%",
+                      width: "auto",
+                      aspectRatio: "9 / 16",
+                      backgroundColor: "transparent",
+                    } as React.CSSProperties;
 
                   return activeView === "video" && activeRobot.video ? (
                     !videoError ? (
@@ -722,22 +729,28 @@ export default function RobotShowcase() {
                             </span>
                           </div>
                         )}
-                        {/* Video playing */}
-                        <video
-                          ref={videoRef}
-                          key={activeRobot.id}
-                          src={activeRobot.video}
-                          preload="auto"
-                          loop muted playsInline autoPlay
-                          onPlaying={() => setIsVideoPlaying(true)}
-                          onCanPlay={() => setIsVideoPlaying(true)}
-                          className="robot-media robot-media-mask h-full w-auto max-w-full object-contain robot-float pointer-events-none relative transition-opacity duration-300 z-20"
+                        {/* Video Wrapper: Handles Masking and Animation */}
+                        <div 
+                          className="robot-media-mask h-full w-auto max-w-full object-contain robot-float pointer-events-none relative transition-opacity duration-300 z-20 flex items-center justify-center"
                           style={{
-                            ...videoStyle,
+                            ...wrapperStyle,
                             opacity: isVideoPlaying ? 1 : 0
                           }}
-                          onError={() => setVideoError(true)}
-                        />
+                        >
+                          {/* Inner Video: Handles ONLY Chroma Key Filtering */}
+                          <video
+                            ref={videoRef}
+                            key={activeRobot.id}
+                            src={activeRobot.video}
+                            preload="auto"
+                            loop muted playsInline autoPlay
+                            onPlaying={() => setIsVideoPlaying(true)}
+                            onCanPlay={() => setIsVideoPlaying(true)}
+                            className="h-full w-auto max-w-full object-contain pointer-events-none"
+                            style={videoStyle}
+                            onError={() => setVideoError(true)}
+                          />
+                        </div>
                       </div>
                     ) : (
                       <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-md z-10">
