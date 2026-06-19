@@ -41,7 +41,7 @@ export default function SolutionsPage() {
               className="w-full h-full object-contain rounded-xl"
             />
             {/* Watermark Mask / Brand Overlay */}
-            <div className="absolute bottom-11 right-6 px-3 py-2 bg-[#050816]/95 backdrop-blur-md border border-cyan-500/30 rounded-xl text-[8px] font-mono font-black tracking-widest text-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.25)] select-none uppercase pointer-events-none">
+            <div className="absolute bottom-3 right-3 px-4 py-3 bg-[#050816] border border-cyan-500/30 rounded-xl text-[8px] font-mono font-black tracking-widest text-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.25)] select-none uppercase pointer-events-none z-10 flex items-center justify-center">
               TECHLIGENCE // SECURE
             </div>
           </div>
@@ -134,7 +134,7 @@ export default function SolutionsPage() {
               className="w-full h-full object-contain rounded-xl"
             />
             {/* Watermark Mask / Brand Overlay */}
-            <div className="absolute bottom-11 right-6 px-3 py-2 bg-[#050816]/95 backdrop-blur-md border border-cyan-500/30 rounded-xl text-[8px] font-mono font-black tracking-widest text-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.25)] select-none uppercase pointer-events-none">
+            <div className="absolute bottom-3 right-3 px-4 py-3 bg-[#050816] border border-cyan-500/30 rounded-xl text-[8px] font-mono font-black tracking-widest text-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.25)] select-none uppercase pointer-events-none z-10 flex items-center justify-center">
               TECHLIGENCE // SECURE
             </div>
           </div>
