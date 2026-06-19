@@ -12,7 +12,11 @@ interface ChromaKeyVideoProps {
 
 /**
  * Canvas-based green screen removal that works on ALL browsers including Safari/iPad.
- * Reads each video frame, processes pixels to make green → transparent, draws to canvas.
+ * 
+ * Key iOS Safari requirements:
+ * 1. The <video> element MUST be in the DOM (not just document.createElement)
+ * 2. It must have playsinline and muted for autoplay to work
+ * 3. drawImage from video is only allowed when video is actually playing
  */
 export default function ChromaKeyVideo({
   src,
@@ -22,110 +26,144 @@ export default function ChromaKeyVideo({
   onError,
 }: ChromaKeyVideoProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const animFrameRef = useRef<number>(0);
-  const [dimensions, setDimensions] = useState({ w: 0, h: 0 });
+  const isProcessingRef = useRef(false);
+  const [ready, setReady] = useState(false);
 
   const processFrame = useCallback(() => {
     const video = videoRef.current;
     const canvas = canvasRef.current;
-    if (!video || !canvas || video.paused || video.ended) {
+    
+    if (!video || !canvas || video.paused || video.ended || video.readyState < 2) {
       animFrameRef.current = requestAnimationFrame(processFrame);
       return;
     }
 
     const ctx = canvas.getContext("2d", { willReadFrequently: true });
-    if (!ctx) return;
+    if (!ctx) {
+      animFrameRef.current = requestAnimationFrame(processFrame);
+      return;
+    }
+
+    // Ensure canvas matches video dimensions
+    if (canvas.width !== video.videoWidth || canvas.height !== video.videoHeight) {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+    }
 
     const w = canvas.width;
     const h = canvas.height;
-
-    // Draw current video frame to canvas
-    ctx.drawImage(video, 0, 0, w, h);
-
-    // Read all pixels
-    const imageData = ctx.getImageData(0, 0, w, h);
-    const data = imageData.data;
-
-    // Process each pixel: detect green and make transparent
-    for (let i = 0; i < data.length; i += 4) {
-      const r = data[i];
-      const g = data[i + 1];
-      const b = data[i + 2];
-
-      // Green screen detection:
-      // Green channel must be dominant and above a threshold
-      const greenDominance = g - Math.max(r, b);
-      
-      if (g > 80 && greenDominance > 30) {
-        // Pure green screen → fully transparent
-        data[i + 3] = 0;
-      } else if (g > 60 && greenDominance > 15) {
-        // Edge/fringe area → partial transparency + despill
-        const alpha = Math.max(0, 255 - (greenDominance - 15) * 12);
-        data[i + 3] = Math.min(data[i + 3], alpha);
-        // Despill: reduce green fringing on edges
-        data[i + 1] = Math.min(g, Math.max(r, b));
-      }
+    if (w === 0 || h === 0) {
+      animFrameRef.current = requestAnimationFrame(processFrame);
+      return;
     }
 
-    ctx.putImageData(imageData, 0, 0);
+    try {
+      // Draw current video frame
+      ctx.drawImage(video, 0, 0, w, h);
+
+      // Read all pixels
+      const imageData = ctx.getImageData(0, 0, w, h);
+      const d = imageData.data;
+
+      // Process pixels: green screen → transparent
+      for (let i = 0; i < d.length; i += 4) {
+        const r = d[i];
+        const g = d[i + 1];
+        const b = d[i + 2];
+
+        // How much greener is this pixel than other channels?
+        const maxRB = r > b ? r : b;
+        const greenDominance = g - maxRB;
+
+        if (g > 80 && greenDominance > 25) {
+          // Solid green → fully transparent
+          d[i + 3] = 0;
+        } else if (g > 55 && greenDominance > 10) {
+          // Fringe/edge → partial transparency + despill green
+          const alpha = 255 - Math.min(255, (greenDominance - 10) * 15);
+          d[i + 3] = alpha;
+          // Despill: cap green to max of red/blue to remove green tint on edges
+          d[i + 1] = Math.min(g, maxRB + 10);
+        }
+      }
+
+      ctx.putImageData(imageData, 0, 0);
+
+      // Signal ready on first successful frame
+      if (!isProcessingRef.current) {
+        isProcessingRef.current = true;
+        setReady(true);
+        onReady?.();
+      }
+    } catch {
+      // Security error from tainted canvas — ignore and retry
+    }
+
     animFrameRef.current = requestAnimationFrame(processFrame);
-  }, []);
+  }, [onReady]);
 
   useEffect(() => {
-    const video = document.createElement("video");
-    video.crossOrigin = "anonymous";
-    video.playsInline = true;
-    video.muted = true;
-    video.loop = true;
-    video.autoplay = true;
-    video.preload = "auto";
-    // Needed for iOS Safari to allow autoplay
-    video.setAttribute("playsinline", "");
-    video.setAttribute("webkit-playsinline", "");
-    
-    video.src = src;
-    videoRef.current = video;
+    const video = videoRef.current;
+    if (!video) return;
 
-    video.addEventListener("loadedmetadata", () => {
-      const w = video.videoWidth;
-      const h = video.videoHeight;
-      setDimensions({ w, h });
-      if (canvasRef.current) {
-        canvasRef.current.width = w;
-        canvasRef.current.height = h;
-      }
-    });
+    const handlePlay = () => {
+      // Start render loop only when video is actually playing
+      cancelAnimationFrame(animFrameRef.current);
+      animFrameRef.current = requestAnimationFrame(processFrame);
+    };
 
-    video.addEventListener("canplay", () => {
-      video.play().catch(() => {});
-      onReady?.();
-    });
-
-    video.addEventListener("error", () => {
+    const handleError = () => {
       onError?.();
-    });
+    };
 
-    // Start the render loop
-    animFrameRef.current = requestAnimationFrame(processFrame);
+    video.addEventListener("playing", handlePlay);
+    video.addEventListener("error", handleError);
+
+    // Attempt to play (muted videos can autoplay on iOS)
+    video.play().catch(() => {
+      // Autoplay blocked — will retry on user interaction
+    });
 
     return () => {
+      video.removeEventListener("playing", handlePlay);
+      video.removeEventListener("error", handleError);
       cancelAnimationFrame(animFrameRef.current);
-      video.pause();
-      video.removeAttribute("src");
-      video.load();
-      videoRef.current = null;
     };
-  }, [src, processFrame, onReady, onError]);
+  }, [src, processFrame, onError]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      width={dimensions.w || 1}
-      height={dimensions.h || 1}
-      className={className}
-      style={style}
-    />
+    <div className={className} style={{ ...style, position: "relative" }}>
+      {/* Hidden video element IN the DOM — required for iOS Safari */}
+      <video
+        ref={videoRef}
+        src={src}
+        muted
+        loop
+        playsInline
+        autoPlay
+        preload="auto"
+        style={{
+          position: "absolute",
+          width: "1px",
+          height: "1px",
+          opacity: 0,
+          pointerEvents: "none",
+          zIndex: -1,
+        }}
+      />
+      {/* Visible canvas where processed (transparent) frames are drawn */}
+      <canvas
+        ref={canvasRef}
+        className="w-full h-full"
+        style={{
+          display: "block",
+          width: "100%",
+          height: "100%",
+          objectFit: "contain",
+        }}
+      />
+    </div>
   );
 }
