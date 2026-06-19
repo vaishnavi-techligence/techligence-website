@@ -753,7 +753,7 @@ export default function RobotShowcase() {
                               height: "100%",
                               maxWidth: "none",
                               ...( (() => {
-                                const viewAdjust = layoutAdjustment.views && activeView !== "video" && activeView !== "wave" ? layoutAdjustment.views[activeView] : null;
+                                const viewAdjust = layoutAdjustment.views && activeView !== "wave" ? layoutAdjustment.views[activeView] : null;
                                 if (viewAdjust) {
                                   return { scale: viewAdjust.scale, translate: `0 ${viewAdjust.translateY}` };
                                 }
