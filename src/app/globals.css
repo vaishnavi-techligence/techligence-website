@@ -48,13 +48,11 @@ body {
 .robot-media {
   -webkit-filter: var(--current-robot-filter);
   filter: var(--current-robot-filter);
-  transform: translateZ(0); /* Fix Safari hardware acceleration bugs */
 }
 
 [data-theme="light"] .robot-media {
   -webkit-filter: var(--current-robot-filter);
   filter: var(--current-robot-filter);
-  transform: translateZ(0);
 }
 
 .robot-media-mask {

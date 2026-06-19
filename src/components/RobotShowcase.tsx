@@ -680,6 +680,8 @@ export default function RobotShowcase() {
                     const videoStyle: React.CSSProperties = isLandscape
                     ? {
                         "--current-robot-filter": filterId,
+                        WebkitFilter: filterId,
+                        filter: filterId,
                         "--top-crop": `${topCrop}%`,
                         "--top-crop-fade": `${topCrop + 3}%`,
                         "--bottom-clip-fade": `${bottomClipNum - 4}%`,
@@ -694,6 +696,8 @@ export default function RobotShowcase() {
                       } as React.CSSProperties
                     : {
                         "--current-robot-filter": filterId,
+                        WebkitFilter: filterId,
+                        filter: filterId,
                         "--top-crop": `${topCrop}%`,
                         "--top-crop-fade": `${topCrop + 3}%`,
                         "--bottom-clip-fade": `${bottomClipNum - 4}%`,
