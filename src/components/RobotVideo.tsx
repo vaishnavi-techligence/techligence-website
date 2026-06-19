@@ -59,7 +59,7 @@ export default function RobotVideo() {
           
           {isSafari ? (
             <img
-              src="/robots/andy-r1.png"
+              src="/robots/t2-mini-front.png"
               alt="Robot"
               className="pointer-events-none w-full h-auto relative z-20 object-contain"
               style={{

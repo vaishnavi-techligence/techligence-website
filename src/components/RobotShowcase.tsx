@@ -273,7 +273,10 @@ export default function RobotShowcase() {
       // Detect Safari on macOS (must contain safari but not chrome/chromium/android)
       const isMacSafari = /^((?!chrome|android|crios|fxios).)*safari/i.test(ua);
       
-      setIsSafari(isIOS || isMacSafari);
+      if (isIOS || isMacSafari) {
+        setIsSafari(true);
+        setActiveView(prev => prev === "video" ? "front" : prev);
+      }
     }
   }, []);
 
@@ -798,7 +801,7 @@ export default function RobotShowcase() {
                 { view: "front", label: "FRONT" },
                 { view: "side",  label: "SIDE" },
                 { view: "back",  label: "BACK" },
-              ].map(({ view, label }) => {
+              ].filter(({ view }) => !(isSafari && view === "video")).map(({ view, label }) => {
                 const isActive = activeView === view;
                 return (
                   <button
@@ -831,7 +834,7 @@ export default function RobotShowcase() {
                   { view: "front", label: "FRONT VIEW", idx: "02" },
                   { view: "side",  label: "SIDE VIEW",  idx: "03" },
                   { view: "back",  label: "BACK VIEW",  idx: "04" },
-                ].map(({ view, label, idx }) => {
+                ].filter(({ view }) => !(isSafari && view === "video")).map(({ view, label, idx }) => {
                   const isActive = activeView === view;
                   return (
                     <button
