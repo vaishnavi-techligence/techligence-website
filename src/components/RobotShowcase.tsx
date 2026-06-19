@@ -264,12 +264,16 @@ export default function RobotShowcase() {
 
   const [showHud, setShowHud] = useState(true);
 
-  // Detect Safari/WebKit — SVG filters on <video> are broken there
+  // Detect Safari/WebKit/iOS — SVG filters on <video> are broken there
   useEffect(() => {
     if (typeof navigator !== "undefined") {
-      const ua = navigator.userAgent;
-      const webkit = /AppleWebKit/.test(ua) && !/Chrome/.test(ua) && !/Chromium/.test(ua);
-      setIsSafari(webkit);
+      const ua = navigator.userAgent.toLowerCase();
+      // Detect iOS devices (iPhone, iPod, iPad) and iPadOS running in desktop mode
+      const isIOS = /iphone|ipad|ipod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      // Detect Safari on macOS (must contain safari but not chrome/chromium/android)
+      const isMacSafari = /^((?!chrome|android|crios|fxios).)*safari/i.test(ua);
+      
+      setIsSafari(isIOS || isMacSafari);
     }
   }, []);
 
