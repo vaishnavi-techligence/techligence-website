@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import ChromaKeyVideo from "./ChromaKeyVideo";
 
 // Robot Profiles Data matching the approved implementation plan
 interface Robot {
@@ -668,17 +669,12 @@ export default function RobotShowcase() {
 
 
                 {(() => {
-                  // Apply dynamic filter selection (remove-black-showcase for black bg, remove-green-showcase for green bg) and WebkitClipPath to hide watermark
-                  // Bypass Safari's buggy CSS variable parser for filters by using the URL directly
-                  const filterId = "url(#remove-green-showcase)";
                   const isLandscape = ["tella-s", "nova-m1"].includes(activeRobot.id);
                   
                   const layoutAdjustment = ROBOT_LAYOUT_ADJUSTMENTS[activeRobot.id] || { scale: 1.0, translateY: "0%", bottomClip: "100%", topClip: "0" };
                   const bottomClipNum = parseFloat(layoutAdjustment.bottomClip || "100");
-                  const bottomCrop = 100 - bottomClipNum;
                   const topCrop = parseFloat(layoutAdjustment.topClip || "0");
 
-                  // The wrapper handles clipping, masking, and floating animation
                   const wrapperStyle: React.CSSProperties = isLandscape
                   ? {
                       "--top-crop": `${topCrop}%`,
@@ -697,25 +693,18 @@ export default function RobotShowcase() {
                       WebkitClipPath: `inset(0 3% 0 3%)`,
                     } as React.CSSProperties;
 
-                  // The inner video handles ONLY the SVG chroma key filter
-                  const videoStyle: React.CSSProperties = isLandscape
+                  const canvasStyle: React.CSSProperties = isLandscape
                   ? {
-                      WebkitFilter: filterId,
-                      filter: filterId,
                       height: "100%",
                       width: "auto",
                       maxWidth: "none",
                       aspectRatio: "16 / 9",
-                      backgroundColor: "transparent",
-                    } as React.CSSProperties
+                    }
                   : {
-                      WebkitFilter: filterId,
-                      filter: filterId,
                       height: "100%",
                       width: "auto",
                       aspectRatio: "9 / 16",
-                      backgroundColor: "transparent",
-                    } as React.CSSProperties;
+                    };
 
                   return activeView === "video" && activeRobot.video ? (
                     !videoError ? (
@@ -729,25 +718,20 @@ export default function RobotShowcase() {
                             </span>
                           </div>
                         )}
-                        {/* Video Wrapper: Handles Masking and Animation */}
+                        {/* Canvas-based chroma key: works on ALL browsers including Safari/iPad */}
                         <div 
-                          className="robot-media-mask h-full w-auto max-w-full object-contain robot-float pointer-events-none relative transition-opacity duration-300 z-20 flex items-center justify-center"
+                          className="robot-media-mask h-full w-auto max-w-full robot-float pointer-events-none relative transition-opacity duration-300 z-20 flex items-center justify-center"
                           style={{
                             ...wrapperStyle,
                             opacity: isVideoPlaying ? 1 : 0
                           }}
                         >
-                          {/* Inner Video: Handles ONLY Chroma Key Filtering */}
-                          <video
-                            ref={videoRef}
+                          <ChromaKeyVideo
                             key={activeRobot.id}
                             src={activeRobot.video}
-                            preload="auto"
-                            loop muted playsInline autoPlay
-                            onPlaying={() => setIsVideoPlaying(true)}
-                            onCanPlay={() => setIsVideoPlaying(true)}
                             className="h-full w-auto max-w-full object-contain pointer-events-none"
-                            style={videoStyle}
+                            style={canvasStyle}
+                            onReady={() => setIsVideoPlaying(true)}
                             onError={() => setVideoError(true)}
                           />
                         </div>
