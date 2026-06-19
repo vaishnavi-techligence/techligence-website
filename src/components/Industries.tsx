@@ -1,6 +1,6 @@
 export default function Industries() {
   return (
-    <section className="py-32 bg-[#050816]">
+    <section className="pt-8 pb-32 bg-[#050816]">
 
       <div className="max-w-7xl mx-auto px-6">
 
@@ -12,26 +12,32 @@ export default function Industries() {
           Built For Every Business
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+          {/* Card 0: Mall & Retail */}
+          <div className="robot-card p-[2px]">
+            <div className="bg-cyan-950/10 border border-cyan-500/20 rounded-3xl p-8 h-full relative overflow-hidden">
+
+              <h3 className="text-3xl font-bold">
+                Mall & Retail
+              </h3>
+
+              <p className="text-gray-400 mt-4">
+                Store navigation, product lookup, and customer assistance.
+              </p>
+
+              <a href="/solutions#mall" className="secondary-explore-btn mt-8 group">
+                <span>EXPLORE</span>
+                <span className="transform group-hover:translate-x-1.5 transition-transform duration-300">→</span>
+              </a>
+
+            </div>
+          </div>
 
           {/* Card 1 */}
           <div className="robot-card p-[2px]">
-            <div className="bg-[#050816] rounded-3xl p-8 h-full relative overflow-hidden">
-            <div
-  className="
-    absolute
-    -top-2
-    -right-4
-    text-[100px]
-    font-black
-    text-white/[0.03]
-    select-none
-    pointer-events-none
-    leading-none
-  "
->
-  CORPORATE
-</div>
+            <div className="bg-cyan-950/10 border border-cyan-500/20 rounded-3xl p-8 h-full relative overflow-hidden">
+
               <h3 className="text-3xl font-bold">
                 Corporate
               </h3>
@@ -50,22 +56,8 @@ export default function Industries() {
 
           {/* Card 2 */}
           <div className="robot-card p-[2px]">
-            <div className="bg-[#050816] rounded-3xl p-8 h-full relative overflow-hidden">
-            <div
-  className="
-    absolute
-    -top-2
-    -right-4
-    text-[90px]
-    font-black
-    text-white/[0.03]
-    select-none
-    pointer-events-none
-    leading-none
-  "
->
-  HOSPITALITY
-</div>
+            <div className="bg-cyan-950/10 border border-cyan-500/20 rounded-3xl p-8 h-full relative overflow-hidden">
+
               <h3 className="text-3xl font-bold">
                 Hospitality
               </h3>
@@ -84,22 +76,8 @@ export default function Industries() {
 
           {/* Card 3 */}
           <div className="robot-card p-[2px]">
-            <div className="bg-[#050816] rounded-3xl p-8 h-full relative overflow-hidden">
-<div
-  className="
-    absolute
-    -top-2
-    -right-4
-    text-[90px]
-    font-black
-    text-white/[0.03]
-    select-none
-    pointer-events-none
-    leading-none
-  "
->
-  HEALTHCARE
-</div>
+            <div className="bg-cyan-950/10 border border-cyan-500/20 rounded-3xl p-8 h-full relative overflow-hidden">
+
               <h3 className="text-3xl font-bold">
                 Healthcare
               </h3>

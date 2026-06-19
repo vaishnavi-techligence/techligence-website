@@ -66,10 +66,12 @@ export default function RobotVideo() {
             onError={handleVideoError}
             className="pointer-events-none w-full h-auto relative transition-opacity duration-300 z-20"
             style={{
-              transform: "translateY(-14.8%) scale(0.92)",
+              transform: "translateY(-10%) scale(0.92)",
               filter: "var(--filter-remove-green) contrast(1.05) brightness(1.02)",
               clipPath: "inset(0% 3% 0% 3%)",
               WebkitClipPath: "inset(0% 3% 0% 3%)",
+              maskImage: "linear-gradient(to bottom, black 90%, transparent 100%)",
+              WebkitMaskImage: "linear-gradient(to bottom, black 90%, transparent 100%)",
               opacity: isVideoPlaying ? 1 : 0,
             }}
           />

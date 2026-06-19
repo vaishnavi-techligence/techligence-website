@@ -158,71 +158,53 @@ const TIMELINE_YEARS = [
 
 export default function Timeline() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [displayIndex, setDisplayIndex] = useState(0);
-  const [isFading, setIsFading] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  const touchStartX = useRef(0);
-  const touchEndX = useRef(0);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+    const container = containerRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const scrollLeft = container.scrollLeft;
+      const centerPos = scrollLeft + container.clientWidth / 2;
+      
+      const children = Array.from(container.children) as HTMLElement[];
+      let closestIndex = 0;
+      let minDistance = Infinity;
+
+      children.forEach((child, index) => {
+        const childCenter = child.offsetLeft + child.offsetWidth / 2;
+        const distance = Math.abs(centerPos - childCenter);
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestIndex = index;
+        }
+      });
+
+      setActiveIndex(closestIndex);
     };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+
+    container.addEventListener("scroll", handleScroll, { passive: true });
+    // Trigger once on mount
+    handleScroll();
+    
+    return () => container.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavigate = (nextIndex: number) => {
-    if (nextIndex < 0 || nextIndex >= MILESTONES.length || isFading || nextIndex === activeIndex) return;
-    setIsFading(true);
-
-    setTimeout(() => {
-      setDisplayIndex(nextIndex);
-      setActiveIndex(nextIndex);
-      setIsFading(false);
-    }, 300);
-  };
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.targetTouches[0].clientX;
-    touchEndX.current = e.targetTouches[0].clientX;
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    touchEndX.current = e.targetTouches[0].clientX;
-  };
-
-  const handleTouchEnd = () => {
-    const diff = touchStartX.current - touchEndX.current;
-    if (diff > 50) {
-      if (activeIndex < MILESTONES.length - 1) {
-        handleNavigate(activeIndex + 1);
-      }
-    } else if (diff < -50) {
-      if (activeIndex > 0) {
-        handleNavigate(activeIndex - 1);
+  const handleNavigateYear = (index: number) => {
+    const container = containerRef.current;
+    if (container) {
+      const children = Array.from(container.children) as HTMLElement[];
+      const targetChild = children[index];
+      if (targetChild) {
+        container.scrollTo({
+          left: targetChild.offsetLeft - container.clientWidth / 2 + targetChild.offsetWidth / 2,
+          behavior: 'smooth'
+        });
       }
     }
   };
 
-  // Keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight") {
-        if (activeIndex < MILESTONES.length - 1) handleNavigate(activeIndex + 1);
-      } else if (e.key === "ArrowLeft") {
-        if (activeIndex > 0) handleNavigate(activeIndex - 1);
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [activeIndex]);
-
-  const current = MILESTONES[displayIndex];
-
-  // Helper to find active year index
   const getActiveYearIndex = () => {
     for (let i = TIMELINE_YEARS.length - 1; i >= 0; i--) {
       if (activeIndex >= TIMELINE_YEARS[i].startIndex) {
@@ -235,26 +217,8 @@ export default function Timeline() {
   const activeYearIdx = getActiveYearIndex();
   const activeYear = TIMELINE_YEARS[activeYearIdx];
 
-  // Dynamic layout measurements
-  const getSlideWidth = (aspect: number) => {
-    const height = isMobile ? 190 : 330;
-    return height * aspect;
-  };
-
-  const getTranslateOffset = () => {
-    const gap = isMobile ? 16 : 28;
-    let offset = 0;
-    for (let i = 0; i < activeIndex; i++) {
-      offset += getSlideWidth(MILESTONES[i].aspect) + gap;
-    }
-    offset += getSlideWidth(MILESTONES[activeIndex].aspect) / 2;
-    return offset;
-  };
-
-  const activeTranslate = getTranslateOffset();
-
   return (
-    <section className="timeline-section w-full py-24 px-4 md:px-6 relative overflow-hidden flex flex-col items-center justify-center select-none">
+    <section className="timeline-section w-full py-24 relative overflow-hidden flex flex-col items-center justify-center">
       
       {/* Dynamic Theme Stylesheet */}
       <style>{`
@@ -287,45 +251,14 @@ export default function Timeline() {
           -webkit-text-fill-color: transparent;
         }
 
-        /* Continuous Horizontal Slider CSS Math */
-        .timeline-slider-viewport {
-          width: 100%;
-          overflow: hidden;
-          position: relative;
-          padding: 24px 0;
-          touch-action: pan-y;
-        }
-
-        .timeline-slider-track {
-          display: flex;
-          align-items: center;
-          position: relative;
-          left: 50%;
-          transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-          will-change: transform;
-          gap: 16px;
-          touch-action: pan-y;
-        }
-
         .timeline-slide-item {
-          height: 190px;
           background-color: #121212;
           border: 1px solid rgba(255, 255, 255, 0.08);
           transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-          touch-action: pan-y;
         }
         html[data-theme="light"] .timeline-slide-item {
           background-color: #ffffff;
           border: 1px solid rgba(15, 23, 42, 0.08);
-        }
-
-        @media (min-width: 768px) {
-          .timeline-slider-track {
-            gap: 28px;
-          }
-          .timeline-slide-item {
-            height: 330px;
-          }
         }
 
         .timeline-year-text {
@@ -340,28 +273,6 @@ export default function Timeline() {
         }
         html[data-theme="light"] .timeline-caption {
           color: #475569;
-        }
-
-        .timeline-arrow-btn {
-          background-color: rgba(20, 20, 20, 0.6);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          color: rgba(255, 255, 255, 0.6);
-        }
-        .timeline-arrow-btn:hover:not(:disabled) {
-          background-color: rgba(30, 30, 30, 0.85);
-          border-color: rgba(255, 255, 255, 0.25);
-          color: #ffffff;
-        }
-        html[data-theme="light"] .timeline-arrow-btn {
-          background-color: rgba(255, 255, 255, 0.85);
-          border: 1px solid rgba(15, 23, 42, 0.08);
-          color: rgba(15, 23, 42, 0.6);
-          box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
-        }
-        html[data-theme="light"] .timeline-arrow-btn:hover:not(:disabled) {
-          background-color: #ffffff;
-          border-color: rgba(15, 23, 42, 0.2);
-          color: #0f172a;
         }
 
         .timeline-track-bg {
@@ -393,10 +304,18 @@ export default function Timeline() {
         html[data-theme="light"] .timeline-label-active {
           color: #0f172a;
         }
+        
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .hide-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
       `}</style>
 
       {/* Header Section */}
-      <div className="text-center mb-10 relative z-10">
+      <div className="text-center mb-10 relative z-10 px-4">
         <span className="timeline-header-sub font-mono text-[10px] md:text-[11px] tracking-[0.45em] uppercase mb-2.5 block">
           // CHRONOLOGY OF MILESTONES
         </span>
@@ -406,106 +325,68 @@ export default function Timeline() {
         <div className="w-16 h-[2px] bg-cyan-500/50 mx-auto mt-4" />
       </div>
 
-      {/* Continuous Sliding Carousel Viewport */}
-      <div className="w-full max-w-6xl relative z-10 flex items-center justify-between">
-        
-        {/* Left Arrow Button */}
-        <div className="absolute left-2 md:left-6 z-20">
-          <button
-            onClick={() => handleNavigate(activeIndex - 1)}
-            disabled={activeIndex === 0}
-            className={`timeline-arrow-btn w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 active:scale-95 ${
-              activeIndex > 0 ? "cursor-pointer opacity-70 hover:opacity-100" : "opacity-15 pointer-events-none"
-            }`}
-            aria-label="Previous image"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-            </svg>
-          </button>
-        </div>
+      {/* Native Horizontal Scroll Container */}
+      <div 
+        ref={containerRef}
+        className="w-full flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-8 md:gap-12 items-center relative z-10 py-12"
+        style={{
+          paddingLeft: "calc(50% - min(40vw, 225px))",
+          paddingRight: "calc(50% - min(40vw, 225px))",
+          scrollPaddingInline: "calc(50% - min(40vw, 225px))"
+        }}
+      >
+        {MILESTONES.map((m, idx) => {
+          const isActive = idx === activeIndex;
+          return (
+            <div
+              key={idx}
+              className={`snap-center flex-shrink-0 flex flex-col items-center transition-all duration-500 ${
+                isActive ? "opacity-100 scale-100" : "opacity-40 scale-90"
+              }`}
+              style={{
+                width: '80vw',
+                maxWidth: '450px'
+              }}
+            >
+              <div 
+                className="timeline-slide-item rounded-2xl overflow-hidden p-2 w-full aspect-[4/3] mb-8"
+                style={{
+                  boxShadow: isActive ? `0 20px 45px -12px ${m.glowColor}` : 'none',
+                  borderColor: isActive ? m.glowColorRaw + "40" : undefined
+                }}
+              >
+                <img
+                  src={m.image}
+                  alt={`Techligence Milestone Detail ${m.year}`}
+                  className="w-full h-full object-contain rounded-xl"
+                />
+              </div>
 
-        {/* The Continuous Scroll Row wrapper */}
-        <div className="timeline-slider-viewport" onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
-          <div 
-            className="timeline-slider-track"
-            style={{
-              transform: `translateX(calc(-${activeTranslate}px))`
-            }}
-          >
-            {MILESTONES.map((m, idx) => {
-              const isActive = idx === activeIndex;
-              const slideWidth = getSlideWidth(m.aspect);
-              return (
-                <div
-                  key={idx}
-                  onClick={() => handleNavigate(idx)}
-                  className={`timeline-slide-item rounded-2xl flex-shrink-0 cursor-pointer overflow-hidden p-2 transition-all duration-500 ${
-                    isActive 
-                      ? "scale-100 opacity-100 z-10" 
-                      : "scale-90 opacity-25 hover:opacity-45 z-0"
-                  }`}
-                  style={{
-                    width: `${slideWidth}px`,
-                    boxShadow: isActive ? `0 20px 45px -12px ${m.glowColor}` : 'none',
-                    borderColor: isActive ? m.glowColorRaw + "40" : undefined
-                  }}
-                >
-                  <img
-                    src={m.image}
-                    alt={`Techligence Milestone Detail ${m.year}`}
-                    className="w-full h-full object-contain rounded-xl"
-                  />
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Right Arrow Button */}
-        <div className="absolute right-2 md:right-6 z-20">
-          <button
-            onClick={() => handleNavigate(activeIndex + 1)}
-            disabled={activeIndex === MILESTONES.length - 1}
-            className={`timeline-arrow-btn w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 active:scale-95 ${
-              activeIndex < MILESTONES.length - 1 ? "cursor-pointer opacity-70 hover:opacity-100" : "opacity-15 pointer-events-none"
-            }`}
-            aria-label="Next image"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-            </svg>
-          </button>
-        </div>
-
-      </div>
-
-      {/* Dynamic Text Information */}
-      <div className={`transition-all duration-300 transform ${
-        isFading ? "opacity-0 translate-y-3 blur-[1px]" : "opacity-100 translate-y-0 blur-0"
-      } text-center mt-6 z-10 relative`}>
-        {/* Large Year */}
-        <h3 className="timeline-year-text font-mono font-light text-[60px] md:text-[80px] leading-none tracking-tighter select-none">
-          {current.year}
-        </h3>
-
-        {/* Caption */}
-        <p className="timeline-caption text-[17px] md:text-[20px] font-light mt-3 max-w-[620px] mx-auto leading-relaxed px-4">
-          {current.sentence}
-        </p>
+              {/* Text Info embedded in each card */}
+              <div className="text-center w-full">
+                <h3 className="timeline-year-text font-mono font-light text-[40px] md:text-[60px] leading-none tracking-tighter">
+                  {m.year}
+                </h3>
+                <p className="timeline-caption text-[15px] md:text-[18px] font-light mt-3 leading-relaxed px-4">
+                  {m.sentence}
+                </p>
+              </div>
+            </div>
+          );
+        })}
       </div>
 
       {/* Interactive Bottom Chronological Track (Macro Years) */}
-      <div className="w-full max-w-2xl mx-auto mt-14 px-6 relative z-10 select-none">
+      <div className="w-full max-w-3xl mx-auto mt-8 px-6 md:px-12 relative z-10 select-none">
         
         {/* Track Line Background */}
-        <div className="absolute top-[7px] left-8 right-8 h-[2px] timeline-track-bg rounded" />
+        <div className="absolute top-[7px] left-8 right-8 md:left-14 md:right-14 h-[2px] timeline-track-bg rounded" />
         
-        {/* Track Line Active Fill (Linked to year progress) */}
+        {/* Track Line Active Fill */}
         <div 
-          className="absolute top-[7px] left-8 h-[2px] rounded transition-all duration-500 ease-out"
+          className="absolute top-[7px] left-8 md:left-14 h-[2px] rounded transition-all duration-500 ease-out"
           style={{ 
-            width: `calc(${(activeYearIdx / (TIMELINE_YEARS.length - 1)) * 100}% - ${(activeYearIdx / (TIMELINE_YEARS.length - 1)) * 16}px)`,
+            width: `calc(${(activeYearIdx / (TIMELINE_YEARS.length - 1)) * 100}% - ${(activeYearIdx / (TIMELINE_YEARS.length - 1)) * 32}px)`,
             backgroundColor: activeYear.glowColorRaw,
             boxShadow: `0 0 8px ${activeYear.glowColorRaw}`
           }}
@@ -518,7 +399,7 @@ export default function Timeline() {
             return (
               <button
                 key={ty.label}
-                onClick={() => handleNavigate(ty.startIndex)}
+                onClick={() => handleNavigateYear(ty.startIndex)}
                 className="flex flex-col items-center group cursor-pointer focus:outline-none"
                 style={{ width: '64px' }}
                 aria-label={`Go to period ${ty.label}`}
@@ -539,7 +420,7 @@ export default function Timeline() {
                 
                 {/* Year label text */}
                 <span 
-                  className={`text-[11px] md:text-[12px] mt-3.5 transition-colors duration-300 font-mono tracking-wider ${
+                  className={`text-[10px] md:text-[12px] mt-3.5 transition-colors duration-300 font-mono tracking-wider ${
                     isYearActive 
                       ? "timeline-label-active font-bold" 
                       : "timeline-label-inactive group-hover:text-neutral-900 dark:group-hover:text-neutral-100"

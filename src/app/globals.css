@@ -50,7 +50,17 @@ body {
 }
 
 [data-theme="light"] .robot-media {
-  filter: var(--current-robot-filter) !important;
+  filter: var(--current-robot-filter);
+}
+
+.robot-media-mask {
+  -webkit-mask-image: linear-gradient(to bottom, transparent var(--top-crop), black var(--top-crop-fade), black var(--bottom-clip-fade), transparent var(--bottom-clip));
+  mask-image: linear-gradient(to bottom, transparent var(--top-crop), black var(--top-crop-fade), black var(--bottom-clip-fade), transparent var(--bottom-clip));
+}
+
+[data-theme="light"] .robot-media-mask {
+  -webkit-mask-image: linear-gradient(to bottom, transparent var(--top-crop), black var(--top-crop-fade), black calc(var(--bottom-clip) - 12%), transparent calc(var(--bottom-clip) - 4%)) !important;
+  mask-image: linear-gradient(to bottom, transparent var(--top-crop), black var(--top-crop-fade), black calc(var(--bottom-clip) - 12%), transparent calc(var(--bottom-clip) - 4%)) !important;
 }
 
 
@@ -188,34 +198,6 @@ html[data-theme="light"],
   border-top-color: rgba(15, 23, 42, 0.08) !important;
 }
 
-/* --- Navigation & Theme Toggle --- */
-[data-theme="light"] nav {
-  background-color: rgba(248, 250, 252, 0.8) !important;
-  border-color: rgba(15, 23, 42, 0.1) !important;
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08) !important;
-}
-
-[data-theme="light"] nav a {
-  color: #334155 !important;
-}
-
-[data-theme="light"] nav a:hover {
-  color: #007099 !important;
-}
-
-[data-theme="light"] nav button,
-[data-theme="light"] nav button[class*="bg-white/"] {
-  border-color: rgba(15, 23, 42, 0.15) !important;
-  background-color: rgba(15, 23, 42, 0.05) !important;
-  color: #0f172a !important;
-}
-
-[data-theme="light"] nav button:hover {
-  background-color: rgba(15, 23, 42, 0.1) !important;
-  border-color: #00ace9 !important;
-  color: #007099 !important;
-}
-
 /* --- General Text & Colors --- */
 [data-theme="light"] h1, 
 [data-theme="light"] h2, 
@@ -237,6 +219,28 @@ html[data-theme="light"],
 [data-theme="light"] .text-gray-500 {
   color: #64748b !important;
 }
+
+/* --- Light Mode adjustments for hero video section (Text visibility without touching dark mode or adding dark vignette) --- */
+[data-theme="light"] .hero-video-section .text-white {
+  color: #ffffff !important;
+}
+[data-theme="light"] .hero-video-section .robot-button .text-white {
+  color: #0f172a !important;
+}
+[data-theme="light"] .hero-video-section h1.text-transparent {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8)) drop-shadow(0 8px 16px rgba(0, 0, 0, 0.6)) !important;
+}
+[data-theme="light"] .hero-video-section p,
+[data-theme="light"] .hero-video-section .text-gray-300 {
+  color: #f8fafc !important;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.8)) !important;
+}
+[data-theme="light"] .hero-video-section span.text-cyan-400 {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8)) !important;
+}
+
 
 /* High contrast for cyan accents in light mode matching Techligence logo blue (#00ace9) */
 [data-theme="light"] .text-cyan-300,

@@ -25,56 +25,27 @@ export default function SolutionsPage() {
         </p>
       </section>
 
-      {/* Healthcare */}
-      <section
-        id="healthcare"
-        className="max-w-7xl mx-auto px-6 py-12 scroll-mt-52"
-      >
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-      <Image
-        src="/solutions/hospitality.jpg"
-        alt="Healthcare"
-        width={700}
-        height={500}
-        className="rounded-3xl object-cover w-full"
-      />
-
-          <div>
-            <p className="text-cyan-400 uppercase tracking-[4px]">
-              Healthcare
-            </p>
-
-            <h2 className="text-4xl font-bold mt-3 mb-6">
-              Healthcare & Hospital Solutions
-            </h2>
-
-            <p className="text-gray-300 leading-8">
-              Enhance patient and visitor experiences with intelligent robotic
-              assistance. Techligence robots help healthcare facilities provide
-              navigation support, answer common questions, assist visitors and
-              streamline reception operations.
-            </p>
-
-            <div className="mt-6 text-gray-400 space-y-2">
-              <p>✓ Improved patient experience</p>
-              <p>✓ Faster visitor assistance</p>
-              <p>✓ Visitor navigation</p>
-              <p>✓ Information helpdesk</p>
-            </div>
-
-            <p className="mt-6 text-cyan-400 font-semibold">
-              Robot Used: T2 Mini
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* Mall */}
       <section
         id="mall"
         className="max-w-7xl mx-auto px-6 py-12 scroll-mt-52"
       >
         <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="relative w-full aspect-video rounded-3xl p-2 bg-slate-950/60 border border-white/10 shadow-[0_0_30px_rgba(0,240,255,0.1)]">
+            <video
+              src="/solutions/mall.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-contain rounded-xl"
+            />
+            {/* Watermark Mask / Brand Overlay */}
+            <div className="absolute bottom-11 right-6 px-3 py-2 bg-[#050816]/95 backdrop-blur-md border border-cyan-500/30 rounded-xl text-[8px] font-mono font-black tracking-widest text-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.25)] select-none uppercase pointer-events-none">
+              TECHLIGENCE // SECURE
+            </div>
+          </div>
+
           <div>
             <p className="text-cyan-400 uppercase tracking-[4px]">
               Retail
@@ -101,21 +72,49 @@ export default function SolutionsPage() {
               Robot Used: T2 Mini
             </p>
           </div>
+        </div>
+      </section>
 
-          <div className="relative w-full aspect-video rounded-3xl p-2 bg-slate-950/60 border border-white/10 shadow-[0_0_30px_rgba(0,240,255,0.1)]">
-            <video
-              src="/solutions/mall.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-full object-contain rounded-xl"
-            />
-            {/* Watermark Mask / Brand Overlay */}
-            <div className="absolute bottom-11 right-6 px-3 py-2 bg-[#050816]/95 backdrop-blur-md border border-cyan-500/30 rounded-xl text-[8px] font-mono font-black tracking-widest text-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.25)] select-none uppercase pointer-events-none">
-              TECHLIGENCE // SECURE
+      {/* Corporate */}
+      <section
+        id="corporate"
+        className="max-w-7xl mx-auto px-6 py-12 scroll-mt-52"
+      >
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <p className="text-cyan-400 uppercase tracking-[4px]">
+              Corporate
+            </p>
+
+            <h2 className="text-4xl font-bold mt-3 mb-6">
+              Corporate Office Solutions
+            </h2>
+
+            <p className="text-gray-300 leading-8">
+              Techligence robots provide visitor management, meeting room
+              guidance, reception support and intelligent office navigation
+              while improving operational efficiency.
+            </p>
+
+            <div className="mt-6 text-gray-400 space-y-2">
+              <p>✓ Visitor management</p>
+              <p>✓ Meeting room guidance</p>
+              <p>✓ Reception support</p>
+              <p>✓ Office navigation</p>
             </div>
+
+            <p className="mt-6 text-cyan-400 font-semibold">
+              Robot Used: T2 Mini
+            </p>
           </div>
+
+          <Image
+            src="/solutions/corporate.jpg"
+            alt="Corporate"
+            width={700}
+            height={500}
+            className="rounded-3xl object-cover w-full"
+          />
         </div>
       </section>
 
@@ -169,32 +168,33 @@ export default function SolutionsPage() {
         </div>
       </section>
 
-      {/* Corporate */}
+      {/* Healthcare */}
       <section
-        id="corporate"
+        id="healthcare"
         className="max-w-7xl mx-auto px-6 py-12 scroll-mt-52"
       >
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div>
             <p className="text-cyan-400 uppercase tracking-[4px]">
-              Corporate
+              Healthcare
             </p>
 
             <h2 className="text-4xl font-bold mt-3 mb-6">
-              Corporate Office Solutions
+              Healthcare & Hospital Solutions
             </h2>
 
             <p className="text-gray-300 leading-8">
-              Techligence robots provide visitor management, meeting room
-              guidance, reception support and intelligent office navigation
-              while improving operational efficiency.
+              Enhance patient and visitor experiences with intelligent robotic
+              assistance. Techligence robots help healthcare facilities provide
+              navigation support, answer common questions, assist visitors and
+              streamline reception operations.
             </p>
 
             <div className="mt-6 text-gray-400 space-y-2">
-              <p>✓ Visitor management</p>
-              <p>✓ Meeting room guidance</p>
-              <p>✓ Reception support</p>
-              <p>✓ Office navigation</p>
+              <p>✓ Improved patient experience</p>
+              <p>✓ Faster visitor assistance</p>
+              <p>✓ Visitor navigation</p>
+              <p>✓ Information helpdesk</p>
             </div>
 
             <p className="mt-6 text-cyan-400 font-semibold">
@@ -203,14 +203,15 @@ export default function SolutionsPage() {
           </div>
 
           <Image
-            src="/solutions/corporate.jpg"
-            alt="Corporate"
+            src="/solutions/hospitality.jpg"
+            alt="Healthcare"
             width={700}
             height={500}
             className="rounded-3xl object-cover w-full"
           />
         </div>
       </section>
+
 
       <Footer />
     </main>

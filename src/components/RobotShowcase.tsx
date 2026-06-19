@@ -225,13 +225,21 @@ const ROBOTS_DATA: Robot[] = [
 ];
 
 // Per-robot positioning adjustments to handle varying blank space at the top/bottom of the video frames
-const ROBOT_LAYOUT_ADJUSTMENTS: Record<string, { scale: number; translateY: string; bottomClip: string; topClip?: string; staticHeight?: string; staticTranslateY?: string }> = {
-  "joy-a01": { scale: 0.95,  translateY: "-2%",   bottomClip: "89%",   topClip: "12%", staticHeight: "115%", staticTranslateY: "-2%" },
-  "t2-mini": { scale: 1.10,  translateY: "1.5%",  bottomClip: "89%",   topClip: "16%", staticHeight: "115%", staticTranslateY: "-2%" },
-  "tella-s": { scale: 0.8,   translateY: "2%",    bottomClip: "91%",   staticHeight: "112%", staticTranslateY: "-2%" },
-  "andy-r1": { scale: 0.85,  translateY: "0%",    bottomClip: "91%",   topClip: "0%",  staticHeight: "112%", staticTranslateY: "-2%" },
-  "t2-max":  { scale: 0.8,   translateY: "4%",    bottomClip: "91%",   staticHeight: "112%", staticTranslateY: "-2%" },
-  "nova-m1": { scale: 0.8,   translateY: "2%",    bottomClip: "91%",   staticHeight: "112%", staticTranslateY: "-2%" },
+const ROBOT_LAYOUT_ADJUSTMENTS: Record<string, { 
+  scale: number; translateY: string; bottomClip: string; topClip?: string; 
+  staticHeight?: string; staticTranslateY?: string; staticScale?: string;
+  views?: {
+    front?: { scale: number; translateY: string };
+    side?: { scale: number; translateY: string };
+    back?: { scale: number; translateY: string };
+  };
+}> = {
+  "joy-a01": { scale: 1.15,  translateY: "-1.5%", bottomClip: "96%",   topClip: "15%", staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 1.142, translateY: "+8.83%" }, side: { scale: 1.336, translateY: "-3.00%" }, back: { scale: 1.219, translateY: "+1.55%" } } },
+  "t2-mini": { scale: 1.10,  translateY: "1.5%",  bottomClip: "96%",   topClip: "15%", staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 1.082, translateY: "+0.32%" }, side: { scale: 1.002, translateY: "+1.80%" }, back: { scale: 0.930, translateY: "+2.00%" } } },
+  "tella-s": { scale: 0.95,  translateY: "6%",    bottomClip: "96%",   topClip: "3%",  staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 1.32, translateY: "-3%" }, side: { scale: 0.847, translateY: "-1.8%" }, back: { scale: 0.847, translateY: "-1.8%" } } },
+  "andy-r1": { scale: 1.10,  translateY: "1%",    bottomClip: "96%",   topClip: "14%", staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 1.067, translateY: "+5.21%" }, side: { scale: 0.903, translateY: "+6.53%" }, back: { scale: 0.932, translateY: "+7.79%" } } },
+  "t2-max":  { scale: 0.85,  translateY: "7.5%",  bottomClip: "98%",   topClip: "0%",  staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 1.17, translateY: "-4%" }, side: { scale: 1.20, translateY: "-2%" }, back: { scale: 0.993, translateY: "-1.5%" } } },
+  "nova-m1": { scale: 1.02,  translateY: "3%",    bottomClip: "96%",   topClip: "10%", staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 1.214, translateY: "+4.25%" }, side: { scale: 0.936, translateY: "+6.61%" }, back: { scale: 0.946, translateY: "+6.85%" } } },
 };
 
 export default function RobotShowcase() {
@@ -669,28 +677,32 @@ export default function RobotShowcase() {
                   const bottomCrop = 100 - bottomClipNum;
                   const topCrop = parseFloat(layoutAdjustment.topClip || "0");
 
-                  const videoStyle: React.CSSProperties = isLandscape
+                    const videoStyle: React.CSSProperties = isLandscape
                     ? {
                         "--current-robot-filter": filterId,
+                        "--top-crop": `${topCrop}%`,
+                        "--top-crop-fade": `${topCrop + 3}%`,
+                        "--bottom-clip-fade": `${bottomClipNum - 4}%`,
+                        "--bottom-clip": `${bottomClipNum}%`,
                         height: "100%",
                         width: "auto",
                         maxWidth: "none",
                         aspectRatio: "16 / 9",
                         clipPath: `inset(0 34.375% 0 34.375%)`,
                         WebkitClipPath: `inset(0 34.375% 0 34.375%)`,
-                        WebkitMaskImage: `linear-gradient(to bottom, transparent ${topCrop}%, black ${topCrop + 3}%, black ${bottomClipNum - 4}%, transparent ${bottomClipNum}%)`,
-                        maskImage: `linear-gradient(to bottom, transparent ${topCrop}%, black ${topCrop + 3}%, black ${bottomClipNum - 4}%, transparent ${bottomClipNum}%)`,
                         backgroundColor: "transparent",
                       } as React.CSSProperties
                     : {
                         "--current-robot-filter": filterId,
+                        "--top-crop": `${topCrop}%`,
+                        "--top-crop-fade": `${topCrop + 3}%`,
+                        "--bottom-clip-fade": `${bottomClipNum - 4}%`,
+                        "--bottom-clip": `${bottomClipNum}%`,
                         height: "100%",
                         width: "auto",
                         aspectRatio: "9 / 16",
                         clipPath: `inset(0 3% 0 3%)`,
                         WebkitClipPath: `inset(0 3% 0 3%)`,
-                        WebkitMaskImage: `linear-gradient(to bottom, transparent ${topCrop}%, black ${topCrop + 3}%, black ${bottomClipNum - 4}%, transparent ${bottomClipNum}%)`,
-                        maskImage: `linear-gradient(to bottom, transparent ${topCrop}%, black ${topCrop + 3}%, black ${bottomClipNum - 4}%, transparent ${bottomClipNum}%)`,
                         backgroundColor: "transparent",
                       } as React.CSSProperties;
 
@@ -715,7 +727,7 @@ export default function RobotShowcase() {
                           loop muted playsInline autoPlay
                           onPlaying={() => setIsVideoPlaying(true)}
                           onCanPlay={() => setIsVideoPlaying(true)}
-                          className="robot-media h-full w-auto max-w-full object-contain robot-float pointer-events-none relative transition-opacity duration-300 z-20"
+                          className="robot-media robot-media-mask h-full w-auto max-w-full object-contain robot-float pointer-events-none relative transition-opacity duration-300 z-20"
                           style={{
                             ...videoStyle,
                             opacity: isVideoPlaying ? 1 : 0
@@ -738,9 +750,15 @@ export default function RobotShowcase() {
                         activeView !== "video"
                           ? {
                               filter: "none",
-                              height: layoutAdjustment.staticHeight || "100%",
+                              height: "100%",
                               maxWidth: "none",
-                              transform: `translateY(${layoutAdjustment.staticTranslateY || "0%"})`,
+                              ...( (() => {
+                                const viewAdjust = layoutAdjustment.views && activeView !== "video" && activeView !== "wave" ? layoutAdjustment.views[activeView] : null;
+                                if (viewAdjust) {
+                                  return { scale: viewAdjust.scale, translate: `0 ${viewAdjust.translateY}` };
+                                }
+                                return { scale: layoutAdjustment.staticScale || 1, translate: `0 ${layoutAdjustment.staticTranslateY || "0%"}` };
+                              })() ),
                             }
                           : undefined
                       }
@@ -795,15 +813,46 @@ export default function RobotShowcase() {
                   return (
                     <button
                       key={view}
-                      onClick={() => setActiveView(view as "video" | "front" | "side" | "back" | "wave")}
-                      className={`robot-viewport-btn px-2 py-1.5 rounded-lg text-[8px] font-mono font-bold tracking-widest transition-all duration-300 cursor-pointer flex flex-col items-center ${isActive ? "active-viewport-btn" : "inactive-viewport-btn"}`}
+                      onClick={() => setActiveView(view as "video" | "front" | "side" | "back")}
+                      className={`robot-viewport-btn relative w-full aspect-square rounded-xl overflow-hidden flex flex-col items-center justify-end transition-all duration-300 cursor-pointer border ${isActive ? "active-viewport-btn" : "inactive-viewport-btn group"}`}
                       style={isActive
-                        ? { boxShadow: "0 0 10px rgba(0,240,255,0.45)", backgroundColor: "#00f0ff", color: "#050816" }
-                        : { backgroundColor: "rgba(255,255,255,0.02)", color: "rgb(156,163,175)", border: "1px solid rgba(255,255,255,0.08)" }
+                        ? { borderColor: "#00f0ff", boxShadow: "0 0 15px rgba(0,240,255,0.25)", backgroundColor: "rgba(0,240,255,0.08)" }
+                        : { borderColor: "rgba(255,255,255,0.1)", backgroundColor: "rgba(255,255,255,0.02)" }
                       }
+                      title={label}
                     >
-                      <span className="text-[6px] opacity-60 mb-0.5">{idx}</span>
-                      <span>{label}</span>
+                      {/* Image Thumbnail */}
+                      <div className={`absolute inset-0 flex items-center justify-center p-3 transition-opacity duration-300 ${isActive ? "opacity-100" : "opacity-60 group-hover:opacity-100"}`}>
+                        <img 
+                           src={view === "video" ? activeRobot.image : `/robots/${activeRobot.id}-${view}.png`} 
+                           alt={label} 
+                           className="w-full h-full object-contain filter drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)]"
+                           onError={(e) => {
+                             // Fallback if view image doesn't exist yet
+                             (e.target as HTMLImageElement).src = activeRobot.image;
+                             (e.target as HTMLImageElement).style.opacity = "0.2";
+                           }}
+                        />
+                      </div>
+                      
+                      {/* Top Right Index Badge */}
+                      <div className="absolute top-1.5 right-1.5 text-[5px] font-mono font-bold opacity-40">
+                        {idx}
+                      </div>
+                      
+                      {/* Label overlay at the bottom */}
+                      <div 
+                        className="w-full py-1.5 z-10 backdrop-blur-md bg-black/50 border-t transition-colors duration-300"
+                        style={{
+                           borderColor: isActive ? "rgba(0,240,255,0.3)" : "rgba(255,255,255,0.05)"
+                        }}
+                      >
+                         <span className="block text-[6.5px] font-mono font-bold tracking-widest uppercase text-center"
+                               style={{ color: isActive ? "#00f0ff" : "rgb(156,163,175)" }}
+                         >
+                            {label}
+                         </span>
+                      </div>
                     </button>
                   );
                 })}

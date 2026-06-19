@@ -43,7 +43,7 @@ export default function RobotsOverview() {
             <h3 className="text-2xl font-bold text-white uppercase tracking-wider">Robot Lineup</h3>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-sm hover:bg-cyan-500/5 transition-colors">
+            <div className="p-6 rounded-2xl bg-gradient-to-b from-white/[0.03] to-transparent border border-white/[0.02] hover:bg-cyan-500/[0.02] transition-colors">
               <h4 className="text-cyan-400 font-mono text-sm tracking-wider mb-4 uppercase">Hospitality & Service</h4>
               <ul className="space-y-4 text-gray-300">
                 <li>
@@ -72,7 +72,7 @@ export default function RobotsOverview() {
                 </li>
               </ul>
             </div>
-            <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-sm hover:bg-cyan-500/5 transition-colors">
+            <div className="p-6 rounded-2xl bg-gradient-to-b from-white/[0.03] to-transparent border border-white/[0.02] hover:bg-cyan-500/[0.02] transition-colors">
               <h4 className="text-cyan-400 font-mono text-sm tracking-wider mb-4 uppercase">Advanced Service</h4>
               <ul className="space-y-4 text-gray-300">
                 <li>
@@ -104,7 +104,7 @@ export default function RobotsOverview() {
                 </li>
               </ul>
             </div>
-            <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-sm hover:bg-cyan-500/5 transition-colors">
+            <div className="p-6 rounded-2xl bg-gradient-to-b from-white/[0.03] to-transparent border border-white/[0.02] hover:bg-cyan-500/[0.02] transition-colors">
               <h4 className="text-cyan-400 font-mono text-sm tracking-wider mb-4 uppercase">Woodgen Series</h4>
               <p className="text-sm text-gray-400 mb-4">Hand-crafted wooden robot variants.</p>
               <ul className="space-y-4 text-gray-300">
@@ -175,23 +175,23 @@ export default function RobotsOverview() {
               <h3 className="text-2xl font-bold text-white uppercase tracking-wider">Anatomy of A-01</h3>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="p-5 rounded-xl bg-white/[0.02] border border-white/5">
+              <div className="p-5 rounded-xl bg-gradient-to-br from-white/[0.02] to-transparent border border-white/[0.02]">
                 <h4 className="text-cyan-300 font-bold mb-2">Expressive Digital Face</h4>
                 <p className="text-xs text-gray-400">Human-centric interaction engine for emotional and visual communication.</p>
               </div>
-              <div className="p-5 rounded-xl bg-white/[0.02] border border-white/5">
+              <div className="p-5 rounded-xl bg-gradient-to-br from-white/[0.02] to-transparent border border-white/[0.02]">
                 <h4 className="text-cyan-300 font-bold mb-2">2-6 DoF Articulated Arms</h4>
                 <p className="text-xs text-gray-400">Enhanced gestures and animations for better user engagement.</p>
               </div>
-              <div className="p-5 rounded-xl bg-white/[0.02] border border-white/5">
+              <div className="p-5 rounded-xl bg-gradient-to-br from-white/[0.02] to-transparent border border-white/[0.02]">
                 <h4 className="text-cyan-300 font-bold mb-2">SLAM Chassis</h4>
                 <p className="text-xs text-gray-400">Sensor-rich mobility platform for spatial awareness and navigation.</p>
               </div>
-              <div className="p-5 rounded-xl bg-white/[0.02] border border-white/5">
+              <div className="p-5 rounded-xl bg-gradient-to-br from-white/[0.02] to-transparent border border-white/[0.02]">
                 <h4 className="text-cyan-300 font-bold mb-2">High Friction Wheels</h4>
                 <p className="text-xs text-gray-400">Precise movement control for stable autonomous operation.</p>
               </div>
-              <div className="p-5 rounded-xl bg-white/[0.02] border border-white/5 sm:col-span-2">
+              <div className="p-5 rounded-xl bg-gradient-to-br from-white/[0.02] to-transparent border border-white/[0.02] sm:col-span-2">
                 <h4 className="text-cyan-300 font-bold mb-2">Rigid Fiber / Wooden Shell</h4>
                 <p className="text-xs text-gray-400">Durable construction ensuring a long operational lifespan.</p>
               </div>
@@ -212,19 +212,23 @@ export default function RobotsOverview() {
           </div>
           <p className="text-gray-400 mb-8 max-w-2xl text-sm">The platform supports large-scale robot deployments with an interconnected ecosystem.</p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="p-6 border border-cyan-500/20 bg-cyan-950/20 rounded-2xl">
+            <div className="p-6 border border-cyan-500/10 bg-cyan-950/10 rounded-2xl relative overflow-hidden group hover:bg-cyan-950/20 transition-colors">
+              <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
               <h4 className="text-white font-bold text-lg mb-2">Mass Dispatch</h4>
               <p className="text-sm text-gray-400">Manage up to <strong className="text-cyan-400">100 robots simultaneously</strong> in one environment.</p>
             </div>
-            <div className="p-6 border border-cyan-500/20 bg-cyan-950/20 rounded-2xl">
+            <div className="p-6 border border-cyan-500/10 bg-cyan-950/10 rounded-2xl relative overflow-hidden group hover:bg-cyan-950/20 transition-colors">
+              <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
               <h4 className="text-white font-bold text-lg mb-2">Complex Routing</h4>
               <p className="text-sm text-gray-400">Handles intersections, multiple pathways, roundabouts, and dynamic environments.</p>
             </div>
-            <div className="p-6 border border-cyan-500/20 bg-cyan-950/20 rounded-2xl">
+            <div className="p-6 border border-cyan-500/10 bg-cyan-950/10 rounded-2xl relative overflow-hidden group hover:bg-cyan-950/20 transition-colors">
+              <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
               <h4 className="text-white font-bold text-lg mb-2">Ad Hoc Networking</h4>
               <p className="text-sm text-gray-400">Robots communicate directly with each other to reduce network bottlenecks.</p>
             </div>
-            <div className="p-6 border border-cyan-500/20 bg-cyan-950/20 rounded-2xl">
+            <div className="p-6 border border-cyan-500/10 bg-cyan-950/10 rounded-2xl relative overflow-hidden group hover:bg-cyan-950/20 transition-colors">
+              <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
               <h4 className="text-white font-bold text-lg mb-2">IoT Cloud</h4>
               <p className="text-sm text-gray-400">Real-time monitoring, robot health tracking, remote updates, and business analytics.</p>
             </div>
@@ -243,22 +247,54 @@ export default function RobotsOverview() {
             <h3 className="text-2xl font-bold text-white uppercase tracking-wider">Smart Robot Capabilities</h3>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/5 relative overflow-hidden">
-              <div className="absolute top-0 left-0 w-full h-1 bg-cyan-500" />
+            <div className="p-6 rounded-3xl bg-gradient-to-b from-white/[0.02] to-transparent border border-white/[0.02] relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
               <h4 className="text-white font-bold mb-2 text-lg">Predictive Models</h4>
               <p className="text-sm text-gray-400">LLM-based AI responses with an intelligent conversation system.</p>
             </div>
-            <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/5 relative overflow-hidden">
-              <div className="absolute top-0 left-0 w-full h-1 bg-cyan-500" />
+            <div className="p-6 rounded-3xl bg-gradient-to-b from-white/[0.02] to-transparent border border-white/[0.02] relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
               <h4 className="text-white font-bold mb-2 text-lg">Automated Decision Making</h4>
               <p className="text-sm text-gray-400">Autonomous task execution with reduced human intervention.</p>
             </div>
-            <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/5 relative overflow-hidden">
-              <div className="absolute top-0 left-0 w-full h-1 bg-cyan-500" />
+            <div className="p-6 rounded-3xl bg-gradient-to-b from-white/[0.02] to-transparent border border-white/[0.02] relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
               <h4 className="text-white font-bold mb-2 text-lg">Data-Driven Insights</h4>
               <p className="text-sm text-gray-400">Business analytics, operational intelligence, and corporate reporting support.</p>
             </div>
           </div>
+        </div>
+
+        {/* Selling Points & Pitch */}
+        <div className="bg-gradient-to-br from-cyan-950/40 to-slate-900/40 border border-cyan-500/20 rounded-3xl p-8 md:p-12 text-center relative overflow-hidden mb-12">
+           {/* Decorative elements */}
+           <div className="absolute top-4 right-4 w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+           <div className="absolute bottom-4 left-4 w-12 h-[1px] bg-cyan-500/50" />
+           
+          <div className="flex items-center justify-center gap-3 mb-8">
+            <svg className="w-6 h-6 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+            <h3 className="text-xl md:text-2xl font-bold text-white uppercase tracking-widest">Main Selling Points</h3>
+          </div>
+          <div className="flex flex-wrap justify-center gap-3 mb-12">
+            {[
+              "AI-powered conversations", "Multilingual communication", "Autonomous navigation", 
+              "Visitor management", "Security monitoring", "Digital advertising", 
+              "Self-charging functionality", "Fleet management", "Cloud-connected operations",
+              "Made for Indian businesses with global scalability"
+            ].map(point => (
+              <span key={point} className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs text-gray-300 hover:border-cyan-400/50 hover:text-cyan-300 transition-colors cursor-default">
+                {point}
+              </span>
+            ))}
+          </div>
+
+          <div className="w-16 h-[1px] bg-white/20 mx-auto mb-10" />
+
+          <p className="text-sm md:text-lg text-cyan-50 font-mono leading-relaxed max-w-4xl mx-auto italic border-l-2 border-cyan-400 pl-6 text-left">
+            "Techligence Robotics builds AI-powered autonomous service robots that combine reception assistance, navigation, customer engagement, and enterprise fleet management into a single smart robotics ecosystem."
+          </p>
         </div>
 
         {/* Applications */}
@@ -277,32 +313,28 @@ export default function RobotsOverview() {
             <h3 className="text-2xl font-bold text-white uppercase tracking-wider">Key Business Applications</h3>
           </div>
           <div className="space-y-6">
-            <div className="p-8 rounded-3xl bg-white/[0.02] border border-white/5 relative overflow-hidden">
-              <div className="absolute left-0 top-0 w-1 h-full bg-purple-500" />
+            <div className="p-8 rounded-3xl bg-gradient-to-r from-white/[0.02] to-transparent border-l-2 border-l-purple-500/50 border-y border-y-white/[0.01] border-r border-r-white/[0.01]">
               <h4 className="text-xl font-bold text-white mb-3 tracking-wider uppercase">Malls</h4>
               <p className="text-sm text-gray-400 leading-relaxed">
                 Techligence robots transform your mall into an interactive brand experience. Strategically positioned at entrances, atriums, and high-footfall zones, our robots display dynamic advertisements, promote ongoing offers, and engage shoppers in real time in their preferred language. From guiding visitors to stores and restrooms, to broadcasting flash sales and brand activations, T-2 Mini keeps your mall experience smart, memorable, and monetised.
               </p>
             </div>
             
-            <div className="p-8 rounded-3xl bg-white/[0.02] border border-white/5 relative overflow-hidden">
-              <div className="absolute left-0 top-0 w-1 h-full bg-purple-500" />
+            <div className="p-8 rounded-3xl bg-gradient-to-r from-white/[0.02] to-transparent border-l-2 border-l-purple-500/50 border-y border-y-white/[0.01] border-r border-r-white/[0.01]">
               <h4 className="text-xl font-bold text-white mb-3 tracking-wider uppercase">Corporate Parks</h4>
               <p className="text-sm text-gray-400 leading-relaxed">
                 T-2 Mini replaces the revolving door of reception and security staff with a tireless, intelligent robot that works 24×7 greeting visitors, verifying credentials, issuing digital passes, and notifying hosts all without a single HR headache. Deployed across lobby entrances, tower receptions, and security checkpoints, T-2 Mini ensures every visitor gets a consistent, professional, and multilingual experience while your campus stays secure and audit-ready.
               </p>
             </div>
 
-            <div className="p-8 rounded-3xl bg-white/[0.02] border border-white/5 relative overflow-hidden">
-              <div className="absolute left-0 top-0 w-1 h-full bg-purple-500" />
+            <div className="p-8 rounded-3xl bg-gradient-to-r from-white/[0.02] to-transparent border-l-2 border-l-purple-500/50 border-y border-y-white/[0.01] border-r border-r-white/[0.01]">
               <h4 className="text-xl font-bold text-white mb-3 tracking-wider uppercase">Corporate Spaces</h4>
               <p className="text-sm text-gray-400 leading-relaxed">
                 In a shared corporate tower or co-working campus, every tenant deserves a premium front-desk experience without the cost of dedicated staff per floor. T-2 Mini serves all tenants simultaneously, with configurable branding, language preferences, and information per company. From guiding guests to the right floor and meeting room, to managing access logs and real-time security alerts, our robots integrate into your building's ecosystem making every square foot smarter.
               </p>
             </div>
 
-            <div className="p-8 rounded-3xl bg-white/[0.02] border border-white/5 relative overflow-hidden">
-              <div className="absolute left-0 top-0 w-1 h-full bg-purple-500" />
+            <div className="p-8 rounded-3xl bg-gradient-to-r from-white/[0.02] to-transparent border-l-2 border-l-purple-500/50 border-y border-y-white/[0.01] border-r border-r-white/[0.01]">
               <h4 className="text-xl font-bold text-white mb-3 tracking-wider uppercase">Healthcare & Hospital Solutions</h4>
               <p className="text-sm text-gray-400 leading-relaxed mb-6">
                 Enhance patient and visitor experiences with intelligent robotic assistance. Techligence robots help healthcare facilities provide navigation support, answer common questions, assist visitors, and streamline reception operations, allowing staff to focus more on patient care.
@@ -334,37 +366,7 @@ export default function RobotsOverview() {
           </div>
         </div>
 
-        {/* Selling Points & Pitch */}
-        <div className="bg-gradient-to-br from-cyan-950/40 to-slate-900/40 border border-cyan-500/20 rounded-3xl p-8 md:p-12 text-center relative overflow-hidden">
-           {/* Decorative elements */}
-           <div className="absolute top-4 right-4 w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-           <div className="absolute bottom-4 left-4 w-12 h-[1px] bg-cyan-500/50" />
-           
-          <div className="flex items-center justify-center gap-3 mb-8">
-            <svg className="w-6 h-6 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-            </svg>
-            <h3 className="text-xl md:text-2xl font-bold text-white uppercase tracking-widest">Main Selling Points</h3>
-          </div>
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {[
-              "AI-powered conversations", "Multilingual communication", "Autonomous navigation", 
-              "Visitor management", "Security monitoring", "Digital advertising", 
-              "Self-charging functionality", "Fleet management", "Cloud-connected operations",
-              "Made for Indian businesses with global scalability"
-            ].map(point => (
-              <span key={point} className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs text-gray-300 hover:border-cyan-400/50 hover:text-cyan-300 transition-colors cursor-default">
-                {point}
-              </span>
-            ))}
-          </div>
 
-          <div className="w-16 h-[1px] bg-white/20 mx-auto mb-10" />
-
-          <p className="text-sm md:text-lg text-cyan-50 font-mono leading-relaxed max-w-4xl mx-auto italic border-l-2 border-cyan-400 pl-6 text-left">
-            "Techligence Robotics builds AI-powered autonomous service robots that combine reception assistance, navigation, customer engagement, and enterprise fleet management into a single smart robotics ecosystem."
-          </p>
-        </div>
 
       </div>
     </section>

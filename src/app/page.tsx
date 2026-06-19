@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar";
 import ShowcaseVideo from "../components/ShowcaseVideo";
 import Hero from "../components/Hero";
+import ClientsCarousel from "@/components/ClientsCarousel";
 import Industries from "@/components/Industries";
 import Footer from "@/components/Footer";
 
@@ -10,6 +11,7 @@ export default function Home() {
       <Navbar />
       <ShowcaseVideo />
       <Hero />
+      <ClientsCarousel />
       <Industries />
       <Footer />
     </main>

@@ -53,7 +53,11 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] md:w-[90%] md:max-w-fit z-50 bg-black/40 backdrop-blur-xl border border-white/10 rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.6)] transition-all duration-300">
+      <nav className={`fixed top-4 left-1/2 -translate-x-1/2 w-[95%] md:w-[90%] md:max-w-fit z-50 backdrop-blur-xl rounded-full transition-all duration-300 ${
+        theme === "light" 
+          ? "bg-slate-50/90 border border-gray-200 shadow-[0_10px_30px_rgba(0,0,0,0.1)]" 
+          : "bg-black/40 border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.6)]"
+      }`}>
         <div className="pl-6 pr-8 lg:pl-8 lg:pr-10 py-2 flex items-center justify-between gap-3 lg:gap-4 whitespace-nowrap">
           {/* Logo + Brand */}
           <a href="/" className="flex items-center gap-2 flex-shrink-0 cursor-pointer">
@@ -76,72 +80,89 @@ export default function Navbar() {
             <a
               href="/"
               className={`relative text-[9px] xl:text-[10px] uppercase tracking-[1px] xl:tracking-[1.5px] transition-all duration-300 ${
-                pathname === "/" ? "text-cyan-400" : "text-gray-300 hover:text-cyan-400"
+                pathname === "/" 
+                  ? (theme === "light" ? "text-cyan-600 font-bold" : "text-cyan-400") 
+                  : (theme === "light" ? "text-gray-600 hover:text-cyan-600 font-semibold" : "text-gray-300 hover:text-cyan-400")
               }`}
             >
               Home
               {pathname === "/" && (
-                <span className="absolute left-0 -bottom-1.5 h-[2px] w-full bg-cyan-400 rounded-full"></span>
+                <span className={`absolute left-0 -bottom-1.5 h-[2px] w-full rounded-full ${theme === "light" ? "bg-cyan-600" : "bg-cyan-400"}`}></span>
               )}
             </a>
 
             <a
               href="/robots"
               className={`relative text-[9px] xl:text-[10px] uppercase tracking-[1px] xl:tracking-[1.5px] transition-all duration-300 ${
-                pathname === "/robots" ? "text-cyan-400" : "text-gray-300 hover:text-cyan-400"
+                pathname === "/robots" 
+                  ? (theme === "light" ? "text-cyan-600 font-bold" : "text-cyan-400") 
+                  : (theme === "light" ? "text-gray-600 hover:text-cyan-600 font-semibold" : "text-gray-300 hover:text-cyan-400")
               }`}
             >
               Robots
               {pathname === "/robots" && (
-                <span className="absolute left-0 -bottom-1.5 h-[2px] w-full bg-cyan-400 rounded-full"></span>
+                <span className={`absolute left-0 -bottom-1.5 h-[2px] w-full rounded-full ${theme === "light" ? "bg-cyan-600" : "bg-cyan-400"}`}></span>
               )}
             </a>
 
             <a
               href="/solutions"
               className={`relative text-[9px] xl:text-[10px] uppercase tracking-[1px] xl:tracking-[1.5px] transition-all duration-300 ${
-                pathname === "/solutions" ? "text-cyan-400" : "text-gray-300 hover:text-cyan-400"
+                pathname === "/solutions" 
+                  ? (theme === "light" ? "text-cyan-600 font-bold" : "text-cyan-400") 
+                  : (theme === "light" ? "text-gray-600 hover:text-cyan-600 font-semibold" : "text-gray-300 hover:text-cyan-400")
               }`}
             >
               Solutions
               {pathname === "/solutions" && (
-                <span className="absolute left-0 -bottom-1.5 h-[2px] w-full bg-cyan-400 rounded-full"></span>
+                <span className={`absolute left-0 -bottom-1.5 h-[2px] w-full rounded-full ${theme === "light" ? "bg-cyan-600" : "bg-cyan-400"}`}></span>
               )}
             </a>
 
-            <a
+            {/* <a
               href="/configurator"
-              className={`relative text-[9px] xl:text-[10px] uppercase tracking-[1px] xl:tracking-[1.5px] transition-all duration-300 ${
-                pathname === "/configurator" ? "text-cyan-400" : "text-gray-300 hover:text-cyan-400"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`relative text-[9px] xl:text-[10px] uppercase tracking-[1px] xl:tracking-[1.5px] transition-all duration-300 flex items-center gap-1 ${
+                pathname === "/configurator" 
+                  ? (theme === "light" ? "text-cyan-600 font-bold" : "text-cyan-400") 
+                  : (theme === "light" ? "text-gray-600 hover:text-cyan-600 font-semibold" : "text-gray-300 hover:text-cyan-400")
               }`}
             >
               Configurator
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-2.5 h-2.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+              </svg>
               {pathname === "/configurator" && (
-                <span className="absolute left-0 -bottom-1.5 h-[2px] w-full bg-cyan-400 rounded-full"></span>
+                <span className={`absolute left-0 -bottom-1.5 h-[2px] w-full rounded-full ${theme === "light" ? "bg-cyan-600" : "bg-cyan-400"}`}></span>
               )}
-            </a>
+            </a> */}
 
             <a
               href="/company"
               className={`relative text-[9px] xl:text-[10px] uppercase tracking-[1px] xl:tracking-[1.5px] transition-all duration-300 ${
-                pathname === "/company" ? "text-cyan-400" : "text-gray-300 hover:text-cyan-400"
+                pathname === "/company" 
+                  ? (theme === "light" ? "text-cyan-600 font-bold" : "text-cyan-400") 
+                  : (theme === "light" ? "text-gray-600 hover:text-cyan-600 font-semibold" : "text-gray-300 hover:text-cyan-400")
               }`}
             >
               Company
               {pathname === "/company" && (
-                <span className="absolute left-0 -bottom-1.5 h-[2px] w-full bg-cyan-400 rounded-full"></span>
+                <span className={`absolute left-0 -bottom-1.5 h-[2px] w-full rounded-full ${theme === "light" ? "bg-cyan-600" : "bg-cyan-400"}`}></span>
               )}
             </a>
 
             <a
               href="/contact"
               className={`relative text-[9px] xl:text-[10px] uppercase tracking-[1px] xl:tracking-[1.5px] transition-all duration-300 ${
-                pathname === "/contact" ? "text-cyan-400" : "text-gray-300 hover:text-cyan-400"
+                pathname === "/contact" 
+                  ? (theme === "light" ? "text-cyan-600 font-bold" : "text-cyan-400") 
+                  : (theme === "light" ? "text-gray-600 hover:text-cyan-600 font-semibold" : "text-gray-300 hover:text-cyan-400")
               }`}
             >
               Contact
               {pathname === "/contact" && (
-                <span className="absolute left-0 -bottom-1.5 h-[2px] w-full bg-cyan-400 rounded-full"></span>
+                <span className={`absolute left-0 -bottom-1.5 h-[2px] w-full rounded-full ${theme === "light" ? "bg-cyan-600" : "bg-cyan-400"}`}></span>
               )}
             </a>
           </div>
@@ -151,7 +172,11 @@ export default function Navbar() {
             {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
-              className="p-1.5 rounded-full border border-white/10 hover:border-cyan-400 bg-white/5 hover:bg-white/10 text-gray-300 hover:text-cyan-400 transition-all cursor-pointer flex items-center justify-center"
+              className={`p-1.5 rounded-full border transition-all cursor-pointer flex items-center justify-center ${
+                theme === "light" 
+                  ? "border-gray-200 hover:border-cyan-500 bg-gray-100 hover:bg-cyan-50 text-gray-600 hover:text-cyan-600" 
+                  : "border-white/10 hover:border-cyan-400 bg-white/5 hover:bg-white/10 text-gray-300 hover:text-cyan-400"
+              }`}
               aria-label="Toggle light/dark theme"
             >
               {theme === "dark" ? (
@@ -182,7 +207,9 @@ export default function Navbar() {
             {/* Hamburger Button (Mobile/Tablet only) */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="flex lg:hidden items-center justify-center p-1.5 text-gray-300 hover:text-cyan-400 focus:outline-none transition-colors cursor-pointer"
+              className={`flex lg:hidden items-center justify-center p-1.5 focus:outline-none transition-colors cursor-pointer ${
+                theme === "light" ? "text-gray-600 hover:text-cyan-600" : "text-gray-300 hover:text-cyan-400"
+              }`}
               aria-label="Toggle navigation menu"
             >
               {isMobileMenuOpen ? (
@@ -209,7 +236,7 @@ export default function Navbar() {
           <a href="/" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-cyan-400 transition-colors uppercase py-2 px-4 block">Home</a>
           <a href="/robots" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-cyan-400 transition-colors uppercase py-2 px-4 block">Robots</a>
           <a href="/solutions" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-cyan-400 transition-colors uppercase py-2 px-4 block">Solutions</a>
-          <a href="/configurator" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-cyan-400 transition-colors uppercase py-2 px-4 block">Configurator</a>
+          {/* <a href="/configurator" target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-cyan-400 transition-colors uppercase py-2 px-4 block">Configurator</a> */}
           <a href="/company" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-cyan-400 transition-colors uppercase py-2 px-4 block">Company</a>
           <a href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-cyan-400 transition-colors uppercase py-2 px-4 block">Contact</a>
         </div>

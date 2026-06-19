@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { background: #1a1a1a; color: white; display: flex; flex-wrap: wrap; gap: 20px; padding: 20px; }
+  .container { position: relative; width: 400px; height: 400px; border: 1px solid #444; background: #000; overflow: hidden; }
+  .video { position: absolute; width: 100%; height: 100%; object-fit: contain; }
+  .image { position: absolute; width: 100%; height: 100%; object-fit: contain; opacity: 0.5; }
+  /* Applying the global scales to the container like in the React app */
+  .inner { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+  
+  /* We will dynamically set the transforms */
+</style>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    const robots = [
+      { id: 'joy-a01', baseScale: 1.15, baseTy: '-1.5%', v: { front: { scale: 1.202, ty: '-0.85%' }, side: { scale: 1.385, ty: '-13.88%' }, back: { scale: 1.239, ty: '-9.85%' } } },
+      { id: 't2-mini', baseScale: 1.10, baseTy: '1.5%', v: { front: { scale: 0.946, ty: '-3.66%' }, side: { scale: 0.872, ty: '-2.42%' }, back: { scale: 0.929, ty: '-1.51%' } } },
+      { id: 'tella-s', baseScale: 0.95, baseTy: '6%', v: { front: { scale: 1.276, ty: '-6.38%' }, side: { scale: 1.144, ty: '-2.92%' }, back: { scale: 1.158, ty: '-2.26%' } } },
+    ];
+
+    const app = document.getElementById('app');
+    
+    robots.forEach(r => {
+      ['front', 'side', 'back'].forEach(view => {
+        const div = document.createElement('div');
+        div.className = 'container';
+        
+        const inner = document.createElement('div');
+        inner.className = 'inner';
+        inner.style.transform = `scale(${r.baseScale}) translateY(${r.baseTy})`;
+
+        const vid = document.createElement('video');
+        vid.className = 'video';
+        vid.src = `http://localhost:3000/robots/${r.id}.mp4`;
+        vid.autoplay = true;
+        vid.loop = true;
+        vid.muted = true;
+        
+        const img = document.createElement('img');
+        img.className = 'image';
+        img.src = `http://localhost:3000/robots/${r.id}-${view}.png`;
+        const vAdj = r.v[view];
+        img.style.scale = vAdj.scale;
+        img.style.translate = `0 ${vAdj.ty}`;
+        
+        inner.appendChild(vid);
+        inner.appendChild(img);
+        div.appendChild(inner);
+        
+        const label = document.createElement('div');
+        label.textContent = `${r.id} - ${view}`;
+        label.style.position = 'absolute';
+        label.style.top = '10px';
+        label.style.left = '10px';
+        label.style.background = 'rgba(0,0,0,0.7)';
+        label.style.padding = '5px';
+        label.style.zIndex = '100';
+        div.appendChild(label);
+        
+        app.appendChild(div);
+      });
+    });
+  </script>
+</body>
+</html>

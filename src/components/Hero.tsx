@@ -52,10 +52,10 @@ export default function Hero() {
 
   <div className="flex-shrink-0">
     <h3 className="text-cyan-400 text-3xl sm:text-4xl font-bold">
-      24/7
+      12+ Hrs
     </h3>
     <p className="text-gray-400 text-xs sm:text-sm">
-      Operation
+      Runtime
     </p>
   </div>
 
@@ -63,10 +63,10 @@ export default function Hero() {
 
   <div className="flex-shrink-0">
     <h3 className="text-cyan-400 text-3xl sm:text-4xl font-bold">
-      Voice AI
+      10 kg
     </h3>
     <p className="text-gray-400 text-xs sm:text-sm">
-      Powered
+      Payload
     </p>
   </div>
 
@@ -74,10 +74,10 @@ export default function Hero() {
 
   <div className="flex-shrink-0">
     <h3 className="text-cyan-400 text-3xl sm:text-4xl font-bold">
-      Face 
+      2 Hrs
     </h3>
     <p className="text-gray-400 text-xs sm:text-sm">
-      Recognition
+      Charge Time
     </p>
   </div>
 
