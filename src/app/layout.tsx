@@ -73,7 +73,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         {children}
         {/* Global GPU SVG Chroma Filters for background removal */}
-        <svg width="0" height="0" className="absolute pointer-events-none" style={{ position: "absolute", width: 0, height: 0 }}>
+        <svg width="1" height="1" className="absolute pointer-events-none opacity-0" style={{ position: "absolute", top: "-9999px", left: "-9999px", pointerEvents: "none" }}>
           <defs>
             <filter id="remove-green" colorInterpolationFilters="sRGB">
               <feColorMatrix type="matrix" values="

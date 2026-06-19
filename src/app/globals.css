@@ -46,11 +46,15 @@ body {
    ROBOT MEDIA EFFECTS
 ========================= */
 .robot-media {
+  -webkit-filter: var(--current-robot-filter);
   filter: var(--current-robot-filter);
+  transform: translateZ(0); /* Fix Safari hardware acceleration bugs */
 }
 
 [data-theme="light"] .robot-media {
+  -webkit-filter: var(--current-robot-filter);
   filter: var(--current-robot-filter);
+  transform: translateZ(0);
 }
 
 .robot-media-mask {
@@ -751,4 +755,23 @@ html[data-theme="light"],
     0%, 100% { opacity: 0.8; transform: scale(1); }
     50% { opacity: 1; transform: scale(1.05); box-shadow: 0 0 30px rgba(0,212,255,0.5); }
   }
+}
+
+/* =========================
+   CUSTOM SCROLLBAR
+========================= */
+.custom-scrollbar::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(6, 182, 212, 0.3); /* cyan-500/30 */
+  border-radius: 9999px;
+}
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(6, 182, 212, 0.3) transparent;
 }

@@ -863,7 +863,7 @@ export default function RobotShowcase() {
 
         {/* ── SELECTION DOCK: scrollable row on mobile, compact grid on desktop ── */}
         <div className="flex-shrink-0 w-full overflow-hidden lg:-mt-10 relative z-40">
-          <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-cyan-500/30 scrollbar-track-transparent lg:grid lg:grid-cols-6 lg:overflow-visible lg:pb-0 max-w-3xl mx-auto w-full px-2 lg:px-0">
+          <div className="custom-scrollbar flex gap-2 overflow-x-auto pb-2 lg:grid lg:grid-cols-6 lg:overflow-visible lg:pb-0 max-w-3xl mx-auto w-full px-2 lg:px-0">
             {ROBOTS_DATA.map((robot, index) => {
               const isActive = index === activeRobotIndex;
               return (
