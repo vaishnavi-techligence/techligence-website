@@ -36,45 +36,64 @@ export default function RobotVideo() {
     };
   }, []);
 
+  // Detect Safari/WebKit/iOS
+  const [isSafari, setIsSafari] = useState(false);
+  useEffect(() => {
+    if (typeof navigator !== "undefined") {
+      const ua = navigator.userAgent.toLowerCase();
+      const isIOS = /iphone|ipad|ipod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      const isMacSafari = /^((?!chrome|android|crios|fxios).)*safari/i.test(ua);
+      setIsSafari(isIOS || isMacSafari);
+    }
+  }, []);
+
   return (
-    /*
-      Container: aspect-[3/4] instead of 9/16 — makes it SHORTER in layout,
-      which reduces the grid row height and eliminates the large centering gap.
-      overflow-hidden clips the video to this shorter box.
-    */
     <div className="relative w-full max-w-[480px] aspect-[3/4] overflow-hidden mx-auto z-10 robot-float">
-      {/* Video: width fills the container, translateY(-18%) shifts up to trim dead top space */}
       {!hasError && (
         <>
-          {/* High-tech Loading State shown while video loads */}
-          {!isVideoPlaying && (
+          {!isVideoPlaying && !isSafari && (
             <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-10 transition-opacity duration-300">
               <div className="w-8 h-8 rounded-full border-2 border-cyan-500/10 border-t-cyan-400 animate-spin" />
             </div>
           )}
-          {/* Video playing */}
-          <video
-            ref={videoRef}
-            src="/Robo.mp4"
-            preload="auto"
-            loop
-            muted={true}
-            playsInline
-            autoPlay
-            onPlaying={() => setIsVideoPlaying(true)}
-            onCanPlay={() => setIsVideoPlaying(true)}
-            onError={handleVideoError}
-            className="pointer-events-none w-full h-auto relative transition-opacity duration-300 z-20"
-            style={{
-              transform: "translateY(-10%) scale(0.92)",
-              filter: "var(--filter-remove-green) contrast(1.05) brightness(1.02)",
-              clipPath: "inset(0% 3% 0% 3%)",
-              WebkitClipPath: "inset(0% 3% 0% 3%)",
-              maskImage: "linear-gradient(to bottom, black 90%, transparent 100%)",
-              WebkitMaskImage: "linear-gradient(to bottom, black 90%, transparent 100%)",
-              opacity: isVideoPlaying ? 1 : 0,
-            }}
-          />
+          
+          {isSafari ? (
+            <img
+              src="/robots/andy-r1.png"
+              alt="Robot"
+              className="pointer-events-none w-full h-auto relative z-20 object-contain"
+              style={{
+                transform: "translateY(-10%) scale(0.92)",
+                clipPath: "inset(0% 3% 0% 3%)",
+                WebkitClipPath: "inset(0% 3% 0% 3%)",
+                maskImage: "linear-gradient(to bottom, black 90%, transparent 100%)",
+                WebkitMaskImage: "linear-gradient(to bottom, black 90%, transparent 100%)",
+              }}
+            />
+          ) : (
+            <video
+              ref={videoRef}
+              src="/Robo.mp4"
+              preload="auto"
+              loop
+              muted={true}
+              playsInline
+              autoPlay
+              onPlaying={() => setIsVideoPlaying(true)}
+              onCanPlay={() => setIsVideoPlaying(true)}
+              onError={handleVideoError}
+              className="pointer-events-none w-full h-auto relative transition-opacity duration-300 z-20"
+              style={{
+                transform: "translateY(-10%) scale(0.92)",
+                filter: "var(--filter-remove-green) contrast(1.05) brightness(1.02)",
+                clipPath: "inset(0% 3% 0% 3%)",
+                WebkitClipPath: "inset(0% 3% 0% 3%)",
+                maskImage: "linear-gradient(to bottom, black 90%, transparent 100%)",
+                WebkitMaskImage: "linear-gradient(to bottom, black 90%, transparent 100%)",
+                opacity: isVideoPlaying ? 1 : 0,
+              }}
+            />
+          )}
         </>
       )}
 
