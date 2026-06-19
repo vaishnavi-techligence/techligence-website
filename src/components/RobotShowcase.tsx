@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import ChromaKeyVideo from "./ChromaKeyVideo";
 
 // Robot Profiles Data matching the approved implementation plan
 interface Robot {
@@ -252,6 +251,7 @@ export default function RobotShowcase() {
   const [flashActive, setFlashActive] = useState(false);
   const [videoError, setVideoError] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [isSafari, setIsSafari] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const [animatedStats, setAnimatedStats] = useState({
@@ -263,6 +263,15 @@ export default function RobotShowcase() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const [showHud, setShowHud] = useState(true);
+
+  // Detect Safari/WebKit — SVG filters on <video> are broken there
+  useEffect(() => {
+    if (typeof navigator !== "undefined") {
+      const ua = navigator.userAgent;
+      const webkit = /AppleWebKit/.test(ua) && !/Chrome/.test(ua) && !/Chromium/.test(ua);
+      setIsSafari(webkit);
+    }
+  }, []);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -670,100 +679,109 @@ export default function RobotShowcase() {
 
                 {(() => {
                   const isLandscape = ["tella-s", "nova-m1"].includes(activeRobot.id);
+                  const filterId = "url(#remove-green-showcase)";
                   
                   const layoutAdjustment = ROBOT_LAYOUT_ADJUSTMENTS[activeRobot.id] || { scale: 1.0, translateY: "0%", bottomClip: "100%", topClip: "0" };
                   const bottomClipNum = parseFloat(layoutAdjustment.bottomClip || "100");
                   const topCrop = parseFloat(layoutAdjustment.topClip || "0");
 
-                  const wrapperStyle: React.CSSProperties = isLandscape
-                  ? {
-                      "--top-crop": `${topCrop}%`,
-                      "--top-crop-fade": `${topCrop + 3}%`,
-                      "--bottom-clip-fade": `${bottomClipNum - 4}%`,
-                      "--bottom-clip": `${bottomClipNum}%`,
-                      clipPath: `inset(0 34.375% 0 34.375%)`,
-                      WebkitClipPath: `inset(0 34.375% 0 34.375%)`,
-                    } as React.CSSProperties
-                  : {
-                      "--top-crop": `${topCrop}%`,
-                      "--top-crop-fade": `${topCrop + 3}%`,
-                      "--bottom-clip-fade": `${bottomClipNum - 4}%`,
-                      "--bottom-clip": `${bottomClipNum}%`,
-                      clipPath: `inset(0 3% 0 3%)`,
-                      WebkitClipPath: `inset(0 3% 0 3%)`,
-                    } as React.CSSProperties;
+                  // On Safari/WebKit: show static PNG (SVG filters don't work on <video> in Safari)
+                  // On Chrome/Firefox: show video with SVG chroma key filter (works perfectly)
+                  if (isSafari || activeView !== "video" || !activeRobot.video) {
+                    // Show static PNG image — works everywhere
+                    const imgSrc = activeView === "video"
+                      ? activeRobot.image
+                      : `/robots/${activeRobot.id}-${activeView}.png`;
+                    return (
+                      <img
+                        src={imgSrc}
+                        alt={`${activeRobot.name} visual`}
+                        className="w-auto object-contain robot-float transition-all duration-500 relative z-10"
+                        style={
+                          activeView !== "video"
+                            ? {
+                                filter: "none",
+                                height: "100%",
+                                maxWidth: "none",
+                                ...( (() => {
+                                  const viewAdjust = layoutAdjustment.views && activeView !== "wave" ? layoutAdjustment.views[activeView] : null;
+                                  if (viewAdjust) {
+                                    return { scale: viewAdjust.scale, translate: `0 ${viewAdjust.translateY}` };
+                                  }
+                                  return { scale: layoutAdjustment.staticScale || 1, translate: `0 ${layoutAdjustment.staticTranslateY || "0%"}` };
+                                })() ),
+                              }
+                            : {
+                                height: "100%",
+                                maxWidth: "none",
+                                filter: "none",
+                              }
+                        }
+                      />
+                    );
+                  }
 
-                  const canvasStyle: React.CSSProperties = isLandscape
+                  // Chrome/Firefox: use <video> with SVG chroma key filter
+                  const videoStyle: React.CSSProperties = isLandscape
                   ? {
+                      "--current-robot-filter": filterId,
+                      "--top-crop": `${topCrop}%`,
+                      "--top-crop-fade": `${topCrop + 3}%`,
+                      "--bottom-clip-fade": `${bottomClipNum - 4}%`,
+                      "--bottom-clip": `${bottomClipNum}%`,
                       height: "100%",
                       width: "auto",
                       maxWidth: "none",
                       aspectRatio: "16 / 9",
-                    }
+                      clipPath: `inset(0 34.375% 0 34.375%)`,
+                      WebkitClipPath: `inset(0 34.375% 0 34.375%)`,
+                      backgroundColor: "transparent",
+                    } as React.CSSProperties
                   : {
+                      "--current-robot-filter": filterId,
+                      "--top-crop": `${topCrop}%`,
+                      "--top-crop-fade": `${topCrop + 3}%`,
+                      "--bottom-clip-fade": `${bottomClipNum - 4}%`,
+                      "--bottom-clip": `${bottomClipNum}%`,
                       height: "100%",
                       width: "auto",
                       aspectRatio: "9 / 16",
-                    };
+                      clipPath: `inset(0 3% 0 3%)`,
+                      WebkitClipPath: `inset(0 3% 0 3%)`,
+                      backgroundColor: "transparent",
+                    } as React.CSSProperties;
 
-                  return activeView === "video" && activeRobot.video ? (
-                    !videoError ? (
-                      <div className="relative w-full h-full flex items-center justify-center">
-                        {/* High-tech Loading State shown while video loads */}
-                        {!isVideoPlaying && (
-                          <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-10 transition-opacity duration-300">
-                            <div className="w-10 h-10 rounded-full border-2 border-cyan-500/10 border-t-cyan-400 animate-spin mb-3" />
-                            <span className="font-mono text-[8px] text-cyan-400/80 tracking-[3px] uppercase animate-pulse">
-                              LINKING_FRAME...
-                            </span>
-                          </div>
-                        )}
-                        {/* Canvas-based chroma key: works on ALL browsers including Safari/iPad */}
-                        <div 
-                          className="robot-media-mask h-full w-auto max-w-full robot-float pointer-events-none relative transition-opacity duration-300 z-20 flex items-center justify-center"
-                          style={{
-                            ...wrapperStyle,
-                            opacity: isVideoPlaying ? 1 : 0
-                          }}
-                        >
-                          <ChromaKeyVideo
-                            key={activeRobot.id}
-                            src={activeRobot.video}
-                            className="h-full w-auto max-w-full object-contain pointer-events-none"
-                            style={canvasStyle}
-                            onReady={() => setIsVideoPlaying(true)}
-                            onError={() => setVideoError(true)}
-                          />
+                  return !videoError ? (
+                    <div className="relative w-full h-full flex items-center justify-center">
+                      {!isVideoPlaying && (
+                        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-10 transition-opacity duration-300">
+                          <div className="w-10 h-10 rounded-full border-2 border-cyan-500/10 border-t-cyan-400 animate-spin mb-3" />
+                          <span className="font-mono text-[8px] text-cyan-400/80 tracking-[3px] uppercase animate-pulse">
+                            LINKING_FRAME...
+                          </span>
                         </div>
-                      </div>
-                    ) : (
-                      <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-md z-10">
-                        <p className="text-red-400 font-semibold">Video Offline</p>
-                        <p className="text-xs text-gray-500 mt-1">Check /public/robots/{activeRobot.id}.mp4</p>
-                      </div>
-                    )
+                      )}
+                      <video
+                        ref={videoRef}
+                        key={activeRobot.id}
+                        src={activeRobot.video}
+                        preload="auto"
+                        loop muted playsInline autoPlay
+                        onPlaying={() => setIsVideoPlaying(true)}
+                        onCanPlay={() => setIsVideoPlaying(true)}
+                        className="robot-media robot-media-mask h-full w-auto max-w-full object-contain robot-float pointer-events-none relative transition-opacity duration-300 z-20"
+                        style={{
+                          ...videoStyle,
+                          opacity: isVideoPlaying ? 1 : 0
+                        }}
+                        onError={() => setVideoError(true)}
+                      />
+                    </div>
                   ) : (
-                    <img
-                      src={activeView === "video" ? activeRobot.image : `/robots/${activeRobot.id}-${activeView}.png`}
-                      alt={`${activeRobot.name} visual`}
-                      className="robot-media w-auto object-contain robot-float transition-all duration-500 relative z-10"
-                      style={
-                        activeView !== "video"
-                          ? {
-                              filter: "none",
-                              height: "100%",
-                              maxWidth: "none",
-                              ...( (() => {
-                                const viewAdjust = layoutAdjustment.views && activeView !== "wave" ? layoutAdjustment.views[activeView] : null;
-                                if (viewAdjust) {
-                                  return { scale: viewAdjust.scale, translate: `0 ${viewAdjust.translateY}` };
-                                }
-                                return { scale: layoutAdjustment.staticScale || 1, translate: `0 ${layoutAdjustment.staticTranslateY || "0%"}` };
-                              })() ),
-                            }
-                          : undefined
-                      }
-                    />
+                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-md z-10">
+                      <p className="text-red-400 font-semibold">Video Offline</p>
+                      <p className="text-xs text-gray-500 mt-1">Check /public/robots/{activeRobot.id}.mp4</p>
+                    </div>
                   );
                 })()}
               </div>
