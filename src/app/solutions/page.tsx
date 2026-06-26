@@ -41,8 +41,9 @@ export default function SolutionsPage() {
               className="w-full h-full object-contain rounded-xl"
             />
             {/* Watermark Mask / Brand Overlay */}
-            <div className="absolute bottom-3 right-3 px-4 py-3 bg-[#050816] border border-cyan-500/30 rounded-xl text-[8px] font-mono font-black tracking-widest text-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.25)] select-none uppercase pointer-events-none z-10 flex items-center justify-center">
-              TECHLIGENCE // SECURE
+            <div className="absolute bottom-4 right-4 w-28 h-14 bg-[#050816] border border-cyan-500/30 rounded-xl text-[8px] font-mono font-black tracking-widest text-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.25)] select-none uppercase pointer-events-none z-10 flex flex-col items-center justify-center text-center leading-relaxed">
+              <span>TECHLIGENCE</span>
+              <span>SECURE</span>
             </div>
           </div>
 
@@ -108,13 +109,19 @@ export default function SolutionsPage() {
             </p>
           </div>
 
-          <Image
-            src="/solutions/corporate.jpg"
-            alt="Corporate"
-            width={700}
-            height={500}
-            className="rounded-3xl object-cover w-full"
-          />
+          <div className="relative w-full aspect-video rounded-3xl p-2 bg-slate-950/60 border border-white/10 shadow-[0_0_30px_rgba(0,240,255,0.1)]">
+            <Image
+              src="/solutions/corporate.jpg"
+              alt="Corporate"
+              fill
+              className="rounded-xl object-cover"
+            />
+            {/* Watermark Mask / Brand Overlay */}
+            <div className="absolute bottom-4 right-4 w-28 h-14 bg-[#050816] border border-cyan-500/30 rounded-xl text-[8px] font-mono font-black tracking-widest text-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.25)] select-none uppercase pointer-events-none z-10 flex flex-col items-center justify-center text-center leading-relaxed">
+              <span>TECHLIGENCE</span>
+              <span>SECURE</span>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -134,8 +141,9 @@ export default function SolutionsPage() {
               className="w-full h-full object-contain rounded-xl"
             />
             {/* Watermark Mask / Brand Overlay */}
-            <div className="absolute bottom-3 right-3 px-4 py-3 bg-[#050816] border border-cyan-500/30 rounded-xl text-[8px] font-mono font-black tracking-widest text-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.25)] select-none uppercase pointer-events-none z-10 flex items-center justify-center">
-              TECHLIGENCE // SECURE
+            <div className="absolute bottom-4 right-4 w-28 h-14 bg-[#050816] border border-cyan-500/30 rounded-xl text-[8px] font-mono font-black tracking-widest text-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.25)] select-none uppercase pointer-events-none z-10 flex flex-col items-center justify-center text-center leading-relaxed">
+              <span>TECHLIGENCE</span>
+              <span>SECURE</span>
             </div>
           </div>
 
@@ -202,13 +210,19 @@ export default function SolutionsPage() {
             </p>
           </div>
 
-          <Image
-            src="/solutions/hospitality.jpg"
-            alt="Healthcare"
-            width={700}
-            height={500}
-            className="rounded-3xl object-cover w-full"
-          />
+          <div className="relative w-full aspect-video rounded-3xl p-2 bg-slate-950/60 border border-white/10 shadow-[0_0_30px_rgba(0,240,255,0.1)]">
+            <Image
+              src="/solutions/hospitality.jpg"
+              alt="Healthcare"
+              fill
+              className="rounded-xl object-cover"
+            />
+            {/* Watermark Mask / Brand Overlay */}
+            <div className="absolute bottom-4 right-4 w-28 h-14 bg-[#050816] border border-cyan-500/30 rounded-xl text-[8px] font-mono font-black tracking-widest text-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.25)] select-none uppercase pointer-events-none z-10 flex flex-col items-center justify-center text-center leading-relaxed">
+              <span>TECHLIGENCE</span>
+              <span>SECURE</span>
+            </div>
+          </div>
         </div>
       </section>
 
