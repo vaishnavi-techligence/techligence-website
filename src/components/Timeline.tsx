@@ -6,154 +6,114 @@ const MILESTONES = [
   // 2017-2021
   {
     year: "2017-2021",
-    sentence: "Exposing the first bipedal mechanical joints.",
-    image: "/Timeline Photos/Screenshot 2026-06-14 203902.png",
+    sentence: "Spark Humanoid Development.",
+    image: "/Timeline/spark humanoid 2017-21.png",
     glowColor: "rgba(245, 158, 11, 0.15)",
     glowColorRaw: "#f59e0b",
-    aspect: 0.912,
-  },
-  {
-    year: "2017-2021",
-    sentence: "Obsession with custom kinetic linkages.",
-    image: "/Timeline Photos/Screenshot 2026-06-14 203923.png",
-    glowColor: "rgba(245, 158, 11, 0.15)",
-    glowColorRaw: "#f59e0b",
-    aspect: 1.105,
-  },
-  {
-    year: "2017-2021",
-    sentence: "Testing early static balance and structural frames.",
-    image: "/Timeline Photos/Screenshot 2026-06-14 204211.png",
-    glowColor: "rgba(245, 158, 11, 0.15)",
-    glowColorRaw: "#f59e0b",
-    aspect: 0.657,
-  },
-  {
-    year: "2017-2021",
-    sentence: "VJTI Base Lab foundation trials.",
-    image: "/Timeline Photos/Screenshot 2026-06-14 204219.png",
-    glowColor: "rgba(245, 158, 11, 0.15)",
-    glowColorRaw: "#f59e0b",
-    aspect: 0.624,
   },
   // 2023
   {
     year: "2023",
-    sentence: "Experimenting with modular grid mechanics.",
-    image: "/Timeline Photos/Screenshot 2026-06-14 203955.png",
+    sentence: "Bipedal Gang.",
+    image: "/Timeline/bipedal gang 2023.png",
     glowColor: "rgba(100, 116, 139, 0.15)",
     glowColorRaw: "#64748b",
-    aspect: 0.882,
   },
   {
     year: "2023",
-    sentence: "Spliced articulation learning curves.",
-    image: "/Timeline Photos/Screenshot 2026-06-14 204126.png",
+    sentence: "Car Shi.",
+    image: "/Timeline/car shi 2023.png",
     glowColor: "rgba(100, 116, 139, 0.15)",
     glowColorRaw: "#64748b",
-    aspect: 1.206,
+  },
+  {
+    year: "2023",
+    sentence: "Claws.",
+    image: "/Timeline/clawss 2023.png",
+    glowColor: "rgba(100, 116, 139, 0.15)",
+    glowColorRaw: "#64748b",
+  },
+  {
+    year: "2023",
+    sentence: "Duck.",
+    image: "/Timeline/duck 2023.png",
+    glowColor: "rgba(100, 116, 139, 0.15)",
+    glowColorRaw: "#64748b",
+  },
+  {
+    year: "2023",
+    sentence: "Faces.",
+    image: "/Timeline/faces 2023.png",
+    glowColor: "rgba(100, 116, 139, 0.15)",
+    glowColorRaw: "#64748b",
+  },
+  {
+    year: "2023",
+    sentence: "Hands.",
+    image: "/Timeline/hands 2023.png",
+    glowColor: "rgba(100, 116, 139, 0.15)",
+    glowColorRaw: "#64748b",
+  },
+  {
+    year: "2023",
+    sentence: "Two Claws.",
+    image: "/Timeline/two claws 2023.png",
+    glowColor: "rgba(100, 116, 139, 0.15)",
+    glowColorRaw: "#64748b",
   },
   // 2024
   {
     year: "2024",
-    sentence: "First walk: Full bipedal pedestrian structure.",
-    image: "/Timeline Photos/Screenshot 2026-06-14 204100.png",
+    sentence: "Pihu 1 Deployment.",
+    image: "/Timeline/2024 pihu 1 deployment.png",
     glowColor: "rgba(217, 119, 6, 0.15)",
     glowColorRaw: "#d97706",
-    aspect: 0.817,
-  },
-  {
-    year: "2024",
-    sentence: "Integrating stable walking and balancing cycles.",
-    image: "/Timeline Photos/Screenshot 2026-06-14 203938.png",
-    glowColor: "rgba(217, 119, 6, 0.15)",
-    glowColorRaw: "#d97706",
-    aspect: 0.640,
-  },
-  {
-    year: "2024",
-    sentence: "Pihu vocal speech hardware layout.",
-    image: "/Timeline Photos/Screenshot 2026-06-14 204043.png",
-    glowColor: "rgba(217, 119, 6, 0.15)",
-    glowColorRaw: "#d97706",
-    aspect: 0.942,
-  },
-  {
-    year: "2024",
-    sentence: "First vocal trials and verbal response alignment.",
-    image: "/Timeline Photos/Screenshot 2026-06-14 204151.png",
-    glowColor: "rgba(217, 119, 6, 0.15)",
-    glowColorRaw: "#d97706",
-    aspect: 0.655,
   },
   // 2025
   {
     year: "2025",
-    sentence: "Developing custom, in-house smart actuators.",
-    image: "/Timeline Photos/Screenshot 2026-06-14 203912.png",
+    sentence: "Actuator Development.",
+    image: "/Timeline/acc 1  2025.png",
     glowColor: "rgba(234, 88, 12, 0.15)",
     glowColorRaw: "#ea580c",
-    aspect: 1.267,
   },
   {
     year: "2025",
-    sentence: "High-frequency torque control calibration.",
-    image: "/Timeline Photos/Screenshot 2026-06-14 204229.png",
+    sentence: "Actuator Prototype 2.",
+    image: "/Timeline/acc 2 2025.png",
     glowColor: "rgba(234, 88, 12, 0.15)",
     glowColorRaw: "#ea580c",
-    aspect: 3.572,
+  },
+  {
+    year: "2025",
+    sentence: "Actuator Prototype 3.",
+    image: "/Timeline/acc 3  2025.png",
+    glowColor: "rgba(234, 88, 12, 0.15)",
+    glowColorRaw: "#ea580c",
   },
   // 2026
   {
     year: "2026",
-    sentence: "Deploying T2 Mini prototypes for field trials.",
-    image: "/Timeline Photos/Screenshot 2026-06-14 204139.png",
+    sentence: "Pihu 2.",
+    image: "/Timeline/pihu 2 jan 2026.png",
     glowColor: "rgba(6, 182, 212, 0.15)",
     glowColorRaw: "#06b6d4",
-    aspect: 1.394,
   },
   {
     year: "2026",
-    sentence: "Autonomous fleet connectivity diagnostics.",
-    image: "/Timeline Photos/Screenshot 2026-06-14 204204.png",
+    sentence: "T2-Mini.",
+    image: "/Timeline/t2-mini 2026.png",
     glowColor: "rgba(6, 182, 212, 0.15)",
     glowColorRaw: "#06b6d4",
-    aspect: 1.265,
-  },
-  {
-    year: "2026",
-    sentence: "T2 Mini commercial environment deployment.",
-    image: "/robots/t2-mini.png",
-    glowColor: "rgba(6, 182, 212, 0.15)",
-    glowColorRaw: "#06b6d4",
-    aspect: 0.667,
-  },
-  // 2026+
-  {
-    year: "2026+",
-    sentence: "T2 Max: Heavy-duty autonomous delivery scaling.",
-    image: "/robots/t2-max.png",
-    glowColor: "rgba(59, 130, 246, 0.15)",
-    glowColorRaw: "#3b82f6",
-    aspect: 0.538,
-  },
-  {
-    year: "2026+",
-    sentence: "Nova M1: Scaling custom humanoid integration.",
-    image: "/robots/nova-m1.png",
-    glowColor: "rgba(139, 92, 246, 0.15)",
-    glowColorRaw: "#8b5cf6",
-    aspect: 0.691,
   },
 ];
 
 const TIMELINE_YEARS = [
   { label: "2017-2021", startIndex: 0, glowColorRaw: "#f59e0b" },
-  { label: "2023", startIndex: 4, glowColorRaw: "#64748b" },
-  { label: "2024", startIndex: 6, glowColorRaw: "#d97706" },
-  { label: "2025", startIndex: 10, glowColorRaw: "#ea580c" },
+  { label: "2023", startIndex: 1, glowColorRaw: "#64748b" },
+  { label: "2024", startIndex: 8, glowColorRaw: "#d97706" },
+  { label: "2025", startIndex: 9, glowColorRaw: "#ea580c" },
   { label: "2026", startIndex: 12, glowColorRaw: "#06b6d4" },
-  { label: "2026+", startIndex: 15, glowColorRaw: "#3b82f6" },
 ];
 
 export default function Timeline() {
@@ -252,7 +212,7 @@ export default function Timeline() {
         }
 
         .timeline-slide-item {
-          background-color: #121212;
+          background-color: #ffffff;
           border: 1px solid rgba(255, 255, 255, 0.08);
           transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
@@ -349,7 +309,7 @@ export default function Timeline() {
               }}
             >
               <div 
-                className="timeline-slide-item rounded-2xl overflow-hidden p-2 w-full aspect-[4/3] mb-8"
+                className="timeline-slide-item rounded-2xl overflow-hidden p-4 w-full mb-8 flex items-center justify-center"
                 style={{
                   boxShadow: isActive ? `0 20px 45px -12px ${m.glowColor}` : 'none',
                   borderColor: isActive ? m.glowColorRaw + "40" : undefined
@@ -358,7 +318,7 @@ export default function Timeline() {
                 <img
                   src={m.image}
                   alt={`Techligence Milestone Detail ${m.year}`}
-                  className="w-full h-full object-contain rounded-xl"
+                  className="w-full h-auto max-h-[400px] object-contain rounded-xl"
                 />
               </div>
 
