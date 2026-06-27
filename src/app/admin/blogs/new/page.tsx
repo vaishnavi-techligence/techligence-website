@@ -9,9 +9,40 @@ export default function NewBlogPage() {
   const [body, setBody] = useState("");
   const [conclusion, setConclusion] = useState("");
 
-  const handlePublish = () => {
-    alert("Blog saved successfully!");
-  };
+const handlePublish = async () => {
+  if (!title.trim()) {
+    alert("Please enter a blog title.");
+    return;
+  }
+
+  const response = await fetch("/api/blogs", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      title,
+      slug: title.toLowerCase().replace(/\s+/g, "-"),
+      category: "General",
+      excerpt: tldr,
+      content: `${abstract}\n\n${body}\n\n${conclusion}`,
+      image: "",
+      author: "Admin",
+    }),
+  });
+
+  if (response.ok) {
+    alert("Blog published successfully!");
+
+    setTitle("");
+    setTldr("");
+    setAbstract("");
+    setBody("");
+    setConclusion("");
+  } else {
+    alert("Failed to publish blog.");
+  }
+};
 
   return (
     <main className="min-h-screen bg-[#050816] text-white p-10">

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <footer className="border-t border-white/10 bg-[#050816]">
@@ -135,6 +137,7 @@ export default function Footer() {
               <a href="/solutions" className="hover:text-cyan-400 transition-colors">Solutions</a>
               <a href="/company" className="hover:text-cyan-400 transition-colors">Company</a>
               <a href="/contact" className="hover:text-cyan-400 transition-colors">Contact</a>
+              <Link href="/admin/blogs" className="hover:text-cyan-400 transition-colors">Manage Blogs</Link>
             </div>
           </div>
 
