@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
+import Link from "next/link";
 interface Enquiry {
   id: string;
   name: string;
@@ -261,6 +261,12 @@ export default function AdminPage() {
                   </svg>
                   Sync System
                 </button>
+                <Link
+                  href="/admin/blogs"
+                  className="px-4 py-2 border border-cyan-500/20 bg-cyan-500/5 hover:bg-cyan-500/20 hover:border-cyan-500/50 rounded-xl text-xs font-mono uppercase tracking-wider transition-all duration-300 flex items-center gap-2 text-cyan-400"
+                >
+                  Manage Blogs
+                </Link>
                 <button
                   onClick={handleLogout}
                   className="px-4 py-2 border border-red-500/20 bg-red-500/5 hover:bg-red-500/20 hover:border-red-500/50 rounded-xl text-xs font-mono uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center gap-2 text-red-400"
