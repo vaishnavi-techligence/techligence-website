@@ -115,8 +115,8 @@ export default function Footer() {
                   <svg className="w-4 h-4 text-cyan-400 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.58c0-1.017.762-1.785 1.785-1.785h1.86c.646 0 1.228.384 1.488.978l.848 1.932c.266.608.066 1.304-.469 1.68l-1.104.793a12.083 12.083 0 005.282 5.282l.793-1.104c.376-.535 1.071-.735 1.68-.469l1.932.848c.594.26 1.017.842 1.017 1.488v1.86c0 1.022-.768 1.785-1.785 1.785H18c-8.837 0-16-7.163-16-16v-.22z" />
                   </svg>
-                  <a href="tel:+917020812247" className="hover:text-cyan-400 transition-colors text-xs">
-                    <span className="font-semibold text-white">Customer Care:</span> +91 70208 12247
+                  <a href="tel:+919175616126" className="hover:text-cyan-400 transition-colors text-xs">
+                    <span className="font-semibold text-white">Customer Care:</span> +91 9175616126
                   </a>
                 </div>
               </div>
