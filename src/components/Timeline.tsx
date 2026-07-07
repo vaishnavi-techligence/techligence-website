@@ -7,7 +7,7 @@ const MILESTONES = [
   {
     year: "2017-2021",
     sentence: "Spark Humanoid Development.",
-    image: "/Timeline Photos/spark humanoid.png",
+    image: "/Timeline/spark-humanoid.png",
     glowColor: "rgba(245, 158, 11, 0.15)",
     glowColorRaw: "#f59e0b",
   },
