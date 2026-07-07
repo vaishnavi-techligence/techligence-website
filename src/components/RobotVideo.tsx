@@ -30,6 +30,15 @@ export default function RobotVideo() {
     video.addEventListener("playing", handlePlaying);
     video.addEventListener("canplay", handleCanPlay);
 
+    // Explicitly play to bypass autoplay restrictions sometimes
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // Autoplay was prevented
+        console.log("Autoplay prevented");
+      });
+    }
+
     return () => {
       video.removeEventListener("playing", handlePlaying);
       video.removeEventListener("canplay", handleCanPlay);
@@ -56,7 +65,7 @@ export default function RobotVideo() {
               <div className="w-8 h-8 rounded-full border-2 border-cyan-500/10 border-t-cyan-400 animate-spin" />
             </div>
           )}
-          
+
           {isSafari ? (
             <img
               src="/robots/t2-mini-front.png"
@@ -76,13 +85,14 @@ export default function RobotVideo() {
               src="/Robo.mp4"
               preload="auto"
               loop
-              muted={true}
+              muted
               playsInline
               autoPlay
               onPlaying={() => setIsVideoPlaying(true)}
               onCanPlay={() => setIsVideoPlaying(true)}
+              onLoadedData={() => setIsVideoPlaying(true)}
               onError={handleVideoError}
-              className="pointer-events-none w-full h-auto relative transition-opacity duration-300 z-20"
+              className="pointer-events-none w-full h-auto relative z-20"
               style={{
                 transform: "translateY(-10%) scale(0.92)",
                 filter: "var(--filter-remove-green) contrast(1.05) brightness(1.02)",
@@ -90,7 +100,6 @@ export default function RobotVideo() {
                 WebkitClipPath: "inset(0% 3% 0% 3%)",
                 maskImage: "linear-gradient(to bottom, black 90%, transparent 100%)",
                 WebkitMaskImage: "linear-gradient(to bottom, black 90%, transparent 100%)",
-                opacity: isVideoPlaying ? 1 : 0,
               }}
             />
           )}

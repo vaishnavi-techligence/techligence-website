@@ -119,7 +119,7 @@ export default function Navbar() {
               )}
             </a>
 
-            {/* <a
+            <a
               href="/configurator"
               target="_blank"
               rel="noopener noreferrer"
@@ -136,7 +136,7 @@ export default function Navbar() {
               {pathname === "/configurator" && (
                 <span className={`absolute left-0 -bottom-1.5 h-[2px] w-full rounded-full ${theme === "light" ? "bg-cyan-600" : "bg-cyan-400"}`}></span>
               )}
-            </a> */}
+            </a>
 
             <a
               href="/company"
@@ -151,6 +151,8 @@ export default function Navbar() {
                 <span className={`absolute left-0 -bottom-1.5 h-[2px] w-full rounded-full ${theme === "light" ? "bg-cyan-600" : "bg-cyan-400"}`}></span>
               )}
             </a>
+
+
 
             <a
               href="/contact"
@@ -236,7 +238,7 @@ export default function Navbar() {
           <a href="/" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-cyan-400 transition-colors uppercase py-2 px-4 block">Home</a>
           <a href="/robots" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-cyan-400 transition-colors uppercase py-2 px-4 block">Robots</a>
           <a href="/solutions" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-cyan-400 transition-colors uppercase py-2 px-4 block">Solutions</a>
-          {/* <a href="/configurator" target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-cyan-400 transition-colors uppercase py-2 px-4 block">Configurator</a> */}
+          <a href="/configurator" target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-cyan-400 transition-colors uppercase py-2 px-4 block">Configurator</a>
           <a href="/company" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-cyan-400 transition-colors uppercase py-2 px-4 block">Company</a>
           <a href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-cyan-400 transition-colors uppercase py-2 px-4 block">Contact</a>
         </div>

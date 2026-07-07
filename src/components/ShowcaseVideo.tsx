@@ -73,10 +73,10 @@ export default function ShowcaseVideo() {
       <div className="absolute inset-0 w-full h-full z-0 select-none pointer-events-none">
         <video
           ref={videoRef}
-          src="/robottt.mp4"
+          src="/robot_v2.mp4"
           preload="auto"
           loop
-          muted={isMuted}
+          muted
           playsInline
           autoPlay
           onPlaying={() => setIsVideoPlaying(true)}

@@ -136,6 +136,7 @@ export default function Footer() {
               <a href="/robots" className="hover:text-cyan-400 transition-colors">Robots</a>
               <a href="/solutions" className="hover:text-cyan-400 transition-colors">Solutions</a>
               <a href="/company" className="hover:text-cyan-400 transition-colors">Company</a>
+              <a href="/blogs" className="hover:text-cyan-400 transition-colors">Blogs</a>
               <a href="/contact" className="hover:text-cyan-400 transition-colors">Contact</a>
               <Link href="/admin/blogs" className="hover:text-cyan-400 transition-colors">Manage Blogs</Link>
             </div>
