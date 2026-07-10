@@ -96,7 +96,6 @@ export default async function BlogPage({
                 src={blog.image} 
                 alt={blog.title} 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
-                onError={(e) => (e.currentTarget.style.display = 'none')}
               />
             </div>
           )}
@@ -117,9 +116,10 @@ export default async function BlogPage({
               </div>
             )}
 
-            <div className="text-lg leading-relaxed space-y-6 text-gray-800 whitespace-pre-line">
-              {blog.content}
-            </div>
+            <div 
+              className="text-lg leading-relaxed space-y-6 text-gray-800"
+              dangerouslySetInnerHTML={{ __html: blog.content }}
+            />
           </div>
 
           <div className="mt-16 pt-10 border-t border-gray-200">
