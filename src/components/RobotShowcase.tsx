@@ -888,7 +888,7 @@ export default function RobotShowcase() {
         </div>
 
         {/* ── SELECTION DOCK: scrollable row on mobile, compact grid on desktop ── */}
-        <div className="flex-shrink-0 w-full overflow-hidden lg:-mt-10 relative z-40">
+        <div className="flex-shrink-0 w-full overflow-hidden lg:mt-6 relative z-30">
           <div className="custom-scrollbar flex gap-2 overflow-x-auto pb-2 lg:grid lg:grid-cols-6 lg:overflow-visible lg:pb-0 max-w-3xl mx-auto w-full px-2 lg:px-0">
             {ROBOTS_DATA.map((robot, index) => {
               const isActive = index === activeRobotIndex;
@@ -896,7 +896,7 @@ export default function RobotShowcase() {
                 <button
                   key={robot.id}
                   onClick={() => handleRobotClick(index)}
-                  className={`robot-selection-btn rounded-xl border transition-all duration-300 cursor-pointer w-24 h-[76px] flex-shrink-0 flex flex-col items-center justify-between p-2 backdrop-blur-md select-none group text-center relative overflow-hidden lg:w-full ${isActive ? "active-selection-btn" : "inactive-selection-btn"}`}
+                  className={`robot-selection-btn rounded-xl border transition-all duration-300 cursor-pointer w-28 h-[100px] flex-shrink-0 flex flex-col items-center justify-between p-2 backdrop-blur-md select-none group text-center relative overflow-hidden lg:w-full ${isActive ? "active-selection-btn" : "inactive-selection-btn"}`}
                   style={{
                     borderColor: isActive ? "#00f0ff" : "rgba(255,255,255,0.08)",
                     boxShadow: isActive ? "0 0 12px rgba(0,240,255,0.2)" : "none",
@@ -916,8 +916,8 @@ export default function RobotShowcase() {
                       </span>
                     )}
                   </div>
-                  <div className="w-8 h-8 rounded-full overflow-hidden bg-black/30 flex items-center justify-center border border-white/5 transition-transform duration-300 group-hover:scale-110">
-                    <img src={robot.image} alt={robot.name} className="w-[85%] h-[85%] object-contain" />
+                  <div className="w-12 h-12 rounded-full overflow-hidden bg-black/30 flex items-center justify-center border border-white/5 transition-transform duration-300 group-hover:scale-110">
+                    <img src={robot.image} alt={robot.name} className="w-full h-full object-contain" />
                   </div>
                   <span
                     className="text-[7px] font-mono font-black tracking-wider uppercase truncate block w-full text-center"
