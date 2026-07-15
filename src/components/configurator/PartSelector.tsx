@@ -3,11 +3,16 @@
 import React from 'react';
 import { StarIcon, LockIcon } from './Icons';
 
-const parts = [
-  { id: 'head', name: 'Head', locked: true },
-  { id: 'torso', name: 'Torso', active: true, star: true },
-  { id: 'arms', name: 'Arms', coming: true },
-  { id: 'chassis', name: 'Chassis', coming: true },
+type Part = {
+  id: string;
+  name: string;
+  coming?: boolean;
+  star?: boolean;
+  locked?: boolean;
+};
+
+const parts: Part[] = [
+  { id: 'head', name: 'Head' },
 ];
 
 interface PartSelectorProps {

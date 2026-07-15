@@ -1,7 +1,8 @@
 "use client";
 
 import React from 'react';
-import { SaveIcon, ShareIcon, SearchIcon, ResetIcon, CashIcon, ClipboardIcon } from './Icons';
+import { SaveIcon, ShareIcon, SearchIcon, ResetIcon, CashIcon, ClipboardIcon, LightningIcon } from './Icons';
+import { useConfigurator } from '../../contexts/ConfiguratorContext';
 
 interface BottomBarProps {
   buyRentMode: 'buy' | 'rent';
@@ -9,6 +10,16 @@ interface BottomBarProps {
 }
 
 export default function BottomBar({ buyRentMode, setBuyRentMode }: BottomBarProps) {
+  const { config, updateConfig } = useConfigurator();
+
+  // Calculate customization progress dynamically from context
+  const customizedCount = [
+    config.primaryColor !== null,
+    config.secondaryColor !== null,
+  ].filter(Boolean).length;
+
+  const progressPercent = (customizedCount / 2) * 100;
+
   const handleSave = () => {
     console.log('Saving configuration...');
     alert('Configuration saved! (Connected to your backend)');
@@ -37,7 +48,7 @@ export default function BottomBar({ buyRentMode, setBuyRentMode }: BottomBarProp
   };
 
   return (
-    <div className="h-20 bg-slate-950/65 backdrop-blur-xl border-t border-white/5 px-6 flex items-center justify-between shrink-0 z-20">
+    <div className="h-20 bg-slate-950/60 backdrop-blur-xl border-t border-white/5 px-6 flex items-center justify-between shrink-0 z-20">
       
       {/* Left Actions */}
       <div className="flex gap-2">
@@ -50,7 +61,7 @@ export default function BottomBar({ buyRentMode, setBuyRentMode }: BottomBarProp
         <button onClick={handleShare} className="px-4 py-2 border border-white/10 bg-white/5 hover:border-cyan-400 hover:bg-white/10 text-gray-300 hover:text-cyan-400 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center gap-1.5">
           <ShareIcon className="w-3.5 h-3.5" /> Share
         </button>
-        <button className="px-4 py-2 border border-white/10 bg-white/5 hover:border-cyan-400 hover:bg-white/10 text-gray-300 hover:text-cyan-400 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center gap-1.5">
+        <button onClick={() => updateConfig('isFullscreen', true)} className="px-4 py-2 border border-white/10 bg-white/5 hover:border-cyan-400 hover:bg-white/10 text-gray-300 hover:text-cyan-400 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center gap-1.5">
           <SearchIcon className="w-3.5 h-3.5" /> Preview
         </button>
         <button onClick={handleReset} className="px-4 py-2 border border-white/10 bg-white/5 hover:border-cyan-400 hover:bg-white/10 text-gray-300 hover:text-cyan-400 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center gap-1.5">
@@ -80,6 +91,23 @@ export default function BottomBar({ buyRentMode, setBuyRentMode }: BottomBarProp
         >
           <ClipboardIcon className="w-3.5 h-3.5" /> Rent
         </button>
+      </div>
+      
+      {/* Customization Progress Indicator */}
+      <div className="flex flex-col justify-center w-36 px-3">
+        <div className="flex justify-between items-center mb-1.5">
+          <span className="text-[9px] text-gray-400 font-bold uppercase tracking-wider font-mono flex items-center gap-1">
+            <LightningIcon className="w-3 h-3 text-cyan-400 animate-pulse" />
+            Progress
+          </span>
+          <span className="text-[9px] text-cyan-400 font-bold font-mono">{customizedCount}/2</span>
+        </div>
+        <div className="w-full bg-[#050816] h-1.5 rounded-full overflow-hidden border border-white/10 shadow-inner">
+          <div 
+            className="bg-gradient-to-r from-cyan-400 to-violet-500 h-full rounded-full transition-all duration-500 shadow-[0_0_8px_rgba(6,182,212,0.4)]"
+            style={{ width: `${progressPercent}%` }}
+          />
+        </div>
       </div>
       
       {/* Rent Details (conditional) */}

@@ -427,10 +427,26 @@ html[data-theme="light"],
   opacity: 0.35 !important;
 }
 
+[data-theme="light"] .bg-slate-950\/80,
 [data-theme="light"] .bg-slate-950\/70,
-[data-theme="light"] .bg-slate-950\/60 {
+[data-theme="light"] .bg-slate-950\/60,
+[data-theme="light"] .bg-slate-950\/50 {
   background-color: rgba(255, 255, 255, 0.85) !important;
   border-color: rgba(15, 23, 42, 0.1) !important;
+}
+
+[data-theme="light"] .bg-slate-950 {
+  background-color: #ffffff !important;
+  border-color: rgba(15, 23, 42, 0.1) !important;
+}
+
+[data-theme="light"] button:hover.hover\:bg-slate-900,
+[data-theme="light"] div:hover.hover\:bg-slate-900 {
+  background-color: #f1f5f9 !important;
+}
+
+[data-theme="light"] .border-white\/10 {
+  border-color: rgba(15, 23, 42, 0.15) !important;
 }
 
 /* --- Robot Cockpit Dark Theme Overrides for Light Mode --- */
@@ -637,6 +653,13 @@ html[data-theme="light"],
   background: radial-gradient(circle, rgba(0, 172, 233, 0.25) 0%, transparent 70%) !important;
 }
 
+.center-viewport-bg {
+  background: radial-gradient(circle at 50% 50%, #0e1726, #050816);
+}
+[data-theme="light"] .center-viewport-bg {
+  background: radial-gradient(circle at 50% 50%, #f1f5f9, #f8fafc) !important;
+}
+
 /* Concentric Scanner Rings and HUD Elements styling */
 [data-theme="light"] .robot-scanner-ring-outer {
   border-color: rgba(0, 172, 233, 0.12) !important;
@@ -690,11 +713,23 @@ html[data-theme="light"],
 [data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="shadow-[#00f0ff]"] {
   box-shadow: 0 0 8px rgba(0, 172, 233, 0.4) !important;
 }
-[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="bg-cyan-400"] {
+[data-theme="light"] div.robot-cockpit-dark div[class*="bg-cyan-400"] {
   background-color: #00ace9 !important;
 }
-[data-theme="light"] div.robot-cockpit-dark .robot-viewer-panel div[class*="bg-cyan-300"] {
+[data-theme="light"] div.robot-cockpit-dark div[class*="bg-cyan-300"] {
   background-color: #00ace9 !important;
+}
+[data-theme="light"] div.robot-cockpit-dark button[class*="from-cyan-600/20"] {
+  background-image: linear-gradient(to right, rgba(0, 172, 233, 0.1), rgba(0, 172, 233, 0.05)) !important;
+  border-color: rgba(0, 172, 233, 0.3) !important;
+}
+[data-theme="light"] div.robot-cockpit-dark button:hover[class*="from-cyan-600/20"] {
+  border-color: rgba(0, 172, 233, 0.6) !important;
+}
+[data-theme="light"] div.robot-cockpit-dark textarea {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: rgba(15, 23, 42, 0.15) !important;
 }
 
 /* HIDE GROUND SHADOW COMPLETELY IN ALL THEMES */

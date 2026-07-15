@@ -4,15 +4,16 @@ import React, { useState } from 'react';
 import { useConfigurator } from '../../contexts/ConfiguratorContext';
 
 const textures = [
-  { name: 'Micro-Grid', scale: '1.0x', pattern: 'grid' },
-  { name: 'Honeycomb', scale: '1.5x', pattern: 'hex' },
-  { name: 'Fiber Weave', scale: '0.8x', pattern: 'weave' },
-  { name: 'Smooth Satin', scale: '0.0x', pattern: 'smooth' },
+  { name: 'None', scale: '0.0x', pattern: 'none' },
+  { name: 'Gloss', scale: '0.0x', pattern: 'gloss' },
+  { name: 'Matte', scale: '0.5x', pattern: 'matte' },
+  { name: 'Rough', scale: '2.0x', pattern: 'rough' },
+  { name: 'Leather', scale: '1.0x', pattern: 'leather' },
 ];
 
 export default function TextureEngine() {
   const { config, updateConfig } = useConfigurator();
-  const [selectedTexture, setSelectedTexture] = useState<string | null>(config.selectedTexture || 'Micro-Grid');
+  const [selectedTexture, setSelectedTexture] = useState<string | null>(config.selectedTexture || 'None');
   const [textureScale, setTextureScale] = useState(50);
 
   const handleSelectTexture = (name: string) => {
