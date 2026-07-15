@@ -13,12 +13,9 @@ export default function AboutTechligence() {
           </h2>
 
           <p className="mt-8 text-lg leading-9 text-gray-400">
-            Techligence Robotics is an innovation-driven company building
-            AI-powered service robots that help businesses automate operations,
-            improve customer experiences, and enhance productivity. Our
-            intelligent robotic solutions are designed for industries including
-            hospitality, healthcare, education, retail, manufacturing, and
-            logistics.
+            Techligence Robotics builds AI-powered service robots that automate
+            operations, improve customer experiences, and deliver intelligent
+            solutions for businesses across multiple industries.
           </p>
         </div>
 
@@ -30,9 +27,7 @@ export default function AboutTechligence() {
             </h3>
 
             <p className="mt-5 text-gray-300 leading-8">
-              To make intelligent robotics accessible by delivering reliable,
-              AI-powered automation solutions that simplify operations and
-              create meaningful value for businesses.
+              To make intelligent robotics simple, reliable, and accessible for every business.
             </p>
           </div>
 
@@ -42,9 +37,7 @@ export default function AboutTechligence() {
             </h3>
 
             <p className="mt-5 text-gray-300 leading-8">
-              To become a trusted global leader in intelligent robotics,
-              empowering organizations through innovation, automation, and
-              human-centered technology.
+              To shape the future through innovative AI-powered robotics and automation.
             </p>
           </div>
 

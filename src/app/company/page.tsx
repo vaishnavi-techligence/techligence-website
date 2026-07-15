@@ -120,7 +120,7 @@ export default function CompanyPage() {
   {/* Founders */}
   <div className="grid md:grid-cols-3 gap-8 mb-20">
 
-    <div className="bg-black/20 border border-cyan-500/20 rounded-3xl p-8 text-center">
+    <div className="bg-[var(--theme-card)] border border-[var(--theme-border)] rounded-3xl p-8 text-center">
       <img
         src="/team/kunal-gawhale.jpg"
         alt="Kunal Gawhale"
@@ -138,7 +138,7 @@ export default function CompanyPage() {
       <ExperienceBadge years="6+" />
     </div>
 
-    <div className="bg-black/20 border border-cyan-500/20 rounded-3xl p-8 text-center">
+    <div className="bg-[var(--theme-card)] border border-[var(--theme-border)] rounded-3xl p-8 text-center">
       <img
         src="/team/priyanka-udmale.jpg"
         alt="Priyanka Udmale"
@@ -158,7 +158,7 @@ export default function CompanyPage() {
       <ExperienceBadge years="8+" />
     </div>
 
-    <div className="bg-black/20 border border-cyan-500/20 rounded-3xl p-8 text-center">
+    <div className="bg-[var(--theme-card)] border border-[var(--theme-border)] rounded-3xl p-8 text-center">
       <img
         src="/team/dr-sandeep-udmale.jpg"
         alt="Dr. Sandeep Udmale"
@@ -189,7 +189,7 @@ export default function CompanyPage() {
   <div className="grid md:grid-cols-4 gap-6">
 
     {/* Mentor 1 */}
-    <div className="bg-black/20 border border-cyan-500/20 rounded-3xl p-6 text-center hover:border-cyan-400/40 transition-all duration-300">
+    <div className="bg-[var(--theme-card)] border border-[var(--theme-border)] rounded-3xl p-6 text-center hover:border-cyan-400/40 transition-all duration-300">
       <img
         src="/team/surendra-agarwal.jpg"
         alt="Surendra Agarwal"
@@ -212,7 +212,7 @@ export default function CompanyPage() {
     </div>
 
     {/* Mentor 2 */}
-    <div className="bg-black/20 border border-cyan-500/20 rounded-3xl p-6 text-center hover:border-cyan-400/40 transition-all duration-300">
+    <div className="bg-[var(--theme-card)] border border-[var(--theme-border)] rounded-3xl p-6 text-center hover:border-cyan-400/40 transition-all duration-300">
       <img
         src="/team/ashok-yavele.jpg"
         alt="Ashok Yavele"
@@ -235,7 +235,7 @@ export default function CompanyPage() {
     </div>
 
     {/* Mentor 3 */}
-    <div className="bg-black/20 border border-cyan-500/20 rounded-3xl p-6 text-center hover:border-cyan-400/40 transition-all duration-300">
+    <div className="bg-[var(--theme-card)] border border-[var(--theme-border)] rounded-3xl p-6 text-center hover:border-cyan-400/40 transition-all duration-300">
       <img
         src="/team/sunil-dhadiwal.jpg"
         alt="Sunil Dhadiwal"
@@ -258,7 +258,7 @@ export default function CompanyPage() {
     </div>
 
     {/* Mentor 4 */}
-    <div className="bg-black/20 border border-cyan-500/20 rounded-3xl p-6 text-center hover:border-cyan-400/40 transition-all duration-300">
+    <div className="bg-[var(--theme-card)] border border-[var(--theme-border)] rounded-3xl p-6 text-center hover:border-cyan-400/40 transition-all duration-300">
       <img
         src="/team/chaitanya-rajguru.jpg"
         alt="Chaitanya Rajguru"

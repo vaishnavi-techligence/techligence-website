@@ -12,7 +12,7 @@ export default function FloatingConfiguratorButton() {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 animate-bounce" style={{ animationDuration: '3s' }}>
+    <div className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50" style={{ animationDuration: '3s' }}>
       <a 
         href="/configurator" 
         target="_blank"
