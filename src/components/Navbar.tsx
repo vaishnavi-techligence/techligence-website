@@ -61,13 +61,13 @@ export default function Navbar() {
         <div className="pl-6 pr-8 lg:pl-8 lg:pr-10 py-2 flex items-center justify-between gap-3 lg:gap-4 whitespace-nowrap">
           {/* Logo + Brand */}
           <a href="/" className="flex items-center gap-2 flex-shrink-0 cursor-pointer">
-            <img
-              src="/logo.png"
-              alt="Techligence logo"
-              className="navbar-logo h-9 w-9 object-contain"
-              onLoad={() => setIsLogoLoaded(true)}
-              onError={() => setIsLogoLoaded(false)}
-            />
+        <img
+          src={theme === "light" ? "/logos/logo-light.png" : "/logos/logo-dark.png"}
+          alt="Techligence logo"
+          className="navbar-logo h-9 w-9 object-contain"
+          onLoad={() => setIsLogoLoaded(true)}
+          onError={() => setIsLogoLoaded(false)}
+        />
             <h1 className={`text-xs xl:text-sm font-black bg-gradient-to-r from-cyan-300 to-cyan-500 text-transparent bg-clip-text tracking-wide transition-all duration-300 ${
               (isLogoLoaded && hideTextByVideo) ? "invisible w-0 opacity-0 overflow-hidden" : "w-auto opacity-100"
             }`}>
