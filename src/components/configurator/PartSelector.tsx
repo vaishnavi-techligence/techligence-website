@@ -3,7 +3,15 @@
 import React from 'react';
 import { StarIcon, LockIcon } from './Icons';
 
-const parts = [
+type Part = {
+  id: string;
+  name: string;
+  coming?: boolean;
+  star?: boolean;
+  locked?: boolean;
+};
+
+const parts: Part[] = [
   { id: 'head', name: 'Head' },
 ];
 
