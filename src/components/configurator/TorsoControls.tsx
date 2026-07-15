@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useConfigurator } from '../../contexts/ConfiguratorContext';
 
-const shapes = ['Classic', 'Broad', 'Slim', 'Sculpted'];
+const shapes = ['Sculpted', 'Slim', 'Broad', 'Classic'];
 
 export default function TorsoControls() {
   const { config, updateConfig } = useConfigurator();

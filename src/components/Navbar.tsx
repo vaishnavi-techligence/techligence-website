@@ -119,24 +119,6 @@ export default function Navbar() {
               )}
             </a>
 
-            <a
-              href="/configurator"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`relative text-[9px] xl:text-[10px] uppercase tracking-[1px] xl:tracking-[1.5px] transition-all duration-300 flex items-center gap-1 ${
-                pathname === "/configurator" 
-                  ? (theme === "light" ? "text-cyan-600 font-bold" : "text-cyan-400") 
-                  : (theme === "light" ? "text-gray-600 hover:text-cyan-600 font-semibold" : "text-gray-300 hover:text-cyan-400")
-              }`}
-            >
-              Configurator
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-2.5 h-2.5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-              </svg>
-              {pathname === "/configurator" && (
-                <span className={`absolute left-0 -bottom-1.5 h-[2px] w-full rounded-full ${theme === "light" ? "bg-cyan-600" : "bg-cyan-400"}`}></span>
-              )}
-            </a>
 
             <a
               href="/company"
@@ -238,7 +220,7 @@ export default function Navbar() {
           <a href="/" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-cyan-400 transition-colors uppercase py-2 px-4 block">Home</a>
           <a href="/robots" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-cyan-400 transition-colors uppercase py-2 px-4 block">Robots</a>
           <a href="/solutions" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-cyan-400 transition-colors uppercase py-2 px-4 block">Solutions</a>
-          <a href="/configurator" target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-cyan-400 transition-colors uppercase py-2 px-4 block">Configurator</a>
+
           <a href="/company" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-cyan-400 transition-colors uppercase py-2 px-4 block">Company</a>
           <a href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-cyan-400 transition-colors uppercase py-2 px-4 block">Contact</a>
         </div>

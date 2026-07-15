@@ -18,6 +18,8 @@ export interface ConfiguratorState {
     shoulder: string;
     back: string;
   };
+  environment: string;
+  isFullscreen: boolean;
 }
 
 interface ConfiguratorContextType {
@@ -44,6 +46,8 @@ export function ConfiguratorProvider({ children }: { children: ReactNode }) {
       shoulder: 'None',
       back: 'None',
     },
+    environment: 'None',
+    isFullscreen: false,
   });
 
   const updateConfig = (key: keyof ConfiguratorState, value: any) => {

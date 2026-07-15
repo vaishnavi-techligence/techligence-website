@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { useConfigurator } from '../../contexts/ConfiguratorContext';
-import ColorSuggestionBox, { ColorSuggestion } from './ColorSuggestionBox';
 
 const primaryColors = [
   { name: 'Celestial White', value: '#F0F4F8' },
@@ -20,6 +19,14 @@ const primaryColors = [
 ];
 
 const glowOptions = ['None', 'Cyan', 'Amber', 'Magenta', 'Ice Blue', 'Warm Pulse', 'Gold'];
+
+const bandColors = [
+  { name: 'Blue Band', value: '#2A5F7A' },
+  { name: 'White Band', value: '#F0F4F8' },
+  { name: 'Purple Band', value: '#7B2F9D' },
+  { name: 'Green Band', value: '#4ACA6A' },
+  { name: 'Orange Band', value: '#FF6B35' },
+];
 
 export default function ColorSystem() {
   const { config, updateConfig } = useConfigurator();
@@ -62,38 +69,22 @@ export default function ColorSystem() {
     updateConfig('glowIntensity', value);
   };
 
-  const handleApplySuggestion = ({ primary, secondary, glow }: ColorSuggestion) => {
-    setSelectedPrimary(primary);
-    setSelectedSecondary(secondary);
-    setSelectedGlow(glow);
-    
-    updateConfig('primaryColor', primary);
-    updateConfig('secondaryColor', secondary);
-    updateConfig('glowColor', glow);
-    
-    // Smooth scroll patch
-    if (typeof document !== 'undefined') {
-      document.querySelector('.swatch-grid')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-  };
 
   return (
     <div className="mb-7 border-b border-white/5 pb-6">
       <div className="mb-4">
-        <h3 className="text-[10px] font-bold uppercase tracking-[1.5px] text-cyan-400 mb-1 font-mono">
-          02. COLOR PERSONALITY
+        <h3 className="text-[10px] font-bold uppercase tracking-[1.5px] text-gray-400 mb-1 font-mono">
+          MANUAL OVERRIDE
         </h3>
-        <p className="text-[10px] text-gray-500 uppercase tracking-[1px] font-mono">Choose your robot's energy</p>
+        <p className="text-[10px] text-gray-500 uppercase tracking-[1px] font-mono">Custom color tuning</p>
       </div>
 
-      {/* ✨ AI Color Ambience Assistant */}
-      <ColorSuggestionBox onApplySuggestion={handleApplySuggestion} />
       
       {/* Primary Colors */}
       <div className="mb-4 swatch-grid">
         <div className="flex justify-between items-center mb-2">
-          <span className="text-xs text-gray-400 font-semibold">Primary Body</span>
-          <span className="text-[9px] text-gray-500 font-mono uppercase tracking-wider">Dominant energy</span>
+          <span className="text-xs text-gray-400 font-semibold">Head Casing Paint</span>
+          <span className="text-[9px] text-gray-500 font-mono uppercase tracking-wider">Base Material Color</span>
         </div>
         <div className="grid grid-cols-6 gap-2">
           {primaryColors.map((color) => (
@@ -103,7 +94,7 @@ export default function ColorSystem() {
               className={`aspect-square rounded-xl transition-all cursor-pointer ${
                 selectedPrimary === color.value
                   ? 'ring-2 ring-cyan-400 ring-offset-2 ring-offset-[#050816] scale-105 shadow-[0_0_10px_rgba(6,182,212,0.4)]'
-                  : 'hover:scale-105 border border-white/5'
+                  : 'hover:scale-105 shadow-sm border border-transparent'
               }`}
               style={{ backgroundColor: color.value }}
               title={color.name}
@@ -112,21 +103,21 @@ export default function ColorSystem() {
         </div>
       </div>
 
-      {/* Secondary Accent Colors */}
+      {/* Head Band Colors */}
       <div className="mb-5">
         <div className="flex justify-between items-center mb-2">
-          <span className="text-xs text-gray-400 font-semibold">Secondary Accent</span>
-          <span className="text-[9px] text-gray-500 font-mono uppercase tracking-wider">For joints, sensors</span>
+          <span className="text-xs text-gray-400 font-semibold">Head Band</span>
+          <span className="text-[9px] text-cyan-400 font-mono uppercase tracking-wider">Change physical band component</span>
         </div>
-        <div className="grid grid-cols-8 gap-1.5">
-          {primaryColors.slice(0, 8).map((color) => (
+        <div className="grid grid-cols-5 gap-2">
+          {bandColors.map((color) => (
             <button
               key={color.name}
               onClick={() => handleSelectSecondary(color.value)}
-              className={`w-full aspect-square rounded-lg transition-all cursor-pointer ${
+              className={`w-full aspect-square rounded-full transition-all cursor-pointer ${
                 selectedSecondary === color.value
-                  ? 'ring-2 ring-cyan-400 ring-offset-2 ring-offset-[#050816] scale-105 shadow-[0_0_8px_rgba(6,182,212,0.4)]'
-                  : 'hover:scale-105 border border-white/5'
+                  ? 'ring-2 ring-cyan-400 ring-offset-2 ring-offset-[#050816] scale-110 shadow-[0_0_8px_rgba(6,182,212,0.6)]'
+                  : 'hover:scale-105 shadow-sm border border-transparent opacity-80 hover:opacity-100'
               }`}
               style={{ backgroundColor: color.value }}
               title={color.name}

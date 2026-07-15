@@ -35,73 +35,73 @@ const SUGGESTION_PRESETS: PresetSuggestion[] = [
     iconKey: "hospital", 
     name: "Healthcare", 
     description: "Calm, trustworthy, sterile",
-    colors: ["#E8F4F8", "#2A5F7A", "#FFFFFF"],
+    colors: ["#E8F4F8", "#2A5F7A"],
     primary: "#E8F4F8",
     secondary: "#2A5F7A",
-    glow: "Ice Blue"
+    glow: "None"
   },
   { 
     iconKey: "industrial", 
     name: "Industrial", 
     description: "Durable, visible, functional",
-    colors: ["#F5C542", "#1A2A2F", "#FF6B35"],
+    colors: ["#F5C542", "#FF6B35"],
     primary: "#F5C542",
-    secondary: "#1A2A2F",
-    glow: "Amber"
+    secondary: "#FF6B35",
+    glow: "None"
   },
   { 
     iconKey: "home", 
     name: "Home Companion", 
     description: "Warm, friendly, approachable",
-    colors: ["#E8B8C8", "#D47A4A", "#FFB347"],
+    colors: ["#E8B8C8", "#F0F4F8"],
     primary: "#E8B8C8",
-    secondary: "#D47A4A",
-    glow: "Warm Pulse"
+    secondary: "#F0F4F8",
+    glow: "None"
   },
   { 
     iconKey: "security", 
     name: "Security", 
     description: "Authoritative, stealth, alert",
-    colors: ["#0A1217", "#1A2A2F", "#FF6B35"],
+    colors: ["#0A1217", "#4ACA6A"],
     primary: "#0A1217",
-    secondary: "#1A2A2F",
-    glow: "Cyan"
+    secondary: "#4ACA6A",
+    glow: "None"
   },
   { 
     iconKey: "education", 
     name: "Education", 
     description: "Curious, energetic, engaging",
-    colors: ["#4ACA6A", "#7B2F9D", "#00D4FF"],
-    primary: "#4ACA6A",
+    colors: ["#F0F4F8", "#7B2F9D"],
+    primary: "#F0F4F8",
     secondary: "#7B2F9D",
-    glow: "Magenta"
+    glow: "None"
   },
   { 
     iconKey: "events", 
     name: "Events/FIFA", 
     description: "Energetic, celebratory, visible",
-    colors: ["#FF6B35", "#F5C542", "#00D4FF"],
+    colors: ["#FF6B35", "#4ACA6A"],
     primary: "#FF6B35",
-    secondary: "#F5C542",
-    glow: "Amber"
+    secondary: "#4ACA6A",
+    glow: "None"
   },
   { 
     iconKey: "outdoor", 
     name: "Outdoor/Adventure", 
     description: "Rugged, natural, bold",
-    colors: ["#3A7A5A", "#D47A4A", "#8A7A60"],
+    colors: ["#3A7A5A", "#FF6B35"],
     primary: "#3A7A5A",
-    secondary: "#D47A4A",
+    secondary: "#FF6B35",
     glow: "None"
   },
   { 
     iconKey: "luxury", 
     name: "Luxury/Premium", 
     description: "Elegant, sophisticated, exclusive",
-    colors: ["#C8D8E0", "#D4AF37", "#E8B8C8"],
-    primary: "#C8D8E0",
-    secondary: "#D4AF37",
-    glow: "Gold"
+    colors: ["#1A2A2F", "#F0F4F8"],
+    primary: "#1A2A2F",
+    secondary: "#F0F4F8",
+    glow: "None"
   },
 ];
 
@@ -140,21 +140,21 @@ export default function ColorSuggestionBox({ onApplySuggestion }: ColorSuggestio
       let suggestion: ColorSuggestion & { name: string };
       
       if (prompt.includes('calm') || prompt.includes('peaceful') || prompt.includes('relax') || prompt.includes('hospital')) {
-        suggestion = { primary: "#2A5F7A", secondary: "#E8F4F8", glow: "Ice Blue", name: "Ocean Calm" };
+        suggestion = { primary: "#2A5F7A", secondary: "#F0F4F8", glow: "None", name: "Ocean Calm" };
       } else if (prompt.includes('energetic') || prompt.includes('excited') || prompt.includes('party') || prompt.includes('fifa')) {
-        suggestion = { primary: "#FF6B35", secondary: "#F5C542", glow: "Amber", name: "Solar Burst" };
+        suggestion = { primary: "#FF6B35", secondary: "#FF6B35", glow: "None", name: "Solar Burst" };
       } else if (prompt.includes('professional') || prompt.includes('corporate') || prompt.includes('office')) {
-        suggestion = { primary: "#C8D8E0", secondary: "#1A2A2F", glow: "Cyan", name: "Executive" };
+        suggestion = { primary: "#C8D8E0", secondary: "#2A5F7A", glow: "None", name: "Executive" };
       } else if (prompt.includes('warm') || prompt.includes('friendly') || prompt.includes('home')) {
-        suggestion = { primary: "#E8B8C8", secondary: "#D47A4A", glow: "Warm Pulse", name: "Home Comfort" };
+        suggestion = { primary: "#E8B8C8", secondary: "#F0F4F8", glow: "None", name: "Home Comfort" };
       } else if (prompt.includes('dark') || prompt.includes('stealth') || prompt.includes('night') || prompt.includes('security')) {
-        suggestion = { primary: "#0A1217", secondary: "#1A2A2F", glow: "Cyan", name: "Midnight Ops" };
+        suggestion = { primary: "#0A1217", secondary: "#4ACA6A", glow: "None", name: "Midnight Ops" };
       } else if (prompt.includes('nature') || prompt.includes('green') || prompt.includes('earth')) {
-        suggestion = { primary: "#3A7A5A", secondary: "#D47A4A", glow: "None", name: "Forest Call" };
+        suggestion = { primary: "#3A7A5A", secondary: "#FF6B35", glow: "None", name: "Forest Call" };
       } else if (prompt.includes('tech') || prompt.includes('future') || prompt.includes('cyber')) {
-        suggestion = { primary: "#00D4FF", secondary: "#7B2F9D", glow: "Magenta", name: "Cyber Pulse" };
+        suggestion = { primary: "#00D4FF", secondary: "#7B2F9D", glow: "None", name: "Cyber Pulse" };
       } else {
-        suggestion = { primary: "#7B2F9D", secondary: "#00D4FF", glow: "Cyan", name: "Creative Flow" };
+        suggestion = { primary: "#7B2F9D", secondary: "#2A5F7A", glow: "None", name: "Creative Flow" };
       }
       
       setAiSuggestion(suggestion);
@@ -189,13 +189,13 @@ export default function ColorSuggestionBox({ onApplySuggestion }: ColorSuggestio
       {/* Suggestion Box Header */}
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className="w-full bg-gradient-to-r from-violet-600/10 to-cyan-500/10 border border-cyan-400/20 hover:border-cyan-400/50 hover:shadow-[0_0_15px_rgba(6,182,212,0.15)] rounded-2xl p-3 flex items-center justify-between transition-all duration-300 group cursor-pointer"
+        className="w-full bg-gradient-to-r from-cyan-600/20 to-blue-500/20 border border-cyan-400/40 hover:border-cyan-400/80 hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] rounded-2xl p-4 flex items-center justify-between transition-all duration-300 group cursor-pointer shadow-[0_0_10px_rgba(6,182,212,0.1)]"
       >
         <div className="flex items-center gap-3">
-          <SparklesIcon className="w-5 h-5 text-cyan-400" />
+          <SparklesIcon className="w-6 h-6 text-cyan-400 animate-pulse" />
           <div className="text-left">
-            <div className="text-xs font-bold uppercase tracking-wider text-cyan-400 font-mono">Suggest for Me</div>
-            <div className="text-[10px] text-gray-500 mt-0.5">Get AI color schemes for your vibe</div>
+            <div className="text-sm font-bold uppercase tracking-wider text-cyan-400 font-mono">Predefined Themes</div>
+            <div className="text-[11px] text-gray-400 mt-0.5">Instantly apply full design packages</div>
           </div>
         </div>
         <span className={`text-cyan-400 text-xs transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}>▼</span>
@@ -304,25 +304,23 @@ export default function ColorSuggestionBox({ onApplySuggestion }: ColorSuggestio
           {/* Presets Tab */}
           {selectedPreset === 'presets' && (
             <div>
-              <div className="grid grid-cols-2 gap-2 max-h-64 overflow-y-auto pr-1">
+              <div className="flex flex-col gap-2 max-h-72 overflow-y-auto pr-1 custom-scrollbar">
                 {SUGGESTION_PRESETS.map((preset) => (
                   <button
                     key={preset.name}
                     onClick={() => applyPreset(preset)}
-                    className="bg-slate-950/50 hover:bg-slate-900/60 border border-white/5 hover:border-cyan-400/20 rounded-xl p-2.5 text-left transition-all duration-300 group cursor-pointer flex flex-col justify-between h-20"
+                    className="bg-slate-950/80 hover:bg-slate-900 border border-white/5 hover:border-cyan-400/40 rounded-xl p-3 text-left transition-all duration-300 group cursor-pointer flex items-center gap-3 w-full shadow-sm hover:shadow-[0_0_15px_rgba(6,182,212,0.15)]"
                   >
-                    <div className="flex items-start gap-2">
-                      <div className="shrink-0 mt-0.5">
-                        <RenderPresetIcon iconKey={preset.iconKey} />
-                      </div>
-                      <div>
-                        <div className="text-xs font-bold text-white group-hover:text-cyan-400 transition">{preset.name}</div>
-                        <div className="text-[9px] text-gray-500 mt-0.5 line-clamp-1">{preset.description}</div>
-                      </div>
+                    <div className="shrink-0 flex items-center justify-center w-10 h-10 rounded-lg bg-white/5 border border-white/5 group-hover:border-cyan-400/30 transition-colors">
+                      <RenderPresetIcon iconKey={preset.iconKey} />
                     </div>
-                    <div className="flex gap-1.5 mt-2">
+                    <div className="flex-1 min-w-0">
+                      <div className="text-xs font-bold text-white group-hover:text-cyan-400 transition truncate">{preset.name}</div>
+                      <div className="text-[9px] text-gray-400 mt-0.5 truncate">{preset.description}</div>
+                    </div>
+                    <div className="flex gap-1 shrink-0 ml-2">
                       {preset.colors.map((color, idx) => (
-                        <div key={idx} className="w-5 h-5 rounded-md border border-white/5" style={{ backgroundColor: color }}></div>
+                        <div key={idx} className="w-4 h-4 rounded-full border border-white/10 shadow-sm" style={{ backgroundColor: color }}></div>
                       ))}
                     </div>
                   </button>

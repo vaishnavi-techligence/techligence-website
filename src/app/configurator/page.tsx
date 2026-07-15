@@ -6,44 +6,38 @@ import BottomBar from '../../components/configurator/BottomBar';
 import LeftPanel from '../../components/configurator/LeftPanel';
 import RightPanel from '../../components/configurator/RightPanel';
 import CenterViewport from '../../components/configurator/CenterViewport';
-import { ConfiguratorProvider } from '../../contexts/ConfiguratorContext';
+import { ConfiguratorProvider, useConfigurator } from '../../contexts/ConfiguratorContext';
 
-export default function RoyerConfigurator() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [activeTab, setActiveTab] = useState('torso');
+function ConfiguratorLayout() {
+  const [activeTab, setActiveTab] = useState('head');
   const [buyRentMode, setBuyRentMode] = useState<'buy' | 'rent'>('buy');
+  const { config } = useConfigurator();
+
+  if (config.isFullscreen) {
+    return (
+      <div className="robot-cockpit-dark h-screen w-screen bg-[#050816] text-white overflow-hidden font-sans select-none antialiased flex">
+        <CenterViewport />
+      </div>
+    );
+  }
 
   return (
-    <ConfiguratorProvider>
-      <div className="h-screen flex flex-col bg-[#050816] text-white overflow-hidden font-sans select-none antialiased">
-        
-        {/* Top Bar - 72px */}
-        <TopBar 
-          isLoggedIn={isLoggedIn} 
-          setIsLoggedIn={setIsLoggedIn} 
-        />
-        
-        {/* Main Content - Flex Row with margin-top for Top Bar height */}
-        <div className="flex flex-1 overflow-hidden pt-[72px]">
-          
-          {/* Left Panel - 320px */}
-          <LeftPanel />
-          
-          {/* Center Viewport - Dynamic Width */}
-          <CenterViewport />
-          
-          {/* Right Panel - 360px */}
-          <RightPanel activeTab={activeTab} setActiveTab={setActiveTab} />
-          
-        </div>
-        
-        {/* Bottom Bar - 80px */}
-        <BottomBar 
-          buyRentMode={buyRentMode} 
-          setBuyRentMode={setBuyRentMode} 
-        />
-        
+    <div className="robot-cockpit-dark h-screen flex flex-col bg-[#050816] text-white overflow-hidden font-sans select-none antialiased">
+      <TopBar />
+      <div className="flex flex-1 overflow-hidden pt-[72px]">
+        <RightPanel activeTab={activeTab} setActiveTab={setActiveTab} />
+        <CenterViewport />
+        <LeftPanel activeTab={activeTab} setActiveTab={setActiveTab} />
       </div>
+      <BottomBar buyRentMode={buyRentMode} setBuyRentMode={setBuyRentMode} />
+    </div>
+  );
+}
+
+export default function RoyerConfigurator() {
+  return (
+    <ConfiguratorProvider>
+      <ConfiguratorLayout />
     </ConfiguratorProvider>
   );
 }

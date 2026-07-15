@@ -5,12 +5,26 @@ import ColorSystem from './ColorSystem';
 import MaterialSystem from './MaterialSystem';
 import StitchingSystem from './StitchingSystem';
 import TextureEngine from './TextureEngine';
-import RobotBaseSelector from './RobotBaseSelector';
 import { useConfigurator } from '../../contexts/ConfiguratorContext';
 import { PaletteIcon, LayerIcon, ThreadIcon, MicroscopeIcon, LightningIcon, SparklesIcon } from './Icons';
+import ColorSuggestionBox, { ColorSuggestion } from './ColorSuggestionBox';
+import EnvironmentSelector from './EnvironmentSelector';
+import RobotBaseSelector from './RobotBaseSelector';
+import PartSelector from './PartSelector';
 
-export default function LeftPanel() {
-  const { config } = useConfigurator();
+interface LeftPanelProps {
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
+}
+
+export default function LeftPanel({ activeTab, setActiveTab }: LeftPanelProps) {
+  const { config, updateConfig } = useConfigurator();
+
+  const handleApplySuggestion = ({ primary, secondary, glow }: ColorSuggestion) => {
+    updateConfig('primaryColor', primary);
+    updateConfig('secondaryColor', secondary);
+    updateConfig('glowColor', glow);
+  };
 
   // Collapsible categories state
   const [expandedSections, setExpandedSections] = useState({
@@ -27,15 +41,7 @@ export default function LeftPanel() {
     }));
   };
 
-  // Calculate customization progress dynamically from context
-  const customizedCount = [
-    config.primaryColor !== null,
-    config.selectedMaterial !== null,
-    config.selectedStitch !== null,
-    config.selectedTexture !== null
-  ].filter(Boolean).length;
 
-  const progressPercent = (customizedCount / 4) * 100;
 
   const handleExpandAll = () => {
     setExpandedSections({
@@ -58,43 +64,19 @@ export default function LeftPanel() {
   return (
     <div className="w-[320px] bg-slate-950/60 backdrop-blur-xl border-r border-white/5 overflow-y-auto p-5 shrink-0 z-10 select-none">
       
-      {/* Personalized Progress Tracker (Premium Polish) */}
-      <div className="mb-6 bg-slate-950/50 border border-white/5 rounded-2xl p-3.5">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider font-mono flex items-center gap-1">
-            <LightningIcon className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
-            Customization Progress
-          </span>
-          <span className="text-[10px] text-cyan-400 font-bold font-mono">{customizedCount} / 4</span>
-        </div>
-        <div className="w-full bg-slate-950 h-1.5 rounded-full overflow-hidden border border-white/5">
-          <div 
-            className="bg-gradient-to-r from-cyan-400 to-violet-500 h-full rounded-full transition-all duration-500 shadow-[0_0_8px_rgba(6,182,212,0.4)]"
-            style={{ width: `${progressPercent}%` }}
-          />
-        </div>
+      {/* Part Selector */}
+      <PartSelector activeTab={activeTab} setActiveTab={setActiveTab} />
+
+
+      {/* ✨ AI Color Ambience Assistant (Moved to top) */}
+      {/* Ambience Presets & AI */}
+      <div className="mb-6">
+        <EnvironmentSelector />
         
-        {/* Toggle Utilities */}
-        <div className="flex justify-between items-center mt-3 pt-3 border-t border-white/5">
-          <button 
-            onClick={handleExpandAll}
-            className="text-[9px] uppercase tracking-wider font-mono font-bold text-gray-500 hover:text-cyan-400 transition cursor-pointer"
-          >
-            Expand All
-          </button>
-          <button 
-            onClick={handleCollapseAll}
-            className="text-[9px] uppercase tracking-wider font-mono font-bold text-gray-500 hover:text-cyan-400 transition cursor-pointer"
-          >
-            Collapse All
-          </button>
-        </div>
+        <ColorSuggestionBox onApplySuggestion={handleApplySuggestion} />
       </div>
 
-      {/* Section 1: Robot Base Selection (Always Visible) */}
-      <div className="border-b border-white/5 pb-4 mb-3">
-        <RobotBaseSelector />
-      </div>
+      {/* Removed Robot Base Selector from here to move to the other panel */}
 
       {/* Accordion Categories Container */}
       <div className="space-y-2">
@@ -155,11 +137,9 @@ export default function LeftPanel() {
           {/* Preview Chips (Collapsed State) */}
           {!expandedSections.materials && (
             <div className="flex gap-1.5 mt-1.5 ml-8 overflow-x-auto no-scrollbar">
-              {['Soft', 'Hard', 'Granite'].map(chip => (
-                <span key={chip} className="text-[9px] px-2 py-0.5 bg-white/5 border border-white/5 rounded-full text-gray-500 font-mono uppercase font-bold tracking-wider">
-                  {chip}
-                </span>
-              ))}
+              <span className="text-[9px] px-2 py-0.5 bg-white/5 border border-white/5 rounded-full text-gray-500 font-mono uppercase font-bold tracking-wider">
+                Select
+              </span>
             </div>
           )}
 
@@ -188,17 +168,6 @@ export default function LeftPanel() {
             </span>
           </button>
           
-          {/* Preview Chips (Collapsed State) */}
-          {!expandedSections.stitching && (
-            <div className="flex gap-1.5 mt-1.5 ml-8 overflow-x-auto no-scrollbar">
-              {['Heritage', 'Monolith', 'Tech'].map(chip => (
-                <span key={chip} className="text-[9px] px-2 py-0.5 bg-white/5 border border-white/5 rounded-full text-gray-500 font-mono uppercase font-bold tracking-wider">
-                  {chip}
-                </span>
-              ))}
-            </div>
-          )}
-
           {/* Collapsible Content */}
           {expandedSections.stitching && (
             <div className="mt-3 animate-slide-in ml-2">
@@ -208,7 +177,7 @@ export default function LeftPanel() {
         </div>
 
         {/* 4. TEXTURE CATEGORY */}
-        <div className="pb-2">
+        <div className="border-b border-white/5 pb-3">
           <button
             onClick={() => toggleSection('texture')}
             className="w-full flex items-center justify-between py-2 text-left group cursor-pointer hover:bg-white/5 px-2 rounded-xl transition duration-200"
@@ -227,11 +196,9 @@ export default function LeftPanel() {
           {/* Preview Chips (Collapsed State) */}
           {!expandedSections.texture && (
             <div className="flex gap-1.5 mt-1.5 ml-8 overflow-x-auto no-scrollbar">
-              {['Matte', 'Brushed', 'Carbon'].map(chip => (
-                <span key={chip} className="text-[9px] px-2 py-0.5 bg-white/5 border border-white/5 rounded-full text-gray-500 font-mono uppercase font-bold tracking-wider">
-                  {chip}
-                </span>
-              ))}
+              <span className="text-[9px] px-2 py-0.5 bg-white/5 border border-white/5 rounded-full text-gray-500 font-mono uppercase font-bold tracking-wider">
+                Select
+              </span>
             </div>
           )}
 
@@ -242,7 +209,6 @@ export default function LeftPanel() {
             </div>
           )}
         </div>
-
       </div>
 
       {/* Accordion slide-in keyframe helper style */}

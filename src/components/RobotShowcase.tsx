@@ -916,8 +916,18 @@ export default function RobotShowcase() {
                       </span>
                     )}
                   </div>
-                  <div className="w-12 h-12 rounded-full overflow-hidden bg-black/30 flex items-center justify-center border border-white/5 transition-transform duration-300 group-hover:scale-110">
-                    <img src={robot.image} alt={robot.name} className="w-full h-full object-contain" />
+                  <div className="w-16 h-16 rounded-full bg-black/30 flex items-center justify-center border border-white/5 transition-transform duration-300 group-hover:scale-110">
+                    <img 
+                      src={robot.image} 
+                      alt={robot.name} 
+                      className={`w-full h-full object-contain ${
+                        robot.id === 't2-mini' ? 'scale-[1.3]' :
+                        robot.id === 'joy-a01' ? 'scale-[1.15]' :
+                        robot.id === 'tella-s' ? 'scale-[1.2]' :
+                        robot.id === 'andy-r1' ? 'scale-[1.2]' :
+                        'scale-100'
+                      }`} 
+                    />
                   </div>
                   <span
                     className="text-[7px] font-mono font-black tracking-wider uppercase truncate block w-full text-center"

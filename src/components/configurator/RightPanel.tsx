@@ -1,10 +1,11 @@
 "use client";
 
 import React from 'react';
-import PartSelector from './PartSelector';
+
 import TorsoControls from './TorsoControls';
 import ColorPackages from './ColorPackages';
 import AttachmentSystem from './AttachmentSystem';
+import RobotBaseSelector from './RobotBaseSelector';
 
 interface RightPanelProps {
   activeTab: string;
@@ -15,17 +16,19 @@ export default function RightPanel({ activeTab, setActiveTab }: RightPanelProps)
   return (
     <div className="w-[360px] bg-slate-950/60 backdrop-blur-xl border-l border-white/5 overflow-y-auto p-5 shrink-0 z-10">
       
-      {/* Part Selector */}
-      <PartSelector activeTab={activeTab} setActiveTab={setActiveTab} />
+
+      <div className="mt-5 border-t border-white/5 pt-5">
+        <RobotBaseSelector />
+      </div>
       
-      {/* Torso Controls (Active) */}
-      {activeTab === 'torso' && <TorsoControls />}
-      
-      {/* Color Packages */}
-      <ColorPackages />
-      
-      {/* Attachment System */}
-      <AttachmentSystem />
+      {/* Torso Options (Only show when torso is selected) */}
+      {activeTab === 'torso' && (
+        <>
+          <TorsoControls />
+          <ColorPackages />
+          <AttachmentSystem />
+        </>
+      )}
       
     </div>
   );
