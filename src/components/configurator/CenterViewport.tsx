@@ -96,15 +96,15 @@ export default function CenterViewport() {
           
           {/* Photorealistic HDR Environments */}
           {config.environment === 'Hospital' && config.isFullscreen && (
-            <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/hospital_room_1k.hdr" background={true} />
+            <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/hospital_room_1k.hdr" background={false} />
           )}
 
           {config.environment === 'Luxury Hotel' && config.isFullscreen && (
-            <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/hotel_room_1k.hdr" background={true} />
+            <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/hotel_room_1k.hdr" background={false} />
           )}
 
           {config.environment === 'Studio' && config.isFullscreen && (
-            <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/studio_small_09_1k.hdr" background={true} />
+            <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/studio_small_09_1k.hdr" background={false} />
           )}
 
           <Suspense 

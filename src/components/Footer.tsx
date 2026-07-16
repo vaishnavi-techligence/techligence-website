@@ -1,6 +1,15 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Footer() {
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    setIsAdmin(sessionStorage.getItem("techligence_admin_auth") === "true");
+  }, []);
+
   return (
     <footer className="border-t border-white/10 bg-[#050816]">
 
@@ -138,7 +147,9 @@ export default function Footer() {
               <a href="/company" className="hover:text-cyan-400 transition-colors">Company</a>
               <a href="/blogs" className="hover:text-cyan-400 transition-colors">Blogs</a>
               <a href="/contact" className="hover:text-cyan-400 transition-colors">Contact</a>
-              <Link href="/admin/blogs" className="hover:text-cyan-400 transition-colors">Manage Blogs</Link>
+              {isAdmin && (
+                <Link href="/admin/blogs" className="hover:text-cyan-400 transition-colors">Manage Blogs</Link>
+              )}
             </div>
           </div>
 

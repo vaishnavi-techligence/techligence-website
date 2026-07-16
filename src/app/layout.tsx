@@ -73,8 +73,8 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         {children}
         
-        {/* Floating Configurator Button (Conditional on route) */}
-        <FloatingConfiguratorButton />
+        {/* Floating Configurator Button (Conditional on route) - HIDDEN BY USER REQUEST */}
+        {/* <FloatingConfiguratorButton /> */}
 
         {/* Global GPU SVG Chroma Filters for background removal */}
         <svg width="1" height="1" className="absolute pointer-events-none opacity-0" style={{ position: "absolute", top: "-9999px", left: "-9999px", pointerEvents: "none" }}>

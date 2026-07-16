@@ -9,16 +9,5 @@
     "image": "/blogs/blog1_mammoth_1.png",
     "author": "Techligence Team",
     "createdAt": "2026-07-10T04:06:17.903014Z"
-  },
-  {
-    "id": "ohsqth9",
-    "title": "hello",
-    "slug": "hello",
-    "category": "General",
-    "excerpt": "how are you",
-    "content": "im from techligence\n\nyup\n\ndone",
-    "image": "",
-    "author": "Admin",
-    "createdAt": "2026-06-27T15:40:29.316Z"
   }
 ]

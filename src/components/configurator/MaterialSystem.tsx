@@ -7,6 +7,7 @@ const materials = [
   { name: 'Premium Fabric', description: 'Warm, sound-dampening', pattern: 'fabric', bestFor: 'Companions, Healthcare' },
   { name: 'Brushed Aluminum', description: 'Industrial elegance', pattern: 'metal', bestFor: 'Logistics, Manufacturing' },
   { name: 'Lunar Granite', description: 'Monumental presence', pattern: 'granite', bestFor: 'Premium, Security', premium: true },
+  { name: 'Meta Metal', description: 'Advanced heavy-duty alloy', pattern: 'metal055a', bestFor: 'Exoskeleton, Heavy Duty', premium: true },
 ];
 
 export default function MaterialSystem() {
@@ -65,6 +66,7 @@ export default function MaterialSystem() {
             <div className={`w-10 h-10 rounded-xl border border-white/5 shrink-0 ${
               material.pattern === 'fabric' ? 'bg-[repeating-linear-gradient(45deg,#8AA4AE,#8AA4AE_4px,#6A8A9A_4px,#6A8A9A_8px)]' :
               material.pattern === 'metal' ? 'bg-gradient-to-br from-[#C8D8E0] to-[#A8B8C0]' :
+              material.pattern === 'metal055a' ? 'bg-[linear-gradient(45deg,#333,#666)]' :
               'bg-[radial-gradient(circle_at_30%_40%,#8A7A60_1px,#6A5A40_1px)] bg-[length:6px_6px]'
             }`}></div>
             <div>

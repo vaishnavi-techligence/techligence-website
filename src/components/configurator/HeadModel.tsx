@@ -56,6 +56,7 @@ export default function HeadModel() {
     leather: '/textures/leather_normal.jpg',
     matte: '/textures/matte_normal.jpg',
     rough: '/textures/rough_normal.jpg',
+    metaMetal: '/textures/meta_metal_normal.jpg',
   });
 
   // Setup texture repeating
@@ -94,6 +95,11 @@ export default function HeadModel() {
                 mat.metalness = 0.9;
                 mat.normalMap = textureMaps.metal;
                 mat.normalScale.set(1.5, 1.5);
+              } else if (config.selectedMaterial === 'Meta Metal') {
+                mat.roughness = 0.15;
+                mat.metalness = 1.0;
+                mat.normalMap = textureMaps.metaMetal;
+                mat.normalScale.set(2.0, 2.0);
               } else if (config.selectedMaterial === 'Premium Fabric') {
                 mat.roughness = 0.9;
                 mat.metalness = 0.1;
@@ -177,6 +183,11 @@ export default function HeadModel() {
               newMat.metalness = 0.9;
               newMat.normalMap = textureMaps.metal;
               newMat.normalScale.set(1.5, 1.5);
+            } else if (config.selectedMaterial === 'Meta Metal') {
+              newMat.roughness = 0.15;
+              newMat.metalness = 1.0;
+              newMat.normalMap = textureMaps.metaMetal;
+              newMat.normalScale.set(2.0, 2.0);
             } else if (config.selectedMaterial === 'Premium Fabric') {
               newMat.roughness = 0.9;
               newMat.metalness = 0.1;
