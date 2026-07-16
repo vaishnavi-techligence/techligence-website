@@ -26,15 +26,7 @@ export default function Footer() {
                 alt="Techligence logo"
                 className="navbar-logo w-10 h-10 object-contain"
               />
-              <h2 className="
-                text-4xl
-                font-black
-                bg-gradient-to-r
-                from-white
-                to-cyan-400
-                text-transparent
-                bg-clip-text
-              ">
+              <h2 className="text-4xl font-black bg-gradient-to-r from-white to-cyan-400 text-transparent bg-clip-text">
                 TECHLIGENCE
               </h2>
             </div>
