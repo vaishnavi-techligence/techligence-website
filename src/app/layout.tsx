@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/favicon.png",
+        url: "/logos/logo-light.png",
         width: 256,
         height: 256,
         alt: "Techligence Logo",
@@ -35,12 +35,11 @@ export const metadata: Metadata = {
     card: "summary",
     title: "Techligence | AI-Powered Service Robots",
     description: "Revolutionizing industries with AI-powered service robots and intelligent automation solutions.",
-    images: ["/favicon.png"],
+    images: ["/logos/logo-light.png"],
   },
   icons: {
-    icon: "/favicon.png",
-    shortcut: "/favicon.ico",
-    apple: "/favicon.png",
+    icon: "/logos/logo-light.png",
+    apple: "/logos/logo-light.png",
   },
   metadataBase: new URL("https://www.techligence.in"),
 };
