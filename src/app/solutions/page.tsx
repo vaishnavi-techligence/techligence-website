@@ -32,13 +32,10 @@ export default function SolutionsPage() {
       >
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="relative w-full aspect-video rounded-3xl p-2 bg-slate-950/60 border border-white/10 shadow-[0_0_30px_rgba(0,240,255,0.1)]">
-            <video
-              src="/solutions/mall.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-full object-contain rounded-xl"
+            <img
+              src="/solutions/mall-new.jpg"
+              alt="Mall & Retail Solutions"
+              className="w-full h-full object-cover rounded-xl"
             />
             {/* Watermark Mask / Brand Overlay */}
             <div className="absolute bottom-4 right-4 w-28 h-14 bg-[#050816] border border-cyan-500/30 rounded-xl text-[8px] font-mono font-black tracking-widest text-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.25)] select-none uppercase pointer-events-none z-10 flex flex-col items-center justify-center text-center leading-relaxed">
@@ -132,13 +129,10 @@ export default function SolutionsPage() {
       >
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="relative w-full aspect-video rounded-3xl p-2 bg-slate-950/60 border border-white/10 shadow-[0_0_30px_rgba(0,240,255,0.1)]">
-            <video
-              src="/solutions/hospitality.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-full object-contain rounded-xl"
+            <img
+              src="/solutions/hospitality-new.png"
+              alt="Luxury Hotels & Resorts"
+              className="w-full h-full object-cover rounded-xl"
             />
             {/* Watermark Mask / Brand Overlay */}
             <div className="absolute bottom-4 right-4 w-28 h-14 bg-[#050816] border border-cyan-500/30 rounded-xl text-[8px] font-mono font-black tracking-widest text-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.25)] select-none uppercase pointer-events-none z-10 flex flex-col items-center justify-center text-center leading-relaxed">

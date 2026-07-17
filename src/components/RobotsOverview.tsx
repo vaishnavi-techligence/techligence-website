@@ -33,12 +33,12 @@ export default function RobotsOverview() {
         <div>
           <div className="flex items-center gap-3 mb-8 border-b border-white/10 pb-4">
             <svg className="w-7 h-7 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M4.5 16.5c-1.5 1.25-2.5 3.5-2.5 3.5s2.25-1 3.5-2.5" />
-              <path d="m12 15-3-3" />
-              <path d="m15 9-3-3" />
-              <path d="M11.5 11.5a2.5 2.5 0 1 0-3.5-3.5" />
-              <path d="M2 22l1.5-1.5" />
-              <path d="M9 12c0-2.5 1-5.5 4-8s8.5-4 8.5-4-1.5 5.5-4 8.5-5.5 4-8 4z" />
+              <path d="M12 8V4H8" />
+              <rect width="16" height="12" x="4" y="8" rx="2" />
+              <path d="M2 14h2" />
+              <path d="M20 14h2" />
+              <path d="M15 13v2" />
+              <path d="M9 13v2" />
             </svg>
             <h3 className="text-2xl font-bold text-white uppercase tracking-wider">Robot Lineup</h3>
           </div>
@@ -129,8 +129,16 @@ export default function RobotsOverview() {
           <div>
             <div className="flex items-center gap-3 mb-8 border-b border-white/10 pb-4">
               <svg className="w-7 h-7 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.44 2.5 2.5 0 0 1 0-3.12 3 3 0 0 1 0-4.88 2.5 2.5 0 0 1 0-3.12A2.5 2.5 0 0 1 9.5 2Z" />
-                <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.44 2.5 2.5 0 0 0 0-3.12 3 3 0 0 0 0-4.88 2.5 2.5 0 0 0 0-3.12A2.5 2.5 0 0 0 14.5 2Z" />
+                <rect width="16" height="16" x="4" y="4" rx="2" />
+                <rect width="6" height="6" x="9" y="9" rx="1" />
+                <path d="M15 2v2" />
+                <path d="M15 20v2" />
+                <path d="M2 15h2" />
+                <path d="M2 9h2" />
+                <path d="M20 15h2" />
+                <path d="M20 9h2" />
+                <path d="M9 2v2" />
+                <path d="M9 20v2" />
               </svg>
               <h3 className="text-2xl font-bold text-white uppercase tracking-wider">Core AI Platform (A-01)</h3>
             </div>
@@ -269,12 +277,7 @@ export default function RobotsOverview() {
         <div className="bg-gradient-to-br from-cyan-950/40 to-slate-900/40 border border-cyan-500/20 rounded-3xl p-8 md:p-12 text-center relative overflow-hidden mb-12">
            {/* Decorative elements */}
            <div className="absolute top-4 right-4 w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-           <div className="absolute bottom-4 left-4 w-12 h-[1px] bg-cyan-500/50" />
-           
           <div className="flex items-center justify-center gap-3 mb-8">
-            <svg className="w-6 h-6 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-            </svg>
             <h3 className="text-xl md:text-2xl font-bold text-white uppercase tracking-widest">Main Selling Points</h3>
           </div>
           <div className="flex flex-wrap justify-center gap-3 mb-12">

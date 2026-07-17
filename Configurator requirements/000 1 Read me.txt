@@ -1,0 +1,5 @@
+1. Models in " All default " folder should be consided default for all the themes (means Upload once & no replacing this parts)
+
+2. All the themes are marked 01-02-03...., with 2 files of each theme BODY & Accessorise , use both to create a theme.
+
+3. Also added a model " Default T2 full model" for yur reference.

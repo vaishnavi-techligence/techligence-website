@@ -5,9 +5,30 @@ import { useEffect, useState } from "react";
 
 export default function Footer() {
   const [isAdmin, setIsAdmin] = useState(false);
+  const [theme, setTheme] = useState<"dark" | "light">("light");
 
   useEffect(() => {
     setIsAdmin(sessionStorage.getItem("techligence_admin_auth") === "true");
+
+    const storedTheme = localStorage.getItem("theme") as "dark" | "light" | null;
+    if (storedTheme) {
+      setTheme(storedTheme);
+    } else {
+      const initialTheme = document.documentElement.getAttribute("data-theme") as "dark" | "light" | null;
+      if (initialTheme) setTheme(initialTheme);
+    }
+
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'data-theme') {
+          const currentTheme = document.documentElement.getAttribute('data-theme') as "dark" | "light";
+          if (currentTheme) setTheme(currentTheme);
+        }
+      });
+    });
+    
+    observer.observe(document.documentElement, { attributes: true });
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -22,7 +43,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-3">
               <img
-                src="/logo.png"
+                src={theme === "light" ? "/logos/logo-light.png" : "/logos/logo-dark.png"}
                 alt="Techligence logo"
                 className="navbar-logo w-10 h-10 object-contain"
               />
