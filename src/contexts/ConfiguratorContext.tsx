@@ -6,6 +6,20 @@ export interface ConfiguratorState {
   selectedTheme: string;
   environment: string;
   isFullscreen: boolean;
+  attachments: {
+    shoulder: string;
+    back: string;
+  };
+  primaryColor: string | null;
+  secondaryColor: string | null;
+  glowColor: string;
+  glowIntensity: number;
+  selectedMaterial: string;
+  selectedTexture: string;
+  materialBlend: number;
+  selectedStitch: string;
+  torsoShape: string;
+  torsoOverride: string | null;
 }
 
 interface ConfiguratorContextType {
@@ -20,6 +34,17 @@ export function ConfiguratorProvider({ children }: { children: ReactNode }) {
     selectedTheme: 'Accent - Gold & White',
     environment: 'None',
     isFullscreen: false,
+    attachments: { shoulder: 'None', back: 'None' },
+    primaryColor: '#ffffff',
+    secondaryColor: '#2A5F7A',
+    glowColor: 'Cyan',
+    glowIntensity: 50,
+    selectedMaterial: 'Brushed Aluminum',
+    selectedTexture: 'Matte',
+    materialBlend: 0.5,
+    selectedStitch: 'Standard',
+    torsoShape: 'Standard',
+    torsoOverride: null,
   });
 
   const updateConfig = (key: keyof ConfiguratorState, value: any) => {
