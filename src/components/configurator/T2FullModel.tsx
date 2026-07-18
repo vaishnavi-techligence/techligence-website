@@ -7,14 +7,14 @@ import * as THREE from 'three';
 
 // Define rich, premium materials
 const MATERIALS = {
-  white: new THREE.MeshPhysicalMaterial({ color: '#f5f5f7', roughness: 0.15, metalness: 0.1, side: THREE.DoubleSide }),
+  white: new THREE.MeshPhysicalMaterial({ color: '#9ca3af', roughness: 0.15, metalness: 0.1, side: THREE.DoubleSide }),
   // Royal gold (deep metallic, not brassy yellow)
   gold: new THREE.MeshPhysicalMaterial({ color: '#C5A059', roughness: 0.2, metalness: 0.85, clearcoat: 0.3, side: THREE.DoubleSide }), 
   black: new THREE.MeshPhysicalMaterial({ color: '#1a1a1a', roughness: 0.25, metalness: 0.2, side: THREE.DoubleSide }),
   blue: new THREE.MeshPhysicalMaterial({ color: '#0F2C59', roughness: 0.3, metalness: 0.4, side: THREE.DoubleSide }),
   mocha: new THREE.MeshPhysicalMaterial({ color: '#6F4E37', roughness: 0.4, metalness: 0.1, side: THREE.DoubleSide }),
-  pearl: new THREE.MeshPhysicalMaterial({ color: '#fdfbf7', roughness: 0.05, metalness: 0.3, clearcoat: 1.0, clearcoatRoughness: 0.1, side: THREE.DoubleSide }),
-  pinkish: new THREE.MeshPhysicalMaterial({ color: '#F8C8DC', roughness: 0.15, metalness: 0.4, clearcoat: 0.5, side: THREE.DoubleSide }),
+  pearl: new THREE.MeshPhysicalMaterial({ color: '#b3b0a8', roughness: 0.05, metalness: 0.3, clearcoat: 1.0, clearcoatRoughness: 0.1, side: THREE.DoubleSide }),
+  pinkish: new THREE.MeshPhysicalMaterial({ color: '#FFA07A', roughness: 0.25, metalness: 0.05, clearcoat: 0.3, side: THREE.DoubleSide }),
 };
 
 // Helper to map theme name to glb filenames
@@ -76,7 +76,7 @@ export default function T2FullModel() {
       case 'Blue - Mocha': bodyMat = MATERIALS.blue; accMat = MATERIALS.mocha; break;
       case 'Gold on Gold': bodyMat = MATERIALS.gold; accMat = MATERIALS.gold; break;
       case 'Black & Gold': bodyMat = MATERIALS.black; accMat = MATERIALS.gold; break;
-      case 'Pearl & White': bodyMat = MATERIALS.pearl; accMat = MATERIALS.pinkish; break;
+      case 'Pearl & White': bodyMat = MATERIALS.pinkish; accMat = MATERIALS.pearl; break;
       case 'White & Blue': bodyMat = MATERIALS.white; accMat = MATERIALS.blue; break;
     }
 
