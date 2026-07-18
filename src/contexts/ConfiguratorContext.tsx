@@ -19,7 +19,7 @@ export interface ConfiguratorState {
   materialBlend: number;
   selectedStitch: string;
   torsoShape: string;
-  torsoOverride: string | null;
+  torsoOverride: boolean;
 }
 
 interface ConfiguratorContextType {
@@ -44,7 +44,7 @@ export function ConfiguratorProvider({ children }: { children: ReactNode }) {
     materialBlend: 0.5,
     selectedStitch: 'Standard',
     torsoShape: 'Standard',
-    torsoOverride: null,
+    torsoOverride: false,
   });
 
   const updateConfig = (key: keyof ConfiguratorState, value: any) => {
