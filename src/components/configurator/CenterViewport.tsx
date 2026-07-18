@@ -3,10 +3,10 @@
 import React, { Suspense } from 'react';
 import { MouseIcon, ResetIcon } from './Icons';
 import { Canvas } from '@react-three/fiber';
-import { Html, Environment } from '@react-three/drei';
-import HeadModel from './HeadModel';
+import { Html } from '@react-three/drei';
+import T2FullModel from './T2FullModel';
 import { useConfigurator } from '../../contexts/ConfiguratorContext';
-import EnvironmentSelector from './EnvironmentSelector';
+
 
 const ExpandIcon = ({ className }: { className?: string }) => (
   <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -61,12 +61,7 @@ export default function CenterViewport() {
         <span>Drag to rotate • Scroll to zoom</span>
       </div>
       
-      {/* Floating Environment Selector (Only in Full Screen) */}
-      {config.isFullscreen && (
-        <div className="absolute top-5 left-5 z-20 w-[300px] bg-slate-950/80 backdrop-blur-xl border border-white/5 rounded-2xl p-4 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
-          <EnvironmentSelector />
-        </div>
-      )}
+
       
       {/* Controls Container (Top Right) */}
       <div className="absolute top-5 right-5 z-20 flex gap-2">
@@ -92,20 +87,9 @@ export default function CenterViewport() {
       
       {/* Three.js Canvas */}
       <div className="w-full h-full absolute inset-0 z-10">
-        <Canvas shadows={false} dpr={1} performance={{ min: 0.5 }} camera={{ position: [0, 0, 3], fov: 45 }}>
+        <Canvas shadows={false} dpr={[1, 2]} performance={{ min: 0.5 }} camera={{ position: [0, 0, 3], fov: 45 }}>
           
-          {/* Photorealistic HDR Environments */}
-          {config.environment === 'Hospital' && config.isFullscreen && (
-            <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/hospital_room_1k.hdr" background={false} />
-          )}
 
-          {config.environment === 'Luxury Hotel' && config.isFullscreen && (
-            <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/hotel_room_1k.hdr" background={false} />
-          )}
-
-          {config.environment === 'Studio' && config.isFullscreen && (
-            <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/studio_small_09_1k.hdr" background={false} />
-          )}
 
           <Suspense 
             fallback={
@@ -119,7 +103,7 @@ export default function CenterViewport() {
               </Html>
             }
           >
-            <HeadModel />
+            <T2FullModel />
           </Suspense>
         </Canvas>
       </div>

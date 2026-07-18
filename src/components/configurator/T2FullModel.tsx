@@ -1,0 +1,164 @@
+"use client";
+
+import React, { useMemo } from 'react';
+import { useGLTF, OrbitControls, Environment, Center, ContactShadows, Grid, PerspectiveCamera } from '@react-three/drei';
+import { useConfigurator } from '../../contexts/ConfiguratorContext';
+import * as THREE from 'three';
+
+// Define rich, premium materials
+const MATERIALS = {
+  white: new THREE.MeshPhysicalMaterial({ color: '#f5f5f7', roughness: 0.15, metalness: 0.1, side: THREE.DoubleSide }),
+  // Royal gold (deep metallic, not brassy yellow)
+  gold: new THREE.MeshPhysicalMaterial({ color: '#C5A059', roughness: 0.2, metalness: 0.85, clearcoat: 0.3, side: THREE.DoubleSide }), 
+  black: new THREE.MeshPhysicalMaterial({ color: '#1a1a1a', roughness: 0.25, metalness: 0.2, side: THREE.DoubleSide }),
+  blue: new THREE.MeshPhysicalMaterial({ color: '#0F2C59', roughness: 0.3, metalness: 0.4, side: THREE.DoubleSide }),
+  mocha: new THREE.MeshPhysicalMaterial({ color: '#6F4E37', roughness: 0.4, metalness: 0.1, side: THREE.DoubleSide }),
+  pearl: new THREE.MeshPhysicalMaterial({ color: '#fdfbf7', roughness: 0.05, metalness: 0.3, clearcoat: 1.0, clearcoatRoughness: 0.1, side: THREE.DoubleSide }),
+  pinkish: new THREE.MeshPhysicalMaterial({ color: '#F8C8DC', roughness: 0.15, metalness: 0.4, clearcoat: 0.5, side: THREE.DoubleSide }),
+};
+
+// Helper to map theme name to glb filenames
+const getThemeFiles = (themeName: string) => {
+  // PERFORMANCE OPTIMIZATION:
+  // Since the design team accidentally exported 6 identical clones of the same white robot,
+  // we can completely eliminate network delays and bandwidth waste by just loading ONE base model.
+  // Our dynamic JavaScript material injection handles the colors instantly anyway!
+  return { 
+    body: '/models/t2-themes/01 Body Accent - Gold & White.glb', 
+    accessorise: '/models/t2-themes/01 Accessorise Accent - Gold & White.glb' 
+  };
+};
+
+export default function T2FullModel() {
+  const { config } = useConfigurator();
+  
+  // Load Default Parts
+  const { scene: rawDefaultBlack } = useGLTF('/models/t2-themes/01 Default - Black.glb');
+  const { scene: rawTextDefault } = useGLTF('/models/t2-themes/02 Text Default - Black.glb');
+  const { scene: rawScrewsDefault } = useGLTF('/models/t2-themes/03 Screws & joineries  Default - Black.glb');
+  const { scene: rawDisplayDefault } = useGLTF('/models/t2-themes/04 Display  Default - Black.glb');
+
+  // Load Theme Parts
+  const themeFiles = getThemeFiles(config.selectedTheme);
+  const { scene: rawBodyScene } = useGLTF(themeFiles.body);
+  const { scene: rawAccessoriseScene } = useGLTF(themeFiles.accessorise);
+
+  // Dynamically paint the models and fix transparent bugs
+  const { bodyScene, accessoriseScene, defBlack, defText, defScrews, defDisplay } = useMemo(() => {
+    // Clone to prevent mutating the cached GLTF scene across renders
+    const body = rawBodyScene.clone();
+    const accessorise = rawAccessoriseScene.clone();
+    
+    const dBlack = rawDefaultBlack.clone();
+    const dText = rawTextDefault.clone();
+    const dScrews = rawScrewsDefault.clone();
+    const dDisplay = rawDisplayDefault.clone();
+
+    // Fix the accidentally transparent materials in the default base
+    [dBlack, dText, dScrews, dDisplay].forEach(scene => {
+      scene.traverse((child) => {
+        if (child instanceof THREE.Mesh && child.material) {
+          if (child.material.name === 'GLossy ') {
+             child.material = MATERIALS.black; // Ensure the glossy base is actually black
+             child.material.transparent = false;
+             child.material.transmission = 0;
+             child.material.opacity = 1;
+          }
+        }
+      });
+    });
+
+    let bodyMat = MATERIALS.white;
+    let accMat = MATERIALS.white;
+
+    switch (config.selectedTheme) {
+      case 'Accent - Gold & White': bodyMat = MATERIALS.white; accMat = MATERIALS.gold; break;
+      case 'Blue - Mocha': bodyMat = MATERIALS.blue; accMat = MATERIALS.mocha; break;
+      case 'Gold on Gold': bodyMat = MATERIALS.gold; accMat = MATERIALS.gold; break;
+      case 'Black & Gold': bodyMat = MATERIALS.black; accMat = MATERIALS.gold; break;
+      case 'Pearl & White': bodyMat = MATERIALS.pearl; accMat = MATERIALS.pinkish; break;
+      case 'White & Blue': bodyMat = MATERIALS.white; accMat = MATERIALS.blue; break;
+    }
+
+    const applyMaterial = (scene: THREE.Object3D, targetMat: THREE.Material) => {
+      scene.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+          // Target the white chassis materials specifically, ignoring displays/glass
+          const matName = child.material.name;
+          if (matName === 'Plastic white material' || matName === 'Blue plastic.003' || matName === 'GLossy ') {
+            child.material = targetMat;
+          }
+        }
+      });
+    };
+
+    applyMaterial(body, bodyMat);
+    applyMaterial(accessorise, accMat);
+
+    return { 
+      bodyScene: body, 
+      accessoriseScene: accessorise,
+      defBlack: dBlack,
+      defText: dText,
+      defScrews: dScrews,
+      defDisplay: dDisplay
+    };
+  }, [rawBodyScene, rawAccessoriseScene, rawDefaultBlack, rawTextDefault, rawScrewsDefault, rawDisplayDefault, config.selectedTheme]);
+
+  return (
+    <>
+      <PerspectiveCamera makeDefault position={[0, 2.5, 6.8]} fov={45} />
+      <OrbitControls 
+        makeDefault 
+        autoRotate={false} 
+        enablePan={false}
+        enableZoom={true}
+        minDistance={1.5}
+        maxDistance={12}
+        target={[0, 2.5, 0]}
+        maxPolarAngle={Math.PI / 2 - 0.02}
+      />
+      
+      {/* Lighting */}
+      <ambientLight intensity={0.5} />
+
+      {/* Environment */}
+      <Environment preset="studio" />
+
+      {/* Robot: feet at Y=0 */}
+      <group position={[0, 0, 0]}>
+        <Center position={[0, 2.5, 0]}>
+          <group scale={1.8}>
+            {/* Render the patched defaults */}
+            <primitive object={defBlack} key="defaultBlack" />
+            <primitive object={defText} key="textDefault" />
+            <primitive object={defScrews} key="screwsDefault" />
+            <primitive object={defDisplay} key="displayDefault" />
+            
+            <primitive object={bodyScene} key={`body-${config.selectedTheme}`} />
+            <primitive object={accessoriseScene} key={`acc-${config.selectedTheme}`} />
+          </group>
+        </Center>
+        
+        {/* Shadow directly on the floor to anchor the robot */}
+        <ContactShadows 
+          position={[0, 2.05, 0]}
+          resolution={1024} 
+          scale={10} 
+          blur={1.5} 
+          opacity={0.9} 
+          far={10} 
+          color="#000000" 
+        />
+      </group>
+    </>
+  );
+}
+
+// Preload the base models and defaults so they are instantly ready when the page loads
+useGLTF.preload('/models/t2-themes/01 Body Accent - Gold & White.glb');
+useGLTF.preload('/models/t2-themes/01 Accessorise Accent - Gold & White.glb');
+useGLTF.preload('/models/t2-themes/01 Default - Black.glb');
+useGLTF.preload('/models/t2-themes/02 Text Default - Black.glb');
+useGLTF.preload('/models/t2-themes/03 Screws & joineries  Default - Black.glb');
+useGLTF.preload('/models/t2-themes/04 Display  Default - Black.glb');
