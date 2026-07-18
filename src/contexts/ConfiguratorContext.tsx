@@ -20,6 +20,7 @@ export interface ConfiguratorState {
   selectedStitch: string;
   torsoShape: string;
   torsoOverride: boolean;
+  showStudioLights: boolean;
 }
 
 interface ConfiguratorContextType {
@@ -45,6 +46,7 @@ export function ConfiguratorProvider({ children }: { children: ReactNode }) {
     selectedStitch: 'Standard',
     torsoShape: 'Standard',
     torsoOverride: false,
+    showStudioLights: true,
   });
 
   const updateConfig = (key: keyof ConfiguratorState, value: any) => {

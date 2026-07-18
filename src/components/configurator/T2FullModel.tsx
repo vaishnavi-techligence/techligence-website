@@ -54,8 +54,8 @@ export default function T2FullModel() {
     const dScrews = rawScrewsDefault.clone();
     const dDisplay = rawDisplayDefault.clone();
 
-    // Fix the accidentally transparent materials in the default base
-    [dBlack, dText, dScrews, dDisplay].forEach(scene => {
+    // Fix the accidentally transparent materials in the default base and force glossy to black
+    [dBlack, dText, dScrews, dDisplay, body, accessorise].forEach(scene => {
       scene.traverse((child) => {
         if (child instanceof THREE.Mesh && child.material) {
           if (child.material.name === 'GLossy ') {
@@ -78,6 +78,13 @@ export default function T2FullModel() {
       case 'Black & Gold': bodyMat = MATERIALS.black; accMat = MATERIALS.gold; break;
       case 'Pearl & White': bodyMat = MATERIALS.pinkish; accMat = MATERIALS.pearl; break;
       case 'White & Blue': bodyMat = MATERIALS.white; accMat = MATERIALS.blue; break;
+      case 'Custom Theme': 
+        bodyMat = MATERIALS.white.clone();
+        bodyMat.color = new THREE.Color(config.primaryColor || '#ffffff');
+        
+        accMat = MATERIALS.white.clone();
+        accMat.color = new THREE.Color(config.secondaryColor || '#2A5F7A');
+        break;
     }
 
     const applyMaterial = (scene: THREE.Object3D, targetMat: THREE.Material) => {
@@ -85,7 +92,7 @@ export default function T2FullModel() {
         if (child instanceof THREE.Mesh) {
           // Target the white chassis materials specifically, ignoring displays/glass
           const matName = child.material.name;
-          if (matName === 'Plastic white material' || matName === 'Blue plastic.003' || matName === 'GLossy ') {
+          if (matName === 'Plastic white material' || matName === 'Blue plastic.003') {
             child.material = targetMat;
           }
         }
@@ -103,7 +110,7 @@ export default function T2FullModel() {
       defScrews: dScrews,
       defDisplay: dDisplay
     };
-  }, [rawBodyScene, rawAccessoriseScene, rawDefaultBlack, rawTextDefault, rawScrewsDefault, rawDisplayDefault, config.selectedTheme]);
+  }, [rawBodyScene, rawAccessoriseScene, rawDefaultBlack, rawTextDefault, rawScrewsDefault, rawDisplayDefault, config.selectedTheme, config.primaryColor, config.secondaryColor]);
 
   return (
     <>
@@ -119,8 +126,34 @@ export default function T2FullModel() {
         maxPolarAngle={Math.PI / 2 - 0.02}
       />
       
-      {/* Lighting */}
-      <ambientLight intensity={0.5} />
+      {/* Premium Product Showcase Lighting */}
+      <ambientLight intensity={0.4} />
+      
+      {config.showStudioLights && (
+        <>
+          {/* Dramatic Key Light */}
+          <directionalLight 
+            position={[4, 6, 4]} 
+            intensity={3} 
+            color="#ffffff" 
+            castShadow
+          />
+          
+          {/* Cool Rim Light */}
+          <directionalLight 
+            position={[-5, 4, -5]} 
+            intensity={2.5} 
+            color="#e0f2fe" 
+          />
+
+          {/* Warm Fill Light */}
+          <directionalLight 
+            position={[0, 1.5, 4]} 
+            intensity={1.5} 
+            color="#FFE5B4" 
+          />
+        </>
+      )}
 
       {/* Environment */}
       <Environment preset="studio" />
