@@ -3,21 +3,7 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 
 export interface ConfiguratorState {
-  selectedRobot: any;
-  primaryColor: string | null;
-  secondaryColor: string | null;
-  glowColor: string;
-  glowIntensity: number;
-  materialBlend: number;
-  selectedMaterial: string | null;
-  selectedStitch: string | null;
-  selectedTexture: string | null;
-  torsoShape: string;
-  torsoOverride: boolean;
-  attachments: {
-    shoulder: string;
-    back: string;
-  };
+  selectedTheme: string;
   environment: string;
   isFullscreen: boolean;
 }
@@ -31,21 +17,7 @@ const ConfiguratorContext = createContext<ConfiguratorContextType | undefined>(u
 
 export function ConfiguratorProvider({ children }: { children: ReactNode }) {
   const [config, setConfig] = useState<ConfiguratorState>({
-    selectedRobot: null,
-    primaryColor: null,
-    secondaryColor: null,
-    glowColor: 'None',
-    glowIntensity: 30,
-    materialBlend: 50,
-    selectedMaterial: null,
-    selectedStitch: null,
-    selectedTexture: null,
-    torsoShape: 'Classic',
-    torsoOverride: false,
-    attachments: {
-      shoulder: 'None',
-      back: 'None',
-    },
+    selectedTheme: 'Accent - Gold & White',
     environment: 'None',
     isFullscreen: false,
   });

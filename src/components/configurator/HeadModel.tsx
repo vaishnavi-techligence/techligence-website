@@ -271,11 +271,3 @@ export default function HeadModel() {
     </>
   );
 }
-
-// Preload models for faster switching
-useGLTF.preload('/models/head/head-base.glb');
-useGLTF.preload('/models/head/band-blue.glb');
-useGLTF.preload('/models/head/band-white.glb');
-useGLTF.preload('/models/head/band-purple.glb');
-useGLTF.preload('/models/head/band-green.glb');
-useGLTF.preload('/models/head/band-orange.glb');

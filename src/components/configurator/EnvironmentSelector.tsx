@@ -9,9 +9,9 @@ export default function EnvironmentSelector() {
 
   const environments = [
     { name: 'None', preset: 'None', icon: <SparklesIcon className="w-4 h-4" /> },
-    { name: 'Hospital', preset: 'Hospital', icon: <HospitalIcon className="w-4 h-4" /> },
-    { name: 'Luxury Hotel', preset: 'Luxury Hotel', icon: <HomeIcon className="w-4 h-4" /> },
-    { name: 'Studio', preset: 'Studio', icon: <MountainIcon className="w-4 h-4" /> },
+    { name: 'Hospital', preset: 'apartment', icon: <HospitalIcon className="w-4 h-4" /> },
+    { name: 'Mall', preset: 'lobby', icon: <HomeIcon className="w-4 h-4" /> },
+    { name: 'Studio', preset: 'studio', icon: <MountainIcon className="w-4 h-4" /> },
   ];
 
   return (
