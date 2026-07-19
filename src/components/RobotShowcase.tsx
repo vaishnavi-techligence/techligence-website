@@ -234,11 +234,11 @@ const ROBOT_LAYOUT_ADJUSTMENTS: Record<string, {
     back?: { scale: number; translateY: string };
   };
 }> = {
-  "joy-a01": { scale: 1.15,  translateY: "-1.5%", bottomClip: "96%",   topClip: "15%", staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 1.142, translateY: "+8.83%" }, side: { scale: 1.336, translateY: "-3.00%" }, back: { scale: 1.219, translateY: "+1.55%" } } },
-  "t2-mini": { scale: 1.10,  translateY: "1.5%",  bottomClip: "96%",   topClip: "15%", staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 1.082, translateY: "+0.32%" }, side: { scale: 1.002, translateY: "+1.80%" }, back: { scale: 0.930, translateY: "+2.00%" } } },
-  "tella-s": { scale: 0.95,  translateY: "6%",    bottomClip: "96%",   topClip: "3%",  staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 1.0, translateY: "0%" }, side: { scale: 1.0, translateY: "0%" }, back: { scale: 1.0, translateY: "0%" } } },
+  "joy-a01": { scale: 1.15,  translateY: "-1.5%", bottomClip: "98%",   topClip: "15%", staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 0.980, translateY: "+8.83%" }, side: { scale: 1.170, translateY: "-3.00%" }, back: { scale: 1.10, translateY: "+1.55%" } } },
+  "t2-mini": { scale: 1.10,  translateY: "1.5%",  bottomClip: "96%",   topClip: "15%", staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 1.082, translateY: "+0.32%" }, side: { scale: 0.80, translateY: "+6%" }, back: { scale: 0.70, translateY: "+6%" } } },
+  "tella-s": { scale: 0.95,  translateY: "6%",    bottomClip: "85%",   topClip: "3%",  staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 1.10, translateY: "0%" }, side: { scale: 1.10, translateY: "0%" }, back: { scale: 1.10, translateY: "0%" } } },
   "andy-r1": { scale: 1.10,  translateY: "1%",    bottomClip: "96%",   topClip: "14%", staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 1.067, translateY: "+5.21%" }, side: { scale: 0.903, translateY: "+6.53%" }, back: { scale: 0.932, translateY: "+7.79%" } } },
-  "t2-max":  { scale: 0.95,  translateY: "8%",  bottomClip: "96%",   topClip: "5%",  staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 0.993, translateY: "-1.5%" }, side: { scale: 1.12, translateY: "-4%" }, back: { scale: 0.993, translateY: "-1.5%" } } },
+  "t2-max":  { scale: 0.95,  translateY: "8%",  bottomClip: "96%",   topClip: "5%",  staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 0.93, translateY: "-1.5%" }, side: { scale: 1.12, translateY: "-4%" }, back: { scale: 0.87, translateY: "-1.5%" } } },
   "nova-m1": { scale: 1.02,  translateY: "3%",    bottomClip: "96%",   topClip: "10%", staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 1.214, translateY: "+4.25%" }, side: { scale: 0.936, translateY: "+6.61%" }, back: { scale: 0.946, translateY: "+6.85%" } } },
 };
 
@@ -849,16 +849,29 @@ export default function RobotShowcase() {
                     >
                       {/* Image Thumbnail */}
                       <div className={`absolute inset-0 flex items-center justify-center p-3 transition-opacity duration-300 ${isActive ? "opacity-100" : "opacity-60 group-hover:opacity-100"}`}>
-                        <img 
-                           src={view === "video" ? activeRobot.image : `/robots/${activeRobot.id}-${view}.png`} 
-                           alt={label} 
-                           className="w-full h-full object-contain filter drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)]"
-                           onError={(e) => {
-                             // Fallback if view image doesn't exist yet
-                             (e.target as HTMLImageElement).src = activeRobot.image;
-                             (e.target as HTMLImageElement).style.opacity = "0.2";
-                           }}
-                        />
+<img
+  src={
+    view === "video"
+      ? activeRobot.image
+      : `/robots/${activeRobot.id}-${view}.png`
+  }
+  alt={label}
+  className="w-full h-full object-contain filter drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)]"
+style={{
+  transform:
+    view === "back"
+      ? "scale(0.82)"
+      : view === "side"
+      ? "scale(0.90)"
+      : view === "front"
+      ? "scale(0.90)"
+      : "scale(1)"
+}}
+  onError={(e) => {
+    (e.target as HTMLImageElement).src = activeRobot.image;
+    (e.target as HTMLImageElement).style.opacity = "0.2";
+  }}
+/>
                       </div>
                       
                       {/* Top Right Index Badge */}

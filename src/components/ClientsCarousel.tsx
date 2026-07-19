@@ -55,7 +55,7 @@ const ASSOCIATIONS = [
     category: "Technology Associate",
     desc: "Synergistic tech exploration combining satellite data insights with localized mobile robotic systems.",
     logo: (
-      <img src="/logos/aumsat-new.png" alt="Aumsat Technologies" className="max-h-[90px] max-w-[200px] w-auto h-auto object-contain bg-white p-2 rounded-lg" />
+      <img src="/logos/aumsat-new.png" alt="Aumsat Technologies" className="max-h-[100px] max-w-[200px] w-auto h-auto object-contain bg-white p-2 rounded-lg" />
     ),
   },
   {
@@ -63,7 +63,7 @@ const ASSOCIATIONS = [
     category: "Cleantech Associate",
     desc: "Joint engineering explorations to design and deploy specialized robots for environmental utilities.",
     logo: (
-      <img src="/logos/hydrocawach-new.png" alt="Hydrocawach Technologies" className="max-h-[90px] max-w-[200px] w-auto h-auto object-contain bg-white p-2 rounded-lg" />
+      <img src="/logos/hydrocawach-new.png" alt="Hydrocawach Technologies" className="max-h-[120px] max-w-[200px] w-auto h-auto object-contain bg-white p-2 rounded-lg" />
     ),
   },
   {
@@ -79,7 +79,7 @@ const ASSOCIATIONS = [
     category: "Media & Features Recognition",
     desc: "National media highlight and editorial coverage of our rapid growth and unique service robot lineup.",
     logo: (
-      <img src="/logos/silicon-new.png" alt="Silicon India" className="max-h-[90px] max-w-[200px] w-auto h-auto object-contain bg-white p-2 rounded-lg" />
+      <img src="/logos/silicon-new.png" alt="Silicon India" className="max-h-[110px] max-w-[200px] w-auto h-auto object-contain bg-white p-2 rounded-lg" />
     ),
   },
   {
@@ -87,7 +87,7 @@ const ASSOCIATIONS = [
     category: "Startup & Media Coverage",
     desc: "International startup coverage, showcasing Techligence's vision for future humanoid interfaces.",
     logo: (
-      <img src="/logos/jumpstart-new.png" alt="Jumpstart Magazine" className="max-h-[90px] max-w-[200px] w-auto h-auto object-contain bg-white p-2 rounded-lg" />
+      <img src="/logos/jumpstart-new.png" alt="Jumpstart Magazine" className="max-h-[110px] max-w-[200px] w-auto h-auto object-contain bg-white p-2 rounded-lg" />
     ),
   },
 ];
@@ -99,9 +99,6 @@ export default function ClientsCarousel() {
   return (
     <>
       <div className="max-w-[1400px] mx-auto px-6 pb-10 w-full relative z-10">
-        <p className="text-cyan-400 uppercase tracking-[6px] text-xs font-semibold mb-2 font-mono">
-          CLIENTS & PARTNERS
-        </p>
 
         <h2 className="text-3xl md:text-4xl font-black text-white uppercase mb-4 tracking-tight">
           OUR CLIENTS & PARTNERS

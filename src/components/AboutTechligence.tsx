@@ -18,30 +18,50 @@ export default function AboutTechligence() {
             solutions for businesses across multiple industries.
           </p>
         </div>
+<div className="mt-16 max-w-4xl mx-auto">
 
-        <div className="grid md:grid-cols-2 gap-8 mt-16">
+  <div className="rounded-3xl border border-cyan-500/20 bg-white/5 backdrop-blur-xl p-8 md:p-10 flex flex-col md:flex-row items-center gap-8">
 
-          <div className="rounded-3xl border border-cyan-500/20 bg-white/5 backdrop-blur-xl p-8">
-            <h3 className="text-2xl font-bold text-cyan-400">
-              Our Mission
-            </h3>
+    <img
+      src="/team/kunal-gawhale.jpg"
+      alt="Kunal Gawhale"
+      className="w-40 h-40 rounded-full object-cover border-4 border-cyan-400 shadow-[0_0_20px_rgba(34,211,238,0.4)]"
+    />
 
-            <p className="mt-5 text-gray-300 leading-8">
-              To make intelligent robotics simple, reliable, and accessible for every business.
-            </p>
-          </div>
+    <div className="text-center md:text-left flex-1">
 
-          <div className="rounded-3xl border border-cyan-500/20 bg-white/5 backdrop-blur-xl p-8">
-            <h3 className="text-2xl font-bold text-cyan-400">
-              Our Vision
-            </h3>
+      <p className="uppercase tracking-[0.3em] text-cyan-400 text-sm font-semibold">
+        Founder Spotlight
+      </p>
 
-            <p className="mt-5 text-gray-300 leading-8">
-              To shape the future through innovative AI-powered robotics and automation.
-            </p>
-          </div>
+      <h3 className="text-3xl font-bold mt-2">
+        Kunal Gawhale
+      </h3>
 
-        </div>
+      <p className="text-cyan-400 font-semibold mt-1">
+        Founder & CEO
+      </p>
+
+      <p className="text-gray-400 mt-2">
+        M.Tech (EXTC), VJTI Mumbai
+      </p>
+
+      <p className="mt-5 text-gray-300 leading-8">
+        Leading Techligence Robotics with a vision to build AI-powered service robots that simplify business operations, enhance customer experiences, and drive the future of intelligent automation.
+      </p>
+
+      <a
+        href="/company"
+        className="inline-block mt-6 px-6 py-3 rounded-full border border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black transition-all duration-300 font-semibold"
+      >
+        Learn More About Our Team →
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
       </div>
     </section>
   );

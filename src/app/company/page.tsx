@@ -44,10 +44,10 @@ export default function CompanyPage() {
       <Navbar />
       
       {/* Page Content Container */}
-      <div className="max-w-[1400px] mx-auto px-6 pt-36 pb-12 w-full relative z-10 flex flex-col justify-center">
+      <div className="max-w-[1400px] mx-auto px-6 pt-20 pb-12 w-full relative z-10 flex flex-col justify-center">
         {/* About Techligence */}
-<section className="max-w-[1400px] mx-auto px-6 pb-20 w-full relative z-10">
-  <div className="rounded-3xl border border-[var(--theme-border)] bg-[var(--theme-card)] p-8 md:p-12">
+<section className="max-w-[1400px] mx-auto px-6 py-20 w-full relative z-10">
+  <div className="bg-[var(--theme-card)] p-8 md:p-12">
 
     <p className="text-cyan-500 uppercase tracking-[6px] text-xs font-semibold mb-3">
       ABOUT TECHLIGENCE
@@ -57,6 +57,8 @@ export default function CompanyPage() {
       India's AI-Powered Service Robot Company
     </h2>
 
+    <div className="w-24 h-1 bg-cyan-500 rounded-full mb-8"></div>
+
     <p className="text-[var(--theme-text-secondary)] text-lg leading-relaxed max-w-4xl">
       Techligence Robotics is focused on building intelligent service robots
       for healthcare, hospitality, retail, corporate and educational
@@ -65,10 +67,10 @@ export default function CompanyPage() {
       visitor assistance and operational efficiency.
     </p>
 
-    <div className="grid md:grid-cols-3 gap-6 mt-10">
+    <div className="grid md:grid-cols-3 gap-6 mt-14">
 
-      <div className="rounded-2xl border border-[var(--theme-border)] bg-[var(--theme-background)] p-6">
-        <h3 className="text-cyan-500 font-bold mb-3">
+      <div className="rounded-3xl border border-[var(--theme-border)] bg-[var(--theme-background)] p-6 shadow-sm hover:shadow-lg transition-all duration-300">
+        <h3 className="text-cyan-500 text-xl font-bold mb-3">
           Mission
         </h3>
         <p className="text-[var(--theme-text-secondary)] text-sm">
@@ -76,8 +78,8 @@ export default function CompanyPage() {
         </p>
       </div>
 
-      <div className="rounded-2xl border border-[var(--theme-border)] bg-[var(--theme-background)] p-6">
-        <h3 className="text-cyan-500 font-bold mb-3">
+      <div className="rounded-3xl border border-[var(--theme-border)] bg-[var(--theme-background)] p-6 shadow-sm hover:shadow-lg transition-all duration-300">
+        <h3 className="text-cyan-500 text-xl font-bold mb-3">
           Industry
         </h3>
         <p className="text-[var(--theme-text-secondary)] text-sm">
@@ -85,14 +87,15 @@ export default function CompanyPage() {
         </p>
       </div>
 
-      <div className="rounded-2xl border border-[var(--theme-border)] bg-[var(--theme-background)] p-6">
-        <h3 className="text-cyan-500 font-bold mb-3">
-          Founded
-        </h3>
-        <p className="text-[var(--theme-text-secondary)] text-sm">
-          AI-powered service robotics and autonomous systems development.
-        </p>
-      </div>
+      <div className="rounded-3xl border border-[var(--theme-border)] bg-[var(--theme-background)] p-6 shadow-sm hover:shadow-lg transition-all duration-300">
+  <h3 className="text-cyan-500 text-xl font-bold mb-3">
+    Vision
+  </h3>
+
+  <p className="text-[var(--theme-text-secondary)] text-sm">
+    To become a trusted global leader in intelligent robotics through innovation, automation and human-centered technology.
+  </p>
+</div>
 
     </div>
 
@@ -110,7 +113,7 @@ export default function CompanyPage() {
       The Team Behind Techligence
     </h2>
 
-    <p className="text-gray-400 max-w-4xl mx-auto">
+    <p className="text-[var(--theme-text-secondary)] max-w-4xl mx-auto">
       Techligence Robotics is driven by a multidisciplinary team of innovators,
       engineers, researchers and business leaders dedicated to advancing
       AI-powered service robotics and intelligent automation solutions.
