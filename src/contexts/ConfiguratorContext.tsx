@@ -32,7 +32,7 @@ const ConfiguratorContext = createContext<ConfiguratorContextType | undefined>(u
 
 export function ConfiguratorProvider({ children }: { children: ReactNode }) {
   const [config, setConfig] = useState<ConfiguratorState>({
-    selectedTheme: 'White & Blue - Arctic Horizon',
+    selectedTheme: 'Arctic Horizon',
     environment: 'None',
     isFullscreen: false,
     attachments: { shoulder: 'None', back: 'None' },

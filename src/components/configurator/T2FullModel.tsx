@@ -117,11 +117,11 @@ export default function T2FullModel() {
     let accMat = MATERIALS.white;
 
     switch (config.selectedTheme) {
-      case 'White & Blue - Arctic Horizon': bodyMat = MATERIALS.white; accMat = MATERIALS.blue; break;
-      case 'Deep Blue & Mocha - Midnight Ember': bodyMat = MATERIALS.blue; accMat = MATERIALS.mocha; break;
-      case 'Gold on Gold - Imperial Luxe': bodyMat = MATERIALS.gold; accMat = MATERIALS.gold; break;
-      case 'Pearl & White - Pearl Essence': bodyMat = MATERIALS.pinkish; accMat = MATERIALS.pearl; break;
-      case 'Black & Gold - Obsidian Royale': bodyMat = MATERIALS.black; accMat = MATERIALS.gold; break;
+      case 'Arctic Horizon': bodyMat = MATERIALS.white; accMat = MATERIALS.blue; break;
+      case 'Midnight Ember': bodyMat = MATERIALS.blue; accMat = MATERIALS.mocha; break;
+      case 'Imperial Luxe': bodyMat = MATERIALS.gold; accMat = MATERIALS.gold; break;
+      case 'Pearl Essence': bodyMat = MATERIALS.pinkish; accMat = MATERIALS.pearl; break;
+      case 'Obsidian Royale': bodyMat = MATERIALS.black; accMat = MATERIALS.gold; break;
       case 'Custom Theme': 
         bodyMat = MATERIALS.white.clone();
         bodyMat.color = new THREE.Color(config.primaryColor || '#ffffff');

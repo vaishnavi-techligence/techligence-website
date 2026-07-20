@@ -5,11 +5,11 @@ import { useConfigurator } from '../../contexts/ConfiguratorContext';
 
 
 const THEMES = [
-  'White & Blue - Arctic Horizon',
-  'Deep Blue & Mocha - Midnight Ember',
-  'Gold on Gold - Imperial Luxe',
-  'Pearl & White - Pearl Essence',
-  'Black & Gold - Obsidian Royale',
+  'Arctic Horizon',
+  'Midnight Ember',
+  'Imperial Luxe',
+  'Pearl Essence',
+  'Obsidian Royale',
   'Custom Theme'
 ];
 
