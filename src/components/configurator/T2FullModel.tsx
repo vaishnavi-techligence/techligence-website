@@ -10,6 +10,8 @@ const MATERIALS = {
   white: new THREE.MeshPhysicalMaterial({ color: '#9ca3af', roughness: 0.15, metalness: 0.1, side: THREE.DoubleSide }),
   // Royal gold (deep metallic, not brassy yellow)
   gold: new THREE.MeshPhysicalMaterial({ color: '#C5A059', roughness: 0.2, metalness: 0.85, clearcoat: 0.3, side: THREE.DoubleSide }), 
+  imperialBody: new THREE.MeshPhysicalMaterial({ color: '#B8860B', roughness: 0.2, metalness: 0.85, clearcoat: 0.3, side: THREE.DoubleSide }),
+  imperialAcc: new THREE.MeshPhysicalMaterial({ color: '#FFDB58', roughness: 0.2, metalness: 0.85, clearcoat: 0.3, side: THREE.DoubleSide }),
   black: new THREE.MeshPhysicalMaterial({ color: '#1a1a1a', roughness: 0.25, metalness: 0.2, side: THREE.DoubleSide }),
   blue: new THREE.MeshPhysicalMaterial({ color: '#0F2C59', roughness: 0.3, metalness: 0.4, side: THREE.DoubleSide }),
   mocha: new THREE.MeshPhysicalMaterial({ color: '#6F4E37', roughness: 0.4, metalness: 0.1, side: THREE.DoubleSide }),
@@ -119,7 +121,7 @@ export default function T2FullModel() {
     switch (config.selectedTheme) {
       case 'Arctic Horizon': bodyMat = MATERIALS.white; accMat = MATERIALS.blue; break;
       case 'Midnight Ember': bodyMat = MATERIALS.blue; accMat = MATERIALS.mocha; break;
-      case 'Imperial Luxe': bodyMat = MATERIALS.gold; accMat = MATERIALS.gold; break;
+      case 'Imperial Luxe': bodyMat = MATERIALS.imperialBody; accMat = MATERIALS.imperialAcc; break;
       case 'Pearl Essence': bodyMat = MATERIALS.pinkish; accMat = MATERIALS.pearl; break;
       case 'Obsidian Royale': bodyMat = MATERIALS.black; accMat = MATERIALS.gold; break;
       case 'Custom Theme': 
