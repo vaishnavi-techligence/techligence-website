@@ -22,7 +22,7 @@ export default function TopBar() {
         {/* Brand Logo */}
         <Link href="/" className="flex items-center gap-3 cursor-pointer select-none">
           <img
-            src="/logos/logo-dark.png"
+            src="/logos/logo-light.png"
             alt="Techligence logo"
             className="h-8 w-8 object-contain"
           />
