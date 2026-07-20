@@ -48,7 +48,7 @@ export default function BottomBar({ buyRentMode, setBuyRentMode }: BottomBarProp
   };
 
   return (
-    <div className="h-20 bg-slate-950/60 backdrop-blur-xl border-t border-white/5 px-6 flex items-center justify-between shrink-0 z-20">
+    <div className="relative h-20 bg-slate-950/60 backdrop-blur-xl border-t border-white/5 px-6 flex items-center justify-between shrink-0 z-20">
       
       {/* Left Actions */}
       <div className="flex gap-2">
@@ -141,6 +141,10 @@ export default function BottomBar({ buyRentMode, setBuyRentMode }: BottomBarProp
         </button>
       </div>
       
+      {/* Disclaimer Note */}
+      <div className="absolute bottom-1.5 left-1/2 transform -translate-x-1/2 text-[9px] text-gray-500/80 w-full text-center pointer-events-none font-mono">
+        Note: Colors shown in the configurator are for reference only. Actual colors may vary slightly due to lighting, screen settings, and material finishes.
+      </div>
     </div>
   );
 }
