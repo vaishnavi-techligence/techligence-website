@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import FloatingConfiguratorButton from "../components/FloatingConfiguratorButton";
+import AOSProvider from "@/components/AOSProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -71,6 +72,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col">
+        <AOSProvider />
         {children}
         
         {/* Floating Configurator Button (Conditional on route) */}

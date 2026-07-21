@@ -452,14 +452,19 @@ export default function RobotShowcase() {
     };
   }, [activeRobotIndex]);
 
-  const handleRobotClick = (index: number) => {
-    if (isTransitioning) return;
-    setActiveRobotIndex(index);
-    setActiveView("video");
-    setVideoError(false);   // reset so next robot's video gets a fresh attempt
-    setIsTransitioning(true);
-    setTimeout(() => setIsTransitioning(false), 400);
-  };
+const handleRobotClick = (index: number) => {
+  if (isTransitioning || index === activeRobotIndex) return;
+
+  setIsTransitioning(true);
+
+  setActiveRobotIndex(index);
+  setActiveView("video");
+  setVideoError(false);
+
+  setTimeout(() => {
+    setIsTransitioning(false);
+  }, 300);
+};
 
   const layoutAdjustment = ROBOT_LAYOUT_ADJUSTMENTS[activeRobot.id] || { scale: 0.8, translateY: "0%" };
 
@@ -668,8 +673,8 @@ export default function RobotShowcase() {
 
             {/* ── Robot media: per-robot background removal with centering translation ── */}
             <div className="absolute inset-0 w-full h-full flex items-center justify-center z-10 pt-0 overflow-hidden">
-              <div 
-                className="relative w-full h-full flex items-center justify-center transition-all duration-500"
+              <div
+className="relative w-full h-full flex items-center justify-center transition-all duration-300"
                 style={{ transform: `scale(${layoutAdjustment.scale}) translateY(${layoutAdjustment.translateY})` }}
               >
                 {/* Floor shadow glows inside the translation container to lock to the robot base */}
@@ -700,10 +705,13 @@ export default function RobotShowcase() {
                       ? activeRobot.image
                       : `/robots/${activeRobot.id}-${activeView}.png`;
                     return (
-                      <img
-                        src={imgSrc}
-                        alt={`${activeRobot.name} visual`}
-                        className="w-auto object-contain robot-float transition-all duration-500 relative z-10"
+                     <img
+  src={imgSrc}
+  alt={`${activeRobot.name} visual`}
+  data-aos="zoom-in"
+  data-aos-duration="700"
+  data-aos-once="true"
+  className="w-auto object-contain robot-float transition-all duration-500 relative z-10"
                         style={
                           activeView !== "video"
                             ? {
@@ -855,6 +863,9 @@ export default function RobotShowcase() {
       ? activeRobot.image
       : `/robots/${activeRobot.id}-${view}.png`
   }
+  data-aos="zoom-in"
+  data-aos-duration="600"
+  data-aos-once="true"
   alt={label}
   className="w-full h-full object-contain filter drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)]"
 style={{
@@ -930,17 +941,24 @@ style={{
                     )}
                   </div>
                   <div className="w-16 h-16 rounded-full bg-black/30 flex items-center justify-center border border-white/5 transition-transform duration-300 group-hover:scale-110">
-                    <img 
-                      src={robot.image} 
-                      alt={robot.name} 
-                      className={`w-full h-full object-contain ${
-                        robot.id === 't2-mini' ? 'scale-[1.3]' :
-                        robot.id === 'joy-a01' ? 'scale-[1.15]' :
-                        robot.id === 'tella-s' ? 'scale-[1.2]' :
-                        robot.id === 'andy-r1' ? 'scale-[1.2]' :
-                        'scale-100'
-                      }`} 
-                    />
+                  <img
+                    src={robot.image}
+                    alt={robot.name}
+                    data-aos="fade-up"
+                    data-aos-duration="600"
+                    data-aos-once="true"
+className={`w-full h-full object-contain transition-all duration-500 ${
+  robot.id === "t2-mini"
+    ? "scale-[1.3]"
+    : robot.id === "joy-a01"
+    ? "scale-[1.15]"
+    : robot.id === "tella-s"
+    ? "scale-[1.2]"
+    : robot.id === "andy-r1"
+    ? "scale-[1.2]"
+    : "scale-100"
+}`}
+/>
                   </div>
                   <span
                     className="text-[7px] font-mono font-black tracking-wider uppercase truncate block w-full text-center"
