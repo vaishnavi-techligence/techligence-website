@@ -24,7 +24,7 @@ export default function CenterViewport() {
   const { config, updateConfig } = useConfigurator();
 
   return (
-    <div className={`flex-1 relative overflow-hidden center-viewport-bg h-full ${
+    <div className={`relative overflow-hidden center-viewport-bg h-[50vh] shrink-0 lg:h-full lg:flex-1 ${
       config.isFullscreen ? 'fixed inset-0 z-[100] w-screen h-screen' : ''
     }`}>
       

@@ -22,7 +22,7 @@ export default function LeftPanel({ activeTab, setActiveTab }: LeftPanelProps) {
   const { config, updateConfig } = useConfigurator();
 
   return (
-    <div className="w-[360px] bg-slate-950/60 backdrop-blur-xl border-r border-white/5 overflow-y-auto p-5 shrink-0 z-10 flex flex-col gap-6">
+    <div className="w-full lg:w-[360px] flex-1 lg:flex-none bg-slate-950/60 backdrop-blur-xl border-t lg:border-t-0 lg:border-r border-white/5 overflow-y-auto p-5 shrink-0 z-10 flex flex-col gap-6">
       
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-bold font-mono tracking-widest text-cyan-400 uppercase">

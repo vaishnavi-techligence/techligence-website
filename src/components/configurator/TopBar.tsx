@@ -53,22 +53,24 @@ export default function TopBar() {
         </Link>
         
         {/* Navigation - Matches Navbar.tsx typography */}
-        <div className="flex gap-6 items-center">
-          {navItems.map((item) => (
-            <Link
-              key={item.path}
-              href={item.path}
-              className={`relative text-[10px] uppercase tracking-[1.5px] font-medium transition-all duration-300 after:absolute after:left-0 after:-bottom-1.5 after:h-[2px] after:bg-cyan-400 after:transition-all after:duration-300 hover:after:w-full ${
-                pathname === item.path
-                  ? 'text-cyan-400 after:w-full'
-                  : 'text-gray-300 hover:text-cyan-400 after:w-0'
-              }`}
-            >
-              {item.name}
-            </Link>
-          ))}
-          
-          <div className="w-px h-6 bg-white/10 mx-2"></div>
+        <div className="flex gap-4 md:gap-6 items-center">
+          <div className="hidden md:flex gap-6 items-center">
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                href={item.path}
+                className={`relative text-[10px] uppercase tracking-[1.5px] font-medium transition-all duration-300 after:absolute after:left-0 after:-bottom-1.5 after:h-[2px] after:bg-cyan-400 after:transition-all after:duration-300 hover:after:w-full ${
+                  pathname === item.path
+                    ? 'text-cyan-400 after:w-full'
+                    : 'text-gray-300 hover:text-cyan-400 after:w-0'
+                }`}
+              >
+                {item.name}
+              </Link>
+            ))}
+            
+            <div className="w-px h-6 bg-white/10 mx-2"></div>
+          </div>
           
           {/* Theme Toggle Button */}
           <button

@@ -48,7 +48,7 @@ export default function BottomBar({ buyRentMode, setBuyRentMode }: BottomBarProp
   };
 
   return (
-    <div className="relative h-20 bg-slate-950/60 backdrop-blur-xl border-t border-white/5 px-6 flex items-center justify-between shrink-0 z-20">
+    <div className="relative h-20 bg-slate-950/60 backdrop-blur-xl border-t border-white/5 px-4 md:px-6 flex items-center justify-between shrink-0 z-20 overflow-x-auto whitespace-nowrap gap-6 lg:gap-0 [&::-webkit-scrollbar]:hidden">
       
       {/* Left Actions */}
       <div className="flex gap-2">

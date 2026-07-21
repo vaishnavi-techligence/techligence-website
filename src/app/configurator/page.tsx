@@ -24,7 +24,7 @@ function ConfiguratorLayout() {
   return (
     <div className="robot-cockpit-dark h-screen flex flex-col bg-[#050816] text-white overflow-hidden font-sans select-none antialiased">
       <TopBar />
-      <div className="flex flex-1 overflow-hidden pt-[72px]">
+      <div className="flex flex-col lg:flex-row flex-1 overflow-hidden pt-[72px]">
         <RightPanel activeTab={activeTab} setActiveTab={setActiveTab} />
         <CenterViewport />
         <LeftPanel activeTab={activeTab} setActiveTab={setActiveTab} />
