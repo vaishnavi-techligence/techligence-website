@@ -94,8 +94,8 @@ export default function BottomBar({ buyRentMode, setBuyRentMode }: BottomBarProp
       </div>
       
       {/* Disclaimer Note */}
-      <div className="flex flex-col justify-center flex-1 px-4 hidden lg:flex">
-        <p className="text-[9px] text-gray-500/80 text-center font-mono leading-tight">
+      <div className="flex flex-col justify-center flex-1 px-4 min-w-[280px] lg:min-w-0">
+        <p className="text-[9px] text-gray-500/80 text-center font-mono leading-tight whitespace-normal">
           Note: Colors shown in the configurator are for reference only. Actual colors may vary slightly due to lighting, screen settings, and material finishes.
         </p>
       </div>
