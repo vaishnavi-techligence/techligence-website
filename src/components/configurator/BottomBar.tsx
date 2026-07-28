@@ -48,7 +48,7 @@ export default function BottomBar({ buyRentMode, setBuyRentMode }: BottomBarProp
   };
 
   return (
-    <div className="h-20 bg-slate-950/60 backdrop-blur-xl border-t border-white/5 px-6 flex items-center justify-between shrink-0 z-20">
+    <div className="relative h-20 bg-slate-950/60 backdrop-blur-xl border-t border-white/5 px-6 flex items-center justify-between shrink-0 z-20">
       
       {/* Left Actions */}
       <div className="flex gap-2">
@@ -93,21 +93,11 @@ export default function BottomBar({ buyRentMode, setBuyRentMode }: BottomBarProp
         </button>
       </div>
       
-      {/* Customization Progress Indicator */}
-      <div className="flex flex-col justify-center w-36 px-3">
-        <div className="flex justify-between items-center mb-1.5">
-          <span className="text-[9px] text-gray-400 font-bold uppercase tracking-wider font-mono flex items-center gap-1">
-            <LightningIcon className="w-3 h-3 text-cyan-400 animate-pulse" />
-            Progress
-          </span>
-          <span className="text-[9px] text-cyan-400 font-bold font-mono">{customizedCount}/2</span>
-        </div>
-        <div className="w-full bg-[#050816] h-1.5 rounded-full overflow-hidden border border-white/10 shadow-inner">
-          <div 
-            className="bg-gradient-to-r from-cyan-400 to-violet-500 h-full rounded-full transition-all duration-500 shadow-[0_0_8px_rgba(6,182,212,0.4)]"
-            style={{ width: `${progressPercent}%` }}
-          />
-        </div>
+      {/* Disclaimer Note */}
+      <div className="flex flex-col justify-center flex-1 px-4 hidden lg:flex">
+        <p className="text-[9px] text-gray-500/80 text-center font-mono leading-tight">
+          Note: Colors shown in the configurator are for reference only. Actual colors may vary slightly due to lighting, screen settings, and material finishes.
+        </p>
       </div>
       
       {/* Rent Details (conditional) */}

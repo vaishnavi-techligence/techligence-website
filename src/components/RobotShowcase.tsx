@@ -237,9 +237,9 @@ const ROBOT_LAYOUT_ADJUSTMENTS: Record<string, {
   "joy-a01": { scale: 1.15,  translateY: "-1.5%", bottomClip: "98%",   topClip: "15%", staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 0.980, translateY: "+8.83%" }, side: { scale: 1.170, translateY: "-3.00%" }, back: { scale: 1.10, translateY: "+1.55%" } } },
   "t2-mini": { scale: 1.10,  translateY: "1.5%",  bottomClip: "96%",   topClip: "15%", staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 1.082, translateY: "+0.32%" }, side: { scale: 0.80, translateY: "+6%" }, back: { scale: 0.70, translateY: "+6%" } } },
   "tella-s": { scale: 0.95,  translateY: "6%",    bottomClip: "85%",   topClip: "3%",  staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 1.10, translateY: "0%" }, side: { scale: 1.10, translateY: "0%" }, back: { scale: 1.10, translateY: "0%" } } },
-  "andy-r1": { scale: 1.10,  translateY: "1%",    bottomClip: "96%",   topClip: "14%", staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 1.067, translateY: "+5.21%" }, side: { scale: 0.903, translateY: "+6.53%" }, back: { scale: 0.932, translateY: "+7.79%" } } },
+  "andy-r1": { scale: 1.10,  translateY: "1%",    bottomClip: "100%",   topClip: "14%", staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 0.767, translateY: "+5.21%" }, side: { scale: 0.753, translateY: "+6.53%" }, back: { scale: 0.752, translateY: "+7.79%" } } },
   "t2-max":  { scale: 0.95,  translateY: "8%",  bottomClip: "96%",   topClip: "5%",  staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 0.93, translateY: "-1.5%" }, side: { scale: 1.12, translateY: "-4%" }, back: { scale: 0.87, translateY: "-1.5%" } } },
-  "nova-m1": { scale: 1.02,  translateY: "3%",    bottomClip: "96%",   topClip: "10%", staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 1.214, translateY: "+4.25%" }, side: { scale: 0.936, translateY: "+6.61%" }, back: { scale: 0.946, translateY: "+6.85%" } } },
+  "nova-m1": { scale: 1.02,  translateY: "3%",    bottomClip: "96%",   topClip: "10%", staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 1.214, translateY: "+4.25%" }, side: { scale: 0.936, translateY: "+6.61%" }, back: { scale: 0.816, translateY: "+6.85%" } } },
 };
 
 export default function RobotShowcase() {
@@ -705,12 +705,13 @@ className="relative w-full h-full flex items-center justify-center transition-al
                       ? activeRobot.image
                       : `/robots/${activeRobot.id}-${activeView}.png`;
                     return (
-                     <img
+<img
+  key={`${activeRobot.id}-${activeView}`}
   src={imgSrc}
   alt={`${activeRobot.name} visual`}
   data-aos="zoom-in"
-  data-aos-duration="700"
-  data-aos-once="true"
+  data-aos-duration="1500"
+  data-aos-once="false"
   className="w-auto object-contain robot-float transition-all duration-500 relative z-10"
                         style={
                           activeView !== "video"

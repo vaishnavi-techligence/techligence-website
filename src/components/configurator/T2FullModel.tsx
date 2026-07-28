@@ -10,6 +10,8 @@ const MATERIALS = {
   white: new THREE.MeshPhysicalMaterial({ color: '#9ca3af', roughness: 0.15, metalness: 0.1, side: THREE.DoubleSide }),
   // Royal gold (deep metallic, not brassy yellow)
   gold: new THREE.MeshPhysicalMaterial({ color: '#C5A059', roughness: 0.2, metalness: 0.85, clearcoat: 0.3, side: THREE.DoubleSide }), 
+  imperialBody: new THREE.MeshPhysicalMaterial({ color: '#B8860B', roughness: 0.2, metalness: 0.85, clearcoat: 0.3, side: THREE.DoubleSide }),
+  imperialAcc: new THREE.MeshPhysicalMaterial({ color: '#FFDB58', roughness: 0.2, metalness: 0.85, clearcoat: 0.3, side: THREE.DoubleSide }),
   black: new THREE.MeshPhysicalMaterial({ color: '#1a1a1a', roughness: 0.25, metalness: 0.2, side: THREE.DoubleSide }),
   blue: new THREE.MeshPhysicalMaterial({ color: '#0F2C59', roughness: 0.3, metalness: 0.4, side: THREE.DoubleSide }),
   mocha: new THREE.MeshPhysicalMaterial({ color: '#6F4E37', roughness: 0.4, metalness: 0.1, side: THREE.DoubleSide }),
@@ -64,20 +66,64 @@ export default function T2FullModel() {
              child.material.transmission = 0;
              child.material.opacity = 1;
           }
+          // Make sure text/logos are double-sided in case normals are flipped, and prevent z-fighting
+          if (scene === dText) {
+             child.material.side = THREE.DoubleSide;
+             child.material.transparent = true;
+             child.material.depthWrite = false; // Prevent transparent square from cutting into gold panel
+             child.material.polygonOffset = true;
+             child.material.polygonOffsetFactor = -15; // Push closer to camera
+             child.material.polygonOffsetUnits = -20;
+
+             // Perfectly center the text/logo meshes on the X axis to fix GLTF placement errors
+             child.updateMatrixWorld(true);
+             const box = new THREE.Box3().setFromObject(child);
+             const center = new THREE.Vector3();
+             box.getCenter(center);
+             
+             const worldPos = new THREE.Vector3();
+             child.getWorldPosition(worldPos);
+             
+             // 1. Center the mesh
+             worldPos.x -= center.x;
+             
+             // 2. The "T" logo has a long swoosh on the right with no padding. 
+             // Nudge it slightly left to balance visual weight and pull the tip away from the slope.
+             if (child.name && child.name.includes('Techligence_Logo')) {
+                worldPos.x -= 0.005; 
+                
+                // 3. Physically lift the mesh to prevent edges from sinking into the curved surface
+                // If it's on the top of the head (high Y), lift it straight up (+Y)
+                if (worldPos.y > 0.8) {
+                    worldPos.y += 0.008; // 8mm lift to safely clear the steep dome curve
+                } else {
+                    // Otherwise it's on the back, lift it outwards (+Z)
+                    worldPos.z += 0.005; 
+                }
+             }
+             
+             if (child.parent) {
+                child.parent.worldToLocal(worldPos);
+             }
+             child.position.copy(worldPos);
+          }
         }
       });
     });
+
+    // Ensure text scale is normal
+    dText.scale.set(1, 1, 1);
+
 
     let bodyMat = MATERIALS.white;
     let accMat = MATERIALS.white;
 
     switch (config.selectedTheme) {
-      case 'Accent - Gold & White': bodyMat = MATERIALS.white; accMat = MATERIALS.gold; break;
-      case 'Blue - Mocha': bodyMat = MATERIALS.blue; accMat = MATERIALS.mocha; break;
-      case 'Gold on Gold': bodyMat = MATERIALS.gold; accMat = MATERIALS.gold; break;
-      case 'Black & Gold': bodyMat = MATERIALS.black; accMat = MATERIALS.gold; break;
-      case 'Pearl & White': bodyMat = MATERIALS.pinkish; accMat = MATERIALS.pearl; break;
-      case 'White & Blue': bodyMat = MATERIALS.white; accMat = MATERIALS.blue; break;
+      case 'Arctic Horizon': bodyMat = MATERIALS.white; accMat = MATERIALS.blue; break;
+      case 'Midnight Ember': bodyMat = MATERIALS.blue; accMat = MATERIALS.mocha; break;
+      case 'Imperial Luxe': bodyMat = MATERIALS.imperialBody; accMat = MATERIALS.imperialAcc; break;
+      case 'Pearl Essence': bodyMat = MATERIALS.pinkish; accMat = MATERIALS.pearl; break;
+      case 'Obsidian Royale': bodyMat = MATERIALS.black; accMat = MATERIALS.gold; break;
       case 'Custom Theme': 
         bodyMat = MATERIALS.white.clone();
         bodyMat.color = new THREE.Color(config.primaryColor || '#ffffff');

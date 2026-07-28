@@ -5,12 +5,11 @@ import { useConfigurator } from '../../contexts/ConfiguratorContext';
 
 
 const THEMES = [
-  'Accent - Gold & White',
-  'Blue - Mocha',
-  'Gold on Gold',
-  'Black & Gold',
-  'Pearl & White',
-  'White & Blue',
+  'Arctic Horizon',
+  'Midnight Ember',
+  'Imperial Luxe',
+  'Pearl Essence',
+  'Obsidian Royale',
   'Custom Theme'
 ];
 
@@ -69,7 +68,7 @@ export default function LeftPanel({ activeTab, setActiveTab }: LeftPanelProps) {
           
           <div className="flex justify-between items-center">
             <div>
-              <label className="text-[11px] text-gray-300 font-bold uppercase tracking-wider block">Body Color</label>
+              <label className="text-[11px] text-gray-300 font-bold uppercase tracking-wider block">Base Colour</label>
               <span className="text-[9px] text-gray-500 font-mono uppercase">Main Chassis</span>
             </div>
             <div className="relative w-12 h-12 rounded-lg overflow-hidden border border-white/10 shadow-inner cursor-pointer">
@@ -84,7 +83,7 @@ export default function LeftPanel({ activeTab, setActiveTab }: LeftPanelProps) {
 
           <div className="flex justify-between items-center">
             <div>
-              <label className="text-[11px] text-gray-300 font-bold uppercase tracking-wider block">Accessories</label>
+              <label className="text-[11px] text-gray-300 font-bold uppercase tracking-wider block">Accent Colour</label>
               <span className="text-[9px] text-gray-500 font-mono uppercase">Handles & Accents</span>
             </div>
             <div className="relative w-12 h-12 rounded-lg overflow-hidden border border-white/10 shadow-inner cursor-pointer">
