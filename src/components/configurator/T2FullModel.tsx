@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useMemo } from 'react';
-import { useGLTF, OrbitControls, Environment, Center, ContactShadows, Grid, PerspectiveCamera } from '@react-three/drei';
+import React, { useMemo, useRef } from 'react';
+import { useGLTF, OrbitControls, Environment, Center, ContactShadows, PerspectiveCamera } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
 import { useConfigurator } from '../../contexts/ConfiguratorContext';
 import * as THREE from 'three';
 
@@ -33,6 +34,63 @@ const getThemeFiles = (themeName: string) => {
 
 export default function T2FullModel() {
   const { config } = useConfigurator();
+  const robotRef = useRef<THREE.Group>(null);
+  
+  // Persistent materials that we will smoothly animate
+  const bodyMat = useRef(MATERIALS.white.clone());
+  const accMat = useRef(MATERIALS.white.clone());
+
+  useFrame((state, delta) => {
+    if (!robotRef.current) return;
+    
+    // Ensure resting pose is maintained if we previously modified it
+    if (robotRef.current.position.y !== 0 || robotRef.current.rotation.y !== 0) {
+      robotRef.current.position.y = THREE.MathUtils.lerp(robotRef.current.position.y, 0, 0.1);
+      robotRef.current.rotation.y = THREE.MathUtils.lerp(robotRef.current.rotation.y, 0, 0.1);
+    }
+
+    // --- SMOOTH COLOR TRANSITIONS ---
+    let targetBodyMat = MATERIALS.white;
+    let targetAccMat = MATERIALS.white;
+
+    switch (config.selectedTheme) {
+      case 'Arctic Horizon': targetBodyMat = MATERIALS.white; targetAccMat = MATERIALS.blue; break;
+      case 'Midnight Ember': targetBodyMat = MATERIALS.blue; targetAccMat = MATERIALS.mocha; break;
+      case 'Imperial Luxe': targetBodyMat = MATERIALS.imperialBody; targetAccMat = MATERIALS.imperialAcc; break;
+      case 'Pearl Essence': targetBodyMat = MATERIALS.pinkish; targetAccMat = MATERIALS.pearl; break;
+      case 'Obsidian Royale': targetBodyMat = MATERIALS.black; targetAccMat = MATERIALS.gold; break;
+      // Custom Theme is handled below
+    }
+
+    // Framerate-independent smoothing factor
+    const t = 1 - Math.exp(-8 * delta);
+
+    if (config.selectedTheme === 'Custom Theme') {
+      // Lerp custom colors
+      bodyMat.current.color.lerp(new THREE.Color(config.primaryColor || '#ffffff'), t);
+      accMat.current.color.lerp(new THREE.Color(config.secondaryColor || '#2A5F7A'), t);
+      
+      // Return to default plastic properties for custom themes
+      bodyMat.current.roughness = THREE.MathUtils.lerp(bodyMat.current.roughness, 0.15, t);
+      bodyMat.current.metalness = THREE.MathUtils.lerp(bodyMat.current.metalness, 0.1, t);
+      bodyMat.current.clearcoat = THREE.MathUtils.lerp(bodyMat.current.clearcoat, 0, t);
+      
+      accMat.current.roughness = THREE.MathUtils.lerp(accMat.current.roughness, 0.15, t);
+      accMat.current.metalness = THREE.MathUtils.lerp(accMat.current.metalness, 0.1, t);
+      accMat.current.clearcoat = THREE.MathUtils.lerp(accMat.current.clearcoat, 0, t);
+    } else {
+      // Lerp properties towards preset materials
+      const lerpMat = (current: THREE.MeshPhysicalMaterial, target: THREE.MeshPhysicalMaterial) => {
+        current.color.lerp(target.color, t);
+        current.roughness = THREE.MathUtils.lerp(current.roughness, target.roughness, t);
+        current.metalness = THREE.MathUtils.lerp(current.metalness, target.metalness, t);
+        current.clearcoat = THREE.MathUtils.lerp(current.clearcoat, target.clearcoat || 0, t);
+      };
+      
+      lerpMat(bodyMat.current, targetBodyMat);
+      lerpMat(accMat.current, targetAccMat);
+    }
+  });
   
   // Load Default Parts
   const { scene: rawDefaultBlack } = useGLTF('/models/t2-themes/01 Default - Black.glb');
@@ -115,24 +173,6 @@ export default function T2FullModel() {
     dText.scale.set(1, 1, 1);
 
 
-    let bodyMat = MATERIALS.white;
-    let accMat = MATERIALS.white;
-
-    switch (config.selectedTheme) {
-      case 'Arctic Horizon': bodyMat = MATERIALS.white; accMat = MATERIALS.blue; break;
-      case 'Midnight Ember': bodyMat = MATERIALS.blue; accMat = MATERIALS.mocha; break;
-      case 'Imperial Luxe': bodyMat = MATERIALS.imperialBody; accMat = MATERIALS.imperialAcc; break;
-      case 'Pearl Essence': bodyMat = MATERIALS.pinkish; accMat = MATERIALS.pearl; break;
-      case 'Obsidian Royale': bodyMat = MATERIALS.black; accMat = MATERIALS.gold; break;
-      case 'Custom Theme': 
-        bodyMat = MATERIALS.white.clone();
-        bodyMat.color = new THREE.Color(config.primaryColor || '#ffffff');
-        
-        accMat = MATERIALS.white.clone();
-        accMat.color = new THREE.Color(config.secondaryColor || '#2A5F7A');
-        break;
-    }
-
     const applyMaterial = (scene: THREE.Object3D, targetMat: THREE.Material) => {
       scene.traverse((child) => {
         if (child instanceof THREE.Mesh) {
@@ -145,8 +185,8 @@ export default function T2FullModel() {
       });
     };
 
-    applyMaterial(body, bodyMat);
-    applyMaterial(accessorise, accMat);
+    applyMaterial(body, bodyMat.current);
+    applyMaterial(accessorise, accMat.current);
 
     return { 
       bodyScene: body, 
@@ -156,14 +196,16 @@ export default function T2FullModel() {
       defScrews: dScrews,
       defDisplay: dDisplay
     };
-  }, [rawBodyScene, rawAccessoriseScene, rawDefaultBlack, rawTextDefault, rawScrewsDefault, rawDisplayDefault, config.selectedTheme, config.primaryColor, config.secondaryColor]);
+  // ONLY depend on the raw models. The theme logic is now perfectly handled by the animation loop!
+  }, [rawBodyScene, rawAccessoriseScene, rawDefaultBlack, rawTextDefault, rawScrewsDefault, rawDisplayDefault]);
 
   return (
     <>
       <PerspectiveCamera makeDefault position={[0, 2.5, 6.8]} fov={45} />
       <OrbitControls 
         makeDefault 
-        autoRotate={false} 
+        autoRotate={true}
+        autoRotateSpeed={1.0}
         enablePan={false}
         enableZoom={true}
         minDistance={1.5}
@@ -207,7 +249,7 @@ export default function T2FullModel() {
       {/* Robot: feet at Y=0 */}
       <group position={[0, 0, 0]}>
         <Center position={[0, 2.5, 0]}>
-          <group scale={1.8}>
+          <group ref={robotRef} scale={1.8}>
             {/* Render the patched defaults */}
             <primitive object={defBlack} key="defaultBlack" />
             <primitive object={defText} key="textDefault" />

@@ -234,12 +234,26 @@ const ROBOT_LAYOUT_ADJUSTMENTS: Record<string, {
     back?: { scale: number; translateY: string };
   };
 }> = {
-  "joy-a01": { scale: 1.15,  translateY: "-1.5%", bottomClip: "98%",   topClip: "15%", staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 0.980, translateY: "+8.83%" }, side: { scale: 1.170, translateY: "-3.00%" }, back: { scale: 1.10, translateY: "+1.55%" } } },
+  "joy-a01": { scale: 1.20,  translateY: "3%", bottomClip: "95%",   topClip: "15%", staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 1.05, translateY: "+12%" }, side: { scale: 1.15, translateY: "-2%" }, back: { scale: 1.15, translateY: "+5%" } } },
   "t2-mini": { scale: 1.10,  translateY: "1.5%",  bottomClip: "96%",   topClip: "15%", staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 1.082, translateY: "+0.32%" }, side: { scale: 0.80, translateY: "+6%" }, back: { scale: 0.70, translateY: "+6%" } } },
-  "tella-s": { scale: 0.95,  translateY: "6%",    bottomClip: "85%",   topClip: "3%",  staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 1.10, translateY: "0%" }, side: { scale: 1.10, translateY: "0%" }, back: { scale: 1.10, translateY: "0%" } } },
+  "tella-s": { scale: 0.95,  translateY: "12%",    bottomClip: "85%",   topClip: "5%",  staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 1.30, translateY: "+2%" }, side: { scale: 1.20, translateY: "-2%" }, back: { scale: 1.30, translateY: "+2%" } } },
   "andy-r1": { scale: 1.10,  translateY: "1%",    bottomClip: "96%",   topClip: "14%", staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 1.067, translateY: "+5.21%" }, side: { scale: 0.903, translateY: "+6.53%" }, back: { scale: 0.932, translateY: "+7.79%" } } },
-  "t2-max":  { scale: 0.95,  translateY: "8%",  bottomClip: "96%",   topClip: "5%",  staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 0.93, translateY: "-1.5%" }, side: { scale: 1.12, translateY: "-4%" }, back: { scale: 0.87, translateY: "-1.5%" } } },
+  "t2-max":  { scale: 0.95,  translateY: "8%",  bottomClip: "96%",   topClip: "5%",  staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 1.03, translateY: "+5%" }, side: { scale: 1.05, translateY: "+5%" }, back: { scale: 0.87, translateY: "+1%" } } },
   "nova-m1": { scale: 1.02,  translateY: "3%",    bottomClip: "96%",   topClip: "10%", staticHeight: "100%", staticTranslateY: "0%", staticScale: "1", views: { front: { scale: 1.214, translateY: "+4.25%" }, side: { scale: 0.936, translateY: "+6.61%" }, back: { scale: 0.946, translateY: "+6.85%" } } },
+};
+
+const THUMBNAIL_ADJUSTMENTS: Record<string, {
+  video: { scale: number; translateY: string };
+  front: { scale: number; translateY: string };
+  side: { scale: number; translateY: string };
+  back: { scale: number; translateY: string };
+}> = {
+  "joy-a01": { video: { scale: 1.30, translateY: "0%" }, front: { scale: 1.30, translateY: "0%" }, side: { scale: 1.30, translateY: "0%" }, back: { scale: 1.30, translateY: "0%" } },
+  "t2-mini": { video: { scale: 1.20, translateY: "0%" }, front: { scale: 1.20, translateY: "0%" }, side: { scale: 1.20, translateY: "0%" }, back: { scale: 1.0, translateY: "0%" } },
+  "tella-s": { video: { scale: 1.20, translateY: "0%" }, front: { scale: 1.20, translateY: "0%" }, side: { scale: 1.20, translateY: "0%" }, back: { scale: 1.20, translateY: "0%" } },
+  "andy-r1": { video: { scale: 1.25, translateY: "0%" }, front: { scale: 1.25, translateY: "0%" }, side: { scale: 1.25, translateY: "0%" }, back: { scale: 1.25, translateY: "0%" } },
+  "t2-max":  { video: { scale: 1.20, translateY: "0%" }, front: { scale: 1.20, translateY: "0%" }, side: { scale: 1.20, translateY: "0%" }, back: { scale: 1.20, translateY: "0%" } },
+  "nova-m1": { video: { scale: 1.20, translateY: "0%" }, front: { scale: 1.20, translateY: "0%" }, side: { scale: 1.20, translateY: "0%" }, back: { scale: 1.20, translateY: "0%" } },
 };
 
 export default function RobotShowcase() {
@@ -461,6 +475,16 @@ export default function RobotShowcase() {
     setTimeout(() => setIsTransitioning(false), 400);
   };
 
+  const handleViewClick = (view: "video" | "front" | "side" | "back" | "wave") => {
+    if (activeView === view || isTransitioning) return;
+    setActiveView(view);
+    setIsVideoPlaying(false);
+    setFlashActive(true);
+    setTimeout(() => setFlashActive(false), 500);
+    setIsTransitioning(true);
+    setTimeout(() => setIsTransitioning(false), 400);
+  };
+
   const layoutAdjustment = ROBOT_LAYOUT_ADJUSTMENTS[activeRobot.id] || { scale: 0.8, translateY: "0%" };
 
   return (
@@ -468,6 +492,13 @@ export default function RobotShowcase() {
     <div
       className="robot-cockpit-dark relative w-full bg-[#050816] text-white min-h-screen flex flex-col overflow-x-hidden"
     >
+      {/* Preload all videos in the background for instant switching */}
+      <div className="hidden" aria-hidden="true">
+        {ROBOTS_DATA.map(robot => robot.video && (
+          <video key={`preload-${robot.id}`} src={robot.video} preload="auto" muted playsInline />
+        ))}
+      </div>
+
       {/* Background Canvas Particles */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
         <canvas ref={canvasRef} className="w-full h-full opacity-65" />
@@ -701,6 +732,7 @@ export default function RobotShowcase() {
                       : `/robots/${activeRobot.id}-${activeView}.png`;
                     return (
                       <img
+                        key={`${activeRobot.id}-${activeView}`}
                         src={imgSrc}
                         alt={`${activeRobot.name} visual`}
                         className="w-auto object-contain robot-float transition-all duration-500 relative z-10"
@@ -806,7 +838,7 @@ export default function RobotShowcase() {
                 return (
                   <button
                     key={view}
-                    onClick={() => setActiveView(view as "video" | "front" | "side" | "back" | "wave")}
+                    onClick={() => handleViewClick(view as "video" | "front" | "side" | "back" | "wave")}
                     className={`robot-viewport-btn flex-1 py-1 rounded-lg text-[8px] font-mono font-bold tracking-wider transition-all duration-300 cursor-pointer text-center ${isActive ? "active-viewport-btn" : "inactive-viewport-btn"}`}
                     style={isActive
                       ? { boxShadow: "0 0 8px rgba(0,240,255,0.4)", backgroundColor: "#00f0ff", color: "#050816" }
@@ -839,7 +871,7 @@ export default function RobotShowcase() {
                   return (
                     <button
                       key={view}
-                      onClick={() => setActiveView(view as "video" | "front" | "side" | "back")}
+                      onClick={() => handleViewClick(view as "video" | "front" | "side" | "back")}
                       className={`robot-viewport-btn relative w-full aspect-square rounded-xl overflow-hidden flex flex-col items-center justify-end transition-all duration-300 cursor-pointer border ${isActive ? "active-viewport-btn" : "inactive-viewport-btn group"}`}
                       style={isActive
                         ? { borderColor: "#00f0ff", boxShadow: "0 0 15px rgba(0,240,255,0.25)", backgroundColor: "rgba(0,240,255,0.08)" }
@@ -858,14 +890,11 @@ export default function RobotShowcase() {
   alt={label}
   className="w-full h-full object-contain filter drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)]"
 style={{
-  transform:
-    view === "back"
-      ? "scale(0.82)"
-      : view === "side"
-      ? "scale(0.90)"
-      : view === "front"
-      ? "scale(0.90)"
-      : "scale(1)"
+  transform: (() => {
+    const adj = THUMBNAIL_ADJUSTMENTS[activeRobot.id]?.[view as "video" | "front" | "side" | "back"] 
+      || { scale: 0.85, translateY: "8%" };
+    return `scale(${adj.scale}) translateY(${adj.translateY})`;
+  })()
 }}
   onError={(e) => {
     (e.target as HTMLImageElement).src = activeRobot.image;
