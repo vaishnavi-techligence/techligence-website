@@ -430,7 +430,8 @@ html[data-theme="light"],
 [data-theme="light"] .bg-slate-950\/80,
 [data-theme="light"] .bg-slate-950\/70,
 [data-theme="light"] .bg-slate-950\/60,
-[data-theme="light"] .bg-slate-950\/50 {
+[data-theme="light"] .bg-slate-950\/50,
+[data-theme="light"] .bg-slate-950\/40 {
   background-color: rgba(255, 255, 255, 0.85) !important;
   border-color: rgba(15, 23, 42, 0.1) !important;
 }

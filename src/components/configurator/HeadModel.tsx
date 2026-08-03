@@ -247,10 +247,29 @@ export default function HeadModel() {
       />
       
       {/* Lighting for premium metallic surfaces */}
-      <ambientLight intensity={0.8} />
-      <directionalLight position={[5, 10, 5]} intensity={2} color="#ffffff" />
-      <directionalLight position={[-5, 5, -5]} intensity={1.2} color="#ffffff" />
-      <directionalLight position={[0, 0, 5]} intensity={1.5} color="#ffffff" />
+      <ambientLight intensity={0.4} />
+      
+      {/* Dramatic Key Light */}
+      <directionalLight 
+        position={[4, 6, 4]} 
+        intensity={3} 
+        color="#ffffff" 
+        castShadow
+      />
+      
+      {/* Cool Rim Light */}
+      <directionalLight 
+        position={[-5, 4, -5]} 
+        intensity={2.5} 
+        color="#e0f2fe" 
+      />
+
+      {/* Warm Fill Light */}
+      <directionalLight 
+        position={[0, 1.5, 4]} 
+        intensity={1.5} 
+        color="#FFE5B4" 
+      />
       <Environment preset="studio" />
 
       <group position={[0, -0.5, 0]} scale={1.2}>

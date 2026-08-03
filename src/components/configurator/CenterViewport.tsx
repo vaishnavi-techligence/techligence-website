@@ -21,7 +21,7 @@ const CollapseIcon = ({ className }: { className?: string }) => (
 );
 
 export default function CenterViewport() {
-  const { config, updateConfig } = useConfigurator();
+  const { config, updateConfig, resetConfig } = useConfigurator();
 
   return (
     <div className={`relative overflow-hidden center-viewport-bg h-[50vh] shrink-0 lg:h-full lg:flex-1 ${
@@ -66,17 +66,6 @@ export default function CenterViewport() {
       {/* Controls Container (Top Right) */}
       <div className="absolute top-5 right-5 z-20 flex gap-2">
         <button 
-          onClick={() => updateConfig('showStudioLights', !config.showStudioLights)}
-          className={`px-4 py-2 rounded-full text-xs border transition-all duration-300 cursor-pointer shadow-[0_5px_15px_rgba(0,0,0,0.5)] flex items-center gap-1.5 ${
-            config.showStudioLights 
-              ? 'bg-cyan-500/20 text-cyan-400 border-cyan-400/50' 
-              : 'bg-slate-950/70 text-gray-400 border-white/5 hover:text-white'
-          }`}
-        >
-          <span>💡 Lights {config.showStudioLights ? 'ON' : 'OFF'}</span>
-        </button>
-
-        <button 
           onClick={() => updateConfig('isFullscreen', !config.isFullscreen)}
           className="bg-slate-950/70 backdrop-blur-md px-4 py-2 rounded-full text-xs text-gray-300 border border-white/5 hover:border-cyan-400 hover:text-cyan-400 transition-all duration-300 cursor-pointer shadow-[0_5px_15px_rgba(0,0,0,0.5)] flex items-center gap-1.5"
         >
@@ -88,7 +77,7 @@ export default function CenterViewport() {
         </button>
 
         <button 
-          onClick={() => window.location.reload()}
+          onClick={resetConfig}
           className="bg-slate-950/70 backdrop-blur-md px-4 py-2 rounded-full text-xs text-gray-300 border border-white/5 hover:border-cyan-400 hover:text-cyan-400 transition-all duration-300 cursor-pointer shadow-[0_5px_15px_rgba(0,0,0,0.5)] flex items-center gap-1.5"
         >
           <ResetIcon className="w-3.5 h-3.5" />

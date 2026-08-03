@@ -201,7 +201,7 @@ export default function T2FullModel() {
 
   return (
     <>
-      <PerspectiveCamera makeDefault position={[0, 2.5, 6.8]} fov={45} />
+      <PerspectiveCamera makeDefault position={[0, 2.5, 4.0]} fov={45} />
       <OrbitControls 
         makeDefault 
         autoRotate={true}
@@ -217,31 +217,27 @@ export default function T2FullModel() {
       {/* Premium Product Showcase Lighting */}
       <ambientLight intensity={0.4} />
       
-      {config.showStudioLights && (
-        <>
-          {/* Dramatic Key Light */}
-          <directionalLight 
-            position={[4, 6, 4]} 
-            intensity={3} 
-            color="#ffffff" 
-            castShadow
-          />
-          
-          {/* Cool Rim Light */}
-          <directionalLight 
-            position={[-5, 4, -5]} 
-            intensity={2.5} 
-            color="#e0f2fe" 
-          />
+      {/* Dramatic Key Light */}
+      <directionalLight 
+        position={[4, 6, 4]} 
+        intensity={3} 
+        color="#ffffff" 
+        castShadow
+      />
+      
+      {/* Cool Rim Light */}
+      <directionalLight 
+        position={[-5, 4, -5]} 
+        intensity={2.5} 
+        color="#e0f2fe" 
+      />
 
-          {/* Warm Fill Light */}
-          <directionalLight 
-            position={[0, 1.5, 4]} 
-            intensity={1.5} 
-            color="#FFE5B4" 
-          />
-        </>
-      )}
+      {/* Warm Fill Light */}
+      <directionalLight 
+        position={[0, 1.5, 4]} 
+        intensity={1.5} 
+        color="#FFE5B4" 
+      />
 
       {/* Environment */}
       <Environment preset="studio" />

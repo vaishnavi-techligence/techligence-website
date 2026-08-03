@@ -26,6 +26,7 @@ export interface ConfiguratorState {
 interface ConfiguratorContextType {
   config: ConfiguratorState;
   updateConfig: (key: keyof ConfiguratorState, value: any) => void;
+  resetConfig: () => void;
 }
 
 const ConfiguratorContext = createContext<ConfiguratorContextType | undefined>(undefined);
@@ -53,8 +54,28 @@ export function ConfiguratorProvider({ children }: { children: ReactNode }) {
     setConfig(prev => ({ ...prev, [key]: value }));
   };
 
+  const resetConfig = () => {
+    setConfig({
+      selectedTheme: 'Arctic Horizon',
+      environment: 'None',
+      isFullscreen: false,
+      attachments: { shoulder: 'None', back: 'None' },
+      primaryColor: '#ffffff',
+      secondaryColor: '#2A5F7A',
+      glowColor: 'Cyan',
+      glowIntensity: 50,
+      selectedMaterial: 'Brushed Aluminum',
+      selectedTexture: 'Matte',
+      materialBlend: 0.5,
+      selectedStitch: 'Standard',
+      torsoShape: 'Standard',
+      torsoOverride: false,
+      showStudioLights: true,
+    });
+  };
+
   return (
-    <ConfiguratorContext.Provider value={{ config, updateConfig }}>
+    <ConfiguratorContext.Provider value={{ config, updateConfig, resetConfig }}>
       {children}
     </ConfiguratorContext.Provider>
   );
